@@ -1,0 +1,80 @@
+on:
+  push:
+    branches:
+      - main
+      - development
+  pull_request:
+    branches:
+      - main
+      - development
+
+name: examples-SK
+
+jobs:
+  examples-SK:
+    if: "!contains(github.event.commits[0].message, '[skip-ci]')"
+    runs-on: ${{ matrix.config.os }}
+
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: windows-latest, r: 'release'}
+          - {os: windows-latest, r: 'devel'}
+          - {os: ubuntu-latest,  r: 'release'}
+          - {os: ubuntu-latest,  r: 'devel'}
+          #- {os: macOS-latest,   r: 'release'}
+
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      GOOGLE_AUTH: ${{ secrets.GOOGLE_AUTH }}
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: PredictiveEcology/actions/install-spatial-deps@v0.2
+
+      # 2025-01-30: systemfonts R package failed to install due to these missing
+      - name: Install extra Linux dependencies
+        if: runner.os == 'Linux' && matrix.config.r == 'devel'
+        run: |
+          sudo apt -y install libfontconfig1-dev
+          sudo apt-get install libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
+        shell: bash
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          extra-repositories: 'https://predictiveecology.r-universe.dev/'
+          Ncpus: 2
+          r-version: ${{ matrix.config.r }}
+          use-public-rspm: false
+
+      - uses: PredictiveEcology/actions/install-Require@v0.2
+        with:
+          GitTag: 'development'
+
+      - uses: PredictiveEcology/actions/install-SpaDES@v0.2
+
+      - name: Install SpaDES.project
+        run: Require::Require("PredictiveEcology/SpaDES.project@development", require = FALSE)
+        shell: Rscript {0}
+
+      - name: Install googledrive
+        run: install.packages("googledrive")
+        shell: Rscript {0}
+
+      - name: Run examples for SK
+        run: |
+
+          # Authorize Google Drive
+          googledrive::drive_auth(path = Sys.getenv("GOOGLE_AUTH"))
+
+          # Run examples
+          source("examples/SK-small_1998-2000.R")
+          source("examples/SK_1985-2011.R")
+
+        shell: Rscript {0}
+
