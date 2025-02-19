@@ -73,8 +73,8 @@ jobs:
           googledrive::drive_auth(path = Sys.getenv("GOOGLE_AUTH"))
 
           # Run examples
-          source("examples/SK-small_1998-2000.R")
-          source("examples/SK_1985-2011.R")
+          examples <- list.files("examples", pattern = "^SK[_-]+", full.names = TRUE)
+          lapply(examples, source)
 
         shell: Rscript {0}
 
