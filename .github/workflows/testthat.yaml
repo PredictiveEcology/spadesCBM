@@ -8,10 +8,10 @@ on:
       - main
       - development
 
-name: testthat-development
+name: testthat
 
 jobs:
-  testthat-development:
+  testthat:
     if: "!contains(github.event.commits[0].message, '[skip-ci]')"
     runs-on: ${{ matrix.config.os }}
 
@@ -30,6 +30,7 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       GOOGLE_AUTH: ${{ secrets.GOOGLE_AUTH }}
+      BRANCH_NAME: ${{ github.base_ref || github.ref_name }}
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
 
     steps:
@@ -69,17 +70,18 @@ jobs:
       - name: Run testthat
         run: |
 
+          # Set module branches
+          options("spades.test.modules" = c(
+            CBM_core        = paste0("PredictiveEcology/CBM_core@",        Sys.getenv("BRANCH_NAME")),
+            CBM_defaults    = paste0("PredictiveEcology/CBM_defaults@",    Sys.getenv("BRANCH_NAME")),
+            CBM_vol2biomass = paste0("PredictiveEcology/CBM_vol2biomass@", Sys.getenv("BRANCH_NAME")),
+            CBM_dataPrep_SK = paste0("PredictiveEcology/CBM_dataPrep_SK@", Sys.getenv("BRANCH_NAME"))
+          ))
+          cat("\nTESTING WITH MODULES:\n -", paste(getOption("spades.test.modules"), collapse = "\n - "), "\n\n")
+
           # Authorize Google Drive
           install.packages("googledrive")
           googledrive::drive_auth(path = Sys.getenv("GOOGLE_AUTH"))
-
-          # Test development branches
-          options("spades.test.modules" = c(
-            CBM_core        = "PredictiveEcology/CBM_core@development",
-            CBM_defaults    = "PredictiveEcology/CBM_defaults@development",
-            CBM_vol2biomass = "PredictiveEcology/CBM_vol2biomass@development",
-            CBM_dataPrep_SK = "PredictiveEcology/CBM_dataPrep_SK@development"
-          ))
 
           # # Run tests
           # testthat::test_dir("tests/testthat", stop_on_failure = TRUE)
