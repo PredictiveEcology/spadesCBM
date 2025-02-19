@@ -26,10 +26,10 @@ test_that("SK 1998-2000", {
       times   = times,
       paths   = list(
         projectPath = projectPath,
-        inputPath   = spadesTestPaths$temp$inputs,
-        packagePath = spadesTestPaths$temp$packages,
         modulePath  = spadesTestPaths$temp$modules,
-        cachePath   = file.path(projectPath, "cache"),
+        packagePath = spadesTestPaths$temp$packages,
+        inputPath   = spadesTestPaths$temp$inputs,
+        cachePath   = spadesTestPaths$temp$cache,
         outputPath  = file.path(projectPath, "outputs")
       ),
 
