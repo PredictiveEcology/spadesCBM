@@ -121,6 +121,7 @@
   moduleDiagram(simCBM)
 
   # View object diagram
+  Require::Require("DiagrammeR")
   objectDiagram(simCBM)
 
   # Plot yearly forest products and yearly emissions for the length of the simulation
