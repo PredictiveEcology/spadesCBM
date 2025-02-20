@@ -19,4 +19,4 @@ SpaDES CBM is a [SpaDES](https://predictiveecology.org/SpaDES.html) project for 
 
 The [examples](examples) directory contains SpaDES simulation project scripts that can be used to run a SpaDES CBM simulation. Each project has a set study area, time span, and sometimes other custom inputs or parameters.
 
-See the [CBM_core module](https://github.com/PredictiveEcology/CBM_core) for more information about the simulation outputs.
+See the [Forest Carbon Modelling in SpaDES](https://predictiveecology.org/training/_book/spadesCBMDemo.html) for more information.
