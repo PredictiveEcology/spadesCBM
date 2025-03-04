@@ -99,15 +99,15 @@ A smaller example use of <code>spadesCBM</code> is available in the <code>SpaDES
 <p>In this example, we setup the workflow using <code>setupProject</code> from the
 <a href="https://spades-project.predictiveecology.org/"><code>SpaDES.project</code></a> package and
 current versions of the spadesCBM modules.</p>
-<div class="callout-important">
+<div class="rmdwarning">
 <p><strong>Google account needed for this example</strong></p>
 <p>Users need to access some of the data using the <code>googledrive</code> R package (part of the <code>tidyverse</code> family) to run the example in this manual.
 During the <code>simInit()</code> (or <code>simInitAndSpades()</code>) call R will prompt you to either choose a previously authenticated account (if you have previously used <code>googledrive</code>) or to open a browser window and authenticate.</p>
 <p>Make sure you give <code>tidyverse</code> read/write access to your files:</p>
 <div class="inline-figure"><img src="https://github.com/PredictiveEcology/PredictiveEcology.org/blob/main/training/assets/img/gdriveauth.png?raw=true" fig-align="center" width="467"></div>
 </div>
-<div class="callout-important">
-<p>** Python is required for this example **</p>
+<div class="rmdwarning">
+<p><strong>Python is required for this example</strong></p>
 <p>The <em>CBM_core</em> module requires Python &gt;=3.9 and &lt;=3.12.7.</p>
 <p>If a suitable version of Python does not already exist on your computer,
 <code>setupProject</code> will use the <a href="https://rstudio.github.io/reticulate/"><code>reticulate</code></a> package to install it using the <a href="https://github.com/pyenv/pyenv">pyenv</a> or <a href="https://github.com/pyenv-win/pyenv-win">pyenv-win</a> project.</p>
