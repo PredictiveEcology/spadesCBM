@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 6 CBM_core | CBM Spades Manual</title>
+<meta name="author" content="Céline Boisvenue">
+<meta name="description" content="6.1 Overview This is the core modules of Spades CBM.  6.1.1 Notes on forest type The SQligth (used in CBM_defaults) has has a column named forest_type_id that identifies a softwood forest (sw) as...">
+<meta name="generator" content="bookdown 0.42 with bs4_book()">
+<meta property="og:title" content="Chapter 6 CBM_core | CBM Spades Manual">
+<meta property="og:type" content="book">
+<meta property="og:description" content="6.1 Overview This is the core modules of Spades CBM.  6.1.1 Notes on forest type The SQligth (used in CBM_defaults) has has a column named forest_type_id that identifies a softwood forest (sw) as...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 6 CBM_core | CBM Spades Manual">
+<meta name="twitter:description" content="6.1 Overview This is the core modules of Spades CBM.  6.1.1 Notes on forest type The SQligth (used in CBM_defaults) has has a column named forest_type_id that identifies a softwood forest (sw) as...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="v. 0.1">CBM Spades Manual</a>:
+        <small class="text-muted">v. 0.1</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> About</a></li>
+<li><a class="" href="cbm_defaults.html"><span class="header-section-number">2</span> CBM_defaults</a></li>
+<li><a class="" href="cbm_dataprep_sk.html"><span class="header-section-number">3</span> CBM_dataPrep_SK</a></li>
+<li><a class="" href="cbm_vol2biomass.html"><span class="header-section-number">4</span> CBM_vol2biomass</a></li>
+<li><a class="" href="cbm_vol2biomass-1.html"><span class="header-section-number">5</span> CBM_vol2biomass</a></li>
+<li><a class="active" href="cbm_core.html"><span class="header-section-number">6</span> CBM_core</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/PredictiveEcology/spadesCBM">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cbm_core" class="section level1" number="6">
+<h1>
+<span class="header-section-number">6</span> CBM_core<a class="anchor" aria-label="anchor" href="#cbm_core"><i class="fas fa-link"></i></a>
+</h1>
+<div id="overview-5" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview-5"><i class="fas fa-link"></i></a>
+</h2>
+<p>This is the core modules of Spades CBM.</p>
+<div id="notes-on-forest-type" class="section level3" number="6.1.1">
+<h3>
+<span class="header-section-number">6.1.1</span> Notes on forest type<a class="anchor" aria-label="anchor" href="#notes-on-forest-type"><i class="fas fa-link"></i></a>
+</h3>
+<p>The SQligth (used in CBM_defaults) has has a column named <code>forest_type_id</code> that identifies a softwood forest (sw) as 1, a mixed forest as 2, and a hardwood forest (hw) as 3. This distinction is important because it determines how the root biomass will be calculated (sw differently than hw). The definition of <code>fotrest_type_id</code> is constant and is the same that is used in <code>canfi_species.csv</code> (species level identification of codes that is needed in the volumne to biomass translation in CBM_vol2biomass), in <code>gcMeta.csv</code> (SK specific growth curve metadata), and in <code>sim$growth_increments</code> because it built from <code>gcMeta</code> and <code>canfi_species</code>. The <code>sim$growth_increment$forest_type_id</code> is the one used to create the sw flag needed for input in the spinup event. After that, the sw_hw flag (1=sw, 0=hw) is stored in the <code>sim$cbm_vars$state$sw_hw</code> column.</p>
+</div>
+</div>
+<div id="list-of-input-objects-3" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> List of input objects<a class="anchor" aria-label="anchor" href="#list-of-input-objects-3"><i class="fas fa-link"></i></a>
+</h2>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="22%">
+<col width="22%">
+<col width="31%">
+<col width="22%">
+</colgroup>
+<thead><tr class="header">
+<th>Name</th>
+<th>Class</th>
+<th>Description</th>
+<th>Source</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>growth_increments</td>
+<td>Data table</td>
+<td></td>
+<td>CBM_vol2biomass</td>
+</tr>
+<tr class="even">
+<td>forestTypeID</td>
+<td>Data table</td>
+<td>Defines forest types and their respective IDs</td>
+<td>CM_defaults</td>
+</tr>
+<tr class="odd">
+<td>level3DT</td>
+<td>Data table</td>
+<td>pixelGroup level table with all collapsed raster information</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>spatialDT</td>
+<td>Data table</td>
+<td>Pixel level table with all collapsed raster information</td>
+<td>CBM_dataPrep_x</td>
+</tr>
+<tr class="odd">
+<td>masterRaster</td>
+<td>SpatRaster</td>
+<td></td>
+<td>CBM_dataPrep_x</td>
+</tr>
+<tr class="even">
+<td>pooldel</td>
+<td>Character</td>
+<td>Vector of pools</td>
+<td>CBM_defaults</td>
+</tr>
+<tr class="odd">
+<td>spinupSQL</td>
+<td>Data table</td>
+<td>Parameters for CBM_core spinup event</td>
+<td>CBM_defaults</td>
+</tr>
+<tr class="even">
+<td>disturbanceMatrix</td>
+<td>Data table</td>
+<td>Default disturbance data</td>
+<td>CBM_defaults</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="list-of-output-objects-3" class="section level2" number="6.3">
+<h2>
+<span class="header-section-number">6.3</span> List of output objects<a class="anchor" aria-label="anchor" href="#list-of-output-objects-3"><i class="fas fa-link"></i></a>
+</h2>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="24%">
+<col width="24%">
+<col width="50%">
+</colgroup>
+<thead><tr class="header">
+<th>Name</th>
+<th>Class</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>spinup_input</td>
+<td>List</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>cbm_vars</td>
+<td>List</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>spinupResults</td>
+<td>Data frame</td>
+<td>Pools post spinup in order of pixelGroup</td>
+</tr>
+<tr class="even">
+<td>pixelGroupC</td>
+<td>Data table</td>
+<td>All vectors (pixelGroup columns) and pools for simulation year.</td>
+</tr>
+<tr class="odd">
+<td>pixelKeep</td>
+<td>Data table</td>
+<td>Tracking all pixels’ pixel group through simulations</td>
+</tr>
+<tr class="even">
+<td>cbmPools</td>
+<td>Data table</td>
+<td>All pools and pixelGroups after each simulation</td>
+</tr>
+<tr class="odd">
+<td>NPP</td>
+<td>Data table</td>
+<td>Net primary production per pixel group</td>
+</tr>
+<tr class="even">
+<td>emissionsProducts</td>
+<td>matrix</td>
+<td>Total emissions and products for study area per simulation year</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="module-flow-rename-this-section-later-2" class="section level2" number="6.4">
+<h2>
+<span class="header-section-number">6.4</span> Module flow (rename this section later)<a class="anchor" aria-label="anchor" href="#module-flow-rename-this-section-later-2"><i class="fas fa-link"></i></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>
+<li>
+<li>
+<li>
+</ol>
+</div>
+<div id="old-version-1" class="section level2" number="6.5">
+<h2>
+<span class="header-section-number">6.5</span> OLD VERSION<a class="anchor" aria-label="anchor" href="#old-version-1"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="overview-6" class="section level2" number="6.6">
+<h2>
+<span class="header-section-number">6.6</span> Overview<a class="anchor" aria-label="anchor" href="#overview-6"><i class="fas fa-link"></i></a>
+</h2>
+<p>NPP: Net primary productivity is for both above and below ground productivity. Provide an overview of what the module does / how to use the module.</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="cbm_vol2biomass-1.html"><span class="header-section-number">5</span> CBM_vol2biomass</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#cbm_core"><span class="header-section-number">6</span> CBM_core</a></li>
+<li>
+<a class="nav-link" href="#overview-5"><span class="header-section-number">6.1</span> Overview</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#notes-on-forest-type"><span class="header-section-number">6.1.1</span> Notes on forest type</a></li></ul>
+</li>
+<li><a class="nav-link" href="#list-of-input-objects-3"><span class="header-section-number">6.2</span> List of input objects</a></li>
+<li><a class="nav-link" href="#list-of-output-objects-3"><span class="header-section-number">6.3</span> List of output objects</a></li>
+<li><a class="nav-link" href="#module-flow-rename-this-section-later-2"><span class="header-section-number">6.4</span> Module flow (rename this section later)</a></li>
+<li><a class="nav-link" href="#old-version-1"><span class="header-section-number">6.5</span> OLD VERSION</a></li>
+<li><a class="nav-link" href="#overview-6"><span class="header-section-number">6.6</span> Overview</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/PredictiveEcology/spadesCBM/blob/main/../modules/CBM_core/CBM_core.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/PredictiveEcology/spadesCBM/edit/main/../modules/CBM_core/CBM_core.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>CBM Spades Manual</strong>: v. 0.1" was written by Céline Boisvenue. It was last built on 26 June 2024.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 2 CBM_defaults | CBM Spades Manual</title>
+<meta name="author" content="Céline Boisvenue">
+<meta name="description" content="2.1 Overview The primary role of the CBM_defaults module is to read in various tables from the SQLite database file. This includes default disturbance data such as different disturbance types and...">
+<meta name="generator" content="bookdown 0.42 with bs4_book()">
+<meta property="og:title" content="Chapter 2 CBM_defaults | CBM Spades Manual">
+<meta property="og:type" content="book">
+<meta property="og:description" content="2.1 Overview The primary role of the CBM_defaults module is to read in various tables from the SQLite database file. This includes default disturbance data such as different disturbance types and...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 2 CBM_defaults | CBM Spades Manual">
+<meta name="twitter:description" content="2.1 Overview The primary role of the CBM_defaults module is to read in various tables from the SQLite database file. This includes default disturbance data such as different disturbance types and...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="v. 0.1">CBM Spades Manual</a>:
+        <small class="text-muted">v. 0.1</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> About</a></li>
+<li><a class="active" href="cbm_defaults.html"><span class="header-section-number">2</span> CBM_defaults</a></li>
+<li><a class="" href="cbm_dataprep_sk.html"><span class="header-section-number">3</span> CBM_dataPrep_SK</a></li>
+<li><a class="" href="cbm_vol2biomass.html"><span class="header-section-number">4</span> CBM_vol2biomass</a></li>
+<li><a class="" href="cbm_vol2biomass-1.html"><span class="header-section-number">5</span> CBM_vol2biomass</a></li>
+<li><a class="" href="cbm_core.html"><span class="header-section-number">6</span> CBM_core</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/PredictiveEcology/spadesCBM">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cbm_defaults" class="section level1" number="2">
+<h1>
+<span class="header-section-number">2</span> CBM_defaults<a class="anchor" aria-label="anchor" href="#cbm_defaults"><i class="fas fa-link"></i></a>
+</h1>
+<div id="overview" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview"><i class="fas fa-link"></i></a>
+</h2>
+<p>The primary role of the CBM_defaults module is to read in various tables from the SQLite database file. This includes default disturbance data such as different disturbance types and their IDs, spinup parameters, pool names, and more. The outputs of this module are primarily used in CBM_dataPrep_x and CBM_core.</p>
+</div>
+<div id="list-of-input-objects" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> List of input objects<a class="anchor" aria-label="anchor" href="#list-of-input-objects"><i class="fas fa-link"></i></a>
+</h2>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="23%">
+<col width="23%">
+<col width="27%">
+<col width="26%">
+</colgroup>
+<thead><tr class="header">
+<th>Name</th>
+<th>Class</th>
+<th>Description</th>
+<th>Source</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td>Archive Index</td>
+<td>SQL Database</td>
+<td>SQLite database file for CFS_CBM3 default tables</td>
+<td><a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/resources/cbm_defaults_db" class="uri">https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/resources/cbm_defaults_db</a></td>
+</tr></tbody>
+</table></div>
+</div>
+<div id="list-of-output-objects" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> List of output objects<a class="anchor" aria-label="anchor" href="#list-of-output-objects"><i class="fas fa-link"></i></a>
+</h2>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="26%">
+<col width="26%">
+<col width="47%">
+</colgroup>
+<thead><tr class="header">
+<th>Name</th>
+<th>Class</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>disturbanceMatrix</td>
+<td>Data table</td>
+<td>Default disturbance data</td>
+</tr>
+<tr class="even">
+<td>spinupSQL</td>
+<td>Data table</td>
+<td>Parameters for CBM_core spinup event</td>
+</tr>
+<tr class="odd">
+<td>pooldef</td>
+<td>Character</td>
+<td>Vector of pools</td>
+</tr>
+<tr class="even">
+<td>poolCount</td>
+<td>Numeric</td>
+<td>Length of pooldef</td>
+</tr>
+<tr class="odd">
+<td>forestTypeID</td>
+<td>Data table</td>
+<td>Defines forest types and their respective IDs</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="module-flow" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> Module flow<a class="anchor" aria-label="anchor" href="#module-flow"><i class="fas fa-link"></i></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>the SQLite database file is downloaded and stored into the user’s Inputs folder from GitHub using <code>prepInputs</code>.</li>
+<li>Create a connection to the database with <code>dbConnect</code>. This creates the archiveIndex object.</li>
+<li>Using <code>dbGetQuery</code>, 3 disturbance tables are extracted from archiveIndex. These tables are named matrices2, matrices3, and matrices6. These are merged to create the disturbanceMatrix object.</li>
+<li>spatialUnitsID and spinupParameters are extracted from archiveIndex and merged to create the spinupSQL object.</li>
+<li>pooldef is then extracted, and transformed into a Character class object.</li>
+<li>poolCount is created by defining the length of pooldef.</li>
+<li>forestTypeID is extracted from archiveIndex and a is_sw column is created where any entry where forest_type_id = 1 is <code>TRUE</code> and everything else is <code>FALSE</code>.</li>
+</ol>
+</div>
+<div id="usage-1" class="section level2" number="2.5">
+<h2>
+<span class="header-section-number">2.5</span> Usage<a class="anchor" aria-label="anchor" href="#usage-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>This module can run independently by running the global script below. Its main task is to read-in all the default values in SpaDES-CBM which is akin to the <code>ArchiveIndex</code> in CBM-CFS3 runs.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">projectPath</span> <span class="op">&lt;-</span> <span class="st">"~/CBM_defaults"</span></span>
+<span><span class="va">repos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"predictiveecology.r-universe.dev"</span>, <span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span><span class="op">(</span><span class="st">"repos"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"SpaDES.project"</span><span class="op">)</span> <span class="op">&lt;</span> <span class="st">"0.1.1"</span> <span class="op">||</span> <span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"Require"</span><span class="op">)</span> <span class="op">&lt;</span> <span class="st">"1.0.1.9002"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/conditions.html">tryCatch</a></span><span class="op">(</span>error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"SpaDES.project"</span>, <span class="st">"Require"</span><span class="op">)</span>, repos <span class="op">=</span> <span class="va">repos</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">SpaDES.project</span><span class="fu">::</span><span class="fu"><a href="http://spades-project.predictiveecology.org/reference/setupProject.html">setupProject</a></span><span class="op">(</span></span>
+<span>  paths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>projectPath <span class="op">=</span> <span class="va">projectPath</span><span class="op">)</span>,</span>
+<span>  </span>
+<span>  options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span></span>
+<span>    repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>repos <span class="op">=</span> <span class="va">repos</span><span class="op">)</span>,</span>
+<span>    reproducible.destinationPath <span class="op">=</span> <span class="st">"inputs"</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  modules <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PredictiveEcology/CBM_defaults@training"</span><span class="op">)</span>,</span>
+<span>  require <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"SpaDES.core"</span><span class="op">)</span>,</span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">outDefaults</span> <span class="op">&lt;-</span> <span class="fu">SpaDES.core</span><span class="fu">::</span><span class="fu">simInitAndSpades2</span><span class="op">(</span><span class="va">out</span><span class="op">)</span></span></code></pre></div>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html"><span class="header-section-number">1</span> About</a></div>
+<div class="next"><a href="cbm_dataprep_sk.html"><span class="header-section-number">3</span> CBM_dataPrep_SK</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#cbm_defaults"><span class="header-section-number">2</span> CBM_defaults</a></li>
+<li><a class="nav-link" href="#overview"><span class="header-section-number">2.1</span> Overview</a></li>
+<li><a class="nav-link" href="#list-of-input-objects"><span class="header-section-number">2.2</span> List of input objects</a></li>
+<li><a class="nav-link" href="#list-of-output-objects"><span class="header-section-number">2.3</span> List of output objects</a></li>
+<li><a class="nav-link" href="#module-flow"><span class="header-section-number">2.4</span> Module flow</a></li>
+<li><a class="nav-link" href="#usage-1"><span class="header-section-number">2.5</span> Usage</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/PredictiveEcology/spadesCBM/blob/main/../modules//CBM_defaults/CBM_defaults.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/PredictiveEcology/spadesCBM/edit/main/../modules//CBM_defaults/CBM_defaults.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>CBM Spades Manual</strong>: v. 0.1" was written by Céline Boisvenue. It was last built on 26 June 2024.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
