@@ -1,5 +1,9 @@
 about
 usage
+setup
+google-account-needed-for-this-example
+python-is-required-for-this-example
+run-example-simulation
 cbm_defaults
 overview
 list-of-input-objects

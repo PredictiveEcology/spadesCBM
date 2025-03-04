@@ -50,7 +50,6 @@
 <li><a class="" href="cbm_vol2biomass.html"><span class="header-section-number">4</span> CBM_vol2biomass</a></li>
 <li><a class="" href="cbm_vol2biomass-1.html"><span class="header-section-number">5</span> CBM_vol2biomass</a></li>
 <li><a class="" href="cbm_core.html"><span class="header-section-number">6</span> CBM_core</a></li>
-<li><a class="" href="references.html">References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -156,7 +155,7 @@
 <span class="header-section-number">2.5</span> Usage<a class="anchor" aria-label="anchor" href="#usage-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>This module can run independently by running the global script below. Its main task is to read-in all the default values in SpaDES-CBM which is akin to the <code>ArchiveIndex</code> in CBM-CFS3 runs.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">projectPath</span> <span class="op">&lt;-</span> <span class="st">"~/CBM_defaults"</span></span>
 <span><span class="va">repos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"predictiveecology.r-universe.dev"</span>, <span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span><span class="op">(</span><span class="st">"repos"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"SpaDES.project"</span><span class="op">)</span> <span class="op">&lt;</span> <span class="st">"0.1.1"</span> <span class="op">||</span> <span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"Require"</span><span class="op">)</span> <span class="op">&lt;</span> <span class="st">"1.0.1.9002"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
