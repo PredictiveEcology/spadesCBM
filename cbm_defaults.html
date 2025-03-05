@@ -65,22 +65,18 @@
 <h2>
 <span class="header-section-number">2.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview"><i class="fas fa-link"></i></a>
 </h2>
-<p><a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a> provides simulations with default parameter values for the managed forests of Canada, akin to the Archive Index in the CBM-CFS3 documentation.
-Most parameters are read in from various tables from a SQLite database file (link below).
-Some defaults are modified from CBM-CFS3 to accommodate the capacity for a more flexible representation of vegetation dynamics enable by the <code>libcbm</code> Python functions.
-There are available <a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/resources/cbm_exn">here</a>.
-Defaults for the managed forests of Canada include disturbance data such as different disturbance types and their IDs, spinup parameters, pool names, and more. The outputs of this module are primarily used <em>CBM_dataPrep_SK</em> and <em>CBM_core</em>.</p>
+<p><a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a> provides simulations with default parameter values for the managed forests of Canada, akin to the Archive Index in the CBM-CFS3 documentation. Most parameters are read in from various tables from a SQLite database file (link below). Some defaults are modified from CBM-CFS3 to accommodate the capacity for a more flexible representation of vegetation dynamics enable by the <code>libcbm</code> Python functions. There are available <a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/resources/cbm_exn">here</a>. Defaults for the managed forests of Canada include disturbance data such as different disturbance types and their IDs, spinup parameters, pool names, and more. The outputs of this module are primarily used <em>CBM_dataPrep_SK</em> and <em>CBM_core</em>.</p>
 </div>
 <div id="list-of-input-objects" class="section level2" number="2.2">
 <h2>
 <span class="header-section-number">2.2</span> List of input objects<a class="anchor" aria-label="anchor" href="#list-of-input-objects"><i class="fas fa-link"></i></a>
 </h2>
-<div class="inline-table"><table class="table table-sm">
+<div class="inline-table"><table style="width:100%;" class="table table-sm">
 <colgroup>
-<col width="23%">
-<col width="23%">
-<col width="27%">
+<col width="24%">
+<col width="24%">
 <col width="26%">
+<col width="24%">
 </colgroup>
 <thead><tr class="header">
 <th>Name</th>
@@ -88,12 +84,38 @@ Defaults for the managed forests of Canada include disturbance data such as diff
 <th>Description</th>
 <th>Source</th>
 </tr></thead>
-<tbody><tr class="odd">
+<tbody>
+<tr class="odd">
 <td>Archive Index</td>
 <td>SQL Database</td>
 <td>SQLite database file for CFS_CBM3 default tables</td>
 <td><a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/resources/cbm_defaults_db" class="uri">https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/resources/cbm_defaults_db</a></td>
-</tr></tbody>
+</tr>
+<tr class="even">
+<td>Disturbance Matrix Association</td>
+<td>Data table</td>
+<td>Default disturbance IDs</td>
+<td><a href="https://raw.githubusercontent.com/cat-cfs/libcbm_py/main/libcbm/resources/cbm_exn/disturbance_matrix_association.csv" class="uri">https://raw.githubusercontent.com/cat-cfs/libcbm_py/main/libcbm/resources/cbm_exn/disturbance_matrix_association.csv</a></td>
+</tr>
+<tr class="odd">
+<td>Disturbance Matrix Value</td>
+<td>Data table</td>
+<td>Default disturbance data</td>
+<td><a href="https://raw.githubusercontent.com/cat-cfs/libcbm_py/main/libcbm/resources/cbm_exn/disturbance_matrix_value.csv" class="uri">https://raw.githubusercontent.com/cat-cfs/libcbm_py/main/libcbm/resources/cbm_exn/disturbance_matrix_value.csv</a></td>
+</tr>
+<tr class="even">
+<td>ecoLocator</td>
+<td>Shapefile</td>
+<td>Canada’s ecozone as polygon features</td>
+<td><a href="http://sis.agr.gc.ca/cansis/nsdb/ecostrat/zone/ecozone_shp.zip" class="uri">http://sis.agr.gc.ca/cansis/nsdb/ecostrat/zone/ecozone_shp.zip</a></td>
+</tr>
+<tr class="odd">
+<td>spuLocator</td>
+<td>Shapefile</td>
+<td>Canada’s spatial units as polygon features</td>
+<td><a href="https://drive.google.com/file/d/1D3O0Uj-s_QEgMW7_X-NhVsEZdJ29FBed" class="uri">https://drive.google.com/file/d/1D3O0Uj-s_QEgMW7_X-NhVsEZdJ29FBed</a></td>
+</tr>
+</tbody>
 </table></div>
 </div>
 <div id="list-of-output-objects" class="section level2" number="2.3">
@@ -102,9 +124,9 @@ Defaults for the managed forests of Canada include disturbance data such as diff
 </h2>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
-<col width="26%">
-<col width="26%">
-<col width="47%">
+<col width="27%">
+<col width="17%">
+<col width="55%">
 </colgroup>
 <thead><tr class="header">
 <th>Name</th>
@@ -115,7 +137,7 @@ Defaults for the managed forests of Canada include disturbance data such as diff
 <tr class="odd">
 <td>species_tr</td>
 <td>Data table</td>
-<td>Default disturbance data</td>
+<td>Default species data</td>
 </tr>
 <tr class="even">
 <td>disturbanceMatrix</td>
@@ -124,8 +146,8 @@ Defaults for the managed forests of Canada include disturbance data such as diff
 </tr>
 <tr class="odd">
 <td>cTransfers</td>
-<td></td>
-<td></td>
+<td>Data table</td>
+<td>Default disturbance data</td>
 </tr>
 <tr class="even">
 <td>spinupSQL</td>
@@ -136,6 +158,16 @@ Defaults for the managed forests of Canada include disturbance data such as diff
 <td>pooldef</td>
 <td>Character</td>
 <td>Vector of pools</td>
+</tr>
+<tr class="even">
+<td>ecoLocator</td>
+<td>Shapefile</td>
+<td>Canada’s ecozone as polygon features with ecozone IDs</td>
+</tr>
+<tr class="odd">
+<td>spuLocator</td>
+<td>Shapefile</td>
+<td>Canada’s spatial units as polygon features with spatial unit IDs</td>
 </tr>
 </tbody>
 </table></div>
@@ -153,13 +185,18 @@ Defaults for the managed forests of Canada include disturbance data such as diff
 <li>
 <code>pooldef</code> gives the names of each carbon pool that exists in CBM.</li>
 <li>Objects that narrow the parameter selection for the study area are <code>spuLocator</code> and <code>ecolocator</code>
-## Background</li>
+</li>
 </ol>
+</div>
+<div id="background" class="section level2" number="2.5">
+<h2>
+<span class="header-section-number">2.5</span> Background<a class="anchor" aria-label="anchor" href="#background"><i class="fas fa-link"></i></a>
+</h2>
 <p>This example uses default parameters that were created for use in CBM-CFS3. Few of these parameters have source references. The ones who do are outline in the <a href="https://osdp-psdo.canada.ca/dp/en/search/metadata/NRCAN-CFS-1-7570539d-a457-43ef-9215-584ad612f409">Operational-scale Carbon Budget Model of the Canadian Forest Sector (CBM-CFS3) version 1.2: user’s guide</a>. <em>CBM_defaults</em> brings the parameters to an R-environment in which users can change and test new parameters in CBM simulations easily.</p>
 </div>
-<div id="usage-1" class="section level2" number="2.5">
+<div id="usage-1" class="section level2" number="2.6">
 <h2>
-<span class="header-section-number">2.5</span> Usage<a class="anchor" aria-label="anchor" href="#usage-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6</span> Usage<a class="anchor" aria-label="anchor" href="#usage-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>This module can run independently by running the global script below. It provides default parameters for all managed forests of Canada, a transparent view of these parameters and the means to change and test new parameters in CBM simulations.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -195,7 +232,8 @@ Defaults for the managed forests of Canada include disturbance data such as diff
 <li><a class="nav-link" href="#list-of-input-objects"><span class="header-section-number">2.2</span> List of input objects</a></li>
 <li><a class="nav-link" href="#list-of-output-objects"><span class="header-section-number">2.3</span> List of output objects</a></li>
 <li><a class="nav-link" href="#module-flow"><span class="header-section-number">2.4</span> Module flow</a></li>
-<li><a class="nav-link" href="#usage-1"><span class="header-section-number">2.5</span> Usage</a></li>
+<li><a class="nav-link" href="#background"><span class="header-section-number">2.5</span> Background</a></li>
+<li><a class="nav-link" href="#usage-1"><span class="header-section-number">2.6</span> Usage</a></li>
 </ul>
 
       <div class="book-extra">
