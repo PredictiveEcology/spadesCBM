@@ -94,7 +94,19 @@ A smaller example use of <a href="https://github.com/PredictiveEcology/spadesCBM
 </h2>
 <p>The Carbon Budget Model (CBM) was first developed in the early 1990s <span class="citation">@kurz1992.Its</span> implementation in a platform for model interoperability and nimbleness such as <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> warrants an overview.</p>
 <p><a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulates forest carbon dynamics for a given study area based on Canadian-parameterization and user-provided growth and inventory information. Default Canadian parameters are read-in (<a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a>), matched to the user-provided information (<a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> and <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a>), and this information drives the carbon-transfers through the simulations (<a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>).</p>
-<p>There are 20 carbon pools in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> (MAKE A TABLE AND REFER TO IT). The carbon transfers are dictated by matrices (available in the defaults information) which specify the proportion of carbon moving from one pool (“source_pool” - this needs to be in our lexicon) to (“sink_pools”)</p>
+<p>There are 20 carbon pools in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> (MAKE A TABLE AND REFER TO IT). The carbon transfers are dictated by matrices (available in the defaults information) which specify the proportion of carbon moving from one pool (“source_pool” - this needs to be in our lexicon) to (“sink_pools” - this too). Matrices for growth are populated with the user-provided growth information and are the main change agent in the system. Default parameters for biomass and dead organic mater turnover , decay and soil mixing are either the the provincial/territorial, ecozone (NEED TO DEFINE), or Canada-wide scale (see <span class="citation">@kurz2009</span> Table 1). Note that parameters can easily be modified in a <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulation.</p>
+<p>half growth
+domturnover
+bioturnover
+overmaturedecline
+2nd half of the growth
+domdecay
+slowdecay
+slowmixing</p>
+<p>disturbance happen before everything - dist matrices explanation
+matrices don’t loose carbon, they apply proportions that add up to 1</p>
+<p>spinup procedure</p>
+<p>simulation illustration?</p>
 </div>
 <div id="setup" class="section level2" number="1.3">
 <h2>
