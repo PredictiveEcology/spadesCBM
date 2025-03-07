@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 3 CBM_dataPrep_SK | CBM Spades Manual</title>
 <meta name="author" content="Céline Boisvenue">
-<meta name="description" content="3.1 Overview   3.2 List of input objects Name Class Description Source   3.3 List of output objects Name Class Description   3.4 Module flow (rename this section later)   #OLD VERSION  3.5...">
+<meta name="description" content="3.1 Overview CBM_dataPrep_SK processes spatially explicit inputs for use in CBM_vol2biomass and CBM_core. In SpaDES-speak, it has one event (init).SpaDES was designed for spatially explicit...">
 <meta name="generator" content="bookdown 0.42 with bs4_book()">
 <meta property="og:title" content="Chapter 3 CBM_dataPrep_SK | CBM Spades Manual">
 <meta property="og:type" content="book">
-<meta property="og:description" content="3.1 Overview   3.2 List of input objects Name Class Description Source   3.3 List of output objects Name Class Description   3.4 Module flow (rename this section later)   #OLD VERSION  3.5...">
+<meta property="og:description" content="3.1 Overview CBM_dataPrep_SK processes spatially explicit inputs for use in CBM_vol2biomass and CBM_core. In SpaDES-speak, it has one event (init).SpaDES was designed for spatially explicit...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 3 CBM_dataPrep_SK | CBM Spades Manual">
-<meta name="twitter:description" content="3.1 Overview   3.2 List of input objects Name Class Description Source   3.3 List of output objects Name Class Description   3.4 Module flow (rename this section later)   #OLD VERSION  3.5...">
+<meta name="twitter:description" content="3.1 Overview CBM_dataPrep_SK processes spatially explicit inputs for use in CBM_vol2biomass and CBM_core. In SpaDES-speak, it has one event (init).SpaDES was designed for spatially explicit...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -65,10 +65,11 @@
 <h2>
 <span class="header-section-number">3.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview-1"><i class="fas fa-link"></i></a>
 </h2>
+<p><a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> processes spatially explicit inputs for use in <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> and <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>. In <em>SpaDES-speak</em>, it has one event (<code>init</code>).<a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> was designed for spatially explicit modelling and provides a wide variety of tools to support it. <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> processes spatially explicit inputs for <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>, making use of these tools. This information is study area and scenario specific making <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> the most idiosyncratic module of the <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> deck. Users have the capacity to define their simulation through the inputs they provide to <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>. The default example simulates a present day (1985-2011) scenario where remotely-sensed disturbances are simulated in the managed forests of Saskatchewan, as described in <span class="citation">@boisvenue2016</span>’s (scenario = time horizon + disturbances).</p>
 </div>
-<div id="list-of-input-objects-1" class="section level2" number="3.2">
+<div id="inputs" class="section level2" number="3.2">
 <h2>
-<span class="header-section-number">3.2</span> List of input objects<a class="anchor" aria-label="anchor" href="#list-of-input-objects-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.2</span> Inputs<a class="anchor" aria-label="anchor" href="#inputs"><i class="fas fa-link"></i></a>
 </h2>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
@@ -85,10 +86,25 @@
 </tr></thead>
 <tbody></tbody>
 </table></div>
+<p>The default structure of <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> modules has the <code>.inputObjects</code> function, and in the <code>.inputObjects</code> function of <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, we make use of the <code>reproducible::prepInputs</code> function which is an important part of the <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> toolkit (see the <a href="https://predictiveecology.org/training/_book/ModuleInputs.html%20manual%20for%20more%20details">SpaDES training</a>, tools that enable repeadability and reproducibility (<span class="citation">@McIntire2022</span>). <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> falls back to the defaults for running the SK managed forests, unless alternative information is provided by the user. These defaults give an example users can developed their own scenarios on.</p>
+<p>The study area is defined by the object <code>masterRaster</code>. This object can be provided directly as a raster, as per our example, or created from shape files or by other means by the user. Any R-code can replace current input processing examples in <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>. The characteristics (projection, resolution, etc.) of this <code>masterRaster</code> are transferred to all other rasters used in the simulation via the function <a href="https://predictiveecology.org/training/_book/prepInputs.html"><code>reproducible::prepInputs</code></a>. In our example, the age raster (<code>ageRaster</code>), the raster specifying where each growth curves is to be used (<code>gcIndexRaster</code>), location rasters that link back to the default parameters for Canada (<code>spuRaster</code>, <code>ecoRaster</code>), and the yearly disturbance rasters (provided as a list in this module <code>disturbanceRaster</code>, but process in the <code>annual</code> event of the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module using the function <a href="https://reproducible.predictiveecology.org/reference/postProcessTo.html"><code>reproducible::postProcess</code></a>, which is part of the <a href="https://predictiveecology.org/training/_book/prepInputs.html"><code>reproducible::prepInputs</code></a> function) are all matched to the <code>masterRaster</code>. Defaults parameters are expected from the <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a> (<code>spinupSQL</code>, <code>species_tr</code>) and one table is provided <code>cbmAdmin</code>for user convenience. In addition to location (study area) and inventory information (age, here provided as a raster), the user is expected to provide: growth curves (<span class="math inline">\(m^3/ha\)</span>) that are linked to each pixel or stand (<code>userGcM3</code>), the leading species for each curve (<code>gcMeta</code>), and information about disturbances (<code>userDist</code>).</p>
 </div>
-<div id="list-of-output-objects-1" class="section level2" number="3.3">
+<div id="module-functioning-1" class="section level2" number="3.3">
 <h2>
-<span class="header-section-number">3.3</span> List of output objects<a class="anchor" aria-label="anchor" href="#list-of-output-objects-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.3</span> Module functioning<a class="anchor" aria-label="anchor" href="#module-functioning-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>Two central pieces are processed in <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>: the pixelGroups are created and the named disturbances are matched with disturbance matrices.</p>
+<p><code>pixelGroup</code> are unique combinations of age, growth curve (which means species), spatial unit and ecozone. All pixels having identical age, growth curve, in the same spatial unit and ecozone share one <code>pixelGroup</code> number. The object <code>spatialDT</code> is the long-form where each simulated pixel has its own line, and <code>level3DT</code> lists only the pixel groups. In our example there are XXXX pixels simulated which are grouped in 739 pixelGroups for actual processing. Parameters necessary for the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> <code>spinup</code> are added to the <code>level3DT</code> object by using the output object <code>spinupSQL</code> from <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a>.</p>
+<p>The user identifies what disturbances occur on the landscape during the simulations. Our example points to a file (<code>userGcM3</code>) that has the disturbance name and description, matches that to a number on the raster we provide to identify disturbances (one per year since our simulations are yearly), and identifies if the disturbance is a whole stand disturbance or not. These disturbances need to be match to a disturbance matrix, which identifies the proportion of carbon transferred from one pool (source pool) to another pool (sink pool) when a disturbance occurs in that specific pixel of our study area. If something else then the defaults are used, the user will be prompted to select from a list of disturbance matrices available for the study area, for each spatial unit and ecozone combinations. These matrices are provided in the Canada-wide defaults and are region (spatial unit and ecozone) specific, these are read-in by <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a> and available to the <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> module via the <a href="https://predictiveecology.org/training/_book/simList.html">simList()</a>. We provide an example of selection in our example. The user-prompts look like this:
+<strong>MAYBE TO INSERT SCREEN SHOTS OF THE disturbance SELECTION PROCESS?</strong></p>
+<p>There are 468 unique disturbance matrices identified in the defaults. Since root parameters and snag carbon transfer rates differ between hardwood and softwood in this model, each disturbance has a hardwood and a softwood instance, which means we really have 234 unique disturbances across Canada as defaults in this modelling system, one for hardwood and one for softwood. A user could add or modify the proportions transferred between pools to represent a disturbance (<strong>NOTE THAT THIS WOULD HAVE TO HAPPEN IN THE CSVs, and even then would that work? Does libcbm point to those files? what if we change them? QUESTION FOR SCOTT</strong>).
+<strong>Add a section on how one would modify the disturbance matrices</strong></p>
+<p>There are a series of helper functions in <a href="https://github.com/PredictiveEcology/CBMutils.git">CBMutils</a> to help users explore and navigate disturbance matrices: <a href="https://github.com/PredictiveEcology/CBMutils/tree/main/vignettes">spuDist</a> for extracting the disturbances in a specific spatial unit, <a href="https://github.com/PredictiveEcology/CBMutils/tree/main/vignettes">simDist()</a> which lists the distrubances used in a simulation, and <a href="https://github.com/PredictiveEcology/CBMutils/tree/main/vignettes">seeDist()</a> which pulls out the proportions from source to sink pools.</p>
+<p>Because growth curves can be identified by strata, multiple columns can be used to identify growth curves using the <code>curveID</code> object. In our example, only one column is used, “gcids”.</p>
+</div>
+<div id="list-of-output-objects-1" class="section level2" number="3.4">
+<h2>
+<span class="header-section-number">3.4</span> List of output objects<a class="anchor" aria-label="anchor" href="#list-of-output-objects-1"><i class="fas fa-link"></i></a>
 </h2>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
@@ -104,179 +120,14 @@
 <tbody></tbody>
 </table></div>
 </div>
-<div id="module-flow-rename-this-section-later" class="section level2" number="3.4">
+<div id="links-to-other-modules" class="section level2" number="3.5">
 <h2>
-<span class="header-section-number">3.4</span> Module flow (rename this section later)<a class="anchor" aria-label="anchor" href="#module-flow-rename-this-section-later"><i class="fas fa-link"></i></a>
-</h2>
-<ol style="list-style-type: decimal">
-<li>
-<li>
-<li>
-<li>
-</ol>
-<p>#OLD VERSION</p>
-</div>
-<div id="overview-2" class="section level2" number="3.5">
-<h2>
-<span class="header-section-number">3.5</span> Overview<a class="anchor" aria-label="anchor" href="#overview-2"><i class="fas fa-link"></i></a>
-</h2>
-<p>This module is to read-in user-provided information or provide defaults.
-It reads-in rasters (<code>ageRaster</code>, <code>ecoRaster</code>, <code>gcIndexRaster</code>, <code>spuRaster</code>, and <code>masterRaster</code>) from either defaults of provided by the user.
-From the rasters, <code>pixelGroup</code> are created which are unique combinations of the rasters values.
-<code>pixelGroup</code> is a main processing unit in SpaDES <code>CBM</code> simulations.
-In a first step, a <code>spatialDT</code> which is a <code>data.table</code> listing all pixels with their respective values of <code>raster</code>, <code>pixelIndex</code> and <code>pixelGroup</code> is created (<code>sim$spatialDT</code>).
-From the <code>spatialDT</code>, a reduced <code>data.table</code> is create (<code>sim$level3DT</code>) which is the data.table from which processing will start in <code>CBM_core</code>.
-The number of records in this data.table (<code>sim$level3DT</code>) should equal the number of pixel groups that will be processed in the spinup event of the <code>CBM_core</code> module.
-This present module also creates variables of the same length as the rows in <code>level3DT</code> for use in other events of the <code>CBM_core</code> module.
-These are: <code>returnIntervals</code>, <code>maxRotations</code>, <code>minRotations</code>, <code>lastPassDMIDs</code>, <code>historicDMIDs</code>, and delays all stored in the <code>simList.</code></p>
-<p>Another important object created in this module is <code>mySpuDmids</code>.
-This <code>data.table</code> links the user-defined disturbances (<code>$userDist</code>) with a spatial unit and a disturbance matrix.
-This will be used to apply disturbances to pixel groups in the annual event of the <code>CBM_core</code> module.
-The <code>mySpuDmids</code> object is created starting from a user provided list of disturbances (<code>userDist</code>) that matches the <code>rasterId</code> of the disturbance raster to the disturbance name, and speficies if the disturbance is stand-replacing (<code>userDist$wholeStand == 1</code>) or not (<code>userDist$wholeStand == 1</code>).
-The disturbance names (<code>userDist$distName</code>) and their location of the disturbance (linked via the rasterID to the <code>sim$mySpuDmids$spatial_unit id</code>) are used to associate a disturbance matrix identification number to the disturbed <code>pixelGroup</code>.
-Disturbance Matrices (DM) determine what proportion of a carbon pool gets transferred to another carbon pool via disturbance.
-There are 426 matrix IDs in the present default data (<code>sim$processes$disturbanceMatrices</code>).
-DMIDs (Disturbance Matrix IDs) are part of the default data of CBM-CFS3.
-DMs are specific to spatial units which are a numbering (48 of them <code>sim$cbmData@spatialUnitIds</code>) of the overlay of the administrative boundaries and ecozones in Canada.
-Spatial units are central units in CBM-CFS3, as are ecozones because both determining various ecological and other parameters that will be used in simulations via the <code>CBM_core</code> module.
-The proportion of carbon transferred by a specific DMID can be found here <code>sim$cbmData@disturbanceMatrixValues</code>.
-A series of R-functions were built to help users associate the correct disturbance matrices (<code>spuDist()</code>, <code>mySpu()</code>, <code>seeDist()</code>, <code>simDist()</code>) and are searchable in this package.</p>
-<p>Note: * CBM_defaults objects are recreated in the <code>.inputObject</code> of this module * nothing is in carbon or carbon increments at this point.
-This module feeds into the CBM_core module as does the CBM_vol2biomass.R module.</p>
-</div>
-<div id="usage-2" class="section level2" number="3.6">
-<h2>
-<span class="header-section-number">3.6</span> Usage<a class="anchor" aria-label="anchor" href="#usage-2"><i class="fas fa-link"></i></a>
-</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="cbm_dataprep_sk.html#cb3-1" tabindex="-1"></a><span class="fu">library</span>(igraph)</span>
-<span id="cb3-2"><a href="cbm_dataprep_sk.html#cb3-2" tabindex="-1"></a><span class="fu">library</span>(SpaDES.core)</span>
-<span id="cb3-3"><a href="cbm_dataprep_sk.html#cb3-3" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="cbm_dataprep_sk.html#cb3-4" tabindex="-1"></a>moduleDir <span class="ot">&lt;-</span> <span class="fu">getwd</span>()</span>
-<span id="cb3-5"><a href="cbm_dataprep_sk.html#cb3-5" tabindex="-1"></a>inputDir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(moduleDir, <span class="st">"inputs"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-6"><a href="cbm_dataprep_sk.html#cb3-6" tabindex="-1"></a>    reproducible<span class="sc">::</span><span class="fu">checkPath</span>(<span class="at">create =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-7"><a href="cbm_dataprep_sk.html#cb3-7" tabindex="-1"></a>outputDir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(moduleDir, <span class="st">"outputs"</span>)</span>
-<span id="cb3-8"><a href="cbm_dataprep_sk.html#cb3-8" tabindex="-1"></a>cacheDir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(outputDir, <span class="st">"cache"</span>)</span>
-<span id="cb3-9"><a href="cbm_dataprep_sk.html#cb3-9" tabindex="-1"></a>times <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">start =</span> <span class="dv">0</span>, <span class="at">end =</span> <span class="dv">10</span>)</span>
-<span id="cb3-10"><a href="cbm_dataprep_sk.html#cb3-10" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) parameters</span></span>
-<span id="cb3-11"><a href="cbm_dataprep_sk.html#cb3-11" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) &lt;-</span></span>
-<span id="cb3-12"><a href="cbm_dataprep_sk.html#cb3-12" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) list(#CBM_dataPrep</span></span>
-<span id="cb3-13"><a href="cbm_dataprep_sk.html#cb3-13" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) =</span></span>
-<span id="cb3-14"><a href="cbm_dataprep_sk.html#cb3-14" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) list(.useCache</span></span>
-<span id="cb3-15"><a href="cbm_dataprep_sk.html#cb3-15" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) =</span></span>
-<span id="cb3-16"><a href="cbm_dataprep_sk.html#cb3-16" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) '.inputObjects')</span></span>
-<span id="cb3-17"><a href="cbm_dataprep_sk.html#cb3-17" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) .progress</span></span>
-<span id="cb3-18"><a href="cbm_dataprep_sk.html#cb3-18" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) =</span></span>
-<span id="cb3-19"><a href="cbm_dataprep_sk.html#cb3-19" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) list(type</span></span>
-<span id="cb3-20"><a href="cbm_dataprep_sk.html#cb3-20" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) =</span></span>
-<span id="cb3-21"><a href="cbm_dataprep_sk.html#cb3-21" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) 'text',</span></span>
-<span id="cb3-22"><a href="cbm_dataprep_sk.html#cb3-22" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) interval</span></span>
-<span id="cb3-23"><a href="cbm_dataprep_sk.html#cb3-23" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) =</span></span>
-<span id="cb3-24"><a href="cbm_dataprep_sk.html#cb3-24" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) 1),</span></span>
-<span id="cb3-25"><a href="cbm_dataprep_sk.html#cb3-25" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) #</span></span>
-<span id="cb3-26"><a href="cbm_dataprep_sk.html#cb3-26" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) for</span></span>
-<span id="cb3-27"><a href="cbm_dataprep_sk.html#cb3-27" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) a</span></span>
-<span id="cb3-28"><a href="cbm_dataprep_sk.html#cb3-28" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) progress</span></span>
-<span id="cb3-29"><a href="cbm_dataprep_sk.html#cb3-29" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) bar</span></span>
-<span id="cb3-30"><a href="cbm_dataprep_sk.html#cb3-30" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) If</span></span>
-<span id="cb3-31"><a href="cbm_dataprep_sk.html#cb3-31" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) there</span></span>
-<span id="cb3-32"><a href="cbm_dataprep_sk.html#cb3-32" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) are</span></span>
-<span id="cb3-33"><a href="cbm_dataprep_sk.html#cb3-33" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) further</span></span>
-<span id="cb3-34"><a href="cbm_dataprep_sk.html#cb3-34" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) modules,</span></span>
-<span id="cb3-35"><a href="cbm_dataprep_sk.html#cb3-35" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) each</span></span>
-<span id="cb3-36"><a href="cbm_dataprep_sk.html#cb3-36" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) can</span></span>
-<span id="cb3-37"><a href="cbm_dataprep_sk.html#cb3-37" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) have</span></span>
-<span id="cb3-38"><a href="cbm_dataprep_sk.html#cb3-38" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) its</span></span>
-<span id="cb3-39"><a href="cbm_dataprep_sk.html#cb3-39" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) own</span></span>
-<span id="cb3-40"><a href="cbm_dataprep_sk.html#cb3-40" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) set</span></span>
-<span id="cb3-41"><a href="cbm_dataprep_sk.html#cb3-41" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) of</span></span>
-<span id="cb3-42"><a href="cbm_dataprep_sk.html#cb3-42" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) parameters:</span></span>
-<span id="cb3-43"><a href="cbm_dataprep_sk.html#cb3-43" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) module1</span></span>
-<span id="cb3-44"><a href="cbm_dataprep_sk.html#cb3-44" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) =</span></span>
-<span id="cb3-45"><a href="cbm_dataprep_sk.html#cb3-45" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) list(param1</span></span>
-<span id="cb3-46"><a href="cbm_dataprep_sk.html#cb3-46" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) =</span></span>
-<span id="cb3-47"><a href="cbm_dataprep_sk.html#cb3-47" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) value1,</span></span>
-<span id="cb3-48"><a href="cbm_dataprep_sk.html#cb3-48" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) param2</span></span>
-<span id="cb3-49"><a href="cbm_dataprep_sk.html#cb3-49" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) =</span></span>
-<span id="cb3-50"><a href="cbm_dataprep_sk.html#cb3-50" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) value2),</span></span>
-<span id="cb3-51"><a href="cbm_dataprep_sk.html#cb3-51" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) module2</span></span>
-<span id="cb3-52"><a href="cbm_dataprep_sk.html#cb3-52" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) =</span></span>
-<span id="cb3-53"><a href="cbm_dataprep_sk.html#cb3-53" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) list(param1</span></span>
-<span id="cb3-54"><a href="cbm_dataprep_sk.html#cb3-54" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) =</span></span>
-<span id="cb3-55"><a href="cbm_dataprep_sk.html#cb3-55" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) value1,</span></span>
-<span id="cb3-56"><a href="cbm_dataprep_sk.html#cb3-56" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) param2</span></span>
-<span id="cb3-57"><a href="cbm_dataprep_sk.html#cb3-57" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) =</span></span>
-<span id="cb3-58"><a href="cbm_dataprep_sk.html#cb3-58" tabindex="-1"></a>parameters <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="co">#CBM_dataPrep = list(.useCache = '.inputObjects') .progress = list(type = 'text', interval = 1), # for a progress bar  If there are further modules, each can have its own set of parameters: module1 = list(param1 = value1, param2 = value2), module2 = list(param1 = value1, param2 = value2)) value2))</span></span>
-<span id="cb3-59"><a href="cbm_dataprep_sk.html#cb3-59" tabindex="-1"></a>modules <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="st">"CBM_dataPrep_SK"</span>)</span>
-<span id="cb3-60"><a href="cbm_dataprep_sk.html#cb3-60" tabindex="-1"></a>objects <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">userDistFile =</span> <span class="fu">file.path</span>(moduleDir, <span class="st">"CBM_dataPrep_SK"</span>,</span>
-<span id="cb3-61"><a href="cbm_dataprep_sk.html#cb3-61" tabindex="-1"></a>    <span class="st">"data"</span>, <span class="st">"userDist.csv"</span>))</span>
-<span id="cb3-62"><a href="cbm_dataprep_sk.html#cb3-62" tabindex="-1"></a>paths <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">cachePath =</span> cacheDir, <span class="at">modulePath =</span> moduleDir, <span class="at">inputPath =</span> inputDir,</span>
-<span id="cb3-63"><a href="cbm_dataprep_sk.html#cb3-63" tabindex="-1"></a>    <span class="at">outputPath =</span> outputDir)</span>
-<span id="cb3-64"><a href="cbm_dataprep_sk.html#cb3-64" tabindex="-1"></a></span>
-<span id="cb3-65"><a href="cbm_dataprep_sk.html#cb3-65" tabindex="-1"></a>myInputs <span class="ot">&lt;-</span> <span class="fu">simInit</span>(<span class="at">times =</span> times, <span class="at">params =</span> parameters, <span class="at">modules =</span> modules,</span>
-<span id="cb3-66"><a href="cbm_dataprep_sk.html#cb3-66" tabindex="-1"></a>    <span class="at">objects =</span> objects, <span class="at">paths =</span> paths)</span>
-<span id="cb3-67"><a href="cbm_dataprep_sk.html#cb3-67" tabindex="-1"></a></span>
-<span id="cb3-68"><a href="cbm_dataprep_sk.html#cb3-68" tabindex="-1"></a>outInputs <span class="ot">&lt;-</span> <span class="fu">spades</span>(myInputs)</span></code></pre></div>
-</div>
-<div id="events" class="section level2" number="3.7">
-<h2>
-<span class="header-section-number">3.7</span> Events<a class="anchor" aria-label="anchor" href="#events"><i class="fas fa-link"></i></a>
-</h2>
-<p>There is only when event (init) is this module.</p>
-</div>
-<div id="data-dependencies" class="section level2" number="3.8">
-<h2>
-<span class="header-section-number">3.8</span> Data dependencies<a class="anchor" aria-label="anchor" href="#data-dependencies"><i class="fas fa-link"></i></a>
-</h2>
-<div id="module-parameters" class="section level3" number="3.8.1">
-<h3>
-<span class="header-section-number">3.8.1</span> Module parameters<a class="anchor" aria-label="anchor" href="#module-parameters"><i class="fas fa-link"></i></a>
-</h3>
-</div>
-<div id="input-data" class="section level3" number="3.8.2">
-<h3>
-<span class="header-section-number">3.8.2</span> Input data<a class="anchor" aria-label="anchor" href="#input-data"><i class="fas fa-link"></i></a>
-</h3>
-<p>An example with all the user-provided rasters and <code>.csv</code> files is provided by default.
-The example simulates a region of the managed forests of SK.
-All rasters and data frames for this example are on a cloud-drive (<code>userDefaultData_CBM_SK</code>).
-Unless using this example, the user most provide:</p>
-<ul>
-<li>a raster of the study area at the desired resolution for simulation (<code>sim$masterRaster</code>)</li>
-<li>an age raster (<code>sim$ageRaster</code>)</li>
-<li>a raster indicating which growth curve should be applied to which pixels (<code>sim$gcIndexRaster</code>) or a URL for this raster (<code>sim$gcIndexRasterURL</code>).</li>
-<li>raster of disturbances for each year the user wants disturbances to be simulated. This information could come from other SpaDES modules (fireSence, other fire modules, insects modules, etc.). For retrospective simulation (past to present), rasters found here can be used anywhere in Canada <a href="https://opendata.nfis.org/downloads/forest_change/CA_forest_harvest_mask_year_1985_2015.zip" class="uri">https://opendata.nfis.org/downloads/forest_change/CA_forest_harvest_mask_year_1985_2015.zip</a>.</li>
-<li>a <code>.csv</code> file of the growth curve for the study area (with links to the <code>sim$gcIndexRaster</code>), <code>sim$userGcM3.csv</code> or the location of this file (<code>sim$userGcM3File</code>). The <code>sim$userGcM3.csv</code> file is required to have three columns:
-<ul>
-<li>“GrowthCurveComponentID”, which will be the link to the raster <code>sim$gcIndexRaster</code>,</li>
-<li>“Age” ranging from 0 to the maximum age of the growth curve, and</li>
-<li>“MerchVolume” which is the cumulative value of m3/ha at each age along each growth curve.</li>
-</ul>
-</li>
-<li>a file with the disturbances to be applied as well as their raster values (<code>sim$userDist</code>) or its location (<code>sim$userDistFile</code>). The <code>userDist.csv</code> file must have three columns:
-<ul>
-<li>“distName” representing a simple description of the disturbance type (e.g., fire, clearcut, deforestation, etc.).</li>
-<li>“rasterId” which indications the value that this specific disturbance will have on the disturbance raster.</li>
-<li>“wholeStand” indicating if the disturbance is stand-replacing disturbance (1) or a partial disturbance (0).</li>
-</ul>
-</li>
-</ul>
-<p>The user could provide: * a raster of the ecozones in their study area (<code>sim$ecoRaster</code>), but the script will calculate this raster based on the <code>sim$masterRaster</code> if it is not provided.
-* a raster of the spatial units (<code>sim$spuRaster</code>) but the script will calculate this raster based on the <code>sim$masterRaster</code> if it is not provided.</p>
-</div>
-<div id="output-data" class="section level3" number="3.8.3">
-<h3>
-<span class="header-section-number">3.8.3</span> Output data<a class="anchor" aria-label="anchor" href="#output-data"><i class="fas fa-link"></i></a>
-</h3>
-</div>
-</div>
-<div id="links-to-other-modules" class="section level2" number="3.9">
-<h2>
-<span class="header-section-number">3.9</span> Links to other modules<a class="anchor" aria-label="anchor" href="#links-to-other-modules"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.5</span> Links to other modules<a class="anchor" aria-label="anchor" href="#links-to-other-modules"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
-<li><a href="https://github.com/PredictiveEcology/CBM_core"><code>CBM_core</code></a></li>
-<li><a href="https://github.com/PredictiveEcology/CBM_defaults"><code>CBM_defaults</code></a></li>
-<li><a href="https://github.com/PredictiveEcology/CBM_vol2biomass"><code>CBM_vol2biomass</code></a></li>
+<li><a href="https://github.com/PredictiveEcology/CBM_core">CBM_core</a></li>
+<li><a href="https://github.com/PredictiveEcology/CBM_defaults">CBM_defaults</a></li>
+<li><a href="https://github.com/PredictiveEcology/CBM_vol2biomass">CBM_vol2biomass</a></li>
 </ul>
 </div>
 </div>
@@ -288,20 +139,10 @@ Unless using this example, the user most provide:</p>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#cbm_dataprep_sk"><span class="header-section-number">3</span> CBM_dataPrep_SK</a></li>
 <li><a class="nav-link" href="#overview-1"><span class="header-section-number">3.1</span> Overview</a></li>
-<li><a class="nav-link" href="#list-of-input-objects-1"><span class="header-section-number">3.2</span> List of input objects</a></li>
-<li><a class="nav-link" href="#list-of-output-objects-1"><span class="header-section-number">3.3</span> List of output objects</a></li>
-<li><a class="nav-link" href="#module-flow-rename-this-section-later"><span class="header-section-number">3.4</span> Module flow (rename this section later)</a></li>
-<li><a class="nav-link" href="#overview-2"><span class="header-section-number">3.5</span> Overview</a></li>
-<li><a class="nav-link" href="#usage-2"><span class="header-section-number">3.6</span> Usage</a></li>
-<li><a class="nav-link" href="#events"><span class="header-section-number">3.7</span> Events</a></li>
-<li>
-<a class="nav-link" href="#data-dependencies"><span class="header-section-number">3.8</span> Data dependencies</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#module-parameters"><span class="header-section-number">3.8.1</span> Module parameters</a></li>
-<li><a class="nav-link" href="#input-data"><span class="header-section-number">3.8.2</span> Input data</a></li>
-<li><a class="nav-link" href="#output-data"><span class="header-section-number">3.8.3</span> Output data</a></li>
-</ul>
-</li>
-<li><a class="nav-link" href="#links-to-other-modules"><span class="header-section-number">3.9</span> Links to other modules</a></li>
+<li><a class="nav-link" href="#inputs"><span class="header-section-number">3.2</span> Inputs</a></li>
+<li><a class="nav-link" href="#module-functioning-1"><span class="header-section-number">3.3</span> Module functioning</a></li>
+<li><a class="nav-link" href="#list-of-output-objects-1"><span class="header-section-number">3.4</span> List of output objects</a></li>
+<li><a class="nav-link" href="#links-to-other-modules"><span class="header-section-number">3.5</span> Links to other modules</a></li>
 </ul>
 
       <div class="book-extra">

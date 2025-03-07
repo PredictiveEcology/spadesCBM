@@ -6,14 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 2 CBM_defaults | CBM Spades Manual</title>
 <meta name="author" content="Céline Boisvenue">
-<meta name="description" content="2.1 Overview The primary role of the CBM_defaults module is to read in various tables from the SQLite database file. This includes default disturbance data such as different disturbance types and...">
+<meta name="description" content="2.1 Overview CBM_defaults reads in default parameters for the managed forest of Canada. In SpaDES-speak, it has one event (init). On its own, this module provides R-based access to all defaults...">
 <meta name="generator" content="bookdown 0.42 with bs4_book()">
 <meta property="og:title" content="Chapter 2 CBM_defaults | CBM Spades Manual">
 <meta property="og:type" content="book">
-<meta property="og:description" content="2.1 Overview The primary role of the CBM_defaults module is to read in various tables from the SQLite database file. This includes default disturbance data such as different disturbance types and...">
+<meta property="og:description" content="2.1 Overview CBM_defaults reads in default parameters for the managed forest of Canada. In SpaDES-speak, it has one event (init). On its own, this module provides R-based access to all defaults...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Chapter 2 CBM_defaults | CBM Spades Manual">
-<meta name="twitter:description" content="2.1 Overview The primary role of the CBM_defaults module is to read in various tables from the SQLite database file. This includes default disturbance data such as different disturbance types and...">
+<meta name="twitter:description" content="2.1 Overview CBM_defaults reads in default parameters for the managed forest of Canada. In SpaDES-speak, it has one event (init). On its own, this module provides R-based access to all defaults...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -65,18 +65,18 @@
 <h2>
 <span class="header-section-number">2.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview"><i class="fas fa-link"></i></a>
 </h2>
-<p>The primary role of the CBM_defaults module is to read in various tables from the SQLite database file. This includes default disturbance data such as different disturbance types and their IDs, spinup parameters, pool names, and more. The outputs of this module are primarily used in CBM_dataPrep_x and CBM_core.</p>
+<p><a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a> reads in default parameters for the managed forest of Canada. In <em>SpaDES-speak</em>, it has one event (<code>init</code>). On its own, this module provides R-based access to all defaults <strong>CBM</strong> parametersfor the managed forests of Canada. As part of <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>, it provides simulations with default parameter values for the managed forests of Canada, akin to the Archive Index in the CBM-CFS3 documentation. Most parameters are read in from an SQLite database (link below), with some defaults, modified from CBM-CFS3 to accommodate the capacity for a more flexible representation of vegetation dynamics enable by the <code>libcbm</code> Python functions used, available <a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/resources/cbm_exn">here</a>. Defaults for the managed forests of Canada include disturbance data such as different disturbance types and their IDs, spinup parameters, pool names, and more. The outputs of this module are used by <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> and <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulations.</p>
 </div>
 <div id="list-of-input-objects" class="section level2" number="2.2">
 <h2>
 <span class="header-section-number">2.2</span> List of input objects<a class="anchor" aria-label="anchor" href="#list-of-input-objects"><i class="fas fa-link"></i></a>
 </h2>
-<div class="inline-table"><table class="table table-sm">
+<div class="inline-table"><table style="width:100%;" class="table table-sm">
 <colgroup>
-<col width="23%">
-<col width="23%">
-<col width="27%">
+<col width="24%">
+<col width="24%">
 <col width="26%">
+<col width="24%">
 </colgroup>
 <thead><tr class="header">
 <th>Name</th>
@@ -84,23 +84,65 @@
 <th>Description</th>
 <th>Source</th>
 </tr></thead>
-<tbody><tr class="odd">
+<tbody>
+<tr class="odd">
 <td>Archive Index</td>
 <td>SQL Database</td>
 <td>SQLite database file for CFS_CBM3 default tables</td>
 <td><a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/resources/cbm_defaults_db" class="uri">https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/resources/cbm_defaults_db</a></td>
-</tr></tbody>
+</tr>
+<tr class="even">
+<td>Disturbance Matrix Association</td>
+<td>Data table</td>
+<td>Default disturbance IDs</td>
+<td><a href="https://raw.githubusercontent.com/cat-cfs/libcbm_py/main/libcbm/resources/cbm_exn/disturbance_matrix_association.csv" class="uri">https://raw.githubusercontent.com/cat-cfs/libcbm_py/main/libcbm/resources/cbm_exn/disturbance_matrix_association.csv</a></td>
+</tr>
+<tr class="odd">
+<td>Disturbance Matrix Value</td>
+<td>Data table</td>
+<td>Default disturbance data</td>
+<td><a href="https://raw.githubusercontent.com/cat-cfs/libcbm_py/main/libcbm/resources/cbm_exn/disturbance_matrix_value.csv" class="uri">https://raw.githubusercontent.com/cat-cfs/libcbm_py/main/libcbm/resources/cbm_exn/disturbance_matrix_value.csv</a></td>
+</tr>
+<tr class="even">
+<td>ecoLocator</td>
+<td>Shapefile</td>
+<td>Canada’s ecozone as polygon features</td>
+<td><a href="http://sis.agr.gc.ca/cansis/nsdb/ecostrat/zone/ecozone_shp.zip" class="uri">http://sis.agr.gc.ca/cansis/nsdb/ecostrat/zone/ecozone_shp.zip</a></td>
+</tr>
+<tr class="odd">
+<td>spuLocator</td>
+<td>Shapefile</td>
+<td>Canada’s spatial units as polygon features</td>
+<td><a href="https://drive.google.com/file/d/1D3O0Uj-s_QEgMW7_X-NhVsEZdJ29FBed" class="uri">https://drive.google.com/file/d/1D3O0Uj-s_QEgMW7_X-NhVsEZdJ29FBed</a></td>
+</tr>
+</tbody>
 </table></div>
 </div>
-<div id="list-of-output-objects" class="section level2" number="2.3">
+<div id="module-functioning" class="section level2" number="2.3">
 <h2>
-<span class="header-section-number">2.3</span> List of output objects<a class="anchor" aria-label="anchor" href="#list-of-output-objects"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3</span> Module functioning<a class="anchor" aria-label="anchor" href="#module-functioning"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>The SQLite database, and a selection of the <code>cbm_exn</code> resource files are downloaded and stored into the user’s Inputs folder from GitHub using the <code>reproducible::prepInputs</code> function, a useful tool in the <code>SpaDES</code> toolkit.</li>
+<li>Parameters necessary for <em>spadesCBM</em> simulations are extracted from the downloaded files. Each of these are saved as objects in the <code>simList</code> (see list of output objects above).</li>
+<li>The <code>species_tr</code> object is created to match a species name to the provided growth curve.</li>
+<li>The <code>disturbanceMatrix</code> and <code>cTransfers</code> objects help identify which carbon transfers matches the provided disturbances as it matches the transfer matrix IDs and the proportions transferred to disturbance names.</li>
+<li>Parameters for the <code>spinup</code> event in the <code>CBM_core</code> modules are assembled in the spinupSQL object.</li>
+<li>
+<code>pooldef</code> gives the names of each carbon pool that exists in CBM.</li>
+<li>Objects that narrow the parameter selection for the study area are <code>spuLocator</code> and <code>ecolocator</code>
+</li>
+</ul>
+</div>
+<div id="list-of-output-objects" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> List of output objects<a class="anchor" aria-label="anchor" href="#list-of-output-objects"><i class="fas fa-link"></i></a>
 </h2>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
-<col width="26%">
-<col width="26%">
-<col width="47%">
+<col width="27%">
+<col width="17%">
+<col width="55%">
 </colgroup>
 <thead><tr class="header">
 <th>Name</th>
@@ -109,14 +151,24 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td>species_tr</td>
+<td>Data table</td>
+<td>Default species data</td>
+</tr>
+<tr class="even">
 <td>disturbanceMatrix</td>
+<td>Data table</td>
+<td>Default disturbance data</td>
+</tr>
+<tr class="odd">
+<td>cTransfers</td>
 <td>Data table</td>
 <td>Default disturbance data</td>
 </tr>
 <tr class="even">
 <td>spinupSQL</td>
 <td>Data table</td>
-<td>Parameters for CBM_core spinup event</td>
+<td>Parameters for <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> spinup event</td>
 </tr>
 <tr class="odd">
 <td>pooldef</td>
@@ -124,37 +176,29 @@
 <td>Vector of pools</td>
 </tr>
 <tr class="even">
-<td>poolCount</td>
-<td>Numeric</td>
-<td>Length of pooldef</td>
+<td>ecoLocator</td>
+<td>Shapefile</td>
+<td>Canada’s ecozone as polygon features with ecozone IDs</td>
 </tr>
 <tr class="odd">
-<td>forestTypeID</td>
-<td>Data table</td>
-<td>Defines forest types and their respective IDs</td>
+<td>spuLocator</td>
+<td>Shapefile</td>
+<td>Canada’s spatial units as polygon features with spatial unit IDs</td>
 </tr>
 </tbody>
 </table></div>
 </div>
-<div id="module-flow" class="section level2" number="2.4">
+<div id="background" class="section level2" number="2.5">
 <h2>
-<span class="header-section-number">2.4</span> Module flow<a class="anchor" aria-label="anchor" href="#module-flow"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.5</span> Background<a class="anchor" aria-label="anchor" href="#background"><i class="fas fa-link"></i></a>
 </h2>
-<ol style="list-style-type: decimal">
-<li>the SQLite database file is downloaded and stored into the user’s Inputs folder from GitHub using <code>prepInputs</code>.</li>
-<li>Create a connection to the database with <code>dbConnect</code>. This creates the archiveIndex object.</li>
-<li>Using <code>dbGetQuery</code>, 3 disturbance tables are extracted from archiveIndex. These tables are named matrices2, matrices3, and matrices6. These are merged to create the disturbanceMatrix object.</li>
-<li>spatialUnitsID and spinupParameters are extracted from archiveIndex and merged to create the spinupSQL object.</li>
-<li>pooldef is then extracted, and transformed into a Character class object.</li>
-<li>poolCount is created by defining the length of pooldef.</li>
-<li>forestTypeID is extracted from archiveIndex and a is_sw column is created where any entry where forest_type_id = 1 is <code>TRUE</code> and everything else is <code>FALSE</code>.</li>
-</ol>
+<p>This example uses default parameters that were created for use in CBM-CFS3. Few of these parameters have source references. The ones who do are outline in the <a href="https://osdp-psdo.canada.ca/dp/en/search/metadata/NRCAN-CFS-1-7570539d-a457-43ef-9215-584ad612f409">Operational-scale Carbon Budget Model of the Canadian Forest Sector (CBM-CFS3) version 1.2: user’s guide</a>. <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a> brings the parameters to an R-environment, for easy user-access and modifications.</p>
 </div>
-<div id="usage-1" class="section level2" number="2.5">
+<div id="usage-1" class="section level2" number="2.6">
 <h2>
-<span class="header-section-number">2.5</span> Usage<a class="anchor" aria-label="anchor" href="#usage-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6</span> Usage<a class="anchor" aria-label="anchor" href="#usage-1"><i class="fas fa-link"></i></a>
 </h2>
-<p>This module can run independently by running the global script below. Its main task is to read-in all the default values in SpaDES-CBM which is akin to the <code>ArchiveIndex</code> in CBM-CFS3 runs.</p>
+<p>This module can run independently by running the global script below. Run independently, it provides transparent access tp default parameters for all managed forests of Canada for <em>CBM</em> simulations.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">projectPath</span> <span class="op">&lt;-</span> <span class="st">"~/CBM_defaults"</span></span>
 <span><span class="va">repos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"predictiveecology.r-universe.dev"</span>, <span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span><span class="op">(</span><span class="st">"repos"</span><span class="op">)</span><span class="op">)</span></span>
@@ -169,7 +213,7 @@
 <span>    repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>repos <span class="op">=</span> <span class="va">repos</span><span class="op">)</span>,</span>
 <span>    reproducible.destinationPath <span class="op">=</span> <span class="st">"inputs"</span></span>
 <span>  <span class="op">)</span>,</span>
-<span>  modules <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PredictiveEcology/CBM_defaults@training"</span><span class="op">)</span>,</span>
+<span>  modules <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"PredictiveEcology/CBM_defaults@main"</span><span class="op">)</span>,</span>
 <span>  require <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"SpaDES.core"</span><span class="op">)</span>,</span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -186,9 +230,10 @@
 <li><a class="nav-link" href="#cbm_defaults"><span class="header-section-number">2</span> CBM_defaults</a></li>
 <li><a class="nav-link" href="#overview"><span class="header-section-number">2.1</span> Overview</a></li>
 <li><a class="nav-link" href="#list-of-input-objects"><span class="header-section-number">2.2</span> List of input objects</a></li>
-<li><a class="nav-link" href="#list-of-output-objects"><span class="header-section-number">2.3</span> List of output objects</a></li>
-<li><a class="nav-link" href="#module-flow"><span class="header-section-number">2.4</span> Module flow</a></li>
-<li><a class="nav-link" href="#usage-1"><span class="header-section-number">2.5</span> Usage</a></li>
+<li><a class="nav-link" href="#module-functioning"><span class="header-section-number">2.3</span> Module functioning</a></li>
+<li><a class="nav-link" href="#list-of-output-objects"><span class="header-section-number">2.4</span> List of output objects</a></li>
+<li><a class="nav-link" href="#background"><span class="header-section-number">2.5</span> Background</a></li>
+<li><a class="nav-link" href="#usage-1"><span class="header-section-number">2.6</span> Usage</a></li>
 </ul>
 
       <div class="book-extra">
