@@ -73,10 +73,10 @@
 </h2>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
-<col width="22%">
-<col width="22%">
-<col width="31%">
-<col width="22%">
+<col width="23%">
+<col width="23%">
+<col width="29%">
+<col width="23%">
 </colgroup>
 <thead><tr class="header">
 <th>Name</th>
@@ -84,7 +84,84 @@
 <th>Description</th>
 <th>Source</th>
 </tr></thead>
-<tbody></tbody>
+<tbody>
+<tr class="odd">
+<td>dMatrixAssociation</td>
+<td>Data table</td>
+<td>Default disturbance IDs</td>
+<td>CBM_defaults</td>
+</tr>
+<tr class="even">
+<td>spinupSQL</td>
+<td>Data table</td>
+<td>Parameters for CBM_core spinup event</td>
+<td>CBM_defaults</td>
+</tr>
+<tr class="odd">
+<td>species_tr</td>
+<td>Data table</td>
+<td>Default species data</td>
+<td>CBM_defaults</td>
+</tr>
+<tr class="even">
+<td>gcMeta</td>
+<td>Data table</td>
+<td>Species and growth curve IDs</td>
+<td><a href="https://drive.google.com/file/d/189SFlySTt0Zs6k57-PzQMuQ29LmycDmJ/view?usp=sharing" class="uri">https://drive.google.com/file/d/189SFlySTt0Zs6k57-PzQMuQ29LmycDmJ/view?usp=sharing</a></td>
+</tr>
+<tr class="odd">
+<td>userGcM3</td>
+<td>Data table</td>
+<td>User provided growth curve data</td>
+<td><a href="https://drive.google.com/file/d/1u7o2BzPZ2Bo7hNcC8nEctNpDmp7ce84m" class="uri">https://drive.google.com/file/d/1u7o2BzPZ2Bo7hNcC8nEctNpDmp7ce84m</a></td>
+</tr>
+<tr class="even">
+<td>masterRaster</td>
+<td>SpatRaster</td>
+<td>Raster of study area</td>
+<td>User provided, for SK: <a href="https://drive.google.com/file/d/1zUyFH8k6Ef4c_GiWMInKbwAl6m6gvLJW" class="uri">https://drive.google.com/file/d/1zUyFH8k6Ef4c_GiWMInKbwAl6m6gvLJW</a>
+</td>
+</tr>
+<tr class="odd">
+<td>ageRaster</td>
+<td>SpatRaster</td>
+<td>Raster ages for each pixel</td>
+<td><a href="https://drive.google.com/file/d/1hylk0D1vO19Dpg4zFtnSNhnyYP4j-bEA" class="uri">https://drive.google.com/file/d/1hylk0D1vO19Dpg4zFtnSNhnyYP4j-bEA</a></td>
+</tr>
+<tr class="even">
+<td>gcIndexRaster</td>
+<td>SpatRaster</td>
+<td>Raster giving the growth curve value for each pixel</td>
+<td><a href="https://drive.google.com/file/d/1yunkaYCV2LIdqej45C4F9ir5j1An0KKr" class="uri">https://drive.google.com/file/d/1yunkaYCV2LIdqej45C4F9ir5j1An0KKr</a></td>
+</tr>
+<tr class="odd">
+<td>spuLocator</td>
+<td>SpatRaster</td>
+<td>Canada’s spatial units as polygon features with spatial unit IDs</td>
+<td>CBM_defaults</td>
+</tr>
+<tr class="even">
+<td>ecoLocator</td>
+<td>SpatRaster</td>
+<td>Canada’s ecozone as polygon features with ecozone IDs</td>
+<td>CBM_defaults</td>
+</tr>
+<tr class="odd">
+<td>disturbanceRasters</td>
+<td>Character</td>
+<td>Disturbance rasters for the study area for the duration of simulation</td>
+<td>User provided, for SK: <a href="https://drive.google.com/file/d/12YnuQYytjcBej0_kdodLchPg7z9LygCt" class="uri">https://drive.google.com/file/d/12YnuQYytjcBej0_kdodLchPg7z9LygCt</a>
+</td>
+</tr>
+<tr class="even">
+<td>userDist</td>
+<td>Data table</td>
+<td>User provided disturbance table defining distubances and values in <code>disturbanceRasters</code>
+</td>
+<td>User provided, for SK: <a href="https://drive.google.com/file/d/1n4fXwUkX5GPyWJgr0QQx65roAIaxmcWJ" class="uri">https://drive.google.com/file/d/1n4fXwUkX5GPyWJgr0QQx65roAIaxmcWJ</a>
+</td>
+</tr>
+</tbody>
 </table></div>
 <p>The default structure of <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> modules has the <code>.inputObjects</code> function, and in the <code>.inputObjects</code> function of <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, we make use of the <code>reproducible::prepInputs</code> function which is an important part of the <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> toolkit (see the <a href="https://predictiveecology.org/training/_book/ModuleInputs.html%20manual%20for%20more%20details">SpaDES training</a>, tools that enable repeadability and reproducibility (<span class="citation">@McIntire2022</span>). <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> falls back to the defaults for running the SK managed forests, unless alternative information is provided by the user. These defaults give an example users can developed their own scenarios on.</p>
 <p>The study area is defined by the object <code>masterRaster</code>. This object can be provided directly as a raster, as per our example, or created from shape files or by other means by the user. Any R-code can replace current input processing examples in <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>. The characteristics (projection, resolution, etc.) of this <code>masterRaster</code> are transferred to all other rasters used in the simulation via the function <a href="https://predictiveecology.org/training/_book/prepInputs.html"><code>reproducible::prepInputs</code></a>. In our example, the age raster (<code>ageRaster</code>), the raster specifying where each growth curves is to be used (<code>gcIndexRaster</code>), location rasters that link back to the default parameters for Canada (<code>spuRaster</code>, <code>ecoRaster</code>), and the yearly disturbance rasters (provided as a list in this module <code>disturbanceRaster</code>, but process in the <code>annual</code> event of the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module using the function <a href="https://reproducible.predictiveecology.org/reference/postProcessTo.html"><code>reproducible::postProcess</code></a>, which is part of the <a href="https://predictiveecology.org/training/_book/prepInputs.html"><code>reproducible::prepInputs</code></a> function) are all matched to the <code>masterRaster</code>. Defaults parameters are expected from the <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a> (<code>spinupSQL</code>, <code>species_tr</code>) and one table is provided <code>cbmAdmin</code>for user convenience. In addition to location (study area) and inventory information (age, here provided as a raster), the user is expected to provide: growth curves (<span class="math inline">\(m^3/ha\)</span>) that are linked to each pixel or stand (<code>userGcM3</code>), the leading species for each curve (<code>gcMeta</code>), and information about disturbances (<code>userDist</code>).</p>
@@ -108,8 +185,8 @@
 </h2>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
-<col width="24%">
-<col width="24%">
+<col width="23%">
+<col width="26%">
 <col width="50%">
 </colgroup>
 <thead><tr class="header">
@@ -117,7 +194,59 @@
 <th>Class</th>
 <th>Description</th>
 </tr></thead>
-<tbody></tbody>
+<tbody>
+<tr class="odd">
+<td>allPixDT</td>
+<td>Data table</td>
+<td>Summary table of raster input data with 1 row for each <code>masterRaster</code> pixel</td>
+</tr>
+<tr class="even">
+<td>spatialDT</td>
+<td>Data table</td>
+<td>Summary table of raster input data with 1 row for each <code>masterRaster</code> pixel that is not <code>NA</code>
+</td>
+</tr>
+<tr class="odd">
+<td>level3DT</td>
+<td>Data table</td>
+<td>Table associating pixel groups with key attributes</td>
+</tr>
+<tr class="even">
+<td>speciesPixelGroup</td>
+<td>Data table</td>
+<td>Table connecting pixel groups to species IDs</td>
+</tr>
+<tr class="odd">
+<td>ecozones</td>
+<td>Numeric</td>
+<td>Extracted ecozone IDs for each pixel group</td>
+</tr>
+<tr class="even">
+<td>spatialUnits</td>
+<td>Numeric</td>
+<td>Extracted spatial unit IDs for each pixel group</td>
+</tr>
+<tr class="odd">
+<td>realAges</td>
+<td>Numeric</td>
+<td>Extracted ages for each pixel group</td>
+</tr>
+<tr class="even">
+<td>mySpuDmids</td>
+<td>Data table</td>
+<td>Summary table of possible CBM-CFS3 disturbances within study area spatial units</td>
+</tr>
+<tr class="odd">
+<td>historicDMtype</td>
+<td>Numeric</td>
+<td>Historical disturbance type for each pixel group</td>
+</tr>
+<tr class="even">
+<td>lastPassDMtype</td>
+<td>Numeric</td>
+<td>Last pass disturebance type for each pizel group</td>
+</tr>
+</tbody>
 </table></div>
 </div>
 <div id="links-to-other-modules" class="section level2" number="3.5">
