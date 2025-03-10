@@ -24,7 +24,6 @@ list-of-input-objects-1
 list-of-output-objects-2
 module-flow-rename-this-section-later
 old-version
-cbm_vol2biomass-1
 overview-3
 user-input
 default-files-provided

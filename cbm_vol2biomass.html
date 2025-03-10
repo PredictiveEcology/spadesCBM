@@ -48,8 +48,7 @@
 <li><a class="" href="cbm_defaults.html"><span class="header-section-number">2</span> CBM_defaults</a></li>
 <li><a class="" href="cbm_dataprep_sk.html"><span class="header-section-number">3</span> CBM_dataPrep_SK</a></li>
 <li><a class="active" href="cbm_vol2biomass.html"><span class="header-section-number">4</span> CBM_vol2biomass</a></li>
-<li><a class="" href="cbm_vol2biomass-1.html"><span class="header-section-number">5</span> CBM_vol2biomass</a></li>
-<li><a class="" href="cbm_core.html"><span class="header-section-number">6</span> CBM_core</a></li>
+<li><a class="" href="cbm_core.html"><span class="header-section-number">5</span> CBM_core</a></li>
 </ul>
 
         <div class="book-extra">
@@ -90,73 +89,68 @@
 <tr class="odd">
 <td>userGCM3</td>
 <td>Data table</td>
-<td></td>
+<td>User provided growth curve data</td>
 <td><a href="https://docs.google.com/spreadsheets/d/1u7o2BzPZ2Bo7hNcC8nEctNpDmp7ce84m/edit?usp=sharing&amp;ouid=108246386320559871010&amp;rtpof=true&amp;sd=true" class="uri">https://docs.google.com/spreadsheets/d/1u7o2BzPZ2Bo7hNcC8nEctNpDmp7ce84m/edit?usp=sharing&amp;ouid=108246386320559871010&amp;rtpof=true&amp;sd=true</a></td>
 </tr>
 <tr class="even">
-<td>curveID</td>
-<td>Character</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
 <td>gcMeta</td>
 <td>Data table</td>
-<td></td>
+<td>Species and growth curve IDs</td>
 <td><a href="https://docs.google.com/spreadsheets/d/1LYnShgd0Q7idNNKX9hHYju4kMDwMSkW5/" class="uri">https://docs.google.com/spreadsheets/d/1LYnShgd0Q7idNNKX9hHYju4kMDwMSkW5/</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>spatialID</td>
 <td>Data table</td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>canfi_species</td>
-<td>Data table</td>
-<td></td>
-<td><a href="https://docs.google.com/spreadsheets/d/1YpJ9MyETyt1LBFO81xTrIdbhjO7GoK3K/" class="uri">https://docs.google.com/spreadsheets/d/1YpJ9MyETyt1LBFO81xTrIdbhjO7GoK3K/</a></td>
+<td>Summary table of raster input data with 1 row for each <code>masterRaster</code> pixel that is not <code>NA</code>
+</td>
+<td>CBM_dataPrep_SK</td>
 </tr>
 <tr class="even">
 <td>ecozones</td>
-<td>Numeric</td>
-<td></td>
-<td></td>
+<td>Data table</td>
+<td>Extracted ecozone IDs for each pixel group</td>
+<td>CBM_dataPrep_SK</td>
 </tr>
 <tr class="odd">
+<td>spatialUnits</td>
+<td>Data table</td>
+<td>Extracted spatial unit IDs for each pixel group</td>
+<td></td>
+</tr>
+<tr class="even">
 <td>table 3</td>
 <td>Data table</td>
-<td></td>
+<td>Boudewyn table used in volume-to-biomass translations</td>
 <td><a href="https://nfi.nfis.org/resources/biomass_models/appendix2_table3.csv" class="uri">https://nfi.nfis.org/resources/biomass_models/appendix2_table3.csv</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>table 4</td>
 <td>Data table</td>
-<td></td>
+<td>Boudewyn table used in volume-to-biomass translations</td>
 <td><a href="https://nfi.nfis.org/resources/biomass_models/appendix2_table4.csv" class="uri">https://nfi.nfis.org/resources/biomass_models/appendix2_table4.csv</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>table 5</td>
 <td>Data table</td>
-<td></td>
+<td>Boudewyn table used in volume-to-biomass translations</td>
 <td><a href="https://nfi.nfis.org/resources/biomass_models/appendix2_table5.csv" class="uri">https://nfi.nfis.org/resources/biomass_models/appendix2_table5.csv</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>table 6</td>
 <td>Data table</td>
-<td></td>
+<td>Boudewyn table used in volume-to-biomass translations</td>
 <td><a href="https://nfi.nfis.org/resources/biomass_models/appendix2_table6.csv" class="uri">https://nfi.nfis.org/resources/biomass_models/appendix2_table6.csv</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>table 7</td>
 <td>Data table</td>
-<td></td>
+<td>Boudewyn table used in volume-to-biomass translations</td>
 <td><a href="https://nfi.nfis.org/resources/biomass_models/appendix2_table7.csv" class="uri">https://nfi.nfis.org/resources/biomass_models/appendix2_table7.csv</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>cbmAdmin</td>
 <td>Data table</td>
-<td></td>
+<td>Provides ecozone and spatial unit information for provincial boundaries</td>
 <td><a href="https://drive.google.com/file/d/1xdQt9JB5KRIw72uaN5m3iOk8e34t9dyz" class="uri">https://drive.google.com/file/d/1xdQt9JB5KRIw72uaN5m3iOk8e34t9dyz</a></td>
 </tr>
 </tbody>
@@ -167,6 +161,11 @@
 <span class="header-section-number">4.3</span> List of output objects<a class="anchor" aria-label="anchor" href="#list-of-output-objects-2"><i class="fas fa-link"></i></a>
 </h2>
 <div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="43%">
+<col width="27%">
+<col width="29%">
+</colgroup>
 <thead><tr class="header">
 <th>Name</th>
 <th>Class</th>
@@ -176,22 +175,23 @@
 <tr class="odd">
 <td>cumPoolsClean</td>
 <td>Data table</td>
-<td></td>
+<td>Tonnes of carbon/ha both cumnulative and increments, for each growth curve id, by age and ecozone</td>
 </tr>
 <tr class="even">
 <td>growth_increments</td>
 <td>Data table</td>
-<td></td>
+<td>1/2 growth increment matrix</td>
 </tr>
 <tr class="odd">
 <td>gcMetaAllCols</td>
 <td>Data table</td>
-<td></td>
+<td>
+<code>gcMeta</code> with ecozones</td>
 </tr>
 <tr class="even">
 <td>volCurves</td>
 <td>gg (list?)</td>
-<td></td>
+<td>Plots of al growth curves provided by the user</td>
 </tr>
 </tbody>
 </table></div>
@@ -212,10 +212,147 @@
 <span class="header-section-number">4.5</span> OLD VERSION<a class="anchor" aria-label="anchor" href="#old-version"><i class="fas fa-link"></i></a>
 </h2>
 </div>
+<div id="overview-3" class="section level2" number="4.6">
+<h2>
+<span class="header-section-number">4.6</span> Overview<a class="anchor" aria-label="anchor" href="#overview-3"><i class="fas fa-link"></i></a>
+</h2>
+<p>This module translates the m3/ha values into the biomass/ha increments that spadesCBMcore needs to simulate annual carbon fluxes and estimate stocks in the spadesCBMcore.R module of the spadesCBM.
+This is an implementation of the Boudewyn et al 2007 stand-level translation.
+Like many statistical models, this translation is not always successful.
+This scripts is in line with the translation procedure in CBM-CFS3 with the addition of smoothing methods using Generalized Additive Models (GAMs).
+This module provides two examples of smoothing methods: one applied to the cumulative carbon/ha curves (merch, foliage, and other for each growth curves provided), and one applied to the increment curves (differences betwee years of the cumulative curves).
+<strong>It is the responsibility of the user to decide if these curves and smoothing methods are appropriate.</strong> This module can be run independently of the spadesCBM deck of SpaDES modules.</p>
+<div id="user-input" class="section level3" number="4.6.1">
+<h3>
+<span class="header-section-number">4.6.1</span> User input<a class="anchor" aria-label="anchor" href="#user-input"><i class="fas fa-link"></i></a>
+</h3>
+<p>The user must provide two files for the growth information and one location file.
+Note that these can be provided in the spadesCBMinputs module if the spadesCBM deck is used: * one metadata file (userGcMeta) that has at a minimum an identifier that links each specific growth curve to a pixel on the study area raster (gcId - growth curve identification number) and the leading species for that curve.
+* one file that gives the m3 per ha by age for each of the identified growth curves.
+* a location information file.
+This information is preferably passed along as a raster from the spadesCBMinputs module, but that can be by-passed by providing a vector of the ecozones and spatial units the growth curves apply to.
+The information is used to identify the jurisdiction (province or territory) and the ecozone each gcId is in, which in turn are used to determine the appropriate parameters for the stand-level conversion from m3/ha to biomass per ha in the Boudewyn et al. approach.</p>
+</div>
+<div id="default-files-provided" class="section level3" number="4.6.2">
+<h3>
+<span class="header-section-number">4.6.2</span> Default files provided<a class="anchor" aria-label="anchor" href="#default-files-provided"><i class="fas fa-link"></i></a>
+</h3>
+<p>Two types of information are built in to this module: Boudewyn et al. parameters tables, and data frames to help link CBM-specific information and parameter categories.
+* URLs to the Boudewyn et al. five parameter tables are built into this module (see .inputObjects) and will be loaded from the NFIS site directly.
+* the cbmAdmin data frame links CBM-specific spatial units to administrative boundaries in Canada and ecozones.
+* the canfi_species data frame provides the canfi_species numbers and genus abbreviations used to identify the correct parameters in Boudewyn et al tables.
+This also specifies a name for each tree species and the forest_type_id, which is an identifier used in CBM.</p>
+</div>
+<div id="pseudocode-the-general-steps" class="section level3" number="4.6.3">
+<h3>
+<span class="header-section-number">4.6.3</span> Pseudocode: the general steps<a class="anchor" aria-label="anchor" href="#pseudocode-the-general-steps"><i class="fas fa-link"></i></a>
+</h3>
+<p>This module reads in the user userGcMeta, then reads in the userGcM3.
+It provides a plot of all the curves in userGcM3 for visual inspection (<code>sim$volCurves</code>).
+It then matches the jurisdiction with each gcId (growth curve identification), and matches the leading species attaching a canfi_species (number) and a genus to each leading species.
+canfi_species and genus are key to associating the correct parameters for conversion (Boudewyn et al. 2007).
+Once all the species matches are complete, a series of functions (see the package <code>CBMutils</code>) are used to go from the provided cumulative m3/ha for each curve into cumulative tonnes of carbon/ha for each above ground live biomass pool (merch, foliage, other).
+A visual check is provided via <code>sim$plotsRawCumulativeBiomass</code>.
+Since most of the time these models need smoothing, two examples of smoothing, applied to the Saskatchewan default example, are provided by fitting GAMs to 1) each of the cumulative curve (per gcId) for each three pool, and 2) fitting GAMs to the increments between years for each of the three pools.
+Currently, example 1) is commented out, and example 2) is used to show that sometimes, even perfect-looking curves need hard fixes.
+In these examplee, the default knots for the GAMs are set at 20 (k=20) and extra weight is given to the 0 intercept and the maximum value of each curve by setting weights (wts in the script).
+See <a href="http://environmentalcomputing.net/intro-to-gams/" class="uri">http://environmentalcomputing.net/intro-to-gams/</a> for an guide to GAMs.
+Again, <strong>it is the user’s responsibility to decided if smoothing parameters and/or methods are appropriate</strong>.
+In the default example 1) (commented out), fitted values of the GAMs to the cumulative curves of carbon/ha are used to calculate annual increment, which are then dived by two for use in the spadesCBMcore.R module annual processing (half the growth is processes in two instances).
+Halved increments can be visually assessed using <code>sim$checkInc</code> and the halved increments themselves are save in the simList (<code>sim$growth_increments</code>).
+In example 2), currently executed for the default Saskatchewan example, the increments are calculated prior to fitting the GAMs.
+In a final step (both examples), the halved growth increment table if hashed for processing speed (<code>sim$gcHash</code>).
+This module uses an example from a region in Saskatchewan as a default simulation and can be modified to run independently (i.e., just for translation of m3 to above ground carbon in the three pools).</p>
+</div>
+<div id="units" class="section level3" number="4.6.4">
+<h3>
+<span class="header-section-number">4.6.4</span> Units<a class="anchor" aria-label="anchor" href="#units"><i class="fas fa-link"></i></a>
+</h3>
+<p>The user provides growth curves of cumulative m3/ha over time for one leading species (following CBM-CFS3).
+Those curves are fed into the Boudewyn algorithms (CBM_vol2biomass module) with its results multiplied by 0.5 to give carbon/ha.
+This deck of modules simulates on an annual basis and it is preferable that the cumulative curves of m3/ha be provided over individual years.
+If these are not per individual years, the GAM fitted values should be modified to provide yearly fitted.values.
+The object cumPoolsRaw (line 411) in CBM_vol2biomass.R, is the cumulative values for each of the three above-ground live pools in tonnes of carbon/ha.
+All following values are in tonnes of c/ha.</p>
+</div>
+<div id="output" class="section level3" number="4.6.5">
+<h3>
+<span class="header-section-number">4.6.5</span> Output<a class="anchor" aria-label="anchor" href="#output"><i class="fas fa-link"></i></a>
+</h3>
+<p>This module provides the <code>sim$growth_increments</code> and its hashed version, <code>sim$gcHash</code> available for the spadesCBMcore module.
+All other output created by this module is for visual checks of the growth curve themselves and their processing.</p>
+</div>
+<div id="spades" class="section level3" number="4.6.6">
+<h3>
+<span class="header-section-number">4.6.6</span> SpaDES<a class="anchor" aria-label="anchor" href="#spades"><i class="fas fa-link"></i></a>
+</h3>
+<p>There is only one event in this module (init), and this module is only scheduled once.
+This module is designed to be part of SpaDES-deck spadesCBM, SpaDES modules representing CBM-CFS3, but transparent and spatialized.
+There are four modules in this family: spadesCBMdefaults, spadesSBMinputs, CBM_vol2biomass, and spadesCBMcore.</p>
+</div>
+<div id="list-of-potential-improvements" class="section level3" number="4.6.7">
+<h3>
+<span class="header-section-number">4.6.7</span> list of potential improvements<a class="anchor" aria-label="anchor" href="#list-of-potential-improvements"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>add a check to see if the growth curves provided are on an annual basis and if not, modify the GAM outputs to provided and annual fitted value.</li>
+<li>make k (knots in the GAMs) a user defined parameter</li>
+<li>provide an option to fit a GAM prior to the maximum value of each curve (from 0 to max) with its own number of knots (k) and one for after the maximum value with possibly few knots.</li>
+<li>same as previous but for the weights going into the GAMs.</li>
+</ul>
+</div>
+</div>
+<div id="usage-2" class="section level2" number="4.7">
+<h2>
+<span class="header-section-number">4.7</span> Usage<a class="anchor" aria-label="anchor" href="#usage-2"><i class="fas fa-link"></i></a>
+</h2>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://spades.predictiveecology.org">SpaDES</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org">magrittr</a></span><span class="op">)</span> <span class="co"># this is needed to use "%&gt;%" below</span></span>
+<span><span class="va">moduleDir</span> <span class="op">&lt;-</span> <span class="st">"C:/Celine/github/spadesCBM"</span></span>
+<span><span class="va">inputDir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">moduleDir</span>, <span class="st">"inputs"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu">reproducible</span><span class="fu">::</span><span class="fu">checkPath</span><span class="op">(</span>create <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">outputDir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">moduleDir</span>, <span class="st">"outputs"</span><span class="op">)</span></span>
+<span><span class="va">cacheDir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">outputDir</span>, <span class="st">"cache"</span><span class="op">)</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>start <span class="op">=</span> <span class="fl">0</span>, end <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">parameters</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>  CBM_vol2biomass <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>.useCache <span class="op">=</span> <span class="st">".inputObjects"</span><span class="op">)</span></span>
+<span>  <span class="co">#.progress = list(type = "text", interval = 1), # for a progress bar</span></span>
+<span>  <span class="co">## If there are further modules, each can have its own set of parameters:</span></span>
+<span>  <span class="co">#module1 = list(param1 = value1, param2 = value2),</span></span>
+<span>  <span class="co">#module2 = list(param1 = value1, param2 = value2)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">modules</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="st">"CBM_vol2biomass"</span><span class="op">)</span></span>
+<span><span class="va">objects</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>  <span class="co">#userGcMetafileName &lt;- c("/RIA2019/gcMetaRuns.csv"),</span></span>
+<span>  <span class="co">#userGcM3 &lt;- c("/RIA2019/gcRIAm3.csv")</span></span>
+<span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">paths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>  cachePath <span class="op">=</span> <span class="va">cacheDir</span>,</span>
+<span>  modulePath <span class="op">=</span> <span class="va">moduleDir</span>,</span>
+<span>  inputPath <span class="op">=</span> <span class="va">inputDir</span>,</span>
+<span>  outputPath <span class="op">=</span> <span class="va">outputDir</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span></span>
+<span>    rasterTmpDir <span class="op">=</span> <span class="va">inputDir</span>,</span>
+<span>    reproducible.cachePath <span class="op">=</span> <span class="va">cacheDir</span>,</span>
+<span>    spades.inputPath <span class="op">=</span> <span class="va">inputDir</span>,</span>
+<span>    spades.outputPath <span class="op">=</span> <span class="va">outputDir</span>,</span>
+<span>    spades.modulePath <span class="op">=</span> <span class="va">moduleDir</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">myBiomass</span> <span class="op">&lt;-</span> <span class="fu">simInit</span><span class="op">(</span>times <span class="op">=</span> <span class="va">times</span>, params <span class="op">=</span> <span class="va">parameters</span>, modules <span class="op">=</span> <span class="va">modules</span>,</span>
+<span>                 objects <span class="op">=</span> <span class="va">objects</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">myBiomassOut</span> <span class="op">&lt;-</span> <span class="fu">spades</span><span class="op">(</span><span class="va">myBiomass</span><span class="op">)</span></span></code></pre></div>
+
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="cbm_dataprep_sk.html"><span class="header-section-number">3</span> CBM_dataPrep_SK</a></div>
-<div class="next"><a href="cbm_vol2biomass-1.html"><span class="header-section-number">5</span> CBM_vol2biomass</a></div>
+<div class="next"><a href="cbm_core.html"><span class="header-section-number">5</span> CBM_core</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -225,6 +362,18 @@
 <li><a class="nav-link" href="#list-of-output-objects-2"><span class="header-section-number">4.3</span> List of output objects</a></li>
 <li><a class="nav-link" href="#module-flow-rename-this-section-later"><span class="header-section-number">4.4</span> Module flow (rename this section later)</a></li>
 <li><a class="nav-link" href="#old-version"><span class="header-section-number">4.5</span> OLD VERSION</a></li>
+<li>
+<a class="nav-link" href="#overview-3"><span class="header-section-number">4.6</span> Overview</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#user-input"><span class="header-section-number">4.6.1</span> User input</a></li>
+<li><a class="nav-link" href="#default-files-provided"><span class="header-section-number">4.6.2</span> Default files provided</a></li>
+<li><a class="nav-link" href="#pseudocode-the-general-steps"><span class="header-section-number">4.6.3</span> Pseudocode: the general steps</a></li>
+<li><a class="nav-link" href="#units"><span class="header-section-number">4.6.4</span> Units</a></li>
+<li><a class="nav-link" href="#output"><span class="header-section-number">4.6.5</span> Output</a></li>
+<li><a class="nav-link" href="#spades"><span class="header-section-number">4.6.6</span> SpaDES</a></li>
+<li><a class="nav-link" href="#list-of-potential-improvements"><span class="header-section-number">4.6.7</span> list of potential improvements</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#usage-2"><span class="header-section-number">4.7</span> Usage</a></li>
 </ul>
 
       <div class="book-extra">
