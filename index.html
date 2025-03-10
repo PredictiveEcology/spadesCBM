@@ -27,6 +27,29 @@ set in the _output.yml file.&lt;/p&gt;">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+          margin-bottom: 0em;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
@@ -55,6 +78,7 @@ set in the _output.yml file.&lt;/p&gt;">
 <li><a class="" href="cbm_dataprep_sk.html"><span class="header-section-number">3</span> CBM_dataPrep_SK</a></li>
 <li><a class="" href="cbm_vol2biomass.html"><span class="header-section-number">4</span> CBM_vol2biomass</a></li>
 <li><a class="" href="cbm_core.html"><span class="header-section-number">5</span> CBM_core</a></li>
+<li><a class="" href="references.html">References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -69,8 +93,8 @@ set in the _output.yml file.&lt;/p&gt;">
 <div class="rmdimportant">
 <p>This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, contact us <a href="%22https://github.com/PredictiveEcology/spadesCBM/issues%22">here</a>.</p>
 </div>
-<p><a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> is a modular, transparent, and spatially explicit implementation of the logic, pools structure, equations, and default assumptions of the Carbon Budget Model of the Canadian Forest Sector <a href="https://natural-resources.canada.ca/climate-change/climate-change-impacts-forests/carbon-accounting/carbon-budget-model/13107">CBM</a>. It applies the science presented in <span class="citation">@kurz2009</span> in a similar way to the simulations in <span class="citation">@boisvenue2016</span> and <span class="citation">@boisvenue2022</span> but calls Python functions for annual processes. These functions are, like much of modelling-based science, continuously under development.</p>
-<p>The collection of <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> modules in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> was developed to enable R&amp;D input to the Canadian Forest Service <a href="https://natural-resources.canada.ca/corporate/corporate-overview/about-canadian-forest-service">CFS</a> forest carbon reporting system, <a href="https://natural-resources.canada.ca/climate-change/forest-carbon/canada-s-forest-carbon-reporting-system">NFCMARS</a>. The CFS provides the science backing for Canadian policies on national forest issues. <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> is a tool in which new science, data and algorithms can be tested and explored to serve policy purposes. <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> development follows the PERFICT approach <span class="citation">@mcintire2022</span> for ecological modelling systems. The <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> platform is the toolkit that enables the implementation of the PERFICT principle, a recipe to build nimble system that help solve many ecological modelling issues.</p>
+<p><a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> is a modular, transparent, and spatially explicit implementation of the logic, pools structure, equations, and default assumptions of the Carbon Budget Model of the Canadian Forest Sector <a href="https://natural-resources.canada.ca/climate-change/climate-change-impacts-forests/carbon-accounting/carbon-budget-model/13107">CBM</a>. It applies the science presented in <span class="citation">Kurz <em>et al.</em> (<a href="references.html#ref-kurz2009">2009</a>)</span> in a similar way to the simulations in <span class="citation">Boisvenue <em>et al.</em> (<a href="references.html#ref-boisvenue2016">2016</a>)</span> and <span class="citation">Boisvenue <em>et al.</em> (<a href="references.html#ref-boisvenue2022">2022</a>)</span> but calls Python functions for annual processes. These functions are, like much of modelling-based science, continuously under development.</p>
+<p>The collection of <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> modules in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> was developed to enable R&amp;D input to the Canadian Forest Service <a href="https://natural-resources.canada.ca/corporate/corporate-overview/about-canadian-forest-service">CFS</a> forest carbon reporting system, <a href="https://natural-resources.canada.ca/climate-change/forest-carbon/canada-s-forest-carbon-reporting-system">NFCMARS</a>. The CFS provides the science backing for Canadian policies on national forest issues. <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> is a tool in which new science, data and algorithms can be tested and explored to serve policy purposes. <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> development follows the PERFICT approach <span class="citation">McIntire <em>et al.</em> (<a href="references.html#ref-mcintire2022">2022</a>)</span> for ecological modelling systems. The <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> platform is the toolkit that enables the implementation of the PERFICT principle, a recipe to build nimble system that help solve many ecological modelling issues.</p>
 <div id="usage" class="section level2" number="1.1">
 <h2>
 <span class="header-section-number">1.1</span> Usage<a class="anchor" aria-label="anchor" href="#usage"><i class="fas fa-link"></i></a>
@@ -79,10 +103,10 @@ set in the _output.yml file.&lt;/p&gt;">
 The first module <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a> reads in defaults CBM parameters for Canada.<br>
 The second module <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> is a data preparation SpaDES module, where input data and spatial layers are assembled and prepared for a specific study area. The example in this manual simulates the managed forest of Saskatchewan.
 The <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> module will be study-area and scenario specific.
-Throughout this manual we use an example simulation of forest carbon dynamics for the managed forests of SK from 1985-2012 similarly to the simulations in <span class="citation">@boisvenue2016</span>, the *_SK* indicates the study area.
+Throughout this manual we use an example simulation of forest carbon dynamics for the managed forests of SK from 1985-2012 similarly to the simulations in <span class="citation">Boisvenue <em>et al.</em> (<a href="references.html#ref-boisvenue2016">2016</a>)</span>, the *_SK* indicates the study area.
 In <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>, as in CBM, growth curves (<span class="math inline">\(m^3/ha\)</span>) are the main change-agent.
-The <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> module translates user-provided stand-level growth curves (<span class="math inline">\(m^3/ha\)</span>) into increments for specific above ground carbon pools (metric tonnes of carbon/ha) using <span class="citation">@boudewyn2007</span> models to which we added a smoothing algorithm to fill-in the gap between age 0 and the age at which growth curves have data.
-Note that <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> is also study-area specific as <span class="citation">@boudewyn2007</span> parameters are dominant species and ecozone specific.<a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a>, <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, and <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> all have one <a href="put%20a%20link%20here%20to%20our%20lexicon%20chapter">event</a> (<code>init</code>) and need to be run only once (note that they will be <a href="https://predictiveecology.org/training/_book/Caching.html">Cached</a>).
+The <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> module translates user-provided stand-level growth curves (<span class="math inline">\(m^3/ha\)</span>) into increments for specific above ground carbon pools (metric tonnes of carbon/ha) using <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span> models to which we added a smoothing algorithm to fill-in the gap between age 0 and the age at which growth curves have data.
+Note that <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> is also study-area specific as <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span> parameters are dominant species and ecozone specific.<a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a>, <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, and <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> all have one <a href="put%20a%20link%20here%20to%20our%20lexicon%20chapter">event</a> (<code>init</code>) and need to be run only once (note that they will be <a href="https://predictiveecology.org/training/_book/Caching.html">Cached</a>).
 These three modules provide the inputs to the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module where between pool carbon-transfers are applied on a specified time step (in our example, yearly).
 This modularity enables users to access and change default parameters, change inputs, connect to external modules that modify the landscape, and assess the impact of these changes.
 We are working on various implementations of this modelling system and making these available to the community in the <a href="https://github.com/PredictiveEcology">Preditive Ecology</a> GitHub repository.
@@ -94,9 +118,9 @@ A smaller example use of <a href="https://github.com/PredictiveEcology/spadesCBM
 <h2>
 <span class="header-section-number">1.2</span> The Carbon Budget Model in SpaDES<a class="anchor" aria-label="anchor" href="#the-carbon-budget-model-in-spades"><i class="fas fa-link"></i></a>
 </h2>
-<p>The Carbon Budget Model (CBM) was first developed in the early 1990s <span class="citation">@kurz1992.Its</span> implementation in a platform for model interoperability and nimbleness such as <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> warrants an overview.</p>
+<p>The Carbon Budget Model (CBM) was first developed in the early 1990s <span class="citation">(<a href="#ref-kurz1992.Its"><strong>kurz1992.Its?</strong></a>)</span> implementation in a platform for model interoperability and nimbleness such as <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> warrants an overview.</p>
 <p><a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulates forest carbon dynamics for a given study area based on Canadian-parameterization and user-provided growth and inventory information. Default Canadian parameters are read-in (<a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a>), matched to the user-provided information (<a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> and <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a>), and this information drives the carbon-transfers through the simulations (<a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>).</p>
-<p>There are 20 carbon pools in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> (MAKE A TABLE AND REFER TO IT). The carbon transfers are dictated by matrices (available in the defaults information) which specify the proportion of carbon moving from one pool (“source_pool” - this needs to be in our lexicon) to (“sink_pools” - this too). Matrices for growth are populated with the user-provided growth information and are the main change agent in the system. Default parameters for biomass and dead organic mater turnover , decay and soil mixing are either the the provincial/territorial, ecozone (NEED TO DEFINE), or Canada-wide scale (see <span class="citation">@kurz2009</span> Table 1). Note that parameters can easily be modified in a <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulation.</p>
+<p>There are 20 carbon pools in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> (MAKE A TABLE AND REFER TO IT). The carbon transfers are dictated by matrices (available in the defaults information) which specify the proportion of carbon moving from one pool (“source_pool” - this needs to be in our lexicon) to (“sink_pools” - this too). Matrices for growth are populated with the user-provided growth information and are the main change agent in the system. Default parameters for biomass and dead organic mater turnover , decay and soil mixing are either the the provincial/territorial, ecozone (NEED TO DEFINE), or Canada-wide scale (see <span class="citation">Kurz <em>et al.</em> (<a href="references.html#ref-kurz2009">2009</a>)</span> Table 1). Note that parameters can easily be modified in a <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulation.</p>
 <p>half growth
 domturnover
 bioturnover
@@ -141,7 +165,7 @@ During the <a href="https://spades-core.predictiveecology.org/reference/simInit.
 <h2>
 <span class="header-section-number">1.6</span> Run Example Simulation<a class="anchor" aria-label="anchor" href="#run-example-simulation"><i class="fas fa-link"></i></a>
 </h2>
-<p>Here is the R script to run the simulation of forest carbon dynamics in the managed forests of SK from 1985 to 2012, with disturbances as presented in <span class="citation">@boisvenue2016</span>. Depending on your computing capacity, this may take a while, particularly the first time you run it. Subsequent simulations are much faster because of the use of the <a href="https://cran.r-project.org/web/packages/SpaDES.core/vignettes/iii-cache.html">reproducible::Cache</a> function.</p>
+<p>Here is the R script to run the simulation of forest carbon dynamics in the managed forests of SK from 1985 to 2012, with disturbances as presented in <span class="citation">Boisvenue <em>et al.</em> (<a href="references.html#ref-boisvenue2016">2016</a>)</span>. Depending on your computing capacity, this may take a while, particularly the first time you run it. Subsequent simulations are much faster because of the use of the <a href="https://cran.r-project.org/web/packages/SpaDES.core/vignettes/iii-cache.html">reproducible::Cache</a> function.</p>
 <pre><code>projectPath &lt;- "~/GitHub/spadesCBM"
 repos &lt;- unique(c("predictiveecology.r-universe.dev", getOption("repos")))
 install.packages("SpaDES.project",

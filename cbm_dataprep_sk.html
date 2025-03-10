@@ -21,6 +21,29 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+          margin-bottom: 0em;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body data-spy="scroll" data-target="#toc">
@@ -49,6 +72,7 @@
 <li><a class="active" href="cbm_dataprep_sk.html"><span class="header-section-number">3</span> CBM_dataPrep_SK</a></li>
 <li><a class="" href="cbm_vol2biomass.html"><span class="header-section-number">4</span> CBM_vol2biomass</a></li>
 <li><a class="" href="cbm_core.html"><span class="header-section-number">5</span> CBM_core</a></li>
+<li><a class="" href="references.html">References</a></li>
 </ul>
 
         <div class="book-extra">
@@ -67,7 +91,7 @@
 <h2>
 <span class="header-section-number">3.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview-1"><i class="fas fa-link"></i></a>
 </h2>
-<p><a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> processes spatially explicit inputs for use in <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> and <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>. In <em>SpaDES-speak</em>, it has one event (<code>init</code>).<a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> was designed for spatially explicit modelling and provides a wide variety of tools to support it. <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> processes spatially explicit inputs for <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>, making use of these tools. This information is study area and scenario specific making <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> the most idiosyncratic module of the <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> deck. Users have the capacity to define their simulation through the inputs they provide to <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>. The default example simulates a present day (1985-2011) scenario where remotely-sensed disturbances are simulated in the managed forests of Saskatchewan, as described in <span class="citation">@boisvenue2016</span>’s (scenario = time horizon + disturbances).</p>
+<p><a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> processes spatially explicit inputs for use in <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> and <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>. In <em>SpaDES-speak</em>, it has one event (<code>init</code>).<a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> was designed for spatially explicit modelling and provides a wide variety of tools to support it. <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> processes spatially explicit inputs for <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>, making use of these tools. This information is study area and scenario specific making <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> the most idiosyncratic module of the <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> deck. Users have the capacity to define their simulation through the inputs they provide to <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>. The default example simulates a present day (1985-2011) scenario where remotely-sensed disturbances are simulated in the managed forests of Saskatchewan, as described in <span class="citation">Boisvenue <em>et al.</em> (<a href="references.html#ref-boisvenue2016">2016</a>)</span>’s (scenario = time horizon + disturbances).</p>
 </div>
 <div id="inputs" class="section level2" number="3.2">
 <h2>
@@ -165,7 +189,7 @@
 </tr>
 </tbody>
 </table></div>
-<p>The default structure of <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> modules has the <code>.inputObjects</code> function, and in the <code>.inputObjects</code> function of <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, we make use of the <code>reproducible::prepInputs</code> function which is an important part of the <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> toolkit (see the <a href="https://predictiveecology.org/training/_book/ModuleInputs.html%20manual%20for%20more%20details">SpaDES training</a>, tools that enable repeadability and reproducibility (<span class="citation">@McIntire2022</span>). <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> falls back to the defaults for running the SK managed forests, unless alternative information is provided by the user. These defaults give an example users can developed their own scenarios on.</p>
+<p>The default structure of <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> modules has the <code>.inputObjects</code> function, and in the <code>.inputObjects</code> function of <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, we make use of the <code>reproducible::prepInputs</code> function which is an important part of the <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> toolkit (see the <a href="https://predictiveecology.org/training/_book/ModuleInputs.html%20manual%20for%20more%20details">SpaDES training</a>, tools that enable repeadability and reproducibility (<span class="citation">(<a href="#ref-McIntire2022"><strong>McIntire2022?</strong></a>)</span>). <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> falls back to the defaults for running the SK managed forests, unless alternative information is provided by the user. These defaults give an example users can developed their own scenarios on.</p>
 <p>The study area is defined by the object <code>masterRaster</code>. This object can be provided directly as a raster, as per our example, or created from shape files or by other means by the user. Any R-code can replace current input processing examples in <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>. The characteristics (projection, resolution, etc.) of this <code>masterRaster</code> are transferred to all other rasters used in the simulation via the function <a href="https://predictiveecology.org/training/_book/prepInputs.html"><code>reproducible::prepInputs</code></a>. In our example, the age raster (<code>ageRaster</code>), the raster specifying where each growth curves is to be used (<code>gcIndexRaster</code>), location rasters that link back to the default parameters for Canada (<code>spuRaster</code>, <code>ecoRaster</code>), and the yearly disturbance rasters (provided as a list in this module <code>disturbanceRaster</code>, but process in the <code>annual</code> event of the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module using the function <a href="https://reproducible.predictiveecology.org/reference/postProcessTo.html"><code>reproducible::postProcess</code></a>, which is part of the <a href="https://predictiveecology.org/training/_book/prepInputs.html"><code>reproducible::prepInputs</code></a> function) are all matched to the <code>masterRaster</code>. Defaults parameters are expected from the <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a> (<code>spinupSQL</code>, <code>species_tr</code>) and one table is provided <code>cbmAdmin</code>for user convenience. In addition to location (study area) and inventory information (age, here provided as a raster), the user is expected to provide: growth curves (<span class="math inline">\(m^3/ha\)</span>) that are linked to each pixel or stand (<code>userGcM3</code>), the leading species for each curve (<code>gcMeta</code>), and information about disturbances (<code>userDist</code>).</p>
 </div>
 <div id="module-functioning-1" class="section level2" number="3.3">
