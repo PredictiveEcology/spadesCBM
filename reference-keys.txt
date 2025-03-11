@@ -1,6 +1,10 @@
 about
 usage
 the-carbon-budget-model-in-spades
+input-requirements
+pools
+order-of-operations
+spinup
 setup
 google-account-needed-for-this-example
 python-is-required-for-this-example
