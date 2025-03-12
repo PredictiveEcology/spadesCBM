@@ -3,6 +3,7 @@ usage
 the-carbon-budget-model-in-spades
 input-requirements
 pools
+pool-description
 order-of-operations
 spinup
 setup
@@ -11,9 +12,8 @@ python-is-required-for-this-example
 run-example-simulation
 lexicon
 basic-concepts
-modules
-simlist
-other
+cbmutils
+notable-functions-and-usage
 cbm_defaults
 overview-1
 list-of-input-objects

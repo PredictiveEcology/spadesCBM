@@ -69,10 +69,11 @@
         <ul class="book-toc list-unstyled">
 <li><a class="active" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
 <li><a class="" href="lexicon.html"><span class="header-section-number">2</span> Lexicon</a></li>
-<li><a class="" href="cbm_defaults.html"><span class="header-section-number">3</span> CBM_defaults</a></li>
-<li><a class="" href="cbm_dataprep_sk.html"><span class="header-section-number">4</span> CBM_dataPrep_SK</a></li>
-<li><a class="" href="cbm_vol2biomass.html"><span class="header-section-number">5</span> CBM_vol2biomass</a></li>
-<li><a class="" href="cbm_core.html"><span class="header-section-number">6</span> CBM_core</a></li>
+<li><a class="" href="cbmutils.html"><span class="header-section-number">3</span> CBMutils</a></li>
+<li><a class="" href="cbm_defaults.html"><span class="header-section-number">4</span> CBM_defaults</a></li>
+<li><a class="" href="cbm_dataprep_sk.html"><span class="header-section-number">5</span> CBM_dataPrep_SK</a></li>
+<li><a class="" href="cbm_vol2biomass.html"><span class="header-section-number">6</span> CBM_vol2biomass</a></li>
+<li><a class="" href="cbm_core.html"><span class="header-section-number">7</span> CBM_core</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -127,9 +128,33 @@ A smaller study area extent simulation of <a href="https://github.com/Predictive
 </h3>
 <p>There are 20 carbon pools in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> (MAKE A TABLE AND REFER TO IT - this needs a description of the pools similar to CBMCFS3_poolsIn2009pub). The carbon transfers are dictated by matrices (available in the defaults information) which specify the proportion of carbon moving from one pool (“source_pool” - this needs to be in our lexicon) to (“sink_pools” - this too). Matrices for growth are populated with the user-provided growth information and are the main change agent in the system. Default parameters for biomass and dead organic mater (DOM) turnover, decay, and soil mixing are either at the provincial/territorial, ecozone (NEED TO DEFINE), or Canada-wide scale (see <span class="citation">Kurz <em>et al.</em> (<a href="references.html#ref-kurz2009">2009</a>)</span> Table 1). Note that parameters can easily be modified from their defaults in a <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulation.</p>
 </div>
-<div id="order-of-operations" class="section level3" number="1.2.3">
+</div>
+<div id="pool-description" class="section level2" number="1.3">
+<h2>
+<span class="header-section-number">1.3</span> | Pool | Description |<a class="anchor" aria-label="anchor" href="#pool-description"><i class="fas fa-link"></i></a>
+</h2>
+<div class="line-block">Input | |<br>
+Merch | Live stemwood of merchantable size |<br>
+Foliage | Live foliage |<br>
+Other | Live branches, stumps, and small trees |<br>
+CoarseRoots | Live roots ≥5 mm diameter |<br>
+FineRoots | Live roots &lt;5 mm diameter |<br>
+AboveGroundVeryFastSoil | The L horizon comprised of foliar litter plus dead fine roots &lt;5 mm diameter |<br>
+BelowGroundVeryFastSoil | Dead fine roots in the mineral soil &lt;5 mm diameter |<br>
+AboveGroundFastSoil | Fine and small woody debris plus dead coarse roots in the forest floor ≥5 and &lt;75 mm diameter |<br>
+BelowGroundFastSoil | Dead coarse roots in the mineral soil ≥5 diameter |<br>
+MediumSoil | Coarse woody debris on the ground |<br>
+AboveGroundSlowSoil | F, H, and O horizons |<br>
+BelowGroundSlowSoil | Humified organic matter in the mineral soil |<br>
+StemSnag | Dead standing stemwood of merchantable size including bark |<br>
+BranchSnag | Dead branches, stumps, and small trees including bark |<br>
+CO2 | |<br>
+CH4 | |<br>
+CO | |<br>
+NO2 | |</div>
+<div id="order-of-operations" class="section level3" number="1.3.1">
 <h3>
-<span class="header-section-number">1.2.3</span> Order of operations<a class="anchor" aria-label="anchor" href="#order-of-operations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.3.1</span> Order of operations<a class="anchor" aria-label="anchor" href="#order-of-operations"><i class="fas fa-link"></i></a>
 </h3>
 <p>In simulations, disturbances happen before any other carbon-transfer. After the disturbances, half of the growth (determined by increments in the user-provided growth curve) is applied followed by the transfers representing DOM turnover, live biomass turnover, an overmature decline compensation if applicable, the 2nd half of the growth, DOM decay, slow decay and slow soil mixing. Addition to the system only come from the atmosphere (amount determined by growth), and carbon exists the system to the atmosphere or to the forest products sector (ADD A FIGURE HERE MODIFICATION OF CBM_slide.ppt). Transfers are proportions of a source pool to sink pools and proportions add up to 1, so no carbon is lost.</p>
 <p>MAKE A TABLE OF THESE
@@ -143,33 +168,33 @@ domdecay
 slowdecay
 slowmixing</p>
 </div>
-<div id="spinup" class="section level3" number="1.2.4">
+<div id="spinup" class="section level3" number="1.3.2">
 <h3>
-<span class="header-section-number">1.2.4</span> spinup<a class="anchor" aria-label="anchor" href="#spinup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.3.2</span> spinup<a class="anchor" aria-label="anchor" href="#spinup"><i class="fas fa-link"></i></a>
 </h3>
 <p>The amount of carbon below ground in forests is extremely variable and consequently there are few data that can provide this information at scales greater then plot levels (REFS). To compensate for this gap in knowledge and data, prior to a simulation, <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> completes a process that populates below ground pools. This process is called a <strong>spinup</strong> and it is the first <a href="SpaDES%20speak">event</a> in the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module. The procedure consists of growing and burning forest stand, according to the provided growth curves and default values for fire return intervals (provided in <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a>) until the below ground carbon pool stabilize or reach a predefined number of simulations. The choice of a fire disturbance matche the historical forest disturbance for most forests in Canada. We consider this procedure a place holder until our knowledge of below ground carbon dynamics improves. Although it will likely be resulting in errors in absolute carbon stocks (see <span class="citation">Boisvenue <em>et al.</em> (<a href="references.html#ref-boisvenue2022">2022</a>)</span> Appendix 4), these should be systematic errors and we can at at least simulate the trends in carbon stocks and fluxes. Research has compared below ground stocks values (<span class="citation">(<a href="#ref-shaw"><strong>shaw?</strong></a>)</span>??) and work continues to improve parameters (<span class="citation">(<a href="#ref-hararuk2017"><strong>hararuk2017?</strong></a>)</span>?).</p>
 </div>
 </div>
-<div id="setup" class="section level2" number="1.3">
+<div id="setup" class="section level2" number="1.4">
 <h2>
-<span class="header-section-number">1.3</span> Setup<a class="anchor" aria-label="anchor" href="#setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.4</span> Setup<a class="anchor" aria-label="anchor" href="#setup"><i class="fas fa-link"></i></a>
 </h2>
 <p>In this example, we setup the workflow using the
 <a href="https://spades-project.predictiveecology.org/"><code>SpaDES.project</code></a> package and
 current versions of the <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> modules.</p>
 </div>
-<div id="google-account-needed-for-this-example" class="section level2 rmdimportant" number="1.4">
+<div id="google-account-needed-for-this-example" class="section level2 rmdimportant" number="1.5">
 <h2>
-<span class="header-section-number">1.4</span> Google account needed for this example<a class="anchor" aria-label="anchor" href="#google-account-needed-for-this-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.5</span> Google account needed for this example<a class="anchor" aria-label="anchor" href="#google-account-needed-for-this-example"><i class="fas fa-link"></i></a>
 </h2>
 <p>To run the provided example, users need to access some of the data using the <a href="https://cloud.r-project.org/web/packages/googledrive/index.html">googledrive</a> R package (part of the <a href="https://www.tidyverse.org/">tidyverse</a> familyof R packages).
 During the <a href="https://spades-core.predictiveecology.org/reference/simInit.html">simInit()</a> (or <a href="https://rdrr.io/cran/SpaDES.core/man/simInitAndSpades.html">simInitAndSpades</a>) call, a function to initialize or initialize and run <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a>-based simulations, R will prompt you to either choose a previously authenticated account (if you have previously used <a href="https://cloud.r-project.org/web/packages/googledrive/index.html">googledrive</a>) or to open a browser window and authenticate.</p>
 <p>Make sure you give <a href="https://www.tidyverse.org/">tidyverse</a> read/write access to your files:</p>
 <div class="inline-figure"><img src="https://github.com/PredictiveEcology/PredictiveEcology.org/blob/main/training/assets/img/gdriveauth.png?raw=true" fig-align="center" width="467"></div>
 </div>
-<div id="python-is-required-for-this-example" class="section level2 rmdimportant" number="1.5">
+<div id="python-is-required-for-this-example" class="section level2 rmdimportant" number="1.6">
 <h2>
-<span class="header-section-number">1.5</span> Python is required for this example<a class="anchor" aria-label="anchor" href="#python-is-required-for-this-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6</span> Python is required for this example<a class="anchor" aria-label="anchor" href="#python-is-required-for-this-example"><i class="fas fa-link"></i></a>
 </h2>
 <p>The <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module, which is the simulation modules of <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> requires Python &gt;=3.9 and &lt;=3.12.7.</p>
 <p>If a suitable version of Python does not already exist on your computer,
@@ -177,9 +202,9 @@ During the <a href="https://spades-core.predictiveecology.org/reference/simInit.
 <p>If you are using a Windows computer with Git installed, the <a href="https://github.com/pyenv-win/pyenv-win">pyenv-win</a> tool will be acquired and managed directly by <a href="https://rstudio.github.io/reticulate/"><code>reticulate</code></a>. If you are using a Windows computer without Git installed, you will be prompted to allow the <a href="https://github.com/pyenv-win/pyenv-win">pyenv-win</a> tool to be downloaded directly from Github to your local user application data directory (<code>tools::R_user_dir("r-spadesCBM")</code>).</p>
 <p>If the Python installation process fails or you would prefer to manually install Python, it can be downloaded directly from <a href="https://python.org/downloads">python.org/downloads</a>. The calls to Python functions from a package called <a href="https://cat-cfs.github.io/libcbm_py/">libcbm</a>. Python functions are only used in the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module. Details on <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module and the Python functions are provided in <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> chapter in this manual.</p>
 </div>
-<div id="run-example-simulation" class="section level2" number="1.6">
+<div id="run-example-simulation" class="section level2" number="1.7">
 <h2>
-<span class="header-section-number">1.6</span> Run Example Simulation<a class="anchor" aria-label="anchor" href="#run-example-simulation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.7</span> Run Example Simulation<a class="anchor" aria-label="anchor" href="#run-example-simulation"><i class="fas fa-link"></i></a>
 </h2>
 <p>Here is the R script to run the simulation of forest carbon dynamics in the managed forests of SK from 1985 to 2012, with disturbances as presented in <span class="citation">Boisvenue <em>et al.</em> (<a href="references.html#ref-boisvenue2016">2016</a>)</span>. Depending on your computing capacity, this may take a while, particularly the first time you run it. Subsequent simulations are much faster because of the use of the <a href="https://cran.r-project.org/web/packages/SpaDES.core/vignettes/iii-cache.html">reproducible::Cache</a> function.</p>
 <pre><code>projectPath &lt;- "~/GitHub/spadesCBM"
@@ -287,14 +312,18 @@ simPython &lt;- SpaDES.core::simInitAndSpades2(out)</code></pre>
 <a class="nav-link" href="#the-carbon-budget-model-in-spades"><span class="header-section-number">1.2</span> The Carbon Budget Model in SpaDES</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#input-requirements"><span class="header-section-number">1.2.1</span> Input requirements</a></li>
 <li><a class="nav-link" href="#pools"><span class="header-section-number">1.2.2</span> Pools</a></li>
-<li><a class="nav-link" href="#order-of-operations"><span class="header-section-number">1.2.3</span> Order of operations</a></li>
-<li><a class="nav-link" href="#spinup"><span class="header-section-number">1.2.4</span> spinup</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#setup"><span class="header-section-number">1.3</span> Setup</a></li>
-<li><a class="nav-link" href="#google-account-needed-for-this-example"><span class="header-section-number">1.4</span> Google account needed for this example</a></li>
-<li><a class="nav-link" href="#python-is-required-for-this-example"><span class="header-section-number">1.5</span> Python is required for this example</a></li>
-<li><a class="nav-link" href="#run-example-simulation"><span class="header-section-number">1.6</span> Run Example Simulation</a></li>
+<li>
+<a class="nav-link" href="#pool-description"><span class="header-section-number">1.3</span> | Pool | Description |</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#order-of-operations"><span class="header-section-number">1.3.1</span> Order of operations</a></li>
+<li><a class="nav-link" href="#spinup"><span class="header-section-number">1.3.2</span> spinup</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#setup"><span class="header-section-number">1.4</span> Setup</a></li>
+<li><a class="nav-link" href="#google-account-needed-for-this-example"><span class="header-section-number">1.5</span> Google account needed for this example</a></li>
+<li><a class="nav-link" href="#python-is-required-for-this-example"><span class="header-section-number">1.6</span> Python is required for this example</a></li>
+<li><a class="nav-link" href="#run-example-simulation"><span class="header-section-number">1.7</span> Run Example Simulation</a></li>
 </ul>
 
       <div class="book-extra">
