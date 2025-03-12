@@ -91,7 +91,7 @@
 <h2>
 <span class="header-section-number">2.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview"><i class="fas fa-link"></i></a>
 </h2>
-<p><a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a> reads in default parameters for the managed forest of Canada. In <em>SpaDES-speak</em>, it has one event (<code>init</code>). On its own, this module provides R-based access to all defaults <strong>CBM</strong> parametersfor the managed forests of Canada. As part of <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>, it provides simulations with default parameter values for the managed forests of Canada, akin to the Archive Index in the CBM-CFS3 documentation. Most parameters are read in from an SQLite database (link below), with some defaults, modified from CBM-CFS3 to accommodate the capacity for a more flexible representation of vegetation dynamics enable by the <code>libcbm</code> Python functions used, available <a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/resources/cbm_exn">here</a>. Defaults for the managed forests of Canada include disturbance data such as different disturbance types and their IDs, spinup parameters, pool names, and more. The outputs of this module are used by <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> and <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulations.</p>
+<p><a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a> reads in default parameters for the managed forest of Canada. In <em>SpaDES-speak</em>, it has one event (<code>init</code>). On its own, this module provides R-based access to all defaults <strong>CBM</strong> parameters for the managed forests of Canada. As part of <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>, it provides simulations with default parameter values for the managed forests of Canada, akin to the Archive Index in the CBM-CFS3 documentation. Most parameters are read in from an SQLite database (link below), with some defaults, modified from CBM-CFS3 to accommodate a more flexible representation of vegetation dynamics enable by the <code>libcbm</code> Python functions used, available <a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/resources/cbm_exn">here</a>. Defaults for the managed forests of Canada include disturbance data such as different disturbance types and their IDs, spinup parameters, pool names, fire return intervals for each ecozone (DEFINE) and more. The outputs of this module are used by <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> and <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulations.</p>
 </div>
 <div id="list-of-input-objects" class="section level2" number="2.2">
 <h2>
@@ -150,13 +150,13 @@
 </h2>
 <ul>
 <li>The SQLite database, and a selection of the <code>cbm_exn</code> resource files are downloaded and stored into the user’s Inputs folder from GitHub using the <code>reproducible::prepInputs</code> function, a useful tool in the <code>SpaDES</code> toolkit.</li>
-<li>Parameters necessary for <em>spadesCBM</em> simulations are extracted from the downloaded files. Each of these are saved as objects in the <code>simList</code> (see list of output objects above).</li>
-<li>The <code>species_tr</code> object is created to match a species name to the provided growth curve.</li>
+<li>Parameters necessary for <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulations are extracted from the downloaded files. Each of these are saved as objects in the <code>simList</code> (see list of output objects above).</li>
+<li>The <code>species_tr</code> object is created to match a species name to the user-provided growth curve.</li>
 <li>The <code>disturbanceMatrix</code> and <code>cTransfers</code> objects help identify which carbon transfers matches the provided disturbances as it matches the transfer matrix IDs and the proportions transferred to disturbance names.</li>
-<li>Parameters for the <code>spinup</code> event in the <code>CBM_core</code> modules are assembled in the spinupSQL object.</li>
+<li>Parameters for the <code>spinup</code> event in the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> modules are assembled in the spinupSQL object.</li>
 <li>
-<code>pooldef</code> gives the names of each carbon pool that exists in CBM.</li>
-<li>Objects that narrow the parameter selection for the study area are <code>spuLocator</code> and <code>ecolocator</code>
+<code>pooldef</code> gives the names of each carbon pool that exists in CBM (LINK TO THE POOLS IN index.Rmd).</li>
+<li>Objects that narrow the parameter selection to the study area are <code>spuLocator</code> and <code>ecolocator</code>
 </li>
 </ul>
 </div>
@@ -224,7 +224,7 @@
 <h2>
 <span class="header-section-number">2.6</span> Usage<a class="anchor" aria-label="anchor" href="#usage-1"><i class="fas fa-link"></i></a>
 </h2>
-<p>This module can run independently by running the global script below. Run independently, it provides transparent access tp default parameters for all managed forests of Canada for <em>CBM</em> simulations.</p>
+<p>This module can run independently by running the global script below. Run independently, it provides transparent access to default parameters for all managed forests of Canada for <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulations.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">projectPath</span> <span class="op">&lt;-</span> <span class="st">"~/CBM_defaults"</span></span>
 <span><span class="va">repos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"predictiveecology.r-universe.dev"</span>, <span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span><span class="op">(</span><span class="st">"repos"</span><span class="op">)</span><span class="op">)</span></span>

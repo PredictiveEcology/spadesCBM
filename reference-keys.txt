@@ -20,6 +20,8 @@ cbm_dataprep_sk
 overview-1
 inputs
 module-functioning-1
+pixel-groups
+disturbances
 list-of-output-objects-1
 links-to-other-modules
 cbm_vol2biomass
