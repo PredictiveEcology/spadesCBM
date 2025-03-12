@@ -3,7 +3,6 @@ usage
 the-carbon-budget-model-in-spades
 input-requirements
 pools
-pool-description
 order-of-operations
 spinup
 setup
