@@ -90,7 +90,7 @@
 <p>This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, contact us <a href="%22https://github.com/PredictiveEcology/spadesCBM/issues%22">here</a>.</p>
 </div>
 <p><a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> is a modular, transparent, and spatially explicit implementation of the logic, pools structure, equations, and default assumptions of the Carbon Budget Model of the Canadian Forest Sector <a href="https://natural-resources.canada.ca/climate-change/climate-change-impacts-forests/carbon-accounting/carbon-budget-model/13107">CBM</a>. It applies the science presented in <span class="citation">Kurz <em>et al.</em> (<a href="references.html#ref-kurz2009">2009</a>)</span> in a similar way to the simulations in <span class="citation">Boisvenue <em>et al.</em> (<a href="references.html#ref-boisvenue2016">2016</a>)</span> and <span class="citation">Boisvenue <em>et al.</em> (<a href="references.html#ref-boisvenue2022">2022</a>)</span> but calls Python functions for annual processes (see <a href="https://github.com/cat-cfs/libcbm_py.git">libcbm_py/examples/cbm_exn</a>). These functions and <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> are, like much of modelling-based science, continuously under development.</p>
-<p>The collection of <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> modules in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> was developed to enable R&amp;D input to the Canadian Forest Service <a href="https://natural-resources.canada.ca/climate-change/climate-change-impacts-forests/carbon-budget-model">CFS</a> forest carbon reporting system, <a href="https://natural-resources.canada.ca/climate-change/forest-carbon/canada-s-forest-carbon-reporting-system">NFCMARS</a>. The CFS provides the science backing for Canadian policies on national forest issues. <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> is a nimble tool in which new science, data and algorithms can be tested and explored to serve policy purposes. <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> development follows the PERFICT approach <span class="citation">McIntire <em>et al.</em> (<a href="references.html#ref-mcintire2022">2022</a>)</span> for ecological modelling systems. The <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> platform is the toolkit that enables the implementation of the PERFICT principle, a recipe to build nimble system that help solve many ecological modelling issues.</p>
+<p>The collection of <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> modules in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> was developed to enable R&amp;D input to the Canadian Forest Service (<a href="https://natural-resources.canada.ca/climate-change/climate-change-impacts-forests/carbon-budget-model">CFS</a>) forest carbon reporting system, <a href="https://natural-resources.canada.ca/climate-change/forest-carbon/canada-s-forest-carbon-reporting-system">NFCMARS</a>. The CFS provides the science backing for Canadian policies on national forest issues. <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> is a nimble tool in which new science, data and algorithms can be tested and explored to serve policy purposes. <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> development follows the PERFICT approach of <span class="citation">McIntire <em>et al.</em> (<a href="references.html#ref-mcintire2022">2022</a>)</span> for ecological modelling systems. The <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> platform is the toolkit that enables this implementation of the PERFICT principle, a recipe to build nimble systems that help solve many ecological modelling issues.</p>
 <div id="usage" class="section level2" number="1.1">
 <h2>
 <span class="header-section-number">1.1</span> Usage<a class="anchor" aria-label="anchor" href="#usage"><i class="fas fa-link"></i></a>
@@ -101,8 +101,9 @@ The second module, <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK
 Throughout this manual we use an example simulation of forest carbon dynamics for the managed forests of SK from 1985-2012 similarly to the simulations in <span class="citation">Boisvenue <em>et al.</em> (<a href="references.html#ref-boisvenue2016">2016</a>)</span>, where the *_SK* indicates the study area.
 In <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>, as in CBM, growth curves (<span class="math inline">\(m^3/ha\)</span>) are the main change-agent.
 The <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> module translates user-provided stand-level growth curves (<span class="math inline">\(m^3/ha\)</span>) into increments for specific above ground carbon pools (metric tonnes of carbon/ha) using <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span> models (leading species specific) to which we added a smoothing algorithm to fill-in the gap between age 0 and the age at which growth curves have data.
-Note that <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> is also study-area specific as <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span> parameters are dominant species and ecozone specific. <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a>, <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, and <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> all have one <a href="put%20a%20link%20here%20to%20our%20lexicon%20chapter">event</a> (<code>init</code>), and need to be run only once (note that they will be <a href="https://predictiveecology.org/training/_book/Caching.html">Cached</a> in our example).
-These three modules provide the inputs to the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module where between pool carbon-transfers are applied on a specified time step (in our example, yearly).
+Note that <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> is also study-area specific, as <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span> parameters are dominant species and ecozone specific.</p>
+<p><a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a>, <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, and <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> all have one <a href="put%20a%20link%20here%20to%20our%20lexicon%20chapter">event</a> (<code>init</code>), and need to be run only once (note that they will be <a href="https://predictiveecology.org/training/_book/Caching.html">cached</a> in our example).
+These three modules provide the inputs to the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module, where carbon-transfers between pools are applied on a specified time step (in our example, yearly).
 This modularity enables users to access and change default parameters, change inputs, connect to external modules that modify the landscape, and assess the impact of these changes.
 We are working on various implementations of this modelling system and making these available to the community in the <a href="https://github.com/PredictiveEcology">Preditive Ecology</a> GitHub repository.
 We hope others will do the same.
@@ -126,95 +127,29 @@ A smaller study area extent simulation of <a href="https://github.com/Predictive
 <h3>
 <span class="header-section-number">1.2.2</span> Pools<a class="anchor" aria-label="anchor" href="#pools"><i class="fas fa-link"></i></a>
 </h3>
-<p>There are 20 carbon pools in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> (MAKE A TABLE AND REFER TO IT - this needs a description of the pools similar to CBMCFS3_poolsIn2009pub). The carbon transfers are dictated by matrices (available in the defaults information) which specify the proportion of carbon moving from one pool (“source_pool” - this needs to be in our lexicon) to (“sink_pools” - this too). Matrices for growth are populated with the user-provided growth information and are the main change agent in the system. Default parameters for biomass and dead organic mater (DOM) turnover, decay, and soil mixing are either at the provincial/territorial, ecozone (NEED TO DEFINE), or Canada-wide scale (see <span class="citation">Kurz <em>et al.</em> (<a href="references.html#ref-kurz2009">2009</a>)</span> Table 1). Note that parameters can easily be modified from their defaults in a <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulation.</p>
-<div class="inline-table"><table class="table table-sm">
-<colgroup>
-<col width="30%">
-<col width="69%">
-</colgroup>
-<thead><tr class="header">
-<th>Pool</th>
-<th>Description</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>Input</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Merch</td>
-<td>Live stemwood of merchantable size</td>
-</tr>
-<tr class="odd">
-<td>Foliage</td>
-<td>Live foliage</td>
-</tr>
-<tr class="even">
-<td>Other</td>
-<td>Live branches, stumps, and small trees</td>
-</tr>
-<tr class="odd">
-<td>CoarseRoots</td>
-<td>Live roots ≥5 mm diameter</td>
-</tr>
-<tr class="even">
-<td>FineRoots</td>
-<td>Live roots &lt;5 mm diameter</td>
-</tr>
-<tr class="odd">
-<td>AboveGroundVeryFastSoil</td>
-<td>The L horizon comprised of foliar litter plus dead fine roots &lt;5 mm diameter</td>
-</tr>
-<tr class="even">
-<td>BelowGroundVeryFastSoil</td>
-<td>Dead fine roots in the mineral soil &lt;5 mm diameter</td>
-</tr>
-<tr class="odd">
-<td>AboveGroundFastSoil</td>
-<td>Fine and small woody debris plus dead coarse roots in the forest floor ≥5 and &lt;75 mm diameter</td>
-</tr>
-<tr class="even">
-<td>BelowGroundFastSoil</td>
-<td>Dead coarse roots in the mineral soil ≥5 diameter</td>
-</tr>
-<tr class="odd">
-<td>MediumSoil</td>
-<td>Coarse woody debris on the ground</td>
-</tr>
-<tr class="even">
-<td>AboveGroundSlowSoil</td>
-<td>F, H, and O horizons</td>
-</tr>
-<tr class="odd">
-<td>BelowGroundSlowSoil</td>
-<td>Humified organic matter in the mineral soil</td>
-</tr>
-<tr class="even">
-<td>StemSnag</td>
-<td>Dead standing stemwood of merchantable size including bark</td>
-</tr>
-<tr class="odd">
-<td>BranchSnag</td>
-<td>Dead branches, stumps, and small trees including bark</td>
-</tr>
-<tr class="even">
-<td>CO2</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>CH4</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>CO</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>NO2</td>
-<td></td>
-</tr>
-</tbody>
-</table></div>
+<p>There are 19 carbon pools in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> (Table 1). The carbon transfers are dictated by matrices (available in the defaults information) which specify the proportion of carbon moving from one pool (“source_pool” - this needs to be in our lexicon) to (“sink_pools” - this too). Matrices for growth are populated with the user-provided growth information and are the main change agent in the system. Default parameters for biomass and dead organic mater (DOM) turnover, decay, and soil mixing are either at the provincial/territorial, ecozone (NEED TO DEFINE), or Canada-wide scale (see <span class="citation">Kurz <em>et al.</em> (<a href="references.html#ref-kurz2009">2009</a>)</span> Table 1). Note that parameters can easily be modified from their defaults in a <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulation.</p>
+<p><em>Table 1: Carbon pools in spadesCBM</em>
+| Pool | Description |
+|——–|——————|
+| Input | |
+| Merch | Live stemwood of merchantable size |
+| Foliage | Live foliage |
+| Other | Live branches, stumps, and small trees |
+| CoarseRoots | Live roots ≥5 mm diameter |
+| FineRoots | Live roots &lt;5 mm diameter |
+| AboveGroundVeryFastSoil | The L horizon comprised of foliar litter plus dead fine roots &lt;5 mm diameter |
+| BelowGroundVeryFastSoil | Dead fine roots in the mineral soil &lt;5 mm diameter |
+| AboveGroundFastSoil | Fine and small woody debris plus dead coarse roots in the forest floor ≥5 and &lt;75 mm diameter |
+| BelowGroundFastSoil | Dead coarse roots in the mineral soil ≥5 diameter |
+| MediumSoil | Coarse woody debris on the ground |
+| AboveGroundSlowSoil | F, H, and O horizons |
+| BelowGroundSlowSoil | Humified organic matter in the mineral soil |
+| StemSnag | Dead standing stemwood of merchantable size including bark |
+| BranchSnag | Dead branches, stumps, and small trees including bark |
+| CO2 | CO2 emitted to atmosphere |
+| CH4 | CH4 emitted to atmosphere |
+| CO | CO emitted to atmosphere |
+| NO2 | NO2 emitted to atmosphere |</p>
 </div>
 <div id="order-of-operations" class="section level3" number="1.2.3">
 <h3>
