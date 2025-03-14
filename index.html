@@ -128,28 +128,95 @@ A smaller study area extent simulation of <a href="https://github.com/Predictive
 <span class="header-section-number">1.2.2</span> Pools<a class="anchor" aria-label="anchor" href="#pools"><i class="fas fa-link"></i></a>
 </h3>
 <p>There are 19 carbon pools in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> (Table 1). The carbon transfers are dictated by matrices (available in the defaults information) which specify the proportion of carbon moving from one pool (“source_pool” - this needs to be in our lexicon) to (“sink_pools” - this too). Matrices for growth are populated with the user-provided growth information and are the main change agent in the system. Default parameters for biomass and dead organic mater (DOM) turnover, decay, and soil mixing are either at the provincial/territorial, ecozone (NEED TO DEFINE), or Canada-wide scale (see <span class="citation">Kurz <em>et al.</em> (<a href="references.html#ref-kurz2009">2009</a>)</span> Table 1). Note that parameters can easily be modified from their defaults in a <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulation.</p>
-<p><em>Table 1: Carbon pools in spadesCBM</em>
-| Pool | Description |
-|——–|——————|
-| Input | |
-| Merch | Live stemwood of merchantable size |
-| Foliage | Live foliage |
-| Other | Live branches, stumps, and small trees |
-| CoarseRoots | Live roots ≥5 mm diameter |
-| FineRoots | Live roots &lt;5 mm diameter |
-| AboveGroundVeryFastSoil | The L horizon comprised of foliar litter plus dead fine roots &lt;5 mm diameter |
-| BelowGroundVeryFastSoil | Dead fine roots in the mineral soil &lt;5 mm diameter |
-| AboveGroundFastSoil | Fine and small woody debris plus dead coarse roots in the forest floor ≥5 and &lt;75 mm diameter |
-| BelowGroundFastSoil | Dead coarse roots in the mineral soil ≥5 diameter |
-| MediumSoil | Coarse woody debris on the ground |
-| AboveGroundSlowSoil | F, H, and O horizons |
-| BelowGroundSlowSoil | Humified organic matter in the mineral soil |
-| StemSnag | Dead standing stemwood of merchantable size including bark |
-| BranchSnag | Dead branches, stumps, and small trees including bark |
-| CO2 | CO2 emitted to atmosphere |
-| CH4 | CH4 emitted to atmosphere |
-| CO | CO emitted to atmosphere |
-| NO2 | NO2 emitted to atmosphere |</p>
+<p><em>Table 1: Carbon pools in spadesCBM</em></p>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="30%">
+<col width="69%">
+</colgroup>
+<thead><tr class="header">
+<th>Pool</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Input</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Merch</td>
+<td>Live stemwood of merchantable size</td>
+</tr>
+<tr class="odd">
+<td>Foliage</td>
+<td>Live foliage</td>
+</tr>
+<tr class="even">
+<td>Other</td>
+<td>Live branches, stumps, and small trees</td>
+</tr>
+<tr class="odd">
+<td>CoarseRoots</td>
+<td>Live roots ≥5 mm diameter</td>
+</tr>
+<tr class="even">
+<td>FineRoots</td>
+<td>Live roots &lt;5 mm diameter</td>
+</tr>
+<tr class="odd">
+<td>AboveGroundVeryFastSoil</td>
+<td>The L horizon comprised of foliar litter plus dead fine roots &lt;5 mm diameter</td>
+</tr>
+<tr class="even">
+<td>BelowGroundVeryFastSoil</td>
+<td>Dead fine roots in the mineral soil &lt;5 mm diameter</td>
+</tr>
+<tr class="odd">
+<td>AboveGroundFastSoil</td>
+<td>Fine and small woody debris plus dead coarse roots in the forest floor ≥5 and &lt;75 mm diameter</td>
+</tr>
+<tr class="even">
+<td>BelowGroundFastSoil</td>
+<td>Dead coarse roots in the mineral soil ≥5 diameter</td>
+</tr>
+<tr class="odd">
+<td>MediumSoil</td>
+<td>Coarse woody debris on the ground</td>
+</tr>
+<tr class="even">
+<td>AboveGroundSlowSoil</td>
+<td>F, H, and O horizons</td>
+</tr>
+<tr class="odd">
+<td>BelowGroundSlowSoil</td>
+<td>Humified organic matter in the mineral soil</td>
+</tr>
+<tr class="even">
+<td>StemSnag</td>
+<td>Dead standing stemwood of merchantable size including bark</td>
+</tr>
+<tr class="odd">
+<td>BranchSnag</td>
+<td>Dead branches, stumps, and small trees including bark</td>
+</tr>
+<tr class="even">
+<td>CO2</td>
+<td>CO2 emitted to atmosphere</td>
+</tr>
+<tr class="odd">
+<td>CH4</td>
+<td>CH4 emitted to atmosphere</td>
+</tr>
+<tr class="even">
+<td>CO</td>
+<td>CO emitted to atmosphere</td>
+</tr>
+<tr class="odd">
+<td>NO2</td>
+<td>NO2 emitted to atmosphere</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <div id="order-of-operations" class="section level3" number="1.2.3">
 <h3>
