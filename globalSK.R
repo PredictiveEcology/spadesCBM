@@ -26,8 +26,8 @@ out <- SpaDES.project::setupProject(
                "PredictiveEcology/CBM_vol2biomass@development",
                "PredictiveEcology/CBM_core@development"),
   times = times,
-  require = c("SpaDES.core", "reticulate",
-              "PredictiveEcology/libcbmr", "data.table"),
+  require = c("PredictiveEcology/CBMutils@development (>=2.0)", "reticulate",
+              "reproducible"),
 
   params = list(
     CBM_defaults = list(
@@ -40,16 +40,14 @@ out <- SpaDES.project::setupProject(
       .useCache = TRUE
     )
   ),
-  functions = "PredictiveEcology/CBM_core@training/R/ReticulateFindPython.R",
 
   ret = {
     reticulate::virtualenv_create(
       "r-spadesCBM",
       python = if (!reticulate::virtualenv_exists("r-spadesCBM")){
-        ReticulateFindPython(
+        CBMutils::ReticulateFindPython(
           version        = ">=3.9,<=3.12.7",
-          versionInstall = "3.10:latest",
-          pyenvRoot      = tools::R_user_dir("r-spadesCBM")
+          versionInstall = "3.10:latest"
         )
       },
       packages = c(
