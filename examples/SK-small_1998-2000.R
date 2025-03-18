@@ -40,7 +40,8 @@
     ),
 
     # Set packages required for set up
-    require = c("PredictiveEcology/CBMutils@development (>=2.0)", "reticulate", "terra"),
+    require = c("PredictiveEcology/CBMutils@development (>=2.0)", "reticulate",
+                "reproducible", "terra"),
 
     # Set up Python
     ret = {
@@ -49,8 +50,7 @@
         python = if (!reticulate::virtualenv_exists("r-spadesCBM")){
           CBMutils::ReticulateFindPython(
             version        = ">=3.9,<=3.12.7",
-            versionInstall = "3.10:latest",
-            pyenvRoot      = tools::R_user_dir("r-spadesCBM")
+            versionInstall = "3.10:latest"
           )
         },
         packages = c(
