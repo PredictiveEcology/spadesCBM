@@ -4,13 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 5 CBM_dataPrep_SK | spadesCBM</title>
+<title>Chapter 2 CBM_dataPrep_SK | spadesCBM</title>
 <meta name="author" content="Céline Boisvenue">
 <meta name="generator" content="bookdown 0.42 with bs4_book()">
-<meta property="og:title" content="Chapter 5 CBM_dataPrep_SK | spadesCBM">
+<meta property="og:title" content="Chapter 2 CBM_dataPrep_SK | spadesCBM">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 5 CBM_dataPrep_SK | spadesCBM">
+<meta name="twitter:title" content="Chapter 2 CBM_dataPrep_SK | spadesCBM">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -42,9 +42,9 @@
     }
   </style>
 <link rel="stylesheet" href="css/style.css">
-<meta name="description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any regarding this module, contact us here.  5.1 Overview CBM_dataPrep_SK...">
-<meta property="og:description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any regarding this module, contact us here.  5.1 Overview CBM_dataPrep_SK...">
-<meta name="twitter:description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any regarding this module, contact us here.  5.1 Overview CBM_dataPrep_SK...">
+<meta name="description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any regarding this module, contact us here.  2.1 Overview CBM_dataPrep_SK...">
+<meta property="og:description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any regarding this module, contact us here.  2.1 Overview CBM_dataPrep_SK...">
+<meta name="twitter:description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any regarding this module, contact us here.  2.1 Overview CBM_dataPrep_SK...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -67,13 +67,13 @@
 
       <nav aria-label="Table of contents"><h2>Table of contents</h2>
         <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> Overview</a></li>
-<li><a class="" href="lexicon.html"><span class="header-section-number">2</span> Lexicon</a></li>
-<li><a class="" href="cbmutils.html"><span class="header-section-number">3</span> CBMutils</a></li>
-<li><a class="" href="cbm_defaults.html"><span class="header-section-number">4</span> CBM_defaults</a></li>
-<li><a class="active" href="cbm_dataprep_sk.html"><span class="header-section-number">5</span> CBM_dataPrep_SK</a></li>
-<li><a class="" href="cbm_vol2biomass.html"><span class="header-section-number">6</span> CBM_vol2biomass</a></li>
-<li><a class="" href="cbm_core.html"><span class="header-section-number">7</span> CBM_core</a></li>
+<li><a class="" href="index.html">Overview</a></li>
+<li><a class="" href="lexicon.html">Lexicon</a></li>
+<li><a class="" href="cbmutils.html">CBMutils</a></li>
+<li><a class="" href="cbm_defaults.html"><span class="header-section-number">1</span> CBM_defaults</a></li>
+<li><a class="active" href="cbm_dataprep_sk.html"><span class="header-section-number">2</span> CBM_dataPrep_SK</a></li>
+<li><a class="" href="cbm_vol2biomass.html"><span class="header-section-number">3</span> CBM_vol2biomass</a></li>
+<li><a class="" href="cbm_core.html"><span class="header-section-number">4</span> CBM_core</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -82,29 +82,29 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cbm_dataprep_sk" class="section level1" number="5">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cbm_dataprep_sk" class="section level1" number="2">
 <h1>
-<span class="header-section-number">5</span> CBM_dataPrep_SK<a class="anchor" aria-label="anchor" href="#cbm_dataprep_sk"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2</span> CBM_dataPrep_SK<a class="anchor" aria-label="anchor" href="#cbm_dataprep_sk"><i class="fas fa-link"></i></a>
 </h1>
 <div class="rmdimportant">
 <p>This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any regarding this module, contact us <a href="%22https://github.com/PredictiveEcology/CBM_datPrep_SK/issues%22">here</a>.</p>
 </div>
-<div id="overview-2" class="section level2" number="5.1">
+<div id="overview-2" class="section level2" number="2.1">
 <h2>
-<span class="header-section-number">5.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview-2"><i class="fas fa-link"></i></a>
 </h2>
 <p><a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> processes spatially explicit inputs for use in <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> and <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>. In <em>SpaDES-speak</em>, it has one event (<code>init</code>) - we might now change this to two events - stay tuned. <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> was designed for spatially explicit modelling and provides a wide variety of tools to support it. <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> makes use of these tools. This module’s inputs are study area and scenario specific rasters making <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> the most idiosyncratic module of the <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> deck, meaning that this is the module that will require users to adapt to their available information for their study area. The default example simulates a present day (1985-2011) scenario where remotely-sensed disturbances are simulated in the managed forests of Saskatchewan, as described in <span class="citation">Boisvenue <em>et al.</em> (<a href="references.html#ref-boisvenue2016">2016</a>)</span>’s (scenario = time horizon + disturbances). We suggest users wanting to run <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> for their study-area, modify this module, adapting their inputs to produce the outputs of <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>. The module would become <strong>CBM_dataPrep_NewStudyArea</strong>.</p>
 </div>
-<div id="background-1" class="section level2" number="5.2">
+<div id="background-1" class="section level2" number="2.2">
 <h2>
-<span class="header-section-number">5.2</span> Background<a class="anchor" aria-label="anchor" href="#background-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.2</span> Background<a class="anchor" aria-label="anchor" href="#background-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>The default structure of <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> modules has the <code>.inputObjects</code> function, and in the <code>.inputObjects</code> function of <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, we make use of the <code><a href="https://reproducible.predictiveecology.org/reference/prepInputs.html">reproducible::prepInputs</a></code> function which is an important part of the <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> toolkit (see the <a href="https://predictiveecology.org/training/_book/ModuleInputs.html%20manual%20for%20more%20details">SpaDES training</a>. <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> falls back to the defaults <a href="link%20to%20lexicon"><em>CBM</em></a> parameters for running the SK managed forests, unless alternative information is provided by the user.</p>
 <p>The study area is spatially defined by the object <code>masterRaster</code>. This object can be provided directly as a raster, as per our example, or created from shape files or by other means. Reminder: any R-code can replace current input processing examples in <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>. The characteristics (projection, resolution, etc.) of this <code>masterRaster</code> are transferred to other rasters used in the simulation via the function <a href="https://predictiveecology.org/training/_book/prepInputs.html"><code>reproducible::prepInputs</code></a>. In our example, the age raster (<code>ageRaster</code>), the raster specifying where each growth curves are to be used (<code>gcIndexRaster</code>), location rasters that link back to the default parameters for Canada (<code>spuRaster</code>, <code>ecoRaster</code>), and the yearly disturbance rasters (provided as a list in this module <code>disturbanceRaster</code>, but process in the <code>annual</code> event of the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module using the function <a href="https://reproducible.predictiveecology.org/reference/postProcessTo.html"><code>reproducible::postProcess</code></a>, which is part of the <a href="https://predictiveecology.org/training/_book/prepInputs.html"><code>reproducible::prepInputs</code></a> function) are all matched to the <code>masterRaster</code>. Defaults parameters are expected from the <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a> (<code>spinupSQL</code>, <code>species_tr</code>) and one table is provided <a href="link%20to%20lexicon"><code>cbmAdmin</code></a> for user convenience. In addition to location (study area) and inventory information (age, here provided as a raster), the user is expected to provide: growth curves (<span class="math inline">\(m^3/ha\)</span>) that are linked to each pixel or stand (<code>userGcM3</code>), the leading species for each curve (<code>gcMeta</code>), and information about disturbances (<code>userDist</code>).</p>
 </div>
-<div id="inputs-1" class="section level2" number="5.3">
+<div id="inputs-1" class="section level2" number="2.3">
 <h2>
-<span class="header-section-number">5.3</span> Inputs<a class="anchor" aria-label="anchor" href="#inputs-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3</span> Inputs<a class="anchor" aria-label="anchor" href="#inputs-1"><i class="fas fa-link"></i></a>
 </h2>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
@@ -199,20 +199,20 @@
 </tbody>
 </table></div>
 </div>
-<div id="module-functioning-1" class="section level2" number="5.4">
+<div id="module-functioning-1" class="section level2" number="2.4">
 <h2>
-<span class="header-section-number">5.4</span> Module functioning<a class="anchor" aria-label="anchor" href="#module-functioning-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4</span> Module functioning<a class="anchor" aria-label="anchor" href="#module-functioning-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>Two central pieces are processed in <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>: the pixelGroups are created and disturbances are matched with disturbance matrices.</p>
-<div id="pixel-groups" class="section level3" number="5.4.1">
+<div id="pixel-groups" class="section level3" number="2.4.1">
 <h3>
-<span class="header-section-number">5.4.1</span> Pixel Groups<a class="anchor" aria-label="anchor" href="#pixel-groups"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4.1</span> Pixel Groups<a class="anchor" aria-label="anchor" href="#pixel-groups"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>pixelGroup</code> are unique combinations of age, growth curve (which means species), spatial unit and ecozone. All pixels having identical age, growth curve, in the same spatial unit and ecozone share one <code>pixelGroup</code> number. The object <code>allPixelDT</code> has all the mixels in the <code>masterRaster</code>. The <code>spatialDT</code> object is the long-form where each simulated pixel has its own line (no N/A pixels), and <code>level3DT</code> lists only the pixel groups. In our example there are 1 347 529 pixels simulated (i.e., 1 347 529 pixels in <code>spatialDT</code>) which are grouped in 739 pixelGroups for actual processing.</p>
 </div>
-<div id="disturbances" class="section level3" number="5.4.2">
+<div id="disturbances" class="section level3" number="2.4.2">
 <h3>
-<span class="header-section-number">5.4.2</span> Disturbances<a class="anchor" aria-label="anchor" href="#disturbances"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4.2</span> Disturbances<a class="anchor" aria-label="anchor" href="#disturbances"><i class="fas fa-link"></i></a>
 </h3>
 <p>The user identifies what disturbances occur on the landscape during the simulations. Our example points to a file (<code>userGcM3</code>) that has the disturbance name and description. The table also provides a number on the raster we provide to identify disturbances (one per year since our simulations are yearly), and identifies if the disturbance is a whole stand disturbance or not. These disturbances need to be match to a disturbance matrix, which identifies the proportion of carbon transferred from one pool (source pool) to another pool (sink pool) when a disturbance occurs in that specific pixel of our study area. If there is more than one match (e.g., more than one type of fire), the user will be prompted to select from a list of disturbance matrices available for the study area, for each spatial unit and ecozone combinations. The default matrices are provided in the Canada-wide defaults and are region (spatial unit and ecozone) specific. These are read-in by <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a> and available to the <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> module via the <a href="https://predictiveecology.org/training/_book/simList.html">simList()</a>. We provide an example of selection in our example. The user-prompts look like this:
 <strong>MAYBE TO INSERT SCREEN SHOTS OF THE disturbance SELECTION PROCESS?</strong></p>
@@ -223,9 +223,9 @@
 <p>Because growth curves can be identified by strata, multiple columns can be used to identify growth curves using the <code>curveID</code> object. In our example, only <strong>gcids</strong> is used.</p>
 </div>
 </div>
-<div id="outputs-1" class="section level2" number="5.5">
+<div id="outputs-1" class="section level2" number="2.5">
 <h2>
-<span class="header-section-number">5.5</span> Outputs<a class="anchor" aria-label="anchor" href="#outputs-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.5</span> Outputs<a class="anchor" aria-label="anchor" href="#outputs-1"><i class="fas fa-link"></i></a>
 </h2>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
@@ -293,9 +293,9 @@
 </tbody>
 </table></div>
 </div>
-<div id="links-to-other-modules-1" class="section level2" number="5.6">
+<div id="links-to-other-modules-1" class="section level2" number="2.6">
 <h2>
-<span class="header-section-number">5.6</span> Links to other modules<a class="anchor" aria-label="anchor" href="#links-to-other-modules-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6</span> Links to other modules<a class="anchor" aria-label="anchor" href="#links-to-other-modules-1"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li><a href="https://github.com/PredictiveEcology/CBM_defaults">CBM_defaults</a></li>
@@ -305,23 +305,23 @@
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="cbm_defaults.html"><span class="header-section-number">4</span> CBM_defaults</a></div>
-<div class="next"><a href="cbm_vol2biomass.html"><span class="header-section-number">6</span> CBM_vol2biomass</a></div>
+<div class="prev"><a href="cbm_defaults.html"><span class="header-section-number">1</span> CBM_defaults</a></div>
+<div class="next"><a href="cbm_vol2biomass.html"><span class="header-section-number">3</span> CBM_vol2biomass</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#cbm_dataprep_sk"><span class="header-section-number">5</span> CBM_dataPrep_SK</a></li>
-<li><a class="nav-link" href="#overview-2"><span class="header-section-number">5.1</span> Overview</a></li>
-<li><a class="nav-link" href="#background-1"><span class="header-section-number">5.2</span> Background</a></li>
-<li><a class="nav-link" href="#inputs-1"><span class="header-section-number">5.3</span> Inputs</a></li>
+<li><a class="nav-link" href="#cbm_dataprep_sk"><span class="header-section-number">2</span> CBM_dataPrep_SK</a></li>
+<li><a class="nav-link" href="#overview-2"><span class="header-section-number">2.1</span> Overview</a></li>
+<li><a class="nav-link" href="#background-1"><span class="header-section-number">2.2</span> Background</a></li>
+<li><a class="nav-link" href="#inputs-1"><span class="header-section-number">2.3</span> Inputs</a></li>
 <li>
-<a class="nav-link" href="#module-functioning-1"><span class="header-section-number">5.4</span> Module functioning</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#pixel-groups"><span class="header-section-number">5.4.1</span> Pixel Groups</a></li>
-<li><a class="nav-link" href="#disturbances"><span class="header-section-number">5.4.2</span> Disturbances</a></li>
+<a class="nav-link" href="#module-functioning-1"><span class="header-section-number">2.4</span> Module functioning</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#pixel-groups"><span class="header-section-number">2.4.1</span> Pixel Groups</a></li>
+<li><a class="nav-link" href="#disturbances"><span class="header-section-number">2.4.2</span> Disturbances</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#outputs-1"><span class="header-section-number">5.5</span> Outputs</a></li>
-<li><a class="nav-link" href="#links-to-other-modules-1"><span class="header-section-number">5.6</span> Links to other modules</a></li>
+<li><a class="nav-link" href="#outputs-1"><span class="header-section-number">2.5</span> Outputs</a></li>
+<li><a class="nav-link" href="#links-to-other-modules-1"><span class="header-section-number">2.6</span> Links to other modules</a></li>
 </ul>
 
       <div class="book-extra">
