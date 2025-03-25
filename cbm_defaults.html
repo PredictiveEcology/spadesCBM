@@ -95,9 +95,15 @@
 </h2>
 <p><a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a> reads in default parameters for the managed forest of Canada. In <em>SpaDES-speak</em>, it has one event (<code>init</code>). On its own, this module provides R-based access to all defaults <strong>CBM</strong> parameters for the managed forests of Canada. As part of <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>, it provides simulations with default parameter values for the managed forests of Canada, akin to the Archive Index in the CBM-CFS3 documentation. Most parameters are read in from an SQLite database (link below), with some defaults, modified from CBM-CFS3 to accommodate a more flexible representation of vegetation dynamics enable by the <code>libcbm</code> Python functions used, available <a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/resources/cbm_exn">here</a>. Defaults for the managed forests of Canada include disturbance data such as different disturbance types and their IDs, spinup parameters, pool names, fire return intervals for each ecozone (DEFINE) and more. The outputs of this module are used by <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> and <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulations.</p>
 </div>
-<div id="list-of-input-objects" class="section level2" number="4.2">
+<div id="background" class="section level2" number="4.2">
 <h2>
-<span class="header-section-number">4.2</span> List of input objects<a class="anchor" aria-label="anchor" href="#list-of-input-objects"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2</span> Background<a class="anchor" aria-label="anchor" href="#background"><i class="fas fa-link"></i></a>
+</h2>
+<p>This example uses default parameters that were created for use in CBM-CFS3. Few of these parameters have source references. The ones who do are outline in the <a href="https://osdp-psdo.canada.ca/dp/en/search/metadata/NRCAN-CFS-1-7570539d-a457-43ef-9215-584ad612f409">Operational-scale Carbon Budget Model of the Canadian Forest Sector (CBM-CFS3) version 1.2: user’s guide</a>. <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a> brings the parameters to an R-environment, for easy user-access and modifications.</p>
+</div>
+<div id="inputs" class="section level2" number="4.3">
+<h2>
+<span class="header-section-number">4.3</span> Inputs<a class="anchor" aria-label="anchor" href="#inputs"><i class="fas fa-link"></i></a>
 </h2>
 <div class="inline-table"><table style="width:100%;" class="table table-sm">
 <colgroup>
@@ -146,9 +152,9 @@
 </tbody>
 </table></div>
 </div>
-<div id="module-functioning" class="section level2" number="4.3">
+<div id="module-functioning" class="section level2" number="4.4">
 <h2>
-<span class="header-section-number">4.3</span> Module functioning<a class="anchor" aria-label="anchor" href="#module-functioning"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4</span> Module functioning<a class="anchor" aria-label="anchor" href="#module-functioning"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>The SQLite database, and a selection of the <code>cbm_exn</code> resource files are downloaded and stored into the user’s Inputs folder from GitHub using the <code><a href="https://reproducible.predictiveecology.org/reference/prepInputs.html">reproducible::prepInputs</a></code> function, a useful tool in the <code>SpaDES</code> toolkit.</li>
@@ -162,9 +168,9 @@
 </li>
 </ul>
 </div>
-<div id="list-of-output-objects" class="section level2" number="4.4">
+<div id="outputs" class="section level2" number="4.5">
 <h2>
-<span class="header-section-number">4.4</span> List of output objects<a class="anchor" aria-label="anchor" href="#list-of-output-objects"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.5</span> Outputs<a class="anchor" aria-label="anchor" href="#outputs"><i class="fas fa-link"></i></a>
 </h2>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
@@ -216,12 +222,6 @@
 </tbody>
 </table></div>
 </div>
-<div id="background" class="section level2" number="4.5">
-<h2>
-<span class="header-section-number">4.5</span> Background<a class="anchor" aria-label="anchor" href="#background"><i class="fas fa-link"></i></a>
-</h2>
-<p>This example uses default parameters that were created for use in CBM-CFS3. Few of these parameters have source references. The ones who do are outline in the <a href="https://osdp-psdo.canada.ca/dp/en/search/metadata/NRCAN-CFS-1-7570539d-a457-43ef-9215-584ad612f409">Operational-scale Carbon Budget Model of the Canadian Forest Sector (CBM-CFS3) version 1.2: user’s guide</a>. <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a> brings the parameters to an R-environment, for easy user-access and modifications.</p>
-</div>
 <div id="usage-1" class="section level2" number="4.6">
 <h2>
 <span class="header-section-number">4.6</span> Usage<a class="anchor" aria-label="anchor" href="#usage-1"><i class="fas fa-link"></i></a>
@@ -246,7 +246,16 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">outDefaults</span> <span class="op">&lt;-</span> <span class="fu">SpaDES.core</span><span class="fu">::</span><span class="fu"><a href="https://spades-core.predictiveecology.org/reference/simInitAndSpades.html">simInitAndSpades2</a></span><span class="op">(</span><span class="va">out</span><span class="op">)</span></span></code></pre></div>
-
+</div>
+<div id="links-to-other-modules" class="section level2" number="4.7">
+<h2>
+<span class="header-section-number">4.7</span> Links to other modules<a class="anchor" aria-label="anchor" href="#links-to-other-modules"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li><a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a></li>
+<li><a href="https://github.com/PredictiveEcology/CBM_vol2biomass">CBM_vol2biomass</a></li>
+<li><a href="https://github.com/PredictiveEcology/CBM_core">CBM_core</a></li>
+</ul>
 </div>
 </div>
   <div class="chapter-nav">
@@ -257,11 +266,12 @@
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#cbm_defaults"><span class="header-section-number">4</span> CBM_defaults</a></li>
 <li><a class="nav-link" href="#overview-1"><span class="header-section-number">4.1</span> Overview</a></li>
-<li><a class="nav-link" href="#list-of-input-objects"><span class="header-section-number">4.2</span> List of input objects</a></li>
-<li><a class="nav-link" href="#module-functioning"><span class="header-section-number">4.3</span> Module functioning</a></li>
-<li><a class="nav-link" href="#list-of-output-objects"><span class="header-section-number">4.4</span> List of output objects</a></li>
-<li><a class="nav-link" href="#background"><span class="header-section-number">4.5</span> Background</a></li>
+<li><a class="nav-link" href="#background"><span class="header-section-number">4.2</span> Background</a></li>
+<li><a class="nav-link" href="#inputs"><span class="header-section-number">4.3</span> Inputs</a></li>
+<li><a class="nav-link" href="#module-functioning"><span class="header-section-number">4.4</span> Module functioning</a></li>
+<li><a class="nav-link" href="#outputs"><span class="header-section-number">4.5</span> Outputs</a></li>
 <li><a class="nav-link" href="#usage-1"><span class="header-section-number">4.6</span> Usage</a></li>
+<li><a class="nav-link" href="#links-to-other-modules"><span class="header-section-number">4.7</span> Links to other modules</a></li>
 </ul>
 
       <div class="book-extra">
