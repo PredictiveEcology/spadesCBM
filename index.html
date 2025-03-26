@@ -264,14 +264,16 @@ During the <a href="https://spades-core.predictiveecology.org/reference/simInit.
 <h2>Run Example Simulation<a class="anchor" aria-label="anchor" href="#run-example-simulation"><i class="fas fa-link"></i></a>
 </h2>
 <p>Here is the R script to run the simulation of forest carbon dynamics in the managed forests of SK from 1985 to 2012, with disturbances as presented in <span class="citation">Boisvenue <em>et al.</em> (<a href="references.html#ref-boisvenue2016">2016</a>)</span>. Depending on your computing capacity, this may take a while, particularly the first time you run it. Subsequent simulations are much faster because of the use of the <a href="https://cran.r-project.org/web/packages/SpaDES.core/vignettes/iii-cache.html">reproducible::Cache</a> function.</p>
-<pre><code>projectPath &lt;- "~/GitHub/spadesCBM"
+<pre><code># set project paths and install packages
+projectPath &lt;- "~/GitHub/spadesCBM"
 repos &lt;- unique(c("predictiveecology.r-universe.dev", getOption("repos")))
 install.packages("SpaDES.project",
                  repos = repos)
 
-# start in 1985, and end in 2012
-times &lt;- list(start = 1985, end = 2012)
+# Set simulation period.In this example we start in 1985, and end in 2011
+times &lt;- list(start = 1985, end = 2011)
 
+# This is our setupProject call. This creates the model's folder structure, downloads modules, installs and loads needed packages, and sets options.
 out &lt;- SpaDES.project::setupProject(
   Restart = TRUE,
   useGit = "PredictiveEcology", # a developer sets and keeps this = TRUE
@@ -352,7 +354,7 @@ out &lt;- SpaDES.project::setupProject(
 
 )
 
-# Run
+# Run simulation
 simPython &lt;- SpaDES.core::simInitAndSpades2(out)</code></pre>
 
 </div>
