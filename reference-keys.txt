@@ -1,16 +1,5 @@
-usage
-the-carbon-budget-model-in-spades
-input-requirements
-pools
-order-of-operations
-the-spinup-function
-setup
 google-account-needed-for-this-example
 python-is-required-for-this-example
-run-example-simulation
-basic-spades-concepts
-spadescbm-terms
-notable-functions-and-usage
 cbm_defaults
 overview-1
 background
