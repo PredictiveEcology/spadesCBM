@@ -76,9 +76,9 @@ jobs:
           options("SpaDES.project.Restart" = FALSE)
 
           # Run examples
-          exampleScripts <- list.files("examples", pattern = "^SK[_-]+", full.names = TRUE)
+          exampleScripts <- list.files(file.path(getwd(), "examples"), pattern = "^SK[_-]+", full.names = TRUE)
           for (exampleScript in exampleScripts){
-            cat("\nRun example:", exampleScript, "\n")
+            cat("\nRun example:", exampleScript, "\n\n")
             source(exampleScript)
           }
 
