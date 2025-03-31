@@ -13,7 +13,7 @@
   simSetup <- SpaDES.project::setupProject(
 
     # Open RStudio project
-    Restart = TRUE,
+    Restart = getOption("SpaDES.project.Restart", TRUE),
 
     # Set project paths
     paths   = list(

@@ -72,6 +72,9 @@ jobs:
           # Authorize Google Drive
           googledrive::drive_auth(path = Sys.getenv("GOOGLE_AUTH"))
 
+          # Do not restart RStudio
+          options("SpaDES.project.Restart" = FALSE)
+
           # Run examples
           examples <- list.files("examples", pattern = "^SK[_-]+", full.names = TRUE)
           lapply(examples, source)
