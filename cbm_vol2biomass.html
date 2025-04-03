@@ -42,9 +42,9 @@
     }
   </style>
 <link rel="stylesheet" href="css/style.css">
-<meta name="description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any regarding this module, contact us here.  3.1 Overview This module...">
-<meta property="og:description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any regarding this module, contact us here.  3.1 Overview This module...">
-<meta name="twitter:description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any regarding this module, contact us here.  3.1 Overview This module...">
+<meta name="description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, please contact us here.  3.1 Overview The main change agent in CBM is...">
+<meta property="og:description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, please contact us here.  3.1 Overview The main change agent in CBM is...">
+<meta name="twitter:description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, please contact us here.  3.1 Overview The main change agent in CBM is...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -87,21 +87,57 @@
 <span class="header-section-number">3</span> CBM_vol2biomass<a class="anchor" aria-label="anchor" href="#cbm_vol2biomass"><i class="fas fa-link"></i></a>
 </h1>
 <div class="rmdimportant">
-<p>This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any regarding this module, contact us <a href="%22https://github.com/PredictiveEcology/CBM_vol2biomass/issues%22">here</a>.</p>
+<p>This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, please contact us <a href="%22https://github.com/PredictiveEcology/CBM_vol2biomass/issues%22">here</a>.</p>
 </div>
 <div id="overview-3" class="section level2" number="3.1">
 <h2>
 <span class="header-section-number">3.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview-3"><i class="fas fa-link"></i></a>
 </h2>
-<p>This module translates the stand-level <span class="math inline">\(m^3/ha\)</span> values the user provides into the <span class="math inline">\(tonnes of biomass/ha\)</span> increments that <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> needs to simulate annual carbon fluxes and estimate stocks in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulations. This is an implementation of the <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span> stand-level translation. These script are similar to the translation procedure in <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">CBM</a> with the addition of
-a smoothing algorithm to fill-in the gap between age 0 and the age at which growth curves have data. Like many statistical models, this translation is not always successful. The user is advised to review the resulting biomass increments as this are the only representation of vegetation dynamics in the <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">CBM</a>.</p>
-<p>This module can be run independently of the <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">deck</a>. It relies on multiple <a href="https://github.com/PredictiveEcology/CBMutils/tree/development"><code>CBMutils</code></a> functions.</p>
+<p>The main change agent in <a href="https://natural-resources.canada.ca/climate-change/climate-change-impacts-forests/carbon-accounting/carbon-budget-model/13107">CBM</a> is forest growth. The models needs increments of carbon for its three above ground carbon pools, <code>Merch</code> for stem wood carbon of merchantable-sized trees, <code>Foliage</code> for foliage-carbon, and <code>Other</code> which combines bark, branches and the stem wood carbon of live, nonmerchantable-sized trees. This module translates stand-level volume <span class="math inline">\(m^3/ha\)</span> values the user provides into the tonnes of carbon/ha increments that <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> needs to simulate annual carbon fluxes and estimate stocks in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulations. This is an implementation of the <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span> stand-level volume to biomass translation. Other <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">CBM</a> implementation use the same approach, but we added a smoothing algorithm to fill-in the gap between age 0 and the age at which growth curves have data.</p>
+<p>Like many statistical models, this translation is not always successful. The user is advised to review the resulting biomass increments as this are the only representation of vegetation dynamics in the <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">CBM</a> and <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a></p>
+<p>This module can be run independently of the <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">deck</a>. It relies on multiple <a href="https://github.com/PredictiveEcology/CBMutils/tree/development"><code>CBMutils</code></a> functions described in the <a href="Camille:%20add%20link%20to%20the%20CBMutils%20chapter">CBMutils</a>. We describe how these functions relate to the <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span> equations, and also describe our smoothing algorithm below.</p>
 </div>
-<div id="inputs-2" class="section level2" number="3.2">
+<div id="background-2" class="section level2" number="3.2">
 <h2>
-<span class="header-section-number">3.2</span> Inputs<a class="anchor" aria-label="anchor" href="#inputs-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.2</span> Background<a class="anchor" aria-label="anchor" href="#background-2"><i class="fas fa-link"></i></a>
 </h2>
-<p>Two main pieces of information are needed to translate stand-level growth curves into stand-level biomass (in tonnes of biomass/ha) using the <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span> approach: the curves themselves (specifying a leading species) and the location where these curves will be applied (specifically, i.e., which pixel, and generally, which <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">spatial unit</a> and <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">ecozone</a>). The object <code>UserGCM3</code> is how the user provides the stand-level <span class="math inline">\(m^3/ha\)</span>, <code>gcMeta</code>links the growth curve to the leading species, the objects <code>level3DT</code>, <code>ecozones</code>, and <code>spatialUnits</code>provide location information. Table 1 lists the inputs to this module. Tables 3 through 7 are the <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span> parameters which are hosted on the National Forest Information System website.</p>
+<p>The module uses the subset of <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span> empirical models that calculate volume-to-biomass conversion models for forested (treed) land. These were developed from plot data supplied from forest inventory agencies throughout Canada. Figure 3.1 (Figure 3 in <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span>) outline the model development procedure (upper) and the calculation workflow (lower). We matched our calculation and functions to the <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span> calculation workflow.</p>
+<p><strong>Camille: insert figure 3 from boudewyn here</strong></p>
+<p>In this module, once we have all required information assembled for our study area, we process the information by species, as the <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span> parameters are leading species-specific ([CBMutils::cumPoolsCreate()][<code>CBMutils</code>](<a href="https://github.com/PredictiveEcology/CBMutils/tree/development" class="uri">https://github.com/PredictiveEcology/CBMutils/tree/development</a>)), and for each species, we processes each growth curve one at a time (using [CBMutils::convertM3biom()][<code>CBMutils</code>](<a href="https://github.com/PredictiveEcology/CBMutils/tree/development" class="uri">https://github.com/PredictiveEcology/CBMutils/tree/development</a>)). Values of merchantable volume at each age and <span class="citation">(<a href="#ref-boudewyn"><strong>boudewyn?</strong></a>)</span> parameters available on the <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">NFIS</a>, are used in Equation 1 (matches Eq. 1 in Figure 1) to get <em>b_m</em>, total stem wood biomass of merchantable-sized live trees (biomass includes stumps and tops), in metric tonnes per ha ([CBMutils::b_m()][<code>CBMutils</code>](<a href="https://github.com/PredictiveEcology/CBMutils/tree/development" class="uri">https://github.com/PredictiveEcology/CBMutils/tree/development</a>) used in [CBMutils::convertM3biom()][<code>CBMutils</code>](<a href="https://github.com/PredictiveEcology/CBMutils/tree/development" class="uri">https://github.com/PredictiveEcology/CBMutils/tree/development</a>)).</p>
+<p><strong>Equation 1.</strong> <em>b_m = a X</em> <span class="math inline">\(volume^b\)</span>
+Where
+- volume = gross merchantable volume/ha (net in B.C.) of all live trees (volume does not include stumps, tops, or trees&lt; merchantable DBH), in m3/ha.
+- a,b = non-linear model parameters fit separately by jurisdiction, ecozone, and lead tree species (Table 3 in <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span>).</p>
+<p>The stem wood content of smaller trees in tonnes/ha (<em>b_n</em>) are calculated via Equation 2 ([CBMutils::nmfac()][<code>CBMutils</code>](<a href="https://github.com/PredictiveEcology/CBMutils/tree/development" class="uri">https://github.com/PredictiveEcology/CBMutils/tree/development</a>) used in [CBMutils::convertM3biom()][<code>CBMutils</code>](<a href="https://github.com/PredictiveEcology/CBMutils/tree/development" class="uri">https://github.com/PredictiveEcology/CBMutils/tree/development</a>) matches Eq. 2 in Figure 1).</p>
+<p><strong>Equation 2.</strong> <em>nonmerchfactor = k + a X b_</em><span class="math inline">\(m^b\)</span>
+Where
+- <em>nonmerchfactor = b_nm/b_m</em>
+- <em>b_nm = b_m + b_n</em>
+- <em>k</em>, <em>a</em>, and <em>b</em> are model parameters fit separately by jurisdiction, ecozone, and lead tree species (Table 4 in <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span>).</p>
+<p>The stem wood biomass of live, sapling-sized trees in tonnes/ha (<em>b_s</em>) is extracted from Equation 3 ([CBMutils::sapfac()][<code>CBMutils</code>](<a href="https://github.com/PredictiveEcology/CBMutils/tree/development" class="uri">https://github.com/PredictiveEcology/CBMutils/tree/development</a>) used in [CBMutils::convertM3biom()][<code>CBMutils</code>](<a href="https://github.com/PredictiveEcology/CBMutils/tree/development" class="uri">https://github.com/PredictiveEcology/CBMutils/tree/development</a>) matches Eq. 3 in Figure 1).</p>
+<p><strong>Equation 3.</strong> <em>saplingfactor = k + a X b_</em><span class="math inline">\(m^b\)</span>
+Where
+- <em>saplingfactor = b_snm/b_nm</em>
+- <em>b_snm = b_nm + b_s</em>
+- <em>k</em>, <em>a</em>, and <em>b</em> are model parameters fit separately by jurisdiction, ecozone, and lead tree species (Table 5 in <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span>). Note that sparse data resulted in incomplete coverage of managed forests of Canada. Module users have to decide on parameter selection appropriate for their study area, as we do in our <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> example.</p>
+<p>Proportions of total tree biomass in stem wood, stem bark, branches and foliage for live trees of all sizes are calculated with Equations 4, 5, 6, and 7 respectively ([CBMutils::biomProp()][<code>CBMutils</code>](<a href="https://github.com/PredictiveEcology/CBMutils/tree/development" class="uri">https://github.com/PredictiveEcology/CBMutils/tree/development</a>) returns a vector of proportion that matches Eq. 4, 5, 6 and 7 in Figure 1 and is used in [CBMutils::convertM3biom()][<code>CBMutils</code>](<a href="https://github.com/PredictiveEcology/CBMutils/tree/development" class="uri">https://github.com/PredictiveEcology/CBMutils/tree/development</a>)).</p>
+<p><strong>Equation 4.</strong> <span class="math inline">\(P_(stemwood)\)</span> <em>= 1/(1 +</em> <span class="math inline">\(e^(a1+a2xvol+a3xlvol)\)</span> <em>+</em> <span class="math inline">\(e^(b1+b2xvol+b3xlvol)\)</span> <em>+</em> <span class="math inline">\(e^(c1+c2xvol+c3xlvol)\)</span> <em>)</em>
+<strong>Equation 5.</strong> <span class="math inline">\(P_(bark)\)</span> <em>= 1/(1 +</em> <span class="math inline">\(e^(a1+a2xvol+a3xlvol)\)</span> <em>+</em> <span class="math inline">\(e^(b1+b2xvol+b3xlvol)\)</span> <em>+</em> <span class="math inline">\(e^(c1+c2xvol+c3xlvol)\)</span> <em>)</em>
+<strong>Equation 6.</strong> <span class="math inline">\(P_(branches)\)</span> <em>= 1/(1 +</em> <span class="math inline">\(e^(a1+a2xvol+a3xlvol)\)</span> <em>+</em> <span class="math inline">\(e^(b1+b2xvol+b3xlvol)\)</span> <em>+</em> <span class="math inline">\(e^(c1+c2xvol+c3xlvol)\)</span> <em>)</em>
+<strong>Equation 7.</strong> <span class="math inline">\(P_(foliage)\)</span> <em>= 1/(1 +</em> <span class="math inline">\(e^(a1+a2xvol+a3xlvol)\)</span> <em>+</em> <span class="math inline">\(e^(b1+b2xvol+b3xlvol)\)</span> <em>+</em> <span class="math inline">\(e^(c1+c2xvol+c3xlvol)\)</span> <em>)</em></p>
+<p>Where
+- <em>vol</em> gross merchantable volume per ha (provided by the user)
+- <em>lvol</em> is the natural logarithm of (<em>vol</em> + 5)
+- <em>a1, a2, a3, b1, b2, b3, c1, c2, c3</em> are model parameters fit separately by jurisdiction, ecozone and lead tree species (Table 6 in <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span>).
+e.</p>
+<p>Our [CBMutils::biomProp()][<code>CBMutils</code>](<a href="https://github.com/PredictiveEcology/CBMutils/tree/development" class="uri">https://github.com/PredictiveEcology/CBMutils/tree/development</a>) function also implements the caps on proportion models (Table 7 in <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span>). Tonnes of biomass per hectare are converted to tonnes of carbon per hectare in our [CBMutils::cumPoolsCreate()][<code>CBMutils</code>](<a href="https://github.com/PredictiveEcology/CBMutils/tree/development" class="uri">https://github.com/PredictiveEcology/CBMutils/tree/development</a>) functions (this is currently a constant at 0.5 tonnes of carbon per tonnes of biomass but users can modify this value).</p>
+</div>
+<div id="inputs-2" class="section level2" number="3.3">
+<h2>
+<span class="header-section-number">3.3</span> Inputs<a class="anchor" aria-label="anchor" href="#inputs-2"><i class="fas fa-link"></i></a>
+</h2>
+<p>The pieces of information needed to apply the <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span> conversion models are growth curves, the leading species for that growth curve, and where on the landscape (which pixel) each growth curve applies to. The user provides the stand-level <span class="math inline">\(m^3/ha\)</span> via <code>userGCM3</code>. In this module, <code>gcMeta</code>links the growth curve to the leading species,
+and the objects <code>level3DT</code>, <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html"><code>ecozones</code></a>, and <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html"><code>spatialUnit</code></a> provide location information. Table 1 lists the inputs to this module. Tables 3 through 7 are the <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span> parameters which are hosted on the National Forest Information System website. We provide the <code>cbmAdmin</code> object to help user with the equivalence between provincial and territorial boudaries, Canadian ecozones (<strong>INSERT LINK AND REF HERE</strong>), and <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html"><code>spatialUnit</code></a></p>
 <div class="inline-table"><table style="width:100%;" class="table table-sm">
 <colgroup>
 <col width="16%">
@@ -185,14 +221,37 @@ a smoothing algorithm to fill-in the gap between age 0 and the age at which grow
 </tbody>
 </table></div>
 </div>
-<div id="module-functioning-2" class="section level2" number="3.3">
+<div id="module-functioning-2" class="section level2" number="3.4">
 <h2>
-<span class="header-section-number">3.3</span> Module functioning<a class="anchor" aria-label="anchor" href="#module-functioning-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.4</span> Module functioning<a class="anchor" aria-label="anchor" href="#module-functioning-2"><i class="fas fa-link"></i></a>
 </h2>
+<p>This module reads in the user userGcMeta, then reads in the userGcM3.
+It provides a plot of all the curves in userGcM3 for visual inspection (<code>sim$volCurves</code>).
+It then matches the jurisdiction with each gcId (growth curve identification), and matches the leading species attaching a canfi_species (number) and a genus to each leading species.
+canfi_species and genus are key to associating the correct parameters for conversion (Boudewyn et al. 2007).
+Once all the species matches are complete, a series of functions (see the package <code>CBMutils</code>) are used to go from the provided cumulative m3/ha for each curve into cumulative tonnes of carbon/ha for each above ground live biomass pool (merch, foliage, other).
+A visual check is provided via <code>sim$plotsRawCumulativeBiomass</code>.</p>
+<div id="smoothing-algorithm" class="section level3" number="3.4.1">
+<h3>
+<span class="header-section-number">3.4.1</span> Smoothing algorithm<a class="anchor" aria-label="anchor" href="#smoothing-algorithm"><i class="fas fa-link"></i></a>
+</h3>
+<p>Since most of the time these models need smoothing, two examples of smoothing, applied to the Saskatchewan default example, are provided by fitting GAMs to 1) each of the cumulative curve (per gcId) for each three pool, and 2) fitting GAMs to the increments between years for each of the three pools.
+Currently, example 1) is commented out, and example 2) is used to show that sometimes, even perfect-looking curves need hard fixes.
+In these examplee, the default knots for the GAMs are set at 20 (k=20) and extra weight is given to the 0 intercept and the maximum value of each curve by setting weights (wts in the script).
+See <a href="http://environmentalcomputing.net/intro-to-gams/" class="uri">http://environmentalcomputing.net/intro-to-gams/</a> for an guide to GAMs.
+Again, <strong>it is the user’s responsibility to decided if smoothing parameters and/or methods are appropriate</strong>.
+In the default example 1) (commented out), fitted values of the GAMs to the cumulative curves of carbon/ha are used to calculate annual increment, which are then dived by two for use in the spadesCBMcore.R module annual processing (half the growth is processes in two instances).
+Halved increments can be visually assessed using <code>sim$checkInc</code> and the halved increments themselves are save in the simList (<code>sim$growth_increments</code>).
+In example 2), currently executed for the default Saskatchewan example, the increments are calculated prior to fitting the GAMs.
+In a final step (both examples), the halved growth increment table if hashed for processing speed (<code>sim$gcHash</code>).
+This module uses an example from a region in Saskatchewan as a default simulation and can be modified to run independently (i.e., just for translation of m3 to above ground carbon in the three pools).</p>
+<p>The object cumPoolsRaw (line 411) in CBM_vol2biomass.R, is the cumulative values for each of the three above-ground live pools in tonnes of carbon/ha.
+All following values are in tonnes of c/ha.</p>
 </div>
-<div id="list-of-output-objects" class="section level2" number="3.4">
+</div>
+<div id="outputs-2" class="section level2" number="3.5">
 <h2>
-<span class="header-section-number">3.4</span> List of output objects<a class="anchor" aria-label="anchor" href="#list-of-output-objects"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.5</span> Outputs<a class="anchor" aria-label="anchor" href="#outputs-2"><i class="fas fa-link"></i></a>
 </h2>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
@@ -230,9 +289,9 @@ a smoothing algorithm to fill-in the gap between age 0 and the age at which grow
 </tbody>
 </table></div>
 </div>
-<div id="module-flow-rename-this-section-later" class="section level2" number="3.5">
+<div id="module-flow-rename-this-section-later" class="section level2" number="3.6">
 <h2>
-<span class="header-section-number">3.5</span> Module flow (rename this section later)<a class="anchor" aria-label="anchor" href="#module-flow-rename-this-section-later"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.6</span> Module flow (rename this section later)<a class="anchor" aria-label="anchor" href="#module-flow-rename-this-section-later"><i class="fas fa-link"></i></a>
 </h2>
 <p>Here how they relate:
 *<strong>INSERT a CARTOONY REPRESENTATION OF THE FUNCTIONS HIEARCHY</strong></p>
@@ -247,89 +306,10 @@ a smoothing algorithm to fill-in the gap between age 0 and the age at which grow
 <li><a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a></li>
 <li><a href="https://github.com/PredictiveEcology/CBM_core">CBM_core</a></li>
 </ul>
-<div id="user-input" class="section level3" number="3.5.1">
-<h3>
-<span class="header-section-number">3.5.1</span> User input<a class="anchor" aria-label="anchor" href="#user-input"><i class="fas fa-link"></i></a>
-</h3>
-<p>The user must provide two files for the growth information and one location file.
-Note that these can be provided in the spadesCBMinputs module if the spadesCBM deck is used: * one metadata file (userGcMeta) that has at a minimum an identifier that links each specific growth curve to a pixel on the study area raster (gcId - growth curve identification number) and the leading species for that curve.
-* one file that gives the m3 per ha by age for each of the identified growth curves.
-* a location information file.
-This information is preferably passed along as a raster from the spadesCBMinputs module, but that can be by-passed by providing a vector of the ecozones and spatial units the growth curves apply to.
-The information is used to identify the jurisdiction (province or territory) and the ecozone each gcId is in, which in turn are used to determine the appropriate parameters for the stand-level conversion from m3/ha to biomass per ha in the Boudewyn et al. approach.</p>
 </div>
-<div id="default-files-provided" class="section level3" number="3.5.2">
-<h3>
-<span class="header-section-number">3.5.2</span> Default files provided<a class="anchor" aria-label="anchor" href="#default-files-provided"><i class="fas fa-link"></i></a>
-</h3>
-<p>Two types of information are built in to this module: Boudewyn et al. parameters tables, and data frames to help link CBM-specific information and parameter categories.
-* URLs to the Boudewyn et al. five parameter tables are built into this module (see .inputObjects) and will be loaded from the NFIS site directly.
-* the cbmAdmin data frame links CBM-specific spatial units to administrative boundaries in Canada and ecozones.
-* the canfi_species data frame provides the canfi_species numbers and genus abbreviations used to identify the correct parameters in Boudewyn et al tables.
-This also specifies a name for each tree species and the forest_type_id, which is an identifier used in CBM.</p>
-</div>
-<div id="pseudocode-the-general-steps" class="section level3" number="3.5.3">
-<h3>
-<span class="header-section-number">3.5.3</span> Pseudocode: the general steps<a class="anchor" aria-label="anchor" href="#pseudocode-the-general-steps"><i class="fas fa-link"></i></a>
-</h3>
-<p>This module reads in the user userGcMeta, then reads in the userGcM3.
-It provides a plot of all the curves in userGcM3 for visual inspection (<code>sim$volCurves</code>).
-It then matches the jurisdiction with each gcId (growth curve identification), and matches the leading species attaching a canfi_species (number) and a genus to each leading species.
-canfi_species and genus are key to associating the correct parameters for conversion (Boudewyn et al. 2007).
-Once all the species matches are complete, a series of functions (see the package <code>CBMutils</code>) are used to go from the provided cumulative m3/ha for each curve into cumulative tonnes of carbon/ha for each above ground live biomass pool (merch, foliage, other).
-A visual check is provided via <code>sim$plotsRawCumulativeBiomass</code>.
-Since most of the time these models need smoothing, two examples of smoothing, applied to the Saskatchewan default example, are provided by fitting GAMs to 1) each of the cumulative curve (per gcId) for each three pool, and 2) fitting GAMs to the increments between years for each of the three pools.
-Currently, example 1) is commented out, and example 2) is used to show that sometimes, even perfect-looking curves need hard fixes.
-In these examplee, the default knots for the GAMs are set at 20 (k=20) and extra weight is given to the 0 intercept and the maximum value of each curve by setting weights (wts in the script).
-See <a href="http://environmentalcomputing.net/intro-to-gams/" class="uri">http://environmentalcomputing.net/intro-to-gams/</a> for an guide to GAMs.
-Again, <strong>it is the user’s responsibility to decided if smoothing parameters and/or methods are appropriate</strong>.
-In the default example 1) (commented out), fitted values of the GAMs to the cumulative curves of carbon/ha are used to calculate annual increment, which are then dived by two for use in the spadesCBMcore.R module annual processing (half the growth is processes in two instances).
-Halved increments can be visually assessed using <code>sim$checkInc</code> and the halved increments themselves are save in the simList (<code>sim$growth_increments</code>).
-In example 2), currently executed for the default Saskatchewan example, the increments are calculated prior to fitting the GAMs.
-In a final step (both examples), the halved growth increment table if hashed for processing speed (<code>sim$gcHash</code>).
-This module uses an example from a region in Saskatchewan as a default simulation and can be modified to run independently (i.e., just for translation of m3 to above ground carbon in the three pools).</p>
-</div>
-<div id="units" class="section level3" number="3.5.4">
-<h3>
-<span class="header-section-number">3.5.4</span> Units<a class="anchor" aria-label="anchor" href="#units"><i class="fas fa-link"></i></a>
-</h3>
-<p>The user provides growth curves of cumulative m3/ha over time for one leading species (following CBM-CFS3).
-Those curves are fed into the Boudewyn algorithms (CBM_vol2biomass module) with its results multiplied by 0.5 to give carbon/ha.
-This deck of modules simulates on an annual basis and it is preferable that the cumulative curves of m3/ha be provided over individual years.
-If these are not per individual years, the GAM fitted values should be modified to provide yearly fitted.values.
-The object cumPoolsRaw (line 411) in CBM_vol2biomass.R, is the cumulative values for each of the three above-ground live pools in tonnes of carbon/ha.
-All following values are in tonnes of c/ha.</p>
-</div>
-<div id="output" class="section level3" number="3.5.5">
-<h3>
-<span class="header-section-number">3.5.5</span> Output<a class="anchor" aria-label="anchor" href="#output"><i class="fas fa-link"></i></a>
-</h3>
-<p>This module provides the <code>sim$growth_increments</code> and its hashed version, <code>sim$gcHash</code> available for the spadesCBMcore module.
-All other output created by this module is for visual checks of the growth curve themselves and their processing.</p>
-</div>
-<div id="spades" class="section level3" number="3.5.6">
-<h3>
-<span class="header-section-number">3.5.6</span> SpaDES<a class="anchor" aria-label="anchor" href="#spades"><i class="fas fa-link"></i></a>
-</h3>
-<p>There is only one event in this module (init), and this module is only scheduled once.
-This module is designed to be part of SpaDES-deck spadesCBM, SpaDES modules representing CBM-CFS3, but transparent and spatialized.
-There are four modules in this family: spadesCBMdefaults, spadesSBMinputs, CBM_vol2biomass, and spadesCBMcore.</p>
-</div>
-<div id="list-of-potential-improvements" class="section level3" number="3.5.7">
-<h3>
-<span class="header-section-number">3.5.7</span> list of potential improvements<a class="anchor" aria-label="anchor" href="#list-of-potential-improvements"><i class="fas fa-link"></i></a>
-</h3>
-<ul>
-<li>add a check to see if the growth curves provided are on an annual basis and if not, modify the GAM outputs to provided and annual fitted value.</li>
-<li>make k (knots in the GAMs) a user defined parameter</li>
-<li>provide an option to fit a GAM prior to the maximum value of each curve (from 0 to max) with its own number of knots (k) and one for after the maximum value with possibly few knots.</li>
-<li>same as previous but for the weights going into the GAMs.</li>
-</ul>
-</div>
-</div>
-<div id="usage-2" class="section level2" number="3.6">
+<div id="usage-2" class="section level2" number="3.7">
 <h2>
-<span class="header-section-number">3.6</span> Usage<a class="anchor" aria-label="anchor" href="#usage-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.7</span> Usage<a class="anchor" aria-label="anchor" href="#usage-2"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://spades.predictiveecology.org">SpaDES</a></span><span class="op">)</span></span>
@@ -383,21 +363,14 @@ There are four modules in this family: spadesCBMdefaults, spadesSBMinputs, CBM_v
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#cbm_vol2biomass"><span class="header-section-number">3</span> CBM_vol2biomass</a></li>
 <li><a class="nav-link" href="#overview-3"><span class="header-section-number">3.1</span> Overview</a></li>
-<li><a class="nav-link" href="#inputs-2"><span class="header-section-number">3.2</span> Inputs</a></li>
-<li><a class="nav-link" href="#module-functioning-2"><span class="header-section-number">3.3</span> Module functioning</a></li>
-<li><a class="nav-link" href="#list-of-output-objects"><span class="header-section-number">3.4</span> List of output objects</a></li>
+<li><a class="nav-link" href="#background-2"><span class="header-section-number">3.2</span> Background</a></li>
+<li><a class="nav-link" href="#inputs-2"><span class="header-section-number">3.3</span> Inputs</a></li>
 <li>
-<a class="nav-link" href="#module-flow-rename-this-section-later"><span class="header-section-number">3.5</span> Module flow (rename this section later)</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#user-input"><span class="header-section-number">3.5.1</span> User input</a></li>
-<li><a class="nav-link" href="#default-files-provided"><span class="header-section-number">3.5.2</span> Default files provided</a></li>
-<li><a class="nav-link" href="#pseudocode-the-general-steps"><span class="header-section-number">3.5.3</span> Pseudocode: the general steps</a></li>
-<li><a class="nav-link" href="#units"><span class="header-section-number">3.5.4</span> Units</a></li>
-<li><a class="nav-link" href="#output"><span class="header-section-number">3.5.5</span> Output</a></li>
-<li><a class="nav-link" href="#spades"><span class="header-section-number">3.5.6</span> SpaDES</a></li>
-<li><a class="nav-link" href="#list-of-potential-improvements"><span class="header-section-number">3.5.7</span> list of potential improvements</a></li>
-</ul>
+<a class="nav-link" href="#module-functioning-2"><span class="header-section-number">3.4</span> Module functioning</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#smoothing-algorithm"><span class="header-section-number">3.4.1</span> Smoothing algorithm</a></li></ul>
 </li>
-<li><a class="nav-link" href="#usage-2"><span class="header-section-number">3.6</span> Usage</a></li>
+<li><a class="nav-link" href="#outputs-2"><span class="header-section-number">3.5</span> Outputs</a></li>
+<li><a class="nav-link" href="#module-flow-rename-this-section-later"><span class="header-section-number">3.6</span> Module flow (rename this section later)</a></li>
+<li><a class="nav-link" href="#usage-2"><span class="header-section-number">3.7</span> Usage</a></li>
 </ul>
 
       <div class="book-extra">

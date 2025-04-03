@@ -101,9 +101,9 @@
 <p>The SQligth (used in CBM_defaults) has has a column named <code>forest_type_id</code> that identifies a softwood forest (sw) as 1, a mixed forest as 2, and a hardwood forest (hw) as 3. This distinction is important because it determines how the root biomass will be calculated (sw differently than hw). The definition of <code>fotrest_type_id</code> is constant and is the same that is used in <code>canfi_species.csv</code> (species level identification of codes that is needed in the volumne to biomass translation in CBM_vol2biomass), in <code>gcMeta.csv</code> (SK specific growth curve metadata), and in <code>sim$growth_increments</code> because it built from <code>gcMeta</code> and <code>canfi_species</code>. The <code>sim$growth_increment$forest_type_id</code> is the one used to create the sw flag needed for input in the spinup event. After that, the sw_hw flag (1=sw, 0=hw) is stored in the <code>sim$cbm_vars$state$sw_hw</code> column.</p>
 </div>
 </div>
-<div id="background-2" class="section level2" number="4.2">
+<div id="background-3" class="section level2" number="4.2">
 <h2>
-<span class="header-section-number">4.2</span> Background<a class="anchor" aria-label="anchor" href="#background-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2</span> Background<a class="anchor" aria-label="anchor" href="#background-3"><i class="fas fa-link"></i></a>
 </h2>
 </div>
 <div id="inputs-3" class="section level2" number="4.3">
@@ -212,9 +212,9 @@
 <span class="header-section-number">4.4</span> Module functioning<a class="anchor" aria-label="anchor" href="#module-functioning-3"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="outputs-2" class="section level2" number="4.5">
+<div id="outputs-3" class="section level2" number="4.5">
 <h2>
-<span class="header-section-number">4.5</span> Outputs<a class="anchor" aria-label="anchor" href="#outputs-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.5</span> Outputs<a class="anchor" aria-label="anchor" href="#outputs-3"><i class="fas fa-link"></i></a>
 </h2>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
@@ -292,10 +292,10 @@
 <li>
 <a class="nav-link" href="#overview-4"><span class="header-section-number">4.1</span> Overview</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#notes-on-forest-type"><span class="header-section-number">4.1.1</span> Notes on forest type</a></li></ul>
 </li>
-<li><a class="nav-link" href="#background-2"><span class="header-section-number">4.2</span> Background</a></li>
+<li><a class="nav-link" href="#background-3"><span class="header-section-number">4.2</span> Background</a></li>
 <li><a class="nav-link" href="#inputs-3"><span class="header-section-number">4.3</span> Inputs</a></li>
 <li><a class="nav-link" href="#module-functioning-3"><span class="header-section-number">4.4</span> Module functioning</a></li>
-<li><a class="nav-link" href="#outputs-2"><span class="header-section-number">4.5</span> Outputs</a></li>
+<li><a class="nav-link" href="#outputs-3"><span class="header-section-number">4.5</span> Outputs</a></li>
 <li><a class="nav-link" href="#links-to-other-modules-2"><span class="header-section-number">4.6</span> Links to other modules</a></li>
 </ul>
 
