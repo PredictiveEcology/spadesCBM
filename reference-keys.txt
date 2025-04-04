@@ -22,9 +22,11 @@ overview-3
 background-2
 inputs-2
 module-functioning-2
+input-check
+choosing-parameters
+from-m3-to-carbon
 smoothing-algorithm
 outputs-2
-module-flow-rename-this-section-later
 usage-2
 cbm_core
 overview-4
