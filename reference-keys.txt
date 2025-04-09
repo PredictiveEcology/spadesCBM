@@ -31,7 +31,6 @@ usage-2
 links-to-other-modules-2
 cbm_core
 overview-4
-notes-on-forest-type
 background-3
 inputs-3
 module-functioning-3

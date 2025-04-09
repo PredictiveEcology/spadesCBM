@@ -42,9 +42,9 @@
     }
   </style>
 <link rel="stylesheet" href="css/style.css">
-<meta name="description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any regarding this module, contact us here.  4.1 Overview This is the core...">
-<meta property="og:description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any regarding this module, contact us here.  4.1 Overview This is the core...">
-<meta name="twitter:description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any regarding this module, contact us here.  4.1 Overview This is the core...">
+<meta name="description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, please contact us here.  4.1 Overview CBM_core is the central module of...">
+<meta property="og:description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, please contact us here.  4.1 Overview CBM_core is the central module of...">
+<meta name="twitter:description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, please contact us here.  4.1 Overview CBM_core is the central module of...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -87,24 +87,19 @@
 <span class="header-section-number">4</span> CBM_core<a class="anchor" aria-label="anchor" href="#cbm_core"><i class="fas fa-link"></i></a>
 </h1>
 <div class="rmdimportant">
-<p>This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any regarding this module, contact us <a href="%22https://github.com/PredictiveEcology/CBM_core/issues%22">here</a>.</p>
+<p>This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, please contact us <a href="%22https://github.com/PredictiveEcology/CBM_core/issues%22">here</a>.</p>
 </div>
 <div id="overview-4" class="section level2" number="4.1">
 <h2>
 <span class="header-section-number">4.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview-4"><i class="fas fa-link"></i></a>
 </h2>
-<p>This is the core modules of Spades CBM.</p>
-<div id="notes-on-forest-type" class="section level3" number="4.1.1">
-<h3>
-<span class="header-section-number">4.1.1</span> Notes on forest type<a class="anchor" aria-label="anchor" href="#notes-on-forest-type"><i class="fas fa-link"></i></a>
-</h3>
-<p>The SQligth (used in CBM_defaults) has has a column named <code>forest_type_id</code> that identifies a softwood forest (sw) as 1, a mixed forest as 2, and a hardwood forest (hw) as 3. This distinction is important because it determines how the root biomass will be calculated (sw differently than hw). The definition of <code>fotrest_type_id</code> is constant and is the same that is used in <code>canfi_species.csv</code> (species level identification of codes that is needed in the volumne to biomass translation in CBM_vol2biomass), in <code>gcMeta.csv</code> (SK specific growth curve metadata), and in <code>sim$growth_increments</code> because it built from <code>gcMeta</code> and <code>canfi_species</code>. The <code>sim$growth_increment$forest_type_id</code> is the one used to create the sw flag needed for input in the spinup event. After that, the sw_hw flag (1=sw, 0=hw) is stored in the <code>sim$cbm_vars$state$sw_hw</code> column.</p>
-</div>
+<p><a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> is the central module of <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>. This is where all the carbon transfers are calculated at every time step, where disturbances are applied, and stocks are tracked. It doesn’t run on its own, it needs parameters from either <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a>, <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, and <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> or the equivalent information from the user. In <em>SpaDES-speak</em>, this module has five events (<code>init</code>, <code>spinup</code>, <code>postspinup</code>, <code>annual</code>, <code>accumulateResults</code>). Only in two of these events do carbon transactions occur: <code>spinup</code> and <code>annual</code>. The other events are tools to enable these transactions. All events are scheduled only once except for the <code>annual</code> event, who schedules itself until the end of the simulation horizon. Only in this module are the Python functions from the <a href="https://github.com/cat-cfs/libcbm_py/tree/main">libcbm</a> package called. The functions used in this module are the <a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/model/cbm_exn">libcbm cbm-exn</a> exclusively, these were designed to accept external biomass increments.</p>
 </div>
 <div id="background-3" class="section level2" number="4.2">
 <h2>
 <span class="header-section-number">4.2</span> Background<a class="anchor" aria-label="anchor" href="#background-3"><i class="fas fa-link"></i></a>
 </h2>
+<p>In <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>, the general approach described in our <a href="link%20to%20the%20overview%20section">Overview</a> section and in <span class="citation">Kurz <em>et al.</em> (<a href="references.html#ref-kurz2009">2009</a>)</span> is applied. There are 18 internal carbon pools in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> (see Table 1 in Overview) and one for the atmosphere. Disturbances are the first carbon transfer to be applied to each record. Half the annual increment is then added (transfer from the atmosphere to the three above ground biomass pools - <code>Merch</code>, <code>Foliage</code>, and <code>Other</code>). Disturbances are processes externally to <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>, in our example the are processes in <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>. Disturbance matrices specify the proportion of carbon in each pool to be transferred to other pools or to be taken out of the system (via forest products (pool named <code>Products</code>) or back to the atmosphere). The amount of carbon transferred from the atmosphere to the aboveground biomass pools is determined from the growth curves, which were translated from <span class="math inline">\(m^3/ha\)</span> to carbon increments in <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> and provided to <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>. Dead Organic Matter (<a href="link%20to%20lexicon">DOM</a>) turnover happens next and transfers carbon from the pools representing snags (stem snags and branches snags), to the MediumSoil, and AboveGroundFastSoil pools. Biomass turnover follows with transfers from the Merch, Foliage, Other, fine and coarse roots, to the pools representing the snags (both stem and branch snage), AboveGroundVeryFastSoil, BelowGroundFastSoil, AboveGroundVeryFastSoil and BelowGroundVeryFastSoil pools. The second half of the growth is then added to the three above ground biomass pools - <code>Merch</code>, <code>Foliage</code>, and `Other.</p>
 </div>
 <div id="inputs-3" class="section level2" number="4.3">
 <h2>
@@ -289,9 +284,7 @@
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#cbm_core"><span class="header-section-number">4</span> CBM_core</a></li>
-<li>
-<a class="nav-link" href="#overview-4"><span class="header-section-number">4.1</span> Overview</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#notes-on-forest-type"><span class="header-section-number">4.1.1</span> Notes on forest type</a></li></ul>
-</li>
+<li><a class="nav-link" href="#overview-4"><span class="header-section-number">4.1</span> Overview</a></li>
 <li><a class="nav-link" href="#background-3"><span class="header-section-number">4.2</span> Background</a></li>
 <li><a class="nav-link" href="#inputs-3"><span class="header-section-number">4.3</span> Inputs</a></li>
 <li><a class="nav-link" href="#module-functioning-3"><span class="header-section-number">4.4</span> Module functioning</a></li>
