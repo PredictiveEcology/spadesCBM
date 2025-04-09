@@ -137,22 +137,11 @@ and the objects <code>level3DT</code>, <a href="https://predictiveecology.github
 <td><a href="https://docs.google.com/spreadsheets/d/1LYnShgd0Q7idNNKX9hHYju4kMDwMSkW5/">Google Drive</a></td>
 </tr>
 <tr class="odd">
-<td>level3DT</td>
+<td>spatialDT</td>
 <td>Data table</td>
-<td>Table of pixelGroups to be simulated with meta data</td>
+<td>Summary table of raster input data with 1 row for each <code>masterRaster pixel</code> that is not <code>NA</code>
+</td>
 <td>CBM_dataPrep_SK</td>
-</tr>
-<tr class="even">
-<td>ecozones</td>
-<td>Data table</td>
-<td>Extracted ecozone IDs for each pixel group</td>
-<td>CBM_dataPrep_SK</td>
-</tr>
-<tr class="odd">
-<td>spatialUnits</td>
-<td>Data table</td>
-<td>Extracted spatial unit IDs for each pixel group</td>
-<td></td>
 </tr>
 <tr class="even">
 <td>table3</td>
@@ -300,7 +289,7 @@ and the objects <code>level3DT</code>, <a href="https://predictiveecology.github
 </tr>
 </tbody>
 </table></div>
-<p>In <code>table5</code> in the NFIS website, there are 5/13 possible jurisdiction id (<code>juris_id</code> column). These are the provinces available: AB BC NB NF NT. For the provinces that did nothave a match, we chose the following equivalence in our example:</p>
+<p>In <code>table5</code> in the NFIS website, there are 5/13 possible jurisdiction id (<code>juris_id</code> column). These are the provinces available: AB BC NB NL NT. For the provinces that did nothave a match, we chose the following equivalence in our example:</p>
 <div class="inline-table"><table class="table table-sm">
 <thead><tr class="header">
 <th>Province</th>
@@ -313,11 +302,11 @@ and the objects <code>level3DT</code>, <a href="https://predictiveecology.github
 </tr>
 <tr class="even">
 <td>QC</td>
-<td>NB</td>
+<td>NL</td>
 </tr>
 <tr class="odd">
 <td>ON</td>
-<td>NB</td>
+<td>NL</td>
 </tr>
 <tr class="even">
 <td>MB</td>
@@ -352,7 +341,7 @@ and the objects <code>level3DT</code>, <a href="https://predictiveecology.github
 Where
 - volume = gross merchantable volume/ha (net in B.C.) of all live trees (volume does not include stumps, tops, or trees&lt; merchantable DBH), in m3/ha.
 - a,b = non-linear model parameters fit separately by jurisdiction, ecozone, and lead tree species (Table 3 in <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span>).</p>
-<p>The stem wood content of smaller trees in tonnes/ha (<em>b_n</em>) are calculated via Equation 2 ([CBMutils::nmfac()][<code>CBMutils</code>](<a href="https://github.com/PredictiveEcology/CBMutils/tree/development" class="uri">https://github.com/PredictiveEcology/CBMutils/tree/development</a>) used in <a href="https://github.com/PredictiveEcology/CBMutils/blob/bd30825d38c1d8abe7d0d002d494745e19b42ec5/R/Boudewyn_growthCurves.R#L259"><code>CBMutils::convertM3biom()</code></a> matches Eq. 2 in Figure 1).</p>
+<p>The stem wood content of smaller trees in tonnes/ha (<em>b_n</em>) are calculated via Equation 2 (<a href="https://github.com/PredictiveEcology/CBMutils/blob/bd30825d38c1d8abe7d0d002d494745e19b42ec5/R/Boudewyn_growthCurves.R#L63"><code>CBMutils::nmfac()</code></a> used in <a href="https://github.com/PredictiveEcology/CBMutils/blob/bd30825d38c1d8abe7d0d002d494745e19b42ec5/R/Boudewyn_growthCurves.R#L259"><code>CBMutils::convertM3biom()</code></a> matches Eq. 2 in Figure 1).</p>
 <p><strong>Equation 2.</strong> <em>nonmerchfactor = k + a X b_</em><span class="math inline">\(m^b\)</span><br>
 Where
 - <em>nonmerchfactor = b_nm/b_m</em>
@@ -415,16 +404,11 @@ e.</p>
 </tr>
 <tr class="even">
 <td>volCurves</td>
-<td>gg (list?)</td>
-<td>Plots of al growth curves provided by the user</td>
+<td>Plot</td>
+<td>Plots of all growth curves provided by the user</td>
 </tr>
 </tbody>
 </table></div>
-<ul>
-<li><a href="https://github.com/PredictiveEcology/CBM_defaults">CBM_defaults</a></li>
-<li><a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a></li>
-<li><a href="https://github.com/PredictiveEcology/CBM_core">CBM_core</a></li>
-</ul>
 </div>
 <div id="usage-2" class="section level2" number="3.6">
 <h2>
@@ -459,7 +443,16 @@ e.</p>
 <span></span>
 <span><span class="co">#run</span></span>
 <span><span class="va">simBiomass</span> <span class="op">&lt;-</span> <span class="fu">simInitAndSpades2</span><span class="op">(</span><span class="va">out</span><span class="op">)</span></span></code></pre></div>
-
+</div>
+<div id="links-to-other-modules-2" class="section level2" number="3.7">
+<h2>
+<span class="header-section-number">3.7</span> Links to other modules<a class="anchor" aria-label="anchor" href="#links-to-other-modules-2"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li><a href="https://github.com/PredictiveEcology/CBM_defaults">CBM_defaults</a></li>
+<li><a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a></li>
+<li><a href="https://github.com/PredictiveEcology/CBM_core">CBM_core</a></li>
+</ul>
 </div>
 </div>
   <div class="chapter-nav">
@@ -482,6 +475,7 @@ e.</p>
 </li>
 <li><a class="nav-link" href="#outputs-2"><span class="header-section-number">3.5</span> Outputs</a></li>
 <li><a class="nav-link" href="#usage-2"><span class="header-section-number">3.6</span> Usage</a></li>
+<li><a class="nav-link" href="#links-to-other-modules-2"><span class="header-section-number">3.7</span> Links to other modules</a></li>
 </ul>
 
       <div class="book-extra">
