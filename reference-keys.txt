@@ -34,5 +34,9 @@ overview-4
 background-3
 inputs-3
 module-functioning-3
+events
+carbon-transfers
+parameters
+results
 outputs-3
 links-to-other-modules-3

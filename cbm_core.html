@@ -93,13 +93,13 @@
 <h2>
 <span class="header-section-number">4.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview-4"><i class="fas fa-link"></i></a>
 </h2>
-<p><a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> is the central module of <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>. This is where all the carbon transfers are calculated at every time step, where disturbances are applied, and stocks are tracked. It doesn’t run on its own, it needs parameters from either <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a>, <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, and <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> or the equivalent information from the user. In <em>SpaDES-speak</em>, this module has five events (<code>init</code>, <code>spinup</code>, <code>postspinup</code>, <code>annual</code>, <code>accumulateResults</code>). Only in two of these events do carbon transactions occur: <code>spinup</code> and <code>annual</code>. The other events are tools to enable these transactions. All events are scheduled only once except for the <code>annual</code> event, who schedules itself until the end of the simulation horizon. Only in this module are the Python functions from the <a href="https://github.com/cat-cfs/libcbm_py/tree/main">libcbm</a> package called. The functions used in this module are the <a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/model/cbm_exn">libcbm cbm-exn</a> exclusively, these were designed to accept external biomass increments.</p>
+<p><a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> is the central module of <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>. This is where all the carbon transfers are calculated at every time step, where disturbances are applied, and stocks are tracked. It doesn’t run on its own, it needs parameters from either <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a>, <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, and <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> (as per the provided example for managed forests of Saskatchewan) or the equivalent information from the user. In <em>SpaDES-speak</em>, this module has five events (<code>Init</code>, <code>spinup</code>, <code>postspinup</code>, <code>annual</code>, <code>accumulateResults</code>). Only in two of these events do carbon transactions occur: <code>spinup</code> and <code>annual</code>. The other events are tools to enable these transactions. All events are scheduled only once except for the <code>annual</code> event, who schedules itself until the end of the simulation horizon. Only in this module are the Python functions from the <a href="https://github.com/cat-cfs/libcbm_py/tree/main">libcbm</a> package called. The functions used in this module are the <a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/model/cbm_exn">libcbm cbm-exn</a> exclusively, these were designed to accept external biomass increments.</p>
 </div>
 <div id="background-3" class="section level2" number="4.2">
 <h2>
 <span class="header-section-number">4.2</span> Background<a class="anchor" aria-label="anchor" href="#background-3"><i class="fas fa-link"></i></a>
 </h2>
-<p>In <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>, the general approach described in our <a href="link%20to%20the%20overview%20section">Overview</a> section and in <span class="citation">Kurz <em>et al.</em> (<a href="references.html#ref-kurz2009">2009</a>)</span> is applied. There are 18 internal carbon pools in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> (see Table 1 in Overview) and one for the atmosphere. Disturbances are the first carbon transfer to be applied to each record. Half the annual increment is then added (transfer from the atmosphere to the three above ground biomass pools - <code>Merch</code>, <code>Foliage</code>, and <code>Other</code>). Disturbances are processes externally to <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>, in our example the are processes in <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>. Disturbance matrices specify the proportion of carbon in each pool to be transferred to other pools or to be taken out of the system (via forest products (pool named <code>Products</code>) or back to the atmosphere). The amount of carbon transferred from the atmosphere to the aboveground biomass pools is determined from the growth curves, which were translated from <span class="math inline">\(m^3/ha\)</span> to carbon increments in <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> and provided to <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>. Dead Organic Matter (<a href="link%20to%20lexicon">DOM</a>) turnover happens next and transfers carbon from the pools representing snags (stem snags and branches snags), to the MediumSoil, and AboveGroundFastSoil pools. Biomass turnover follows with transfers from the Merch, Foliage, Other, fine and coarse roots, to the pools representing the snags (both stem and branch snage), AboveGroundVeryFastSoil, BelowGroundFastSoil, AboveGroundVeryFastSoil and BelowGroundVeryFastSoil pools. The second half of the growth is then added to the three above ground biomass pools - <code>Merch</code>, <code>Foliage</code>, and `Other.</p>
+<p>In <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>, the general approach described in our <a href="link%20to%20the%20overview%20section">Overview</a> section and in <span class="citation">Kurz <em>et al.</em> (<a href="references.html#ref-kurz2009">2009</a>)</span> is applied.</p>
 </div>
 <div id="inputs-3" class="section level2" number="4.3">
 <h2>
@@ -206,6 +206,45 @@
 <h2>
 <span class="header-section-number">4.4</span> Module functioning<a class="anchor" aria-label="anchor" href="#module-functioning-3"><i class="fas fa-link"></i></a>
 </h2>
+<div id="events" class="section level3" number="4.4.1">
+<h3>
+<span class="header-section-number">4.4.1</span> Events<a class="anchor" aria-label="anchor" href="#events"><i class="fas fa-link"></i></a>
+</h3>
+<p>Describe events - what does init do
+what does spinup do</p>
+</div>
+<div id="carbon-transfers" class="section level3" number="4.4.2">
+<h3>
+<span class="header-section-number">4.4.2</span> Carbon Transfers<a class="anchor" aria-label="anchor" href="#carbon-transfers"><i class="fas fa-link"></i></a>
+</h3>
+<p>There are 18 internal carbon pools in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> (see Table 1 in Overview), one for the atmosphere and one for harvested wood exiting the system. Disturbances are the first carbon transfer to be applied to each record. Half the annual increment is then added (transfer from the atmosphere to the three above ground biomass pools - <code>Merch</code>, <code>Foliage</code>, and <code>Other</code>). Disturbances inputs are processes externally to <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>, in our example the are processes in <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, leaving <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> free of spatial data manipulations. Disturbance matrices specify the proportion of carbon in each pool to be transferred to other pools or to be taken out of the system (via forest products (pool named <code>Products</code>) or back to the atmosphere). Figure XX gives an example of transfers during a fire in SK.</p>
+<p><strong>INSERT VINI’S DIST MATRIX TRANSFER FIGURE</strong>.</p>
+<p>The amount of carbon transferred from the atmosphere to the above ground biomass pools is determined from the growth curves, which were translated from <span class="math inline">\(m^3/ha\)</span> to carbon increments in <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> and provided to <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> in carbon increments (tonnes of carbon/ha). Dead Organic Matter (<a href="link%20to%20lexicon">DOM</a>) turnover happens next and transfers carbon from the pools representing snags (stem snags and branches snags), to the <code>MediumSoil</code>, and <code>AboveGroundFastSoil</code> pools. Biomass turnover follows with transfers from the <code>Merch</code>, <code>Foliage</code>, <code>Other</code>, <code>FineRoots</code> and <code>CoarseRoots</code>, to the pools representing the snags (both stem and branch snags), <code>AboveGroundVeryFastSoil</code>, <code>BelowGroundFastSoil</code>, <code>AboveGroundVeryFastSoil</code> and <code>BelowGroundVeryFastSoil pools</code>. Carbon is never lost in the system, but increments are at times negative. To accommodate negative increment values, a carbon transfer labelled <code>overmature_decline</code>, moves carbon between the <code>Merch</code>, <code>Other</code>, <code>Foliage</code>, <code>CoarseRoots</code> and <code>FineRoots</code> to pools representing stem an branch snags, and the <code>AboveGroundFastSoil</code>, <code>AboveGroundVeryFastSoil</code>, <code>BelowGroundFastSoil</code>, and <code>BelowGroundVeryFastSoil</code> pools. The transfers are portioned in the same way as annual process turnover and the amount is equal to the loss of each individual biomass pool according to the negative increment. Following the <code>overmature_decline</code> transfers, the second half of the growth is added to the three above ground biomass pools - <code>Merch</code>, <code>Foliage</code>, and <code>Other</code>.
+omdecay
+Next, the transfers due to decay are</p>
+<p>D
+slowdecay slowmixing</p>
+</div>
+<div id="parameters" class="section level3" number="4.4.3">
+<h3>
+<span class="header-section-number">4.4.3</span> Parameters<a class="anchor" aria-label="anchor" href="#parameters"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="results" class="section level3" number="4.4.4">
+<h3>
+<span class="header-section-number">4.4.4</span> Results<a class="anchor" aria-label="anchor" href="#results"><i class="fas fa-link"></i></a>
+</h3>
+<p>NPP
+NPP is
+calculated as the sum of net growth (i.e. growth that results
+in positive increment) and growth that replaces material lost
+to biomass turnover during the year. In young, actively growing
+stands, a large proportion of NPP results in positive growth
+increment while in older, mature stands, a larger proportion
+of NPP is allocated to replacement of material lost to turnover.
+NPP is calculated in this manner because the CBM-CFS3 does
+not simulate photosynthesis and autotrophic respiration.</p>
+</div>
 </div>
 <div id="outputs-3" class="section level2" number="4.5">
 <h2>
@@ -287,7 +326,14 @@
 <li><a class="nav-link" href="#overview-4"><span class="header-section-number">4.1</span> Overview</a></li>
 <li><a class="nav-link" href="#background-3"><span class="header-section-number">4.2</span> Background</a></li>
 <li><a class="nav-link" href="#inputs-3"><span class="header-section-number">4.3</span> Inputs</a></li>
-<li><a class="nav-link" href="#module-functioning-3"><span class="header-section-number">4.4</span> Module functioning</a></li>
+<li>
+<a class="nav-link" href="#module-functioning-3"><span class="header-section-number">4.4</span> Module functioning</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#events"><span class="header-section-number">4.4.1</span> Events</a></li>
+<li><a class="nav-link" href="#carbon-transfers"><span class="header-section-number">4.4.2</span> Carbon Transfers</a></li>
+<li><a class="nav-link" href="#parameters"><span class="header-section-number">4.4.3</span> Parameters</a></li>
+<li><a class="nav-link" href="#results"><span class="header-section-number">4.4.4</span> Results</a></li>
+</ul>
+</li>
 <li><a class="nav-link" href="#outputs-3"><span class="header-section-number">4.5</span> Outputs</a></li>
 <li><a class="nav-link" href="#links-to-other-modules-3"><span class="header-section-number">4.6</span> Links to other modules</a></li>
 </ul>
