@@ -1,5 +1,10 @@
 google-account-needed-for-this-example
 python-is-required-for-this-example
+cbm-cfs3-vs-spadescbm
+spinup
+ecozone-vs-spatial-unit
+pixel-groups
+source_pool-and-sink_pool
 cbm_defaults
 overview-1
 background
@@ -13,7 +18,7 @@ overview-2
 background-1
 inputs-1
 module-functioning-1
-pixel-groups
+pixel-groups-1
 disturbances
 outputs-1
 links-to-other-modules-1

@@ -95,22 +95,22 @@ Using modules allows us to break up a model’s code into meaningful themes and/
 <h3>Modules<a class="anchor" aria-label="anchor" href="#modules"><i class="fas fa-link"></i></a>
 </h3>
 <p>In its simplest form, a SpaDES module is comprised of R code that has metadata that gets put into functions.</p>
-<div id="metadata" class="section level4 unnumbered">
-<h4>Metadata<a class="anchor" aria-label="anchor" href="#metadata"><i class="fas fa-link"></i></a>
-</h4>
+</div>
+<div id="metadata" class="section level3 unnumbered">
+<h3>Metadata<a class="anchor" aria-label="anchor" href="#metadata"><i class="fas fa-link"></i></a>
+</h3>
 <p>inputs and outputs are described in the metadata of the module.</p>
 </div>
-<div id="events" class="section level4 unnumbered">
-<h4>Events<a class="anchor" aria-label="anchor" href="#events"><i class="fas fa-link"></i></a>
-</h4>
+<div id="events" class="section level3 unnumbered">
+<h3>Events<a class="anchor" aria-label="anchor" href="#events"><i class="fas fa-link"></i></a>
+</h3>
 <p>The functions of the module can be further subdivided into events. These events are scheduled in the module to be run one or many times.</p>
 </div>
-<div id="inputobjects" class="section level4 unnumbered">
-<h4>
+<div id="inputobjects" class="section level3 unnumbered">
+<h3>
 <code>.inputObjects()</code><a class="anchor" aria-label="anchor" href="#inputobjects"><i class="fas fa-link"></i></a>
-</h4>
+</h3>
 <p>This function is found at the end of a module’s script. This is where default inputs are supplied. For most default inputs in spadesCBM, the module will check if a user has supplied their own input, and if not, will use the default described in the module’s <code>.inputObjects()</code> call.</p>
-</div>
 </div>
 <div id="simlist" class="section level3 unnumbered">
 <h3>Simlist<a class="anchor" aria-label="anchor" href="#simlist"><i class="fas fa-link"></i></a>
@@ -121,17 +121,15 @@ Using modules allows us to break up a model’s code into meaningful themes and/
 <div id="running-a-global-script" class="section level2 unnumbered">
 <h2>Running a global script<a class="anchor" aria-label="anchor" href="#running-a-global-script"><i class="fas fa-link"></i></a>
 </h2>
-<div id="setupproject" class="section level3 unnumbered">
-<h3>
-<code>setupProject()</code><a class="anchor" aria-label="anchor" href="#setupproject"><i class="fas fa-link"></i></a>
+<div id="the-setupproject-function" class="section level3 unnumbered">
+<h3>The <code>setupProject()</code> function<a class="anchor" aria-label="anchor" href="#the-setupproject-function"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>setupProject()</code> is a function in the <code>SpaDES.project</code> package. It allows the user to set a variety of options before running. When run, <code>setupProject</code> does a series of very specific things in a particular order to reduce the chances of package conflicts and user errors.
 In spadesCBM, we use our <code>setupProject()</code> call to select the modules to run and their respective GitHub branches, project paths, caching and saving options,our python options and download, and certain project specific input objects.
 to learn more about the <code>SpaDES.project</code> package and <code>setupProject()</code> you can view the training chapter <a href="https://predictiveecology.org/training/_book/workflowSimple2.html">here</a>.</p>
 </div>
-<div id="siminitandspades2" class="section level3 unnumbered">
-<h3>
-<code>simInitAndSpades2()</code><a class="anchor" aria-label="anchor" href="#siminitandspades2"><i class="fas fa-link"></i></a>
+<div id="the-siminitandspades2-function" class="section level3 unnumbered">
+<h3>The <code>simInitAndSpades2()</code> function<a class="anchor" aria-label="anchor" href="#the-siminitandspades2-function"><i class="fas fa-link"></i></a>
 </h3>
 <p>Once we have run our <code>setupProject()</code> call, we can run our model using <code>simInitAndSpades2()</code>. One of the outputs of this function is the simlist, allowing the user to view all outputs from their simulation.</p>
 </div>
@@ -145,13 +143,37 @@ to learn more about the <code>SpaDES.project</code> package and <code>setupProje
 <div id="spadescbm-terms" class="section level2 unnumbered">
 <h2>spadesCBM terms<a class="anchor" aria-label="anchor" href="#spadescbm-terms"><i class="fas fa-link"></i></a>
 </h2>
-<p>source_pool<br>
-sink_pool<br>
-CBM-CFS3 vs spadesCBM<br>
-pixelGroups<br>
-ecozone/spatial units<br>
-spinup</p>
+<div id="cbm-cfs3-vs-spadescbm" class="section level3" number="0.2.1">
+<h3>
+<span class="header-section-number">0.2.1</span> CBM-CFS3 vs spadesCBM<a class="anchor" aria-label="anchor" href="#cbm-cfs3-vs-spadescbm"><i class="fas fa-link"></i></a>
+</h3>
+</div>
+<div id="spinup" class="section level3" number="0.2.2">
+<h3>
+<span class="header-section-number">0.2.2</span> Spinup<a class="anchor" aria-label="anchor" href="#spinup"><i class="fas fa-link"></i></a>
+</h3>
+<p>A more in-depth explanation of the spinup function can be found <a href="https://predictiveecology.github.io/spadesCBM/index.html#the-spinup-function">here</a> and <a href="https://predictiveecology.github.io/spadesCBM/cbm_core.html#events-1">here (incomplete)</a>.</p>
+</div>
+<div id="ecozone-vs-spatial-unit" class="section level3" number="0.2.3">
+<h3>
+<span class="header-section-number">0.2.3</span> Ecozone vs spatial unit<a class="anchor" aria-label="anchor" href="#ecozone-vs-spatial-unit"><i class="fas fa-link"></i></a>
+</h3>
+<p>In Canada, there are 15 distinct terrestrial ecozones. spadesCBM uses this classification. These represent large ecosystems with specific climate and vegetation, regardless of jurisdiction.<br>
+Spatial units are more specific than ecozones, and correspond to the unique combination of jurisdiction (i.e. province or territory) and ecozone.</p>
+</div>
+<div id="pixel-groups" class="section level3" number="0.2.4">
+<h3>
+<span class="header-section-number">0.2.4</span> Pixel groups<a class="anchor" aria-label="anchor" href="#pixel-groups"><i class="fas fa-link"></i></a>
+</h3>
+<p>To simplify and optimize our simulations, we group individual pixels into <code>pixelGroups</code> in which each group corresponds to a unique set of age, growth curve, spatial unit, and ecozone.
+A more in-depth description of pixel groups in spadesCBM can be found here(this definition is currently in the dataPrep chapter, but will likely be moved into core, will link this once it is changed).</p>
+</div>
+<div id="source_pool-and-sink_pool" class="section level3" number="0.2.5">
+<h3>
+<span class="header-section-number">0.2.5</span> source_pool and sink_pool<a class="anchor" aria-label="anchor" href="#source_pool-and-sink_pool"><i class="fas fa-link"></i></a>
+</h3>
 
+</div>
 </div>
 </div>
   <div class="chapter-nav">
@@ -164,17 +186,28 @@ spinup</p>
 <li>
 <a class="nav-link" href="#basic-structure-of-a-spades-project">Basic structure of a SpaDES project</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#modules">Modules</a></li>
+<li><a class="nav-link" href="#metadata">Metadata</a></li>
+<li><a class="nav-link" href="#events">Events</a></li>
+<li><a class="nav-link" href="#inputobjects">.inputObjects()</a></li>
 <li><a class="nav-link" href="#simlist">Simlist</a></li>
 </ul>
 </li>
 <li>
 <a class="nav-link" href="#running-a-global-script">Running a global script</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#setupproject">setupProject()</a></li>
-<li><a class="nav-link" href="#siminitandspades2">simInitAndSpades2()</a></li>
+<li><a class="nav-link" href="#the-setupproject-function">The setupProject() function</a></li>
+<li><a class="nav-link" href="#the-siminitandspades2-function">The simInitAndSpades2() function</a></li>
 <li><a class="nav-link" href="#folder-structure-of-a-spades-module">Folder structure of a SpaDES module</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#spadescbm-terms">spadesCBM terms</a></li>
+<li>
+<a class="nav-link" href="#spadescbm-terms">spadesCBM terms</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#cbm-cfs3-vs-spadescbm"><span class="header-section-number">0.2.1</span> CBM-CFS3 vs spadesCBM</a></li>
+<li><a class="nav-link" href="#spinup"><span class="header-section-number">0.2.2</span> Spinup</a></li>
+<li><a class="nav-link" href="#ecozone-vs-spatial-unit"><span class="header-section-number">0.2.3</span> Ecozone vs spatial unit</a></li>
+<li><a class="nav-link" href="#pixel-groups"><span class="header-section-number">0.2.4</span> Pixel groups</a></li>
+<li><a class="nav-link" href="#source_pool-and-sink_pool"><span class="header-section-number">0.2.5</span> source_pool and sink_pool</a></li>
+</ul>
+</li>
 </ul>
 
       <div class="book-extra">

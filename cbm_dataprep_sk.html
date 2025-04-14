@@ -204,9 +204,9 @@
 <span class="header-section-number">2.4</span> Module functioning<a class="anchor" aria-label="anchor" href="#module-functioning-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>Two central pieces are processed in <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>: the pixelGroups are created and disturbances are matched with disturbance matrices.</p>
-<div id="pixel-groups" class="section level3" number="2.4.1">
+<div id="pixel-groups-1" class="section level3" number="2.4.1">
 <h3>
-<span class="header-section-number">2.4.1</span> Pixel Groups<a class="anchor" aria-label="anchor" href="#pixel-groups"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4.1</span> Pixel Groups<a class="anchor" aria-label="anchor" href="#pixel-groups-1"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="https://predictiveecology.github.io/spadesCBM/lexicon.html"><code>pixelGroup</code></a> are unique combinations of age, growth curve (which means species), <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">spatial unit</a> and <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">ecozone</a>. All pixels having identical age, growth curve, in the same spatial unit and ecozone share one <code>pixelGroup</code> number. The object <code>allPixelDT</code> has all the pixels in the <code>masterRaster</code>. The <code>spatialDT</code> object is the long-form where each simulated pixel has its own line (no NAs), and <code>level3DT</code> lists only the pixel groups. In our example there are 1 347 529 pixels simulated (i.e., 1 347 529 lines in <code>spatialDT</code>) which are grouped in 739 pixelGroups for processing (i.e., 739 lines in <code>level3DT</code>).</p>
 </div>
@@ -320,7 +320,7 @@
 <li><a class="nav-link" href="#inputs-1"><span class="header-section-number">2.3</span> Inputs</a></li>
 <li>
 <a class="nav-link" href="#module-functioning-1"><span class="header-section-number">2.4</span> Module functioning</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#pixel-groups"><span class="header-section-number">2.4.1</span> Pixel Groups</a></li>
+<li><a class="nav-link" href="#pixel-groups-1"><span class="header-section-number">2.4.1</span> Pixel Groups</a></li>
 <li><a class="nav-link" href="#disturbances"><span class="header-section-number">2.4.2</span> Disturbances</a></li>
 </ul>
 </li>
