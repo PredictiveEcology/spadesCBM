@@ -5,6 +5,7 @@ spinup
 ecozone-vs-spatial-unit
 pixel-groups
 source_pool-and-sink_pool
+carbon-terms
 cbm_defaults
 overview-1
 background

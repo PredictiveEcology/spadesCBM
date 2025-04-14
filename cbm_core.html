@@ -210,8 +210,12 @@
 <h3>
 <span class="header-section-number">4.4.1</span> Events<a class="anchor" aria-label="anchor" href="#events-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>Describe events - what does init do
-what does spinup do</p>
+<p><strong>Camille: can you make this a paragraph?</strong>
+Describe events - what does init do: creates all the Python connection and environment (check with Susan she is working on it now).
+The <code>spinup</code> is the landscape initialization event as described in <a href="link%20to%20that%20section">Overview</a> section, where records are grown and burnt until a stabilization of the below ground carbon pools. The <code>cbmExnSpinup</code> function, int R folder of the <a href="">CBM_core</a> module, set-ups the inputs and calls the Python function that defines the model structure (<a href="https://cat-cfs.github.io/libcbm_py/cbm_exn_custom_ops.html#Appendix-1:-CBM-EXN-Default-parameters">cbm_exn_get_default_parameters</a> and runs the carbon transfers necessary for the grow-burn cycle (<a href="https://cat-cfs.github.io/libcbm_py/cbm_exn_custom_ops.html#Appendix-1:-CBM-EXN-Default-parameters">cbm_exn_spinup</a>).</p>
+<p>postspinup: not sure what happens here anymore - check with Susan.</p>
+<p>The <code>annual</code> is where all the carbon transfers are applied. Disturbances are matches to the correct records, and the transfers listed in Table XX of the <a href="link%20to%20overview%20correct%20section">Overview</a> are applied. Details of default transfer rates, which we use in our SK example used throughout this manual are in the following section.</p>
+<p><code>accumulateResults</code> is the event that saves the output as outline in the <code>globalSK.R</code>. In the case of our SK example, we output the <code>cbmPool</code> and the Net Primary Productivity estimate (<a href="link%20to%20lexicon"><code>NPP</code></a>) for each year simulated. These are in the project outputs folder (“~/GitHub/spadesCBM/outputs”) .</p>
 </div>
 <div id="carbon-transfers" class="section level3" number="4.4.2">
 <h3>
@@ -219,23 +223,42 @@ what does spinup do</p>
 </h3>
 <p>There are 18 internal carbon pools in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> (see Table 1 in Overview), one for the atmosphere and one for harvested wood exiting the system. Disturbances are the first carbon transfer to be applied to each record. Half the annual increment is then added (transfer from the atmosphere to the three above ground biomass pools - <code>Merch</code>, <code>Foliage</code>, and <code>Other</code>). Disturbances inputs are processes externally to <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>, in our example the are processes in <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, leaving <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> free of spatial data manipulations. Disturbance matrices specify the proportion of carbon in each pool to be transferred to other pools or to be taken out of the system (via forest products (pool named <code>Products</code>) or back to the atmosphere). Figure XX gives an example of transfers during a fire in SK.</p>
 <p><strong>INSERT VINI’S DIST MATRIX TRANSFER FIGURE</strong>.</p>
-<p>The amount of carbon transferred from the atmosphere to the above ground biomass pools is determined from the growth curves, which were translated from <span class="math inline">\(m^3/ha\)</span> to carbon increments in <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> and provided to <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> in carbon increments (tonnes of carbon/ha). Dead Organic Matter (<a href="link%20to%20lexicon">DOM</a>) turnover happens next and transfers carbon from the pools representing snags (stem snags and branches snags), to the <code>MediumSoil</code>, and <code>AboveGroundFastSoil</code> pools. Biomass turnover follows with transfers from the <code>Merch</code>, <code>Foliage</code>, <code>Other</code>, <code>FineRoots</code> and <code>CoarseRoots</code>, to the pools representing the snags (both stem and branch snags), <code>AboveGroundVeryFastSoil</code>, <code>BelowGroundFastSoil</code>, <code>AboveGroundVeryFastSoil</code> and <code>BelowGroundVeryFastSoil pools</code>. Carbon is never lost in the system, but increments are at times negative. To accommodate negative increment values, a carbon transfer labelled <code>overmature_decline</code>, moves carbon between the <code>Merch</code>, <code>Other</code>, <code>Foliage</code>, <code>CoarseRoots</code> and <code>FineRoots</code> to pools representing stem an branch snags, and the <code>AboveGroundFastSoil</code>, <code>AboveGroundVeryFastSoil</code>, <code>BelowGroundFastSoil</code>, and <code>BelowGroundVeryFastSoil</code> pools. The transfers are portioned in the same way as annual process turnover and the amount is equal to the loss of each individual biomass pool according to the negative increment. Following the <code>overmature_decline</code> transfers, the second half of the growth is added to the three above ground biomass pools - <code>Merch</code>, <code>Foliage</code>, and <code>Other</code>.
-omdecay
-Next, the transfers due to decay are</p>
-<p>D
-slowdecay slowmixing</p>
+<p>The amount of carbon transferred from the atmosphere to the above ground biomass pools is determined from the growth curves, which were translated from <span class="math inline">\(m^3/ha\)</span> to carbon increments in <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> and provided to <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> in carbon increments (tonnes of carbon/ha). Dead Organic Matter (<a href="link%20to%20lexicon">DOM</a>) turnover happens next and transfers carbon from the pools representing snags (stem snags and branches snags), to the <code>MediumSoil</code>, and <code>AboveGroundFastSoil</code> pools. Biomass turnover follows with transfers from the <code>Merch</code>, <code>Foliage</code>, <code>Other</code>, <code>FineRoots</code> and <code>CoarseRoots</code>, to the pools representing the snags (both stem and branch snags), <code>AboveGroundVeryFastSoil</code>, <code>BelowGroundFastSoil</code>, <code>AboveGroundVeryFastSoil</code> and <code>BelowGroundVeryFastSoil pools</code>. Carbon is never lost in the system, but increments are at times negative. To accommodate negative increment values, a carbon transfer labelled <code>overmature_decline</code>, moves carbon between the <code>Merch</code>, <code>Other</code>, <code>Foliage</code>, <code>CoarseRoots</code> and <code>FineRoots</code> to pools representing stem an branch snags, and the <code>AboveGroundFastSoil</code>, <code>AboveGroundVeryFastSoil</code>, <code>BelowGroundFastSoil</code>, and <code>BelowGroundVeryFastSoil</code> pools. The transfers are portioned in the same way as annual process turnover and the amount is equal to the loss of each individual biomass pool according to the negative increment. Following the <code>overmature_decline</code> transfers, the second half of the growth is added to the three above ground biomass pools - <code>Merch</code>, <code>Foliage</code>, and <code>Other</code>.</p>
+<p>Next, the transfers due to decay are performed. Applied decay rates (<span class="math inline">\(a_k\)</span>) are calculated for each DOM pool(<span class="math inline">\(_k\)</span>) as per <strong>Equation 1</strong> (see <span class="citation">Kurz <em>et al.</em> (<a href="references.html#ref-kurz2009">2009</a>)</span>).</p>
+<p><strong>Equation 1.</strong>
+<span class="math inline">\(a_k\)</span> <em>=</em> <span class="math inline">\(D_k\)</span> <em>X TempMod X StandMod</em></p>
+<p>Where:</p>
+<p><span class="math inline">\(D_k\)</span> is the base decay rate (yr−1) at a reference mean annual temperature (<em>RefTemp</em>).</p>
+<p><em>TempMod</em> is a temperature modifier, as per <strong>Equation 2</strong>, and <em>StandMod</em> is a stand modifier as per <strong>Equation 3</strong> (<span class="citation">Kurz &amp; App (<a href="references.html#ref-kurz1999">1999</a>)</span>).</p>
+<p><strong>Equation 2,</strong></p>
+<p><em>TempMod = </em><span class="math inline">\(e^((MAT_i -RefTemp) X ln(Q_10) X 0.1)\)</span></p>
+<p>Where:</p>
+<p><span class="math inline">\(MAT_i\)</span> is the mean annual temperature of each spatial analysis unit.</p>
+<p><span class="math inline">\(RefTemp\)</span> is the reference mean annual temperature.</p>
+<p><span class="math inline">\(Q_10\)</span> is a temperature coefficient.</p>
+<p><strong>Equation 3.</strong></p>
+<p><em>StandMod = </em> <span class="math inline">\(1+(max_r - 1)\)</span>* X *<span class="math inline">\(e^(-b X TotBio/MaxBio)\)</span></p>
+<p>Where:</p>
+<p><span class="math inline">\(max_r\)</span> is the open canopy decay rate multiplier (default value of 1).</p>
+<p><span class="math inline">\(TotBio\)</span> is the total aboveground biomass, <span class="math inline">\(MaxBio\)</span> is the maximum aboveground biomass for the specified stand type, and</p>
+<p><span class="math inline">\(b\)</span> is a reduction factor calculated such that at 10% of maximum biomass, decomposition rates are reduce by 50% (set at 6.93 see <span class="citation">Kurz &amp; App (<a href="references.html#ref-kurz1999">1999</a>)</span>).</p>
+<p>The default values for base decay rate (<span class="math inline">\(D_k\)</span>), <span class="math inline">\(RefTemp\)</span>, <span class="math inline">\(Q_10\)</span> and <span class="math inline">\(max_r\)</span> for <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulations are found <a href="libcbm/resources/cbm_exn/decay_parameters.csv">here</a>.</p>
+<p>The final carbon transfers represents the physical transfer rate from the above- to belowground slow pool and is set at of 0.006 yr−1 (<a href="libcbm/resources/cbm_exn/slow_mixing_rate.csv"><code>slowmixing</code></a>) is based on the transfer rate for dissolved organic C reported in the literature for some Canadian forest soils <span class="citation">Moore (<a href="references.html#ref-moore2003">2003</a>)</span>.</p>
 </div>
 <div id="parameters" class="section level3" number="4.4.3">
 <h3>
 <span class="header-section-number">4.4.3</span> Parameters<a class="anchor" aria-label="anchor" href="#parameters"><i class="fas fa-link"></i></a>
 </h3>
+<p>Default parameters for simulations are available mainly from <a href="libcbm/resources/cbm_exn">default <code>.csv</code> files</a> with a few pieces of information such as <code>mean_annual_temperature</code> used in decay rates calculates, <code>return_interval</code>, <code>min_rotations</code> and <code>max_rotations</code> used in the <code>spinup</code> or initialization process available in an <a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/resources/cbm_defaults_db">SQLight database</a>. Decay parameter values are linked through the explanation of decay calculations in the previous section.</p>
+<p>The amount of carbon in the <code>CoarseRoots</code> and <code>FineRoots</code> pools depends on the carbon in the three above ground pools that absorb carbon from the atmosphere, <code>Merch</code>, <code>Other</code>, and <code>Foliage</code>. Each time these three above ground carbon pools receive an amount of carbon (determined by the growth curve), a portion goes to roots. The total root biomass is estimated using empirical equations, one for hardwood (<strong>Equation 4.</strong>) and one for softwood species (**Euation 5.).</p>
+<p>(RBsw = rb _ sw _ a × ABsw) species</p>
 </div>
 <div id="results" class="section level3" number="4.4.4">
 <h3>
 <span class="header-section-number">4.4.4</span> Results<a class="anchor" aria-label="anchor" href="#results"><i class="fas fa-link"></i></a>
 </h3>
-<p>NPP
-NPP is
+<p>In our example, we specify in the <code>globalSK.R</code> script that we want NPP and cbmPools saved every year (lines 81-85 - **NOTE these line references will change when the Python environment stuff moved to the init of this module). A user could specify outputs for any pools (see Table 1 in <a href="link%20to%20table%20in%20Overview">Overview</a>).</p>
+<p>NPP is
 calculated as the sum of net growth (i.e. growth that results
 in positive increment) and growth that replaces material lost
 to biomass turnover during the year. In young, actively growing
