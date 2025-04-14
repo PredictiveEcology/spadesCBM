@@ -86,53 +86,60 @@
 <h1>Lexicon<a class="anchor" aria-label="anchor" href="#lexicon"><i class="fas fa-link"></i></a>
 </h1>
 <p>If this is your first time encountering a model built within the SpaDES framework, you may be unfamiliar with several terms used in this manual. Here we offer a lexicon to help familiarize users with terms and concepts relevant to spadesCBM. A more comprehensive guide and introduction to robust and nimble scientific workflows using SpaDES can be found <a href="https://predictiveecology.org/training/_book/">here</a>.</p>
-<div id="basic-spades-concepts" class="section level2 unnumbered">
-<h2>Basic SpaDES concepts<a class="anchor" aria-label="anchor" href="#basic-spades-concepts"><i class="fas fa-link"></i></a>
+<div id="basic-structure-of-a-spades-project" class="section level2 unnumbered">
+<h2>Basic structure of a SpaDES project<a class="anchor" aria-label="anchor" href="#basic-structure-of-a-spades-project"><i class="fas fa-link"></i></a>
 </h2>
-<div id="basic-structure-of-a-spades-project" class="section level3 unnumbered">
-<h3>Basic structure of a SpaDES project<a class="anchor" aria-label="anchor" href="#basic-structure-of-a-spades-project"><i class="fas fa-link"></i></a>
-</h3>
 <p>SpaDES projects aim to follow the principles of repeatability, reproducibility, reusability, and transparency.<br>
-Using modules allows us to break up a model’s code into meaningful themes and/or uses that can easily be moved, swapped or replaced. SpaDES projects use modules in its standardized structure to allow for this nimbleness. In it’s most basic form, each module defines its own metadata, identifying the inputs and outputs of the code, allowing R to connect the module with others.</p>
-<div id="modules" class="section level4 unnumbered">
-<h4>Modules<a class="anchor" aria-label="anchor" href="#modules"><i class="fas fa-link"></i></a>
-</h4>
-<p>In its simplest form, a SpaDES module is comprised of R code that has metadata that gets put into functions.</p>
-<div id="metadata" class="section level5 unnumbered">
-<h5>Metadata<a class="anchor" aria-label="anchor" href="#metadata"><i class="fas fa-link"></i></a>
-</h5>
-</div>
-<div id="events" class="section level5 unnumbered">
-<h5>Events<a class="anchor" aria-label="anchor" href="#events"><i class="fas fa-link"></i></a>
-</h5>
-</div>
-<div id="inputobjects" class="section level5 unnumbered">
-<h5>.inputObjects()<a class="anchor" aria-label="anchor" href="#inputobjects"><i class="fas fa-link"></i></a>
-</h5>
-</div>
-</div>
-<div id="simlist" class="section level4 unnumbered">
-<h4>Simlist<a class="anchor" aria-label="anchor" href="#simlist"><i class="fas fa-link"></i></a>
-</h4>
-</div>
-</div>
-<div id="running-a-global-script" class="section level3 unnumbered">
-<h3>Running a global script<a class="anchor" aria-label="anchor" href="#running-a-global-script"><i class="fas fa-link"></i></a>
+Using modules allows us to break up a model’s code into meaningful themes and/or uses that can easily be moved, swapped or replaced. SpaDES projects use modules in its standardized structure to allow for this nimbleness. Each module defines its own metadata, identifying the inputs and outputs of the code, allowing R to connect the module with others.</p>
+<div id="modules" class="section level3 unnumbered">
+<h3>Modules<a class="anchor" aria-label="anchor" href="#modules"><i class="fas fa-link"></i></a>
 </h3>
-<div id="setupproject" class="section level4 unnumbered">
-<h4>setupProject()<a class="anchor" aria-label="anchor" href="#setupproject"><i class="fas fa-link"></i></a>
+<p>In its simplest form, a SpaDES module is comprised of R code that has metadata that gets put into functions.</p>
+<div id="metadata" class="section level4 unnumbered">
+<h4>Metadata<a class="anchor" aria-label="anchor" href="#metadata"><i class="fas fa-link"></i></a>
 </h4>
+<p>inputs and outputs are described in the metadata of the module.</p>
 </div>
-<div id="siminitandspades2" class="section level4 unnumbered">
-<h4>simInitAndSpades2()<a class="anchor" aria-label="anchor" href="#siminitandspades2"><i class="fas fa-link"></i></a>
+<div id="events" class="section level4 unnumbered">
+<h4>Events<a class="anchor" aria-label="anchor" href="#events"><i class="fas fa-link"></i></a>
 </h4>
+<p>The functions of the module can be further subdivided into events. These events are scheduled in the module to be run one or many times.</p>
 </div>
-<div id="folder-structure-of-a-spades-module" class="section level4 unnumbered">
-<h4>Folder structure of a SpaDES module<a class="anchor" aria-label="anchor" href="#folder-structure-of-a-spades-module"><i class="fas fa-link"></i></a>
+<div id="inputobjects" class="section level4 unnumbered">
+<h4>
+<code>.inputObjects()</code><a class="anchor" aria-label="anchor" href="#inputobjects"><i class="fas fa-link"></i></a>
 </h4>
+<p>This function is found at the end of a module’s script. This is where default inputs are supplied. For most default inputs in spadesCBM, the module will check if a user has supplied their own input, and if not, will use the default described in the module’s <code>.inputObjects()</code> call.</p>
+</div>
+</div>
+<div id="simlist" class="section level3 unnumbered">
+<h3>Simlist<a class="anchor" aria-label="anchor" href="#simlist"><i class="fas fa-link"></i></a>
+</h3>
+<p>Objects cannot be shared across modules unless they are added to the simlist. It is a rich data object that acts like a list or an environment. All ouputs of a module or model are added to this simlist.</p>
+</div>
+</div>
+<div id="running-a-global-script" class="section level2 unnumbered">
+<h2>Running a global script<a class="anchor" aria-label="anchor" href="#running-a-global-script"><i class="fas fa-link"></i></a>
+</h2>
+<div id="setupproject" class="section level3 unnumbered">
+<h3>
+<code>setupProject()</code><a class="anchor" aria-label="anchor" href="#setupproject"><i class="fas fa-link"></i></a>
+</h3>
+<p><code>setupProject()</code> is a function in the <code>SpaDES.project</code> package. It allows the user to set a variety of options before running. When run, <code>setupProject</code> does a series of very specific things in a particular order to reduce the chances of package conflicts and user errors.
+In spadesCBM, we use our <code>setupProject()</code> call to select the modules to run and their respective GitHub branches, project paths, caching and saving options,our python options and download, and certain project specific input objects.
+to learn more about the <code>SpaDES.project</code> package and <code>setupProject()</code> you can view the training chapter <a href="https://predictiveecology.org/training/_book/workflowSimple2.html">here</a>.</p>
+</div>
+<div id="siminitandspades2" class="section level3 unnumbered">
+<h3>
+<code>simInitAndSpades2()</code><a class="anchor" aria-label="anchor" href="#siminitandspades2"><i class="fas fa-link"></i></a>
+</h3>
+<p>Once we have run our <code>setupProject()</code> call, we can run our model using <code>simInitAndSpades2()</code>. One of the outputs of this function is the simlist, allowing the user to view all outputs from their simulation.</p>
+</div>
+<div id="folder-structure-of-a-spades-module" class="section level3 unnumbered">
+<h3>Folder structure of a SpaDES module<a class="anchor" aria-label="anchor" href="#folder-structure-of-a-spades-module"><i class="fas fa-link"></i></a>
+</h3>
 <p>Our spadesCBM modules use the basic folder structure for all SpaDES modules. Each have their respective <code>.R</code> scripts, an <code>.Rmd</code> file with their documentation used in this manual, and a <code>tests</code> folder containing the module’s tests. Some will also have an <code>R</code> folder containing other scripts that get sourced when running the module. These can include basic functions used in the module or the creation of default objects only used when the user doesn’t provide a specific input.</p>
-<p>prepInputs()</p>
-</div>
+<p><code>prepInputs()</code></p>
 </div>
 </div>
 <div id="spadescbm-terms" class="section level2 unnumbered">
@@ -155,9 +162,16 @@ spinup</p>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#lexicon">Lexicon</a></li>
 <li>
-<a class="nav-link" href="#basic-spades-concepts">Basic SpaDES concepts</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#basic-structure-of-a-spades-project">Basic structure of a SpaDES project</a></li>
-<li><a class="nav-link" href="#running-a-global-script">Running a global script</a></li>
+<a class="nav-link" href="#basic-structure-of-a-spades-project">Basic structure of a SpaDES project</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#modules">Modules</a></li>
+<li><a class="nav-link" href="#simlist">Simlist</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#running-a-global-script">Running a global script</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#setupproject">setupProject()</a></li>
+<li><a class="nav-link" href="#siminitandspades2">simInitAndSpades2()</a></li>
+<li><a class="nav-link" href="#folder-structure-of-a-spades-module">Folder structure of a SpaDES module</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#spadescbm-terms">spadesCBM terms</a></li>
