@@ -138,12 +138,18 @@
 <td><a href="https://raw.githubusercontent.com/cat-cfs/libcbm_py/main/libcbm/resources/cbm_exn/disturbance_matrix_value.csv">GitHub</a></td>
 </tr>
 <tr class="even">
+<td>species.csv</td>
+<td>Data table</td>
+<td>Default species information</td>
+<td><a href="https://github.com/cat-cfs/libcbm_py/blob/main/libcbm/resources/cbm_exn/species.csv">GitHub</a></td>
+</tr>
+<tr class="odd">
 <td>ecoLocator</td>
 <td>Shapefile</td>
 <td>Canada’s ecozone as polygon features</td>
 <td><a href="http://sis.agr.gc.ca/cansis/nsdb/ecostrat/zone/ecozone_shp.zip">Canadian Soil information Service</a></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>spuLocator</td>
 <td>Shapefile</td>
 <td>Canada’s spatial units as polygon features</td>
@@ -159,11 +165,12 @@
 <ul>
 <li>The SQLite database, and a selection of the <code>cbm_exn</code> resource files are downloaded and stored into the user’s Inputs folder from GitHub using the <code><a href="https://reproducible.predictiveecology.org/reference/prepInputs.html">reproducible::prepInputs</a></code> function, a useful tool in the <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> toolkit.</li>
 <li>Parameters necessary for <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulations are extracted from the downloaded files. Each of these are saved as objects in the <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">simList</a> (see list of output objects above).</li>
-<li>The <code>species_tr</code> object is created to match a species name to the user-provided growth curve.</li>
 <li>The <code>disturbanceMatrix</code> and <code>cTransfers</code> objects help identify which carbon transfers matches the provided disturbances as it matches the transfer matrix IDs and the proportions transferred to disturbance names.</li>
 <li>Parameters necessary for the <code>spinup</code> event in the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> modules are assembled in the <code>spinupSQL</code> object.</li>
 <li>
 <code>pooldef</code> gives the names of each <a href="https://predictiveecology.github.io/spadesCBM/index.html#pools">carbon pool</a> that exists in CBM.</li>
+<li>
+<a href="https://github.com/cat-cfs/libcbm_py/blob/main/libcbm/resources/cbm_exn/species.csv"><code>species.csv</code></a> is read in as the <code>CBMspecies</code> object.</li>
 <li>Objects that narrow the parameter selection to the study area are <code>spuLocator</code> and <code>ecolocator</code>.</li>
 </ul>
 </div>
@@ -184,29 +191,29 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>species_tr</td>
-<td>Data table</td>
-<td>Default species data</td>
-</tr>
-<tr class="even">
 <td>disturbanceMatrix</td>
 <td>Data table</td>
 <td>Default disturbance data</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>cTransfers</td>
 <td>Data table</td>
 <td>Default disturbance data</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>spinupSQL</td>
 <td>Data table</td>
 <td>Parameters for <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> spinup event</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>pooldef</td>
 <td>Character</td>
 <td>Vector of pools</td>
+</tr>
+<tr class="odd">
+<td>CBMspecies</td>
+<td>Data table</td>
+<td>Default species data</td>
 </tr>
 <tr class="even">
 <td>ecoLocator</td>
@@ -227,12 +234,14 @@
 </h2>
 <p>This module can run independently by running the global script below. Run independently, it provides transparent access to default parameters for all managed forests of Canada for <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulations.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">projectPath</span> <span class="op">&lt;-</span> <span class="st">"~/CBM_defaults"</span></span>
+<code class="sourceCode R"><span><span class="co"># project path and package install</span></span>
+<span><span class="va">projectPath</span> <span class="op">&lt;-</span> <span class="st">"~/CBM_defaults"</span></span>
 <span><span class="va">repos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"predictiveecology.r-universe.dev"</span>, <span class="fu"><a href="https://rdrr.io/r/base/options.html">getOption</a></span><span class="op">(</span><span class="st">"repos"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"SpaDES.project"</span><span class="op">)</span> <span class="op">&lt;</span> <span class="st">"0.1.1"</span> <span class="op">||</span> <span class="fu"><a href="https://rdrr.io/r/utils/packageDescription.html">packageVersion</a></span><span class="op">(</span><span class="st">"Require"</span><span class="op">)</span> <span class="op">&lt;</span> <span class="st">"1.0.1.9002"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="kw"><a href="https://rdrr.io/r/base/conditions.html">tryCatch</a></span><span class="op">(</span>error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"SpaDES.project"</span>, <span class="st">"Require"</span><span class="op">)</span>, repos <span class="op">=</span> <span class="va">repos</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># setup</span></span>
 <span><span class="va">out</span> <span class="op">&lt;-</span> <span class="fu">SpaDES.project</span><span class="fu">::</span><span class="fu">setupProject</span><span class="op">(</span></span>
 <span>  paths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>projectPath <span class="op">=</span> <span class="va">projectPath</span><span class="op">)</span>,</span>
 <span>  </span>
@@ -244,6 +253,7 @@
 <span>  require <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"SpaDES.core"</span><span class="op">)</span>,</span>
 <span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># run</span></span>
 <span><span class="va">outDefaults</span> <span class="op">&lt;-</span> <span class="fu">SpaDES.core</span><span class="fu">::</span><span class="fu"><a href="https://spades-core.predictiveecology.org/reference/simInitAndSpades.html">simInitAndSpades2</a></span><span class="op">(</span><span class="va">out</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="links-to-other-modules" class="section level2" number="1.7">
