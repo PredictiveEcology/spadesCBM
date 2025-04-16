@@ -252,7 +252,7 @@ During the <a href="https://spades-core.predictiveecology.org/reference/simInit.
 <p>The <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module, which is the simulation module of <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>, requires Python &gt;=3.9 and &lt;=3.12.7.</p>
 <p>If a suitable version of Python does not already exist on your computer,
 <a href="https://spades-project.predictiveecology.org/reference/setupProject.html">SpaDES.project::setupProject</a> will use the <a href="https://rstudio.github.io/reticulate/"><code>reticulate</code></a> package to install it using the <a href="https://github.com/pyenv/pyenv">pyenv</a> or <a href="https://github.com/pyenv-win/pyenv-win">pyenv-win</a>.</p>
-<p>If you are using a Windows computer with Git installed, the <a href="https://github.com/pyenv-win/pyenv-win">pyenv-win</a> tool will be acquired and managed directly by <a href="https://rstudio.github.io/reticulate/"><code>reticulate</code></a>. If you are using a Windows computer without Git installed, you will be prompted to allow the <a href="https://github.com/pyenv-win/pyenv-win">pyenv-win</a> tool to be downloaded directly from Github to your local user application data directory (<code>tools::R_user_dir("r-spadesCBM")</code>).</p>
+<p>If you are using a Windows computer with Git installed, the <a href="https://github.com/pyenv-win/pyenv-win">pyenv-win</a> tool will be acquired and managed directly by <a href="https://rstudio.github.io/reticulate/"><code>reticulate</code></a>. If you are using a Windows computer without Git installed, you will be prompted to allow the <a href="https://github.com/pyenv-win/pyenv-win">pyenv-win</a> tool to be downloaded directly from Github to your local user application data directory (<code>tools::R_user_dir("CBMutils")</code>).</p>
 <p>If the Python installation process fails or you would prefer to manually install Python, it can be downloaded directly from <a href="https://python.org/downloads">python.org/downloads</a>. The calls to Python are for functions from a package called <a href="https://cat-cfs.github.io/libcbm_py/">libcbm</a>. Python functions are only used in the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module. Details on <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module and the Python functions are provided in <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> chapter in this manual.</p>
 </div>
 <div id="run-example-simulation" class="section level2 unnumbered">
@@ -289,8 +289,7 @@ out &lt;- SpaDES.project::setupProject(
                "PredictiveEcology/CBM_vol2biomass@development",
                "PredictiveEcology/CBM_core@development"),
   times = times,
-  require = c("SpaDES.core", "reticulate",
-              "PredictiveEcology/libcbmr", "data.table"),
+  require = c("PredictiveEcology/CBMutils@development (&gt;=2.0)", "reticulate", "reproducible"),
 
   params = list(
     CBM_defaults = list(
@@ -303,16 +302,14 @@ out &lt;- SpaDES.project::setupProject(
       .useCache = TRUE
     )
   ),
-  functions = "PredictiveEcology/CBM_core@training/R/ReticulateFindPython.R",
 
   ret = {
     reticulate::virtualenv_create(
       "r-spadesCBM",
       python = if (!reticulate::virtualenv_exists("r-spadesCBM")){
-        ReticulateFindPython(
+        CBMutils::ReticulateFindPython(
           version        = "&gt;=3.9,&lt;=3.12.7",
-          versionInstall = "3.10:latest",
-          pyenvRoot      = tools::R_user_dir("r-spadesCBM")
+          versionInstall = "3.10:latest"
         )
       },
       packages = c(
