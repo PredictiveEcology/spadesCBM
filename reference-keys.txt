@@ -42,7 +42,5 @@ inputs-3
 module-functioning-3
 events-1
 carbon-transfers
-parameters
-results
 outputs-3
 links-to-other-modules-3
