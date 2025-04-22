@@ -88,7 +88,7 @@
 <div class="rmdimportant">
 <p>This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, contact us <a href="%22https://github.com/PredictiveEcology/spadesCBM/issues%22">here</a>.</p>
 </div>
-<p><a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> is a modular, transparent, and spatially explicit implementation of the logic, pools structure, equations, and default assumptions of the Carbon Budget Model of the Canadian Forest Sector (<a href="https://natural-resources.canada.ca/climate-change/climate-change-impacts-forests/carbon-accounting/carbon-budget-model/13107">CBM</a>). It applies the science presented in <span class="citation">Kurz <em>et al.</em> (<a href="references.html#ref-kurz2009">2009</a>)</span> in a similar way to the simulations in <span class="citation">Boisvenue <em>et al.</em> (<a href="references.html#ref-boisvenue2016">2016</a>)</span> and <span class="citation">Boisvenue <em>et al.</em> (<a href="references.html#ref-boisvenue2022">2022</a>)</span> but calls Python functions for annual processes (see <a href="https://github.com/cat-cfs/libcbm_py.git">libcbm_py/examples/cbm_exn</a>). These functions and <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> are, like much of modelling-based science, continuously under development.</p>
+<p><a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> is a modular, transparent, and spatially explicit implementation of the logic, pools structure, equations, and default assumptions of the Carbon Budget Model of the Canadian Forest Sector (<a href="https://natural-resources.canada.ca/climate-change/climate-change-impacts-forests/carbon-accounting/carbon-budget-model/13107">CBM</a>). It applies the science presented in <span class="citation">Kurz <em>et al.</em> (<a href="references.html#ref-kurz2009">2009</a>)</span> in a similar way to the simulations in <span class="citation">Boisvenue <em>et al.</em> (<a href="references.html#ref-boisvenue2016">2016</a>)</span> and <span class="citation">Boisvenue <em>et al.</em> (<a href="references.html#ref-boisvenue2022">2022</a>)</span> but calls Python functions for annual processes (see <a href="https://github.com/cat-cfs/libcbm_py/tree/main/examples/cbm_exn">libcbm_py/examples/cbm_exn</a>). These functions and <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> are, like much of modelling-based science, continuously under development.</p>
 <p>The collection of <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> modules in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> was developed to enable R&amp;D input to the Canadian Forest Service (<a href="https://natural-resources.canada.ca/climate-change/climate-change-impacts-forests/carbon-budget-model">CFS</a>) forest carbon reporting system, <a href="https://natural-resources.canada.ca/climate-change/forest-carbon/canada-s-forest-carbon-reporting-system">NFCMARS</a>, the National Forest Carbon Monitoring, Accounting, and Reporting system. The CFS provides science backing for Canadian policies on national forest issues. <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> is a nimble tool in which new science, data and algorithms can be tested and explored to serve policy purposes. <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> development follows the <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">PERFICT</a> approach of <span class="citation">McIntire <em>et al.</em> (<a href="references.html#ref-mcintire2022">2022</a>)</span> for ecological modelling systems, an approach that helps solve many of the complex issues in ecological modelling, supports continuous workflows, and nimble, enter operable modelling systems. The <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> platform is the toolkit that enables this implementation of the PERFICT principle.</p>
 <div id="usage" class="section level2 unnumbered">
 <h2>Usage<a class="anchor" aria-label="anchor" href="#usage"><i class="fas fa-link"></i></a>
@@ -121,7 +121,7 @@ A smaller study area extent simulation of <a href="https://github.com/Predictive
 <div id="pools" class="section level3 unnumbered">
 <h3>Pools<a class="anchor" aria-label="anchor" href="#pools"><i class="fas fa-link"></i></a>
 </h3>
-<p>There are 18 internal carbon pools in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>, representing a stand or pixel (Table 1), and two pools that take carbon out of the system, Products and the Atmosphere. The carbon transfers are dictated by matrices (available in the defaults information) which specify the proportion of carbon moving from one pool (<a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">source_pool</a> to another (<a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">sink_pools</a>). Matrices for growth are populated with the user-provided growth information and are the main change agent in the system, providing carbon input to the stand. Default parameters for biomass and dead organic mater (DOM) turnover, decay, and soil mixing are either at the provincial/territorial, ecozone, or Canada-wide scale (see Table 1 in <span class="citation">Kurz <em>et al.</em> (<a href="references.html#ref-kurz2009">2009</a>)</span>). Note that parameters can easily be modified from their defaults in a <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulation. Disturbances matrices representing carbon-transfers during disturbances like fire or harvesting, are available in the defaults (read-in via <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a>) for all managed forests of Canada.</p>
+<p>There are 18 internal carbon pools in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>, representing a stand or pixel (Table 1), and two pools that take carbon out of the system, Products and the Atmosphere. The carbon transfers are dictated by matrices (available in the defaults information) which specify the proportion of carbon moving from one pool (<a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">source_pool</a> to a <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">sink_pools</a>). Matrices for growth are populated with the user-provided growth information and are the main change agent in the system, providing carbon input to the stand. Default parameters for biomass and dead organic mater (DOM) turnover, decay, and soil mixing are either at the provincial/territorial, ecozone, or Canada-wide scale (see Table 1 in <span class="citation">Kurz <em>et al.</em> (<a href="references.html#ref-kurz2009">2009</a>)</span>). Note that parameters can easily be modified from their defaults in a <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulation. Disturbances matrices representing carbon-transfers during disturbances like fire or harvesting, are available in the defaults (read-in via <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a>) for all managed forests of Canada.</p>
 <p><em>Table 1: Carbon pools in spadesCBM</em></p>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
@@ -212,16 +212,41 @@ A smaller study area extent simulation of <a href="https://github.com/Predictive
 <h3>Order of operations<a class="anchor" aria-label="anchor" href="#order-of-operations"><i class="fas fa-link"></i></a>
 </h3>
 <p>In simulations, disturbances occur before any other carbon-transfer. After the disturbances, half of the growth (determined by increments in the user-provided growth curve) is applied followed by the transfers representing DOM turnover, live biomass turnover, an overmature decline compensation if applicable, the 2nd half of the growth, DOM decay, slow decay and slow soil mixing. AS previously stated, carbon additions to the system come from the atmosphere (amount determined by growth via user-provided growth curves), and carbon exists the system to the atmosphere or to the forest products sector (<strong>ADD A FIGURE HERE MODIFICATION OF CBM_slide.ppt</strong>). Transfers are proportions of a source pool to sink pools and proportions add up to 1, so no carbon is lost.</p>
-<p>MAKE A TABLE OF THESE
-disturbance
-half growth
-domturnover
-bioturnover
-overmaturedecline
-2nd half of the growth
-domdecay
-slowdecay
-slowmixing</p>
+<p><em>Table 2: Types of carbon transfers in spadesCBM</em></p>
+<div class="inline-table"><table class="table table-sm">
+<thead><tr class="header">
+<th>Carbon Transfers</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>disturbance</td>
+</tr>
+<tr class="even">
+<td>half growth</td>
+</tr>
+<tr class="odd">
+<td>domturnover</td>
+</tr>
+<tr class="even">
+<td>bioturnover</td>
+</tr>
+<tr class="odd">
+<td>overmaturedecline</td>
+</tr>
+<tr class="even">
+<td>2nd half of the growth</td>
+</tr>
+<tr class="odd">
+<td>domdecay</td>
+</tr>
+<tr class="even">
+<td>slowdecay</td>
+</tr>
+<tr class="odd">
+<td>slowmixing</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <div id="the-spinup-function" class="section level3 unnumbered">
 <h3>The <code>spinup</code> function<a class="anchor" aria-label="anchor" href="#the-spinup-function"><i class="fas fa-link"></i></a>
