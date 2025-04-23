@@ -4,13 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 3 CBM_vol2biomass | spadesCBM</title>
+<title>Chapter 3 CBM_vol2biomass | Example: All managed forests in Saskatchewan</title>
 <meta name="author" content="Céline Boisvenue">
 <meta name="generator" content="bookdown 0.43 with bs4_book()">
-<meta property="og:title" content="Chapter 3 CBM_vol2biomass | spadesCBM">
+<meta property="og:title" content="Chapter 3 CBM_vol2biomass | Example: All managed forests in Saskatchewan">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 3 CBM_vol2biomass | spadesCBM">
+<meta name="twitter:title" content="Chapter 3 CBM_vol2biomass | Example: All managed forests in Saskatchewan">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -54,7 +54,7 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title="v. 0.1">spadesCBM</a>:
+        <a href="index.html" title="v. 0.1">Example: All managed forests in Saskatchewan</a>:
         <small class="text-muted">v. 0.1</small>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
@@ -74,6 +74,7 @@
 <li><a class="" href="cbm_dataprep_sk.html"><span class="header-section-number">2</span> CBM_dataPrep_SK</a></li>
 <li><a class="active" href="cbm_vol2biomass.html"><span class="header-section-number">3</span> CBM_vol2biomass</a></li>
 <li><a class="" href="cbm_core.html"><span class="header-section-number">4</span> CBM_core</a></li>
+<li><a class="" href="example-running-spadescbm-for-all-managed-forests-of-saskatchewan.html">Example: Running spadesCBM for all managed forests of Saskatchewan</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -425,34 +426,34 @@ and the objects <code>level3DT</code>, <a href="https://predictiveecology.github
 <span class="header-section-number">3.6</span> Usage<a class="anchor" aria-label="anchor" href="#usage-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>This module can be run independently. The global script below runs the module for the managed forests of Saskatchewan. Inputs would have to be adapted by the user to be run elsewhere.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="cbm_vol2biomass.html#cb3-1" tabindex="-1"></a><span class="co">#project path and package install</span></span>
-<span id="cb3-2"><a href="cbm_vol2biomass.html#cb3-2" tabindex="-1"></a>projectPath <span class="ot">&lt;-</span> <span class="st">"~/CBM_vol2biomass"</span></span>
-<span id="cb3-3"><a href="cbm_vol2biomass.html#cb3-3" tabindex="-1"></a>repos <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">c</span>(<span class="st">"predictiveecology.r-universe.dev"</span>, <span class="fu">getOption</span>(<span class="st">"repos"</span>)))</span>
-<span id="cb3-4"><a href="cbm_vol2biomass.html#cb3-4" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"SpaDES.project"</span>,</span>
-<span id="cb3-5"><a href="cbm_vol2biomass.html#cb3-5" tabindex="-1"></a>                 <span class="at">repos =</span> repos)</span>
-<span id="cb3-6"><a href="cbm_vol2biomass.html#cb3-6" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="cbm_vol2biomass.html#cb3-7" tabindex="-1"></a><span class="co">#setup</span></span>
-<span id="cb3-8"><a href="cbm_vol2biomass.html#cb3-8" tabindex="-1"></a>out <span class="ot">&lt;-</span> SpaDES.project<span class="sc">::</span><span class="fu">setupProject</span>(</span>
-<span id="cb3-9"><a href="cbm_vol2biomass.html#cb3-9" tabindex="-1"></a>  <span class="at">paths =</span> <span class="fu">list</span>(<span class="at">projectPath =</span> projectPath),</span>
-<span id="cb3-10"><a href="cbm_vol2biomass.html#cb3-10" tabindex="-1"></a>  <span class="at">overwrite =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb3-11"><a href="cbm_vol2biomass.html#cb3-11" tabindex="-1"></a>  </span>
-<span id="cb3-12"><a href="cbm_vol2biomass.html#cb3-12" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">options</span>(</span>
-<span id="cb3-13"><a href="cbm_vol2biomass.html#cb3-13" tabindex="-1"></a>    <span class="at">repos =</span> <span class="fu">c</span>(<span class="at">repos =</span> repos),</span>
-<span id="cb3-14"><a href="cbm_vol2biomass.html#cb3-14" tabindex="-1"></a>    <span class="at">reproducible.destinationPath =</span> <span class="st">"inputs"</span></span>
-<span id="cb3-15"><a href="cbm_vol2biomass.html#cb3-15" tabindex="-1"></a>  ),</span>
-<span id="cb3-16"><a href="cbm_vol2biomass.html#cb3-16" tabindex="-1"></a>  <span class="at">modules =</span>  <span class="fu">c</span>(<span class="st">"PredictiveEcology/CBM_vol2biomass@development"</span>),</span>
-<span id="cb3-17"><a href="cbm_vol2biomass.html#cb3-17" tabindex="-1"></a>  <span class="at">require =</span> <span class="fu">c</span>(<span class="st">"SpaDES.core"</span>),</span>
-<span id="cb3-18"><a href="cbm_vol2biomass.html#cb3-18" tabindex="-1"></a>  </span>
-<span id="cb3-19"><a href="cbm_vol2biomass.html#cb3-19" tabindex="-1"></a>  </span>
-<span id="cb3-20"><a href="cbm_vol2biomass.html#cb3-20" tabindex="-1"></a>  <span class="do">######### inputs #########</span></span>
-<span id="cb3-21"><a href="cbm_vol2biomass.html#cb3-21" tabindex="-1"></a>  </span>
-<span id="cb3-22"><a href="cbm_vol2biomass.html#cb3-22" tabindex="-1"></a>  <span class="at">spatialDT =</span> <span class="fu">data.table</span>(</span>
-<span id="cb3-23"><a href="cbm_vol2biomass.html#cb3-23" tabindex="-1"></a>    <span class="at">gcids =</span> <span class="fu">c</span>(<span class="dv">55</span>, <span class="dv">49</span>, <span class="dv">52</span>, <span class="dv">58</span>, <span class="dv">28</span>, <span class="dv">37</span>, <span class="dv">34</span>, <span class="dv">31</span>, <span class="dv">40</span>, <span class="dv">61</span>, <span class="dv">50</span>, <span class="dv">35</span>, <span class="dv">29</span>, <span class="dv">56</span>, <span class="dv">62</span>),</span>
-<span id="cb3-24"><a href="cbm_vol2biomass.html#cb3-24" tabindex="-1"></a>    <span class="at">spatial_unit_id =</span> <span class="fu">c</span>(<span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">27</span>, <span class="dv">27</span>, <span class="dv">27</span>, <span class="dv">27</span>, <span class="dv">27</span>, <span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">27</span>, <span class="dv">27</span>, <span class="dv">28</span>, <span class="dv">28</span>),</span>
-<span id="cb3-25"><a href="cbm_vol2biomass.html#cb3-25" tabindex="-1"></a>    <span class="at">ecozones =</span> <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">9</span>)),</span>
-<span id="cb3-26"><a href="cbm_vol2biomass.html#cb3-26" tabindex="-1"></a></span>
-<span id="cb3-27"><a href="cbm_vol2biomass.html#cb3-27" tabindex="-1"></a><span class="co">#run</span></span>
-<span id="cb3-28"><a href="cbm_vol2biomass.html#cb3-28" tabindex="-1"></a>simBiomass <span class="ot">&lt;-</span> <span class="fu">simInitAndSpades2</span>(out)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="cbm_vol2biomass.html#cb2-1" tabindex="-1"></a><span class="co">#project path and package install</span></span>
+<span id="cb2-2"><a href="cbm_vol2biomass.html#cb2-2" tabindex="-1"></a>projectPath <span class="ot">&lt;-</span> <span class="st">"~/CBM_vol2biomass"</span></span>
+<span id="cb2-3"><a href="cbm_vol2biomass.html#cb2-3" tabindex="-1"></a>repos <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">c</span>(<span class="st">"predictiveecology.r-universe.dev"</span>, <span class="fu">getOption</span>(<span class="st">"repos"</span>)))</span>
+<span id="cb2-4"><a href="cbm_vol2biomass.html#cb2-4" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"SpaDES.project"</span>,</span>
+<span id="cb2-5"><a href="cbm_vol2biomass.html#cb2-5" tabindex="-1"></a>                 <span class="at">repos =</span> repos)</span>
+<span id="cb2-6"><a href="cbm_vol2biomass.html#cb2-6" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="cbm_vol2biomass.html#cb2-7" tabindex="-1"></a><span class="co">#setup</span></span>
+<span id="cb2-8"><a href="cbm_vol2biomass.html#cb2-8" tabindex="-1"></a>out <span class="ot">&lt;-</span> SpaDES.project<span class="sc">::</span><span class="fu">setupProject</span>(</span>
+<span id="cb2-9"><a href="cbm_vol2biomass.html#cb2-9" tabindex="-1"></a>  <span class="at">paths =</span> <span class="fu">list</span>(<span class="at">projectPath =</span> projectPath),</span>
+<span id="cb2-10"><a href="cbm_vol2biomass.html#cb2-10" tabindex="-1"></a>  <span class="at">overwrite =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-11"><a href="cbm_vol2biomass.html#cb2-11" tabindex="-1"></a>  </span>
+<span id="cb2-12"><a href="cbm_vol2biomass.html#cb2-12" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">options</span>(</span>
+<span id="cb2-13"><a href="cbm_vol2biomass.html#cb2-13" tabindex="-1"></a>    <span class="at">repos =</span> <span class="fu">c</span>(<span class="at">repos =</span> repos),</span>
+<span id="cb2-14"><a href="cbm_vol2biomass.html#cb2-14" tabindex="-1"></a>    <span class="at">reproducible.destinationPath =</span> <span class="st">"inputs"</span></span>
+<span id="cb2-15"><a href="cbm_vol2biomass.html#cb2-15" tabindex="-1"></a>  ),</span>
+<span id="cb2-16"><a href="cbm_vol2biomass.html#cb2-16" tabindex="-1"></a>  <span class="at">modules =</span>  <span class="fu">c</span>(<span class="st">"PredictiveEcology/CBM_vol2biomass@development"</span>),</span>
+<span id="cb2-17"><a href="cbm_vol2biomass.html#cb2-17" tabindex="-1"></a>  <span class="at">require =</span> <span class="fu">c</span>(<span class="st">"SpaDES.core"</span>),</span>
+<span id="cb2-18"><a href="cbm_vol2biomass.html#cb2-18" tabindex="-1"></a>  </span>
+<span id="cb2-19"><a href="cbm_vol2biomass.html#cb2-19" tabindex="-1"></a>  </span>
+<span id="cb2-20"><a href="cbm_vol2biomass.html#cb2-20" tabindex="-1"></a>  <span class="do">######### inputs #########</span></span>
+<span id="cb2-21"><a href="cbm_vol2biomass.html#cb2-21" tabindex="-1"></a>  </span>
+<span id="cb2-22"><a href="cbm_vol2biomass.html#cb2-22" tabindex="-1"></a>  <span class="at">spatialDT =</span> <span class="fu">data.table</span>(</span>
+<span id="cb2-23"><a href="cbm_vol2biomass.html#cb2-23" tabindex="-1"></a>    <span class="at">gcids =</span> <span class="fu">c</span>(<span class="dv">55</span>, <span class="dv">49</span>, <span class="dv">52</span>, <span class="dv">58</span>, <span class="dv">28</span>, <span class="dv">37</span>, <span class="dv">34</span>, <span class="dv">31</span>, <span class="dv">40</span>, <span class="dv">61</span>, <span class="dv">50</span>, <span class="dv">35</span>, <span class="dv">29</span>, <span class="dv">56</span>, <span class="dv">62</span>),</span>
+<span id="cb2-24"><a href="cbm_vol2biomass.html#cb2-24" tabindex="-1"></a>    <span class="at">spatial_unit_id =</span> <span class="fu">c</span>(<span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">27</span>, <span class="dv">27</span>, <span class="dv">27</span>, <span class="dv">27</span>, <span class="dv">27</span>, <span class="dv">28</span>, <span class="dv">28</span>, <span class="dv">27</span>, <span class="dv">27</span>, <span class="dv">28</span>, <span class="dv">28</span>),</span>
+<span id="cb2-25"><a href="cbm_vol2biomass.html#cb2-25" tabindex="-1"></a>    <span class="at">ecozones =</span> <span class="fu">c</span>(<span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">9</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">9</span>, <span class="dv">9</span>)),</span>
+<span id="cb2-26"><a href="cbm_vol2biomass.html#cb2-26" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="cbm_vol2biomass.html#cb2-27" tabindex="-1"></a><span class="co">#run</span></span>
+<span id="cb2-28"><a href="cbm_vol2biomass.html#cb2-28" tabindex="-1"></a>simBiomass <span class="ot">&lt;-</span> <span class="fu">simInitAndSpades2</span>(out)</span></code></pre></div>
 </div>
 <div id="links-to-other-modules-2" class="section level2" number="3.7">
 <h2>
@@ -503,7 +504,7 @@ and the objects <code>level3DT</code>, <a href="https://predictiveecology.github
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>spadesCBM</strong>: v. 0.1" was written by Céline Boisvenue. It was last built on 26 June 2024.</p>
+    <p>"<strong>Example: All managed forests in Saskatchewan</strong>: v. 0.1" was written by Céline Boisvenue. It was last built on 26 June 2024.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

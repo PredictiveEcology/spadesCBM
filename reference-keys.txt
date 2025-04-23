@@ -1,5 +1,3 @@
-google-account-needed-for-this-example
-python-is-required-for-this-example
 cbm-cfs3-vs-spadescbm
 spinup
 ecozone-vs-spatial-unit

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Example: Running spadesCBM for all managed forests of Saskatchewan | Example: All managed forests in Saskatchewan</title>
+<meta name="author" content="Céline Boisvenue">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
+<meta property="og:title" content="Example: Running spadesCBM for all managed forests of Saskatchewan | Example: All managed forests in Saskatchewan">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Example: Running spadesCBM for all managed forests of Saskatchewan | Example: All managed forests in Saskatchewan">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+          margin-bottom: 0em;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="css/style.css">
+<meta name="description" content="Here we provide an example script to run all managed forests in Saskatchewan. This example is fairly lightweight and most computers should be able to run the simulation. In this example, we setup...">
+<meta property="og:description" content="Here we provide an example script to run all managed forests in Saskatchewan. This example is fairly lightweight and most computers should be able to run the simulation. In this example, we setup...">
+<meta name="twitter:description" content="Here we provide an example script to run all managed forests in Saskatchewan. This example is fairly lightweight and most computers should be able to run the simulation. In this example, we setup...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="v. 0.1">Example: All managed forests in Saskatchewan</a>:
+        <small class="text-muted">v. 0.1</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Overview</a></li>
+<li><a class="" href="lexicon.html">Lexicon</a></li>
+<li><a class="" href="cbmutils.html">CBMutils</a></li>
+<li><a class="" href="cbm_defaults.html"><span class="header-section-number">1</span> CBM_defaults</a></li>
+<li><a class="" href="cbm_dataprep_sk.html"><span class="header-section-number">2</span> CBM_dataPrep_SK</a></li>
+<li><a class="" href="cbm_vol2biomass.html"><span class="header-section-number">3</span> CBM_vol2biomass</a></li>
+<li><a class="" href="cbm_core.html"><span class="header-section-number">4</span> CBM_core</a></li>
+<li><a class="active" href="example-running-spadescbm-for-all-managed-forests-of-saskatchewan.html">Example: Running spadesCBM for all managed forests of Saskatchewan</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/PredictiveEcology/spadesCBM">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="example-running-spadescbm-for-all-managed-forests-of-saskatchewan" class="section level1 unnumbered">
+<h1>Example: Running spadesCBM for all managed forests of Saskatchewan<a class="anchor" aria-label="anchor" href="#example-running-spadescbm-for-all-managed-forests-of-saskatchewan"><i class="fas fa-link"></i></a>
+</h1>
+<p>Here we provide an example script to run all managed forests in Saskatchewan. This example is fairly lightweight and most computers should be able to run the simulation.</p>
+<p>In this example, we setup the workflow using the
+<a href="https://spades-project.predictiveecology.org/"><code>SpaDES.project</code></a> package and
+current versions of the <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> modules.</p>
+<div id="setup" class="section level2 unnumbered">
+<h2>Setup<a class="anchor" aria-label="anchor" href="#setup"><i class="fas fa-link"></i></a>
+</h2>
+<p>A few things need to be set up the first time running spadesCBM. While the global script below will take care and guide you through most of these, here are some things to note during the initial set up.</p>
+<div id="google-account-needed-for-this-example" class="section level3 unnumbered">
+<h3>Google account needed for this example<a class="anchor" aria-label="anchor" href="#google-account-needed-for-this-example"><i class="fas fa-link"></i></a>
+</h3>
+<p>To run the provided example, users need to access some of the data using the <a href="https://cloud.r-project.org/web/packages/googledrive/index.html">googledrive</a> R package (part of the <a href="https://www.tidyverse.org/">tidyverse</a> family of R packages).
+During the <a href="https://spades-core.predictiveecology.org/reference/simInit.html">simInit()</a> (or <a href="https://rdrr.io/cran/SpaDES.core/man/simInitAndSpades.html">simInitAndSpades</a>) call, a function to initialize (or initialize and run) <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a>-based simulations, R will prompt you to either choose a previously authenticated account (if you have previously used <a href="https://cloud.r-project.org/web/packages/googledrive/index.html">googledrive</a>) or to open a browser window and authenticate.</p>
+<p>Make sure you give <a href="https://www.tidyverse.org/">tidyverse</a> read/write access to your files:</p>
+<div class="inline-figure"><img src="https://github.com/PredictiveEcology/PredictiveEcology.org/blob/main/training/assets/img/gdriveauth.png?raw=true" fig-align="center" width="467"></div>
+</div>
+<div id="python-is-required-for-this-example" class="section level3 unnumbered">
+<h3>Python is required for this example<a class="anchor" aria-label="anchor" href="#python-is-required-for-this-example"><i class="fas fa-link"></i></a>
+</h3>
+<p>The <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module, which is the simulation module of <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>, requires Python &gt;=3.9 and &lt;=3.12.7.</p>
+<p>If a suitable version of Python does not already exist on your computer,
+<a href="https://spades-project.predictiveecology.org/reference/setupProject.html">SpaDES.project::setupProject</a> will use the <a href="https://rstudio.github.io/reticulate/"><code>reticulate</code></a> package to install it using the <a href="https://github.com/pyenv/pyenv">pyenv</a> or <a href="https://github.com/pyenv-win/pyenv-win">pyenv-win</a>.</p>
+<p>If you are using a Windows computer with Git installed, the <a href="https://github.com/pyenv-win/pyenv-win">pyenv-win</a> tool will be acquired and managed directly by <a href="https://rstudio.github.io/reticulate/"><code>reticulate</code></a>. If you are using a Windows computer without Git installed, you will be prompted to allow the <a href="https://github.com/pyenv-win/pyenv-win">pyenv-win</a> tool to be downloaded directly from Github to your local user application data directory (<code>tools::R_user_dir("CBMutils")</code>).</p>
+<p>If the Python installation process fails or you would prefer to manually install Python, it can be downloaded directly from <a href="https://python.org/downloads">python.org/downloads</a>. The calls to Python are for functions from a package called <a href="https://cat-cfs.github.io/libcbm_py/">libcbm</a>. Python functions are only used in the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module. Details on <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module and the Python functions are provided in <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> chapter in this manual.</p>
+</div>
+</div>
+<div id="running-the-simulation" class="section level2 unnumbered">
+<h2>Running the simulation<a class="anchor" aria-label="anchor" href="#running-the-simulation"><i class="fas fa-link"></i></a>
+</h2>
+<p>Here is the R script to run the simulation of forest carbon dynamics in the managed forests of SK from 1985 to 2011, with disturbances as presented in <span class="citation">Boisvenue <em>et al.</em> (<a href="references.html#ref-boisvenue2016">2016</a>)</span>. Depending on your computing capacity, this may take a while, particularly the first time you run it. Subsequent simulations are much faster because of the use of the <a href="https://cran.r-project.org/web/packages/SpaDES.core/vignettes/iii-cache.html">reproducible::Cache</a> function.</p>
+<pre><code># set project paths and install packages
+projectPath &lt;- "~/GitHub/spadesCBM"
+repos &lt;- unique(c("predictiveecology.r-universe.dev", getOption("repos")))
+install.packages("SpaDES.project",
+                 repos = repos)
+
+# Set simulation period.In this example we start in 1985, and end in 2011
+times &lt;- list(start = 1985, end = 2011)
+
+# This is our setupProject call. This creates the model's folder structure, downloads modules, installs and loads needed packages, and sets options.
+out &lt;- SpaDES.project::setupProject(
+  Restart = TRUE,
+  useGit = "PredictiveEcology", # a developer sets and keeps this = TRUE
+  overwrite = TRUE, # a user who wants to get latest modules sets this to TRUE
+  paths = list(projectPath = projectPath),
+  
+  options = options(
+    repos = c(repos = repos),
+    Require.cloneFrom = Sys.getenv("R_LIBS_USER"),
+    reproducible.destinationPath = "inputs",
+    ## These are for speed
+    reproducible.useMemoise = TRUE,
+    # Require.offlineMode = TRUE,
+    spades.moduleCodeChecks = FALSE
+  ),
+  modules =  c("PredictiveEcology/CBM_defaults@development",
+               "PredictiveEcology/CBM_dataPrep_SK@development",
+               "PredictiveEcology/CBM_vol2biomass@development",
+               "PredictiveEcology/CBM_core@development"),
+  times = times,
+  require = c("PredictiveEcology/CBMutils@development (&gt;=2.0)", "reticulate", "reproducible"),
+  
+  params = list(
+    CBM_defaults = list(
+      .useCache = TRUE
+    ),
+    CBM_dataPrep_SK = list(
+      .useCache = TRUE
+    ),
+    CBM_vol2biomass = list(
+      .useCache = TRUE
+    )
+  ),
+  
+  ret = {
+    reticulate::virtualenv_create(
+      "r-spadesCBM",
+      python = if (!reticulate::virtualenv_exists("r-spadesCBM")){
+        CBMutils::ReticulateFindPython(
+          version        = "&gt;=3.9,&lt;=3.12.7",
+          versionInstall = "3.10:latest"
+        )
+      },
+      packages = c(
+        "numpy&lt;2",
+        "pandas&gt;=1.1.5",
+        "scipy",
+        "numexpr&gt;=2.8.7",
+        "numba",
+        "pyyaml",
+        "mock",
+        "openpyxl",
+        "libcbm"
+      )
+    )
+    reticulate::use_virtualenv("r-spadesCBM")
+  },
+  
+  #### begin manually passed inputs #########################################
+  ## define the  study area.
+  masterRaster = {
+    mr &lt;- reproducible::prepInputs(url = "https://drive.google.com/file/d/1zUyFH8k6Ef4c_GiWMInKbwAl6m6gvLJW/view?usp=drive_link",
+                                   destinationPath = "inputs")
+    mr[mr[] == 0] &lt;- NA
+    mr
+  },
+  
+  disturbanceRastersURL = "https://drive.google.com/file/d/12YnuQYytjcBej0_kdodLchPg7z9LygCt",
+  
+  outputs = as.data.frame(expand.grid(objectName = c("cbmPools", "NPP"),
+                                      saveTime = sort(c(times$start,
+                                                        times$start +
+                                                          c(1:(times$end - times$start))
+                                      )))),
+  
+)
+
+# Run simulation
+simMngedSK &lt;- SpaDES.core::simInitAndSpades2(out)</code></pre>
+</div>
+<div id="viewing-results" class="section level2 unnumbered">
+<h2>Viewing results<a class="anchor" aria-label="anchor" href="#viewing-results"><i class="fas fa-link"></i></a>
+</h2>
+<p>Once the simulation has run, we can view certain results. Some of these are saved as files in the outputs folder created in the project’s directory. If kept as the default in the global script above, these can be found here: <code>~/GitHub/spadesCBM/outputs</code>. You should be able to see <code>.rds</code> files for cbmPools and NPP for each simulated year, as well as various growth curve and increment related figures from <a href="https://github.com/PredictiveEcology/CBM_vol2biomass">CBM_vol2biomass</a>.</p>
+<p>The <code>simMngedSK</code> object in R is the resulting <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#simlist">simlist</a> of our simulation. <code>CBMutils</code> offers a few plotting functions to help visualize basic results using our simlist.</p>
+<pre><code># Shows yearly forest products and emissions for each simulation year
+carbonPlot &lt;- CBMutils::carbonOutPlot(
+  emissionsProducts = simMngedSK$emissionsProducts
+)
+
+# Shows proportions of carbon in above and below ground compartments
+barplot &lt;- CBMutils::barPlot(
+  cbmPools = simMngedSK$cbmPools
+)
+
+# Map of pixel-level average NPP
+NppPlot &lt;- CBMutils::NPPplot(
+  spatialDT = simMngedSK$spatialDT,
+  NPP = simMngedSK$NPP,
+  masterRaster = simMngedSK$masterRaster
+)
+
+# Map of total carbon per pixel for a simulation year
+spstialPlot &lt;- sCBMutils::patialPlot(
+  cbmPools = simMngedSK$cbmPools,
+  years = 2000, # set simulation year 
+  masterRaster = simMngedSK$masterRaster,
+  spatialDT = simMngedSK$spatialDT
+)</code></pre>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="cbm_core.html"><span class="header-section-number">4</span> CBM_core</a></div>
+<div class="next"><a href="references.html">References</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#example-running-spadescbm-for-all-managed-forests-of-saskatchewan">Example: Running spadesCBM for all managed forests of Saskatchewan</a></li>
+<li>
+<a class="nav-link" href="#setup">Setup</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#google-account-needed-for-this-example">Google account needed for this example</a></li>
+<li><a class="nav-link" href="#python-is-required-for-this-example">Python is required for this example</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#running-the-simulation">Running the simulation</a></li>
+<li><a class="nav-link" href="#viewing-results">Viewing results</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/PredictiveEcology/spadesCBM/blob/main/SKexample.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/PredictiveEcology/spadesCBM/edit/main/SKexample.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Example: All managed forests in Saskatchewan</strong>: v. 0.1" was written by Céline Boisvenue. It was last built on 26 June 2024.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

@@ -4,13 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Lexicon | spadesCBM</title>
+<title>Lexicon | Example: All managed forests in Saskatchewan</title>
 <meta name="author" content="Céline Boisvenue">
 <meta name="generator" content="bookdown 0.43 with bs4_book()">
-<meta property="og:title" content="Lexicon | spadesCBM">
+<meta property="og:title" content="Lexicon | Example: All managed forests in Saskatchewan">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lexicon | spadesCBM">
+<meta name="twitter:title" content="Lexicon | Example: All managed forests in Saskatchewan">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -54,7 +54,7 @@
 
     <div class="d-flex align-items-start justify-content-between">
       <h1>
-        <a href="index.html" title="v. 0.1">spadesCBM</a>:
+        <a href="index.html" title="v. 0.1">Example: All managed forests in Saskatchewan</a>:
         <small class="text-muted">v. 0.1</small>
       </h1>
       <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
@@ -74,6 +74,7 @@
 <li><a class="" href="cbm_dataprep_sk.html"><span class="header-section-number">2</span> CBM_dataPrep_SK</a></li>
 <li><a class="" href="cbm_vol2biomass.html"><span class="header-section-number">3</span> CBM_vol2biomass</a></li>
 <li><a class="" href="cbm_core.html"><span class="header-section-number">4</span> CBM_core</a></li>
+<li><a class="" href="example-running-spadescbm-for-all-managed-forests-of-saskatchewan.html">Example: Running spadesCBM for all managed forests of Saskatchewan</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
 
@@ -143,40 +144,40 @@ to learn more about the <code>SpaDES.project</code> package and <code>setupProje
 <div id="spadescbm-terms" class="section level2 unnumbered">
 <h2>spadesCBM terms<a class="anchor" aria-label="anchor" href="#spadescbm-terms"><i class="fas fa-link"></i></a>
 </h2>
-<div id="cbm-cfs3-vs-spadescbm" class="section level3" number="0.2.1">
+<div id="cbm-cfs3-vs-spadescbm" class="section level3" number="0.0.1">
 <h3>
-<span class="header-section-number">0.2.1</span> CBM-CFS3 vs spadesCBM<a class="anchor" aria-label="anchor" href="#cbm-cfs3-vs-spadescbm"><i class="fas fa-link"></i></a>
+<span class="header-section-number">0.0.1</span> CBM-CFS3 vs spadesCBM<a class="anchor" aria-label="anchor" href="#cbm-cfs3-vs-spadescbm"><i class="fas fa-link"></i></a>
 </h3>
 </div>
-<div id="spinup" class="section level3" number="0.2.2">
+<div id="spinup" class="section level3" number="0.0.2">
 <h3>
-<span class="header-section-number">0.2.2</span> Spinup<a class="anchor" aria-label="anchor" href="#spinup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">0.0.2</span> Spinup<a class="anchor" aria-label="anchor" href="#spinup"><i class="fas fa-link"></i></a>
 </h3>
 <p>A more in-depth explanation of the spinup function can be found <a href="https://predictiveecology.github.io/spadesCBM/index.html#the-spinup-function">here</a> and <a href="https://predictiveecology.github.io/spadesCBM/cbm_core.html#events-1">here (incomplete)</a>.</p>
 </div>
-<div id="ecozone-vs-spatial-unit" class="section level3" number="0.2.3">
+<div id="ecozone-vs-spatial-unit" class="section level3" number="0.0.3">
 <h3>
-<span class="header-section-number">0.2.3</span> Ecozone vs spatial unit<a class="anchor" aria-label="anchor" href="#ecozone-vs-spatial-unit"><i class="fas fa-link"></i></a>
+<span class="header-section-number">0.0.3</span> Ecozone vs spatial unit<a class="anchor" aria-label="anchor" href="#ecozone-vs-spatial-unit"><i class="fas fa-link"></i></a>
 </h3>
 <p>In Canada, there are 15 distinct terrestrial ecozones. spadesCBM uses this classification. These represent large ecosystems with specific climate and vegetation, regardless of jurisdiction.<br>
 Spatial units are more specific than ecozones, and correspond to the unique combination of jurisdiction (i.e. province or territory) and ecozone.</p>
 </div>
-<div id="pixel-groups" class="section level3" number="0.2.4">
+<div id="pixel-groups" class="section level3" number="0.0.4">
 <h3>
-<span class="header-section-number">0.2.4</span> Pixel groups<a class="anchor" aria-label="anchor" href="#pixel-groups"><i class="fas fa-link"></i></a>
+<span class="header-section-number">0.0.4</span> Pixel groups<a class="anchor" aria-label="anchor" href="#pixel-groups"><i class="fas fa-link"></i></a>
 </h3>
 <p>To simplify and optimize our simulations, we group individual pixels into <code>pixelGroups</code> in which each group corresponds to a unique set of age, growth curve, spatial unit, and ecozone.
 A more in-depth description of pixel groups in spadesCBM can be found here(this definition is currently in the dataPrep chapter, but will likely be moved into core, will link this once it is changed).</p>
 </div>
-<div id="source_pool-and-sink_pool" class="section level3" number="0.2.5">
+<div id="source_pool-and-sink_pool" class="section level3" number="0.0.5">
 <h3>
-<span class="header-section-number">0.2.5</span> source_pool and sink_pool<a class="anchor" aria-label="anchor" href="#source_pool-and-sink_pool"><i class="fas fa-link"></i></a>
+<span class="header-section-number">0.0.5</span> source_pool and sink_pool<a class="anchor" aria-label="anchor" href="#source_pool-and-sink_pool"><i class="fas fa-link"></i></a>
 </h3>
 </div>
 </div>
-<div id="carbon-terms" class="section level2" number="0.3">
+<div id="carbon-terms" class="section level2" number="0.1">
 <h2>
-<span class="header-section-number">0.3</span> carbon terms?<a class="anchor" aria-label="anchor" href="#carbon-terms"><i class="fas fa-link"></i></a>
+<span class="header-section-number">0.1</span> carbon terms?<a class="anchor" aria-label="anchor" href="#carbon-terms"><i class="fas fa-link"></i></a>
 </h2>
 <p>NPP - Net Primary Productivity</p>
 
@@ -207,14 +208,14 @@ A more in-depth description of pixel groups in spadesCBM can be found here(this 
 </li>
 <li>
 <a class="nav-link" href="#spadescbm-terms">spadesCBM terms</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#cbm-cfs3-vs-spadescbm"><span class="header-section-number">0.2.1</span> CBM-CFS3 vs spadesCBM</a></li>
-<li><a class="nav-link" href="#spinup"><span class="header-section-number">0.2.2</span> Spinup</a></li>
-<li><a class="nav-link" href="#ecozone-vs-spatial-unit"><span class="header-section-number">0.2.3</span> Ecozone vs spatial unit</a></li>
-<li><a class="nav-link" href="#pixel-groups"><span class="header-section-number">0.2.4</span> Pixel groups</a></li>
-<li><a class="nav-link" href="#source_pool-and-sink_pool"><span class="header-section-number">0.2.5</span> source_pool and sink_pool</a></li>
+<li><a class="nav-link" href="#cbm-cfs3-vs-spadescbm"><span class="header-section-number">0.0.1</span> CBM-CFS3 vs spadesCBM</a></li>
+<li><a class="nav-link" href="#spinup"><span class="header-section-number">0.0.2</span> Spinup</a></li>
+<li><a class="nav-link" href="#ecozone-vs-spatial-unit"><span class="header-section-number">0.0.3</span> Ecozone vs spatial unit</a></li>
+<li><a class="nav-link" href="#pixel-groups"><span class="header-section-number">0.0.4</span> Pixel groups</a></li>
+<li><a class="nav-link" href="#source_pool-and-sink_pool"><span class="header-section-number">0.0.5</span> source_pool and sink_pool</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#carbon-terms"><span class="header-section-number">0.3</span> carbon terms?</a></li>
+<li><a class="nav-link" href="#carbon-terms"><span class="header-section-number">0.1</span> carbon terms?</a></li>
 </ul>
 
       <div class="book-extra">
@@ -232,7 +233,7 @@ A more in-depth description of pixel groups in spadesCBM can be found here(this 
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>spadesCBM</strong>: v. 0.1" was written by Céline Boisvenue. It was last built on 26 June 2024.</p>
+    <p>"<strong>Example: All managed forests in Saskatchewan</strong>: v. 0.1" was written by Céline Boisvenue. It was last built on 26 June 2024.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
