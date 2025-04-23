@@ -69,7 +69,6 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Overview</a></li>
 <li><a class="active" href="lexicon.html">Lexicon</a></li>
-<li><a class="" href="cbmutils.html">CBMutils</a></li>
 <li><a class="" href="cbm_defaults.html"><span class="header-section-number">1</span> CBM_defaults</a></li>
 <li><a class="" href="cbm_dataprep_sk.html"><span class="header-section-number">2</span> CBM_dataPrep_SK</a></li>
 <li><a class="" href="cbm_vol2biomass.html"><span class="header-section-number">3</span> CBM_vol2biomass</a></li>
@@ -148,6 +147,7 @@ to learn more about the <code>SpaDES.project</code> package and <code>setupProje
 <h3>
 <span class="header-section-number">0.0.1</span> CBM-CFS3 vs spadesCBM<a class="anchor" aria-label="anchor" href="#cbm-cfs3-vs-spadescbm"><i class="fas fa-link"></i></a>
 </h3>
+<p>The Carbon Budget Model of the Canadian Forest Sector <a href="https://natural-resources.canada.ca/climate-change/climate-change-impacts-forests/carbon-budget-model">CBM-CFS3</a> is the windows-based framework currently used for the international reporting of Canada’s managed forests. It is aspatial and windows-based. spadesCBM is a SpaDES implementation of the logic, structure, and defaults assumptions of the Carbon Budget Model <a href="https://natural-resources.canada.ca/climate-change/climate-change-impacts-forests/generic-carbon-budget-model">CBM</a>. It is spatially explicit and built in R with calls to Python functions.</p>
 </div>
 <div id="spinup" class="section level3" number="0.0.2">
 <h3>
@@ -173,6 +173,7 @@ A more in-depth description of pixel groups in spadesCBM can be found here(this 
 <h3>
 <span class="header-section-number">0.0.5</span> source_pool and sink_pool<a class="anchor" aria-label="anchor" href="#source_pool-and-sink_pool"><i class="fas fa-link"></i></a>
 </h3>
+<p>Every carbon transfers in spadesCBM occurs between two pools. One pool is the source and transfers its carbon to the sink. A specific pool is generally not tied to one or the other and can be a source in one carbon transfer and a sink in another. in spadesCBM, this is calculated by proportions, with a proportion of one pool moving to another pool, with proportions adding to 1 so that no carbon is lost.</p>
 </div>
 <div id="net-primary-productivity-npp" class="section level3" number="0.0.6">
 <h3>
@@ -184,13 +185,14 @@ A more in-depth description of pixel groups in spadesCBM can be found here(this 
 <h3>
 <span class="header-section-number">0.0.7</span> cbmPools<a class="anchor" aria-label="anchor" href="#cbmpools"><i class="fas fa-link"></i></a>
 </h3>
+<p>This table is an output of spadesCBM. It provides carbon in MgC</p>
 
 </div>
 </div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="index.html">Overview</a></div>
-<div class="next"><a href="cbmutils.html">CBMutils</a></div>
+<div class="next"><a href="cbm_defaults.html"><span class="header-section-number">1</span> CBM_defaults</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
