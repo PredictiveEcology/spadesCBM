@@ -39,6 +39,11 @@ background-3
 inputs-3
 module-functioning-3
 events-1
+init
+spinup-1
+postspinup
+annual
+accumulateresults
 carbon-transfers
 outputs-3
 links-to-other-modules-3

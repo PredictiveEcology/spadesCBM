@@ -211,12 +211,40 @@
 <h3>
 <span class="header-section-number">4.4.1</span> Events<a class="anchor" aria-label="anchor" href="#events-1"><i class="fas fa-link"></i></a>
 </h3>
-<p><strong>Camille: can you make this a paragraph?</strong>
-Describe events - what does init do: creates all the Python connection and environment (check with Susan she is working on it now).
-The <code>spinup</code> is the landscape initialization event as described in <a href="link%20to%20that%20section">Overview</a> section, where records are grown and burnt until a stabilization of the below ground carbon pools. The <code>cbmExnSpinup</code> function, int R folder of the <a href="">CBM_core</a> module, set-ups the inputs and calls the Python function that defines the model structure (<a href="https://cat-cfs.github.io/libcbm_py/cbm_exn_custom_ops.html#Appendix-1:-CBM-EXN-Default-parameters">cbm_exn_get_default_parameters</a> and runs the carbon transfers necessary for the grow-burn cycle (<a href="https://cat-cfs.github.io/libcbm_py/cbm_exn_custom_ops.html#Appendix-1:-CBM-EXN-Default-parameters">cbm_exn_spinup</a>).</p>
-<p>postspinup: not sure what happens here anymore - check with Susan.</p>
-<p>The <code>annual</code> is where all the carbon transfers are applied. Disturbances are matches to the correct records, and the transfers listed in Table XX of the <a href="link%20to%20overview%20correct%20section">Overview</a> are applied. Details of default transfer rates, which we use in our SK example used throughout this manual are in the following section.</p>
-<p><code>accumulateResults</code> is the event that saves the output as outline in the <code>globalSK.R</code>. In the case of our SK example, we output the <code>cbmPool</code> and the Net Primary Productivity estimate (<a href="link%20to%20lexicon"><code>NPP</code></a>) for each year simulated. These are in the project outputs folder (“~/GitHub/spadesCBM/outputs”) .</p>
+<p>There are 5 events in CBM_core. Each are run once, except for the <code>annual</code> event, which is run for each simulation year.</p>
+<div id="init" class="section level4" number="4.4.1.1">
+<h4>
+<span class="header-section-number">4.4.1.1</span> init<a class="anchor" aria-label="anchor" href="#init"><i class="fas fa-link"></i></a>
+</h4>
+<p>In this short event, the Python virtual environment is set up. If a suitable version of python is not available, it will be installed using the <code>reticulate</code> package.
+If you are using a Windows computer with Git installed, the <a href="https://github.com/pyenv-win/pyenv-win">pyenv-win</a> tool will be acquired and managed directly by <a href="https://rstudio.github.io/reticulate/"><code>reticulate</code></a>. If you are using a Windows computer without Git installed, you will be prompted to allow the <a href="https://github.com/pyenv-win/pyenv-win">pyenv-win</a> tool to be downloaded directly from Github to your local user application data directory (<code>tools::R_user_dir("CBMutils")</code>).</p>
+</div>
+<div id="spinup-1" class="section level4" number="4.4.1.2">
+<h4>
+<span class="header-section-number">4.4.1.2</span> spinup<a class="anchor" aria-label="anchor" href="#spinup-1"><i class="fas fa-link"></i></a>
+</h4>
+<p>The main goal of this event is to initialize the lanscape by performing the <a href="https://predictiveecology.github.io/spadesCBM/#the-spinup-function">spinup function</a>.</p>
+<p>Cohort and stand data is prepared and passed to the <a href="https://github.com/PredictiveEcology/CBM_core/blob/cf9c966e7bbbb29f8089411c73d030e21846ffe3/R/spinup.R#L5"><code>cbmExnSpinup</code></a> function alongside growth curve data (from CBM_vol2biomass) and spinup default data (from CBM_defaults). The <a href="https://github.com/PredictiveEcology/CBM_core/blob/cf9c966e7bbbb29f8089411c73d030e21846ffe3/R/spinup.R#L5"><code>cbmExnSpinup</code></a> function sets up inputs, calls the <a href="https://cat-cfs.github.io/libcbm_py/cbm_exn_custom_ops.html#Appendix-1:-CBM-EXN-Default-parameters"><code>cbm_exn_get_default_parameters</code></a> python function that defines the model structure, and runs the carbon transfers necessary for the growth and burn cycle using <a href="https://cat-cfs.github.io/libcbm_py/cbm_exn_custom_ops.html#Appendix-1:-CBM-EXN-Default-parameters"><code>cbm_exn_spinup</code></a>.</p>
+<p>Once complete, outputs of the spinup are saved to the simlist.</p>
+</div>
+<div id="postspinup" class="section level4" number="4.4.1.3">
+<h4>
+<span class="header-section-number">4.4.1.3</span> postSpinup<a class="anchor" aria-label="anchor" href="#postspinup"><i class="fas fa-link"></i></a>
+</h4>
+<p>This short event does some basic data preparation to some of the spinup outputs to allow for use in this model. It also creates the simulation’s initial <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#pixel-groups">pixel groups</a>.</p>
+</div>
+<div id="annual" class="section level4" number="4.4.1.4">
+<h4>
+<span class="header-section-number">4.4.1.4</span> annual<a class="anchor" aria-label="anchor" href="#annual"><i class="fas fa-link"></i></a>
+</h4>
+<p>This event is where are the carbon transfers are applied for each simulation year. Disturbances are matched to the correct records, and the transfers listed <a href="https://predictiveecology.github.io/spadesCBM/index.html#order-of-operations">here</a> are applied. Details on transfer rates are found in the <a href="https://predictiveecology.github.io/spadesCBM/cbm_core.html#carbon-transfers">following section</a>.</p>
+</div>
+<div id="accumulateresults" class="section level4" number="4.4.1.5">
+<h4>
+<span class="header-section-number">4.4.1.5</span> accumulateResults<a class="anchor" aria-label="anchor" href="#accumulateresults"><i class="fas fa-link"></i></a>
+</h4>
+<p>This final event is where outputs are saved. In the case of our example in Saskatchewan, we output and save cbmPools and Net Primary Production (NPP MAKE AND LINK TO LEXICON) for each simulation year. If paths are kept at default when running the global script, these outputs should be found here: <code>~/GitHub/spadesCBM/outputs</code>.</p>
+</div>
 </div>
 <div id="carbon-transfers" class="section level3" number="4.4.2">
 <h3>
