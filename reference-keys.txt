@@ -1,3 +1,4 @@
+prepinputs
 cbm-cfs3-vs-spadescbm
 spinup
 ecozone-vs-spatial-unit
