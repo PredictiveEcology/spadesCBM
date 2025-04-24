@@ -219,8 +219,8 @@
 <p>There are 468 unique disturbance matrices identified in the defaults. Since root parameters and snag carbon transfer rates have hardwood and softwood specific rates, each disturbance has a hardwood and a softwood instance, which means we have 234 unique disturbances across Canada as defaults in this modelling system, one for hardwood and one for softwood. A user could add or modify the proportions transferred between pools to represent a disturbance (<strong>NOTE THAT THIS WOULD HAVE TO HAPPEN IN THE CSVs, and even then would that work? Does libcbm point to those files? what if we change them? QUESTION FOR SCOTT, VINI and SUSAN</strong>).
 <strong>Add a section on how one would modify the disturbance matrices</strong>
 **Add Vini’s (or similar) disturbance matrix figure.</p>
-<p>*Figure 1: disturbances present in a 3 year simulation of all managed forests of Saskatchewan</p>
-<div class="inline-figure"><img src="https://drive.google.com/file/d/1SsJAiC_ocV2l3GUfVaskZguX4R0lxRps" fig-align="center" width="700"></div>
+<p><em>Figure 1: Proportional carbon transfers between pools during a fire in Saskatchewan</em></p>
+<div class="inline-figure"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/SKfireAlluvial.png" fig-align="center" width="700"></div>
 <p>Parameters necessary for the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> <code>spinup</code> event are added to the <code>level3DT</code> object by using the <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a> output object <code>spinupSQL</code>. This includes a match to the historical disturbance matrix (wildfire) specific to this location (<code>historicDMtype</code>).</p>
 <p>There are a series of helper functions in <a href="https://github.com/PredictiveEcology/CBMutils.git">CBMutils</a> to help users explore and navigate disturbance matrices:
 - <a href="https://github.com/PredictiveEcology/CBMutils/tree/main/vignettes">spuDist</a> for extracting the disturbances in a specific spatial unit,
