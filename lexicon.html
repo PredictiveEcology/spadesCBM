@@ -121,6 +121,7 @@ Using modules allows us to break up a model’s code into meaningful themes and/
 <h3>
 <span class="header-section-number">0.0.1</span> <code>prepInputs()</code><a class="anchor" aria-label="anchor" href="#prepinputs"><i class="fas fa-link"></i></a>
 </h3>
+<p>This function is used to prepare R objects from remote (usually URLs) or local data sources. This enables easily repeatable continuous workflows and facilitates commonly used steps for getting, loading, and processing data. More information on the function and how it can be used with SpaDES-related projects can be found <a href="https://predictiveecology.org/training/_book/prepInputs.html">here</a>.</p>
 </div>
 </div>
 <div id="running-a-global-script" class="section level2 unnumbered">
@@ -171,7 +172,7 @@ Spatial units are more specific than ecozones, and correspond to the unique comb
 <span class="header-section-number">0.0.5</span> Pixel groups<a class="anchor" aria-label="anchor" href="#pixel-groups"><i class="fas fa-link"></i></a>
 </h3>
 <p>To simplify and optimize our simulations, we group individual pixels into <code>pixelGroups</code> in which each group corresponds to a unique set of age, growth curve, spatial unit, and ecozone.
-A more in-depth description of pixel groups in spadesCBM can be found here(this definition is currently in the dataPrep chapter, but will likely be moved into core, will link this once it is changed).</p>
+A more in-depth description of pixel groups in spadesCBM can be found <a href="https://predictiveecology.github.io/spadesCBM/cbm_core.html#pixel-groups-1">here</a>.</p>
 </div>
 <div id="source_pool-and-sink_pool" class="section level3" number="0.0.6">
 <h3>
@@ -179,17 +180,35 @@ A more in-depth description of pixel groups in spadesCBM can be found here(this 
 </h3>
 <p>Every carbon transfers in spadesCBM occurs between two pools. One pool is the source and transfers its carbon to the sink. A specific pool is generally not tied to one or the other and can be a source in one carbon transfer and a sink in another. in spadesCBM, this is calculated by proportions, with a proportion of one pool moving to another pool, with proportions adding to 1 so that no carbon is lost.</p>
 </div>
-<div id="net-primary-productivity-npp" class="section level3" number="0.0.7">
+<div id="masterraster" class="section level3" number="0.0.7">
 <h3>
-<span class="header-section-number">0.0.7</span> Net Primary Productivity (NPP)<a class="anchor" aria-label="anchor" href="#net-primary-productivity-npp"><i class="fas fa-link"></i></a>
+<span class="header-section-number">0.0.7</span> masterRaster<a class="anchor" aria-label="anchor" href="#masterraster"><i class="fas fa-link"></i></a>
+</h3>
+<p>In spadesCBM, our study area is defined by the <code>masterRaster</code> object. This object can be directly provided as a raster, created from a shapefile, or by any other means. In our example, it is provided as a raster file in our global script. Refer to our <a href="https://predictiveecology.github.io/spadesCBM/example-spadescbm-in-saskatchewan.html#running-the-simulation">Example</a> chapter to view how it the <code>masterRaster</code> is provided in our example.</p>
+</div>
+<div id="cbmadmin" class="section level3" number="0.0.8">
+<h3>
+<span class="header-section-number">0.0.8</span> cbmAdmin<a class="anchor" aria-label="anchor" href="#cbmadmin"><i class="fas fa-link"></i></a>
+</h3>
+<p>This data table provides ecozone and spatial unit information for provincial boundaries. It is provided to help users with the equivalence between provincial and territorial boundaries, ecozones, and spatial unit IDs.</p>
+</div>
+<div id="net-primary-productivity-npp" class="section level3" number="0.0.9">
+<h3>
+<span class="header-section-number">0.0.9</span> Net Primary Productivity (NPP)<a class="anchor" aria-label="anchor" href="#net-primary-productivity-npp"><i class="fas fa-link"></i></a>
 </h3>
 <p>NPP is defined as the amount of CO<sub>2</sub> removed from the atmosphere and absorbed by the forest to maintain itself.</p>
 </div>
-<div id="cbmpools" class="section level3" number="0.0.8">
+<div id="cbmpools" class="section level3" number="0.0.10">
 <h3>
-<span class="header-section-number">0.0.8</span> cbmPools<a class="anchor" aria-label="anchor" href="#cbmpools"><i class="fas fa-link"></i></a>
+<span class="header-section-number">0.0.10</span> cbmPools<a class="anchor" aria-label="anchor" href="#cbmpools"><i class="fas fa-link"></i></a>
 </h3>
-<p>This table is an output of spadesCBM. It provides carbon in MgC</p>
+<p>This table is an output of spadesCBM. It provides carbon in MgC for all cohort groups and pools after each simulation year (or as prescribed if the simulations are very long).</p>
+</div>
+<div id="dead-oraganic-matter" class="section level3" number="0.0.11">
+<h3>
+<span class="header-section-number">0.0.11</span> Dead Oraganic Matter<a class="anchor" aria-label="anchor" href="#dead-oraganic-matter"><i class="fas fa-link"></i></a>
+</h3>
+<p>spadesCBM models carbon in the live component of the forest (i.e. trees) and its dead organic matter (DOM). DOM carbon pools in spadesCBM include all snag pools (which include dead stems, bark, branches, stumps) and all organic soil carbon pools.</p>
 
 </div>
 </div>
@@ -225,8 +244,11 @@ A more in-depth description of pixel groups in spadesCBM can be found here(this 
 <li><a class="nav-link" href="#ecozone-vs-spatial-unit"><span class="header-section-number">0.0.4</span> Ecozone vs spatial unit</a></li>
 <li><a class="nav-link" href="#pixel-groups"><span class="header-section-number">0.0.5</span> Pixel groups</a></li>
 <li><a class="nav-link" href="#source_pool-and-sink_pool"><span class="header-section-number">0.0.6</span> source_pool and sink_pool</a></li>
-<li><a class="nav-link" href="#net-primary-productivity-npp"><span class="header-section-number">0.0.7</span> Net Primary Productivity (NPP)</a></li>
-<li><a class="nav-link" href="#cbmpools"><span class="header-section-number">0.0.8</span> cbmPools</a></li>
+<li><a class="nav-link" href="#masterraster"><span class="header-section-number">0.0.7</span> masterRaster</a></li>
+<li><a class="nav-link" href="#cbmadmin"><span class="header-section-number">0.0.8</span> cbmAdmin</a></li>
+<li><a class="nav-link" href="#net-primary-productivity-npp"><span class="header-section-number">0.0.9</span> Net Primary Productivity (NPP)</a></li>
+<li><a class="nav-link" href="#cbmpools"><span class="header-section-number">0.0.10</span> cbmPools</a></li>
+<li><a class="nav-link" href="#dead-oraganic-matter"><span class="header-section-number">0.0.11</span> Dead Oraganic Matter</a></li>
 </ul>
 </li>
 </ul>

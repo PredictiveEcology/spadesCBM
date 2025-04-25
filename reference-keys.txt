@@ -4,8 +4,11 @@ spinup
 ecozone-vs-spatial-unit
 pixel-groups
 source_pool-and-sink_pool
+masterraster
+cbmadmin
 net-primary-productivity-npp
 cbmpools
+dead-oraganic-matter
 cbm_defaults
 overview-1
 background
@@ -19,7 +22,8 @@ overview-2
 background-1
 inputs-1
 module-functioning-1
-pixel-groups-1
+init
+readdisturbanceevents
 disturbances
 outputs-1
 links-to-other-modules-1
@@ -41,11 +45,12 @@ background-3
 inputs-3
 module-functioning-3
 events-1
-init
+init-1
 spinup-1
 postspinup
 annual
 accumulateresults
+pixel-groups-1
 carbon-transfers
 outputs-3
 links-to-other-modules-3
