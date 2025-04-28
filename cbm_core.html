@@ -213,11 +213,12 @@
 <p>This final event is where outputs are saved. In the case of our example in Saskatchewan, we output and save <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#cbmpools">cbmPools</a> and Net Primary Production (<a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#net-primary-productivity-npp">NPP</a>) for each simulation year. If paths are kept at default when running the global script, these outputs should be found here: <code>~/GitHub/spadesCBM/outputs</code>.</p>
 </div>
 </div>
-<div id="pixel-groups-1" class="section level3" number="4.4.2">
+<div id="stands-and-cohort-groups" class="section level3" number="4.4.2">
 <h3>
-<span class="header-section-number">4.4.2</span> Pixel Groups<a class="anchor" aria-label="anchor" href="#pixel-groups-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.2</span> Stands and Cohort Groups<a class="anchor" aria-label="anchor" href="#stands-and-cohort-groups"><i class="fas fa-link"></i></a>
 </h3>
-<p><a href="https://predictiveecology.github.io/spadesCBM/lexicon.html"><code>pixelGroup</code></a> are unique combinations of age, growth curve (which means species), <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">spatial unit</a> and <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">ecozone</a>. All pixels having identical age, growth curve, in the same spatial unit and ecozone share one <code>pixelGroup</code> number. The object <code>allPixelDT</code> has all the pixels in the <code>masterRaster</code>. The <code>spatialDT</code> object is the long-form where each simulated pixel has its own line (no NAs), and <code>level3DT</code> lists only the pixel groups. In our example there are 1 347 529 pixels simulated (i.e., 1 347 529 lines in <code>spatialDT</code>) which are grouped in 739 pixelGroups for processing (i.e., 739 lines in <code>level3DT</code>).</p>
+<p><a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#cohort-groups">Cohort groups</a> are unique combinations of age, growth curve (which equates to species), <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#ecozone-vs-spatial-unit">spatial unit</a> and <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#ecozone-vs-spatial-unit">ecozone</a>. in spadesCBM, forested pixels are simulated and represent a stand. Each stand (or pixel) can have one or many cohorts. All cohorts across stands that share an identical age, growth curve, spatial unit, and ecozone will share one unique <code>cohortGroupID</code> number.</p>
+<p>The object <code>allPixDT</code> is a large table with a row corresponding to every pixel in the <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#masterraster"><code>masterRaster</code></a>. The <code>cohortDT</code> object is a long-form table where each simulated pixel (or stand) has its own row (no NAs), and <code>cohortGroups</code> lists only the cohort groups and their attributes. In our example there are 1 347 529 pixels simulated (i.e., 1 347 529 rows in <code>cohortDT</code>) which are grouped in 739 pixelGroups for processing (i.e. 739 rows in <code>cohortGroups</code>).</p>
 </div>
 <div id="carbon-transfers" class="section level3" number="4.4.3">
 <h3>
@@ -346,7 +347,7 @@
 <li>
 <a class="nav-link" href="#module-functioning-3"><span class="header-section-number">4.4</span> Module functioning</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#events-1"><span class="header-section-number">4.4.1</span> Events</a></li>
-<li><a class="nav-link" href="#pixel-groups-1"><span class="header-section-number">4.4.2</span> Pixel Groups</a></li>
+<li><a class="nav-link" href="#stands-and-cohort-groups"><span class="header-section-number">4.4.2</span> Stands and Cohort Groups</a></li>
 <li><a class="nav-link" href="#carbon-transfers"><span class="header-section-number">4.4.3</span> Carbon Transfers</a></li>
 </ul>
 </li>
