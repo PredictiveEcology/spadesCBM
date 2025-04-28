@@ -42,9 +42,9 @@
     }
   </style>
 <link rel="stylesheet" href="css/style.css">
-<meta name="description" content="Here we provide an example script to run all managed forests in Saskatchewan. This example is fairly lightweight and most computers should be able to run the simulation. In this example, we setup...">
-<meta property="og:description" content="Here we provide an example script to run all managed forests in Saskatchewan. This example is fairly lightweight and most computers should be able to run the simulation. In this example, we setup...">
-<meta name="twitter:description" content="Here we provide an example script to run all managed forests in Saskatchewan. This example is fairly lightweight and most computers should be able to run the simulation. In this example, we setup...">
+<meta name="description" content="Here we provide an example script to run all managed forests in Saskatchewan between 1985 and 2011. This example is fairly lightweight and most computers should be able to run the simulation. In...">
+<meta property="og:description" content="Here we provide an example script to run all managed forests in Saskatchewan between 1985 and 2011. This example is fairly lightweight and most computers should be able to run the simulation. In...">
+<meta name="twitter:description" content="Here we provide an example script to run all managed forests in Saskatchewan between 1985 and 2011. This example is fairly lightweight and most computers should be able to run the simulation. In...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -85,7 +85,7 @@
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="example-spadescbm-in-saskatchewan" class="section level1 unnumbered">
 <h1>Example: spadesCBM in Saskatchewan<a class="anchor" aria-label="anchor" href="#example-spadescbm-in-saskatchewan"><i class="fas fa-link"></i></a>
 </h1>
-<p>Here we provide an example script to run all managed forests in Saskatchewan. This example is fairly lightweight and most computers should be able to run the simulation.</p>
+<p>Here we provide an example script to run all managed forests in Saskatchewan between 1985 and 2011. This example is fairly lightweight and most computers should be able to run the simulation.</p>
 <p>In this example, we setup the workflow using the
 <a href="https://spades-project.predictiveecology.org/"><code>SpaDES.project</code></a> package and
 current versions of the <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> modules.</p>
@@ -115,6 +115,7 @@ During the <a href="https://spades-core.predictiveecology.org/reference/simInit.
 <h2>Running the simulation<a class="anchor" aria-label="anchor" href="#running-the-simulation"><i class="fas fa-link"></i></a>
 </h2>
 <p>Here is an R script to run the simulation of forest carbon dynamics in the managed forests of SK from 1985 to 2011, with disturbances as presented in <span class="citation">Boisvenue <em>et al.</em> (<a href="references.html#ref-boisvenue2016">2016</a>)</span>. Depending on your computing capacity, this may take a while, particularly the first time you run it. Subsequent simulations are much faster because of the use of the <a href="https://cran.r-project.org/web/packages/SpaDES.core/vignettes/iii-cache.html">reproducible::Cache</a> function.</p>
+<p>The simulation period can be changed to be shorter, but disturbances raster are only provided for years within the 1985-2011 range in this example.</p>
 <pre><code># set project paths and install packages
 projectPath &lt;- "~/GitHub/spadesCBM"
 repos &lt;- unique(c("predictiveecology.r-universe.dev", getOption("repos")))
@@ -140,10 +141,10 @@ out &lt;- SpaDES.project::setupProject(
     # Require.offlineMode = TRUE,
     spades.moduleCodeChecks = FALSE
   ),
-  modules =  c("PredictiveEcology/CBM_defaults@development",
-               "PredictiveEcology/CBM_dataPrep_SK@development",
-               "PredictiveEcology/CBM_vol2biomass@development",
-               "PredictiveEcology/CBM_core@development"),
+  modules =  c("PredictiveEcology/CBM_defaults@main",
+               "PredictiveEcology/CBM_dataPrep_SK@main",
+               "PredictiveEcology/CBM_vol2biomass@main",
+               "PredictiveEcology/CBM_core@main"),
   times = times,
   require = c("reproducible"),
 
@@ -182,32 +183,34 @@ simMngedSK &lt;- SpaDES.core::simInitAndSpades2(out)</code></pre>
 <div id="viewing-results" class="section level2 unnumbered">
 <h2>Viewing results<a class="anchor" aria-label="anchor" href="#viewing-results"><i class="fas fa-link"></i></a>
 </h2>
-<p>Once the simulation has run, we can view certain results. Some of these are saved as files in the outputs folder created in the project’s directory. If kept as the default in the global script above, these can be found here: <code>~/GitHub/spadesCBM/outputs</code>. You should be able to see <code>.rds</code> files for cbmPools and NPP for each simulated year, as well as various growth curve and increment related figures from <a href="https://github.com/PredictiveEcology/CBM_vol2biomass">CBM_vol2biomass</a>.</p>
+<p>Once the simulation has run, we can view our results. Some of these are saved as files in the outputs folder created in the project’s directory. If kept as the default in the global script above, these can be found here: <code>~/GitHub/spadesCBM/outputs</code>. You should be able to see <code>.rds</code> files for cbmPools and NPP for each simulated year, as well as various growth curve and increment related figures from <a href="https://github.com/PredictiveEcology/CBM_vol2biomass">CBM_vol2biomass</a> shown below.</p>
+<p><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/cumPools_smoothed_postChapmanRichards.png" fig-align="center" width="700"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/Increments.png" fig-align="center" width="700"></p>
 <p>The <code>simMngedSK</code> object in R is the resulting <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#simlist">simlist</a> of our simulation. <code>CBMutils</code> offers a few plotting functions to help visualize basic results using our simlist.</p>
-<pre><code># Shows yearly forest products and emissions for each simulation year
+<pre><code># Yearly forest products and emissions for each simulation year
 carbonPlot &lt;- CBMutils::carbonOutPlot(
   emissionsProducts = simMngedSK$emissionsProducts
-)
-
-# Shows proportions of carbon in above and below ground compartments
+)</code></pre>
+<div class="inline-figure"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/carbonPlot.png" fig-align="center" width="700"></div>
+<pre><code># Proportions of carbon in above and below ground compartments
 barplot &lt;- CBMutils::barPlot(
   cbmPools = simMngedSK$cbmPools
-)
-
-# Map of pixel-level average NPP
+)</code></pre>
+<div class="inline-figure"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/bPlot.png" fig-align="center" width="700"></div>
+<pre><code># Map of pixel-level average NPP
 NppPlot &lt;- CBMutils::NPPplot(
   spatialDT = simMngedSK$spatialDT,
   NPP = simMngedSK$NPP,
   masterRaster = simMngedSK$masterRaster
-)
-
-# Map of total carbon per pixel for a simulation year
+)</code></pre>
+<div class="inline-figure"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/NPPplot.png" fig-align="center" width="700"></div>
+<pre><code># Map of total carbon per pixel for a simulation year
 spstialPlot &lt;- sCBMutils::patialPlot(
   cbmPools = simMngedSK$cbmPools,
   years = 2000, # set simulation year 
   masterRaster = simMngedSK$masterRaster,
   spatialDT = simMngedSK$spatialDT
 )</code></pre>
+<div class="inline-figure"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/spatialPlot.png" fig-align="center" width="700"></div>
 
 </div>
 </div>
