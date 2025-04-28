@@ -93,7 +93,7 @@
 <h2>
 <span class="header-section-number">4.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview-4"><i class="fas fa-link"></i></a>
 </h2>
-<p><a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> is the central module of <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>. This is where all the carbon transfers are calculated at every time step, where disturbances are applied, and stocks are tracked. It cannot run on its own and it needs parameters from either <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a>, <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, and <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> (as per the provided example for managed forests of Saskatchewan) or the equivalent information from the user. In <em>SpaDES-speak</em>, this module has five events (<code>Init</code>, <code>spinup</code>, <code>postSpinup</code>, <code>annual</code>, <code>accumulateResults</code>). Only in two of these events do carbon transactions occur: <code>spinup</code> and <code>annual</code>. The other events are tools to enable these transactions. All events are scheduled only once except for the <code>annual</code> event, who schedules itself until the end of the simulation horizon. Only in this module are the Python functions from the <a href="https://github.com/cat-cfs/libcbm_py/tree/main">libcbm</a> package called. The functions used in this module are the <a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/model/cbm_exn">libcbm cbm-exn</a> functions exclusively, as these were designed to accept external biomass increments. These Python functions are used in the <code>spinup</code> and in the <code>annual</code> events only.</p>
+<p><a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> is the central module of <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>. This is where all the carbon transfers are calculated at every time step, where disturbances are applied, and stocks are tracked. It cannot run on its own and it needs parameters from either <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a>, <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, and <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> (as per the provided example for managed forests of Saskatchewan) or the equivalent information from the user. In <em>SpaDES-speak</em>, this module has four events (<code>Init</code>, <code>spinup</code>, <code>annual</code>, <code>accumulateResults</code>). Only in two of these events do carbon transactions occur: <code>spinup</code> and <code>annual</code>. The other events are tools to enable these transactions. All events are scheduled only once except for the <code>annual</code> event, who schedules itself until the end of the simulation horizon. Only in this module are the Python functions from the <a href="https://github.com/cat-cfs/libcbm_py/tree/main">libcbm</a> package called. The functions used in this module are the <a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/model/cbm_exn">libcbm cbm-exn</a> functions exclusively, as these were designed to accept external biomass increments. These Python functions are used in the <code>spinup</code> and in the <code>annual</code> events only.</p>
 </div>
 <div id="background-3" class="section level2" number="4.2">
 <h2>
@@ -185,7 +185,7 @@
 <h3>
 <span class="header-section-number">4.4.1</span> Events<a class="anchor" aria-label="anchor" href="#events-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>There are 5 events in CBM_core. Each are run once, except for the <code>annual</code> event, which is repeated for each simulation year.</p>
+<p>There are 4 events in CBM_core. Each are run once, except for the <code>annual</code> event, which is repeated for each simulation year.</p>
 <div id="init-1" class="section level4" number="4.4.1.1">
 <h4>
 <span class="header-section-number">4.4.1.1</span> <code>Init</code><a class="anchor" aria-label="anchor" href="#init-1"><i class="fas fa-link"></i></a>
@@ -198,22 +198,17 @@
 </h4>
 <p>The main goal of this event is to initialize the landscape by performing the <a href="https://predictiveecology.github.io/spadesCBM/#the-spinup-function">spinup function</a>.</p>
 <p>Cohort and stand data is prepared and passed to the <a href="https://github.com/PredictiveEcology/CBM_core/blob/cf9c966e7bbbb29f8089411c73d030e21846ffe3/R/spinup.R#L5"><code>cbmExnSpinup</code></a> function alongside growth curve data (from CBM_vol2biomass) and spinup default data (from CBM_defaults). The <a href="https://github.com/PredictiveEcology/CBM_core/blob/cf9c966e7bbbb29f8089411c73d030e21846ffe3/R/spinup.R#L5"><code>cbmExnSpinup</code></a> function sets up inputs, calls the <a href="https://cat-cfs.github.io/libcbm_py/cbm_exn_custom_ops.html#Appendix-1:-CBM-EXN-Default-parameters"><code>cbm_exn_get_default_parameters</code></a> python function that defines the model structure, and runs the carbon transfers necessary for the growth and burn cycle using <a href="https://cat-cfs.github.io/libcbm_py/cbm_exn_custom_ops.html#Appendix-1:-CBM-EXN-Default-parameters"><code>cbm_exn_spinup</code></a>.</p>
+<p>The spinup output data and cohort groups are then prepared for use in the <code>annual</code> event.</p>
 </div>
-<div id="postspinup" class="section level4" number="4.4.1.3">
+<div id="annual" class="section level4" number="4.4.1.3">
 <h4>
-<span class="header-section-number">4.4.1.3</span> <code>postSpinup</code><a class="anchor" aria-label="anchor" href="#postspinup"><i class="fas fa-link"></i></a>
-</h4>
-<p>This short event is responsible for some basic data preparation to some of the spinup outputs to allow for use in this model. It also creates the simulation’s initial <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#pixel-groups">pixel groups</a>.</p>
-</div>
-<div id="annual" class="section level4" number="4.4.1.4">
-<h4>
-<span class="header-section-number">4.4.1.4</span> <code>annual</code><a class="anchor" aria-label="anchor" href="#annual"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.1.3</span> <code>annual</code><a class="anchor" aria-label="anchor" href="#annual"><i class="fas fa-link"></i></a>
 </h4>
 <p>This is the only event in spadesCBM that is run more than once. This event is where are the carbon transfers are applied for each simulation year. Disturbances are matched to the correct records, and the transfers listed <a href="https://predictiveecology.github.io/spadesCBM/index.html#order-of-operations">here</a> are applied. Details on transfer rates are found in the <a href="https://predictiveecology.github.io/spadesCBM/cbm_core.html#carbon-transfers">following section below</a>.</p>
 </div>
-<div id="accumulateresults" class="section level4" number="4.4.1.5">
+<div id="accumulateresults" class="section level4" number="4.4.1.4">
 <h4>
-<span class="header-section-number">4.4.1.5</span> <code>accumulateResults</code><a class="anchor" aria-label="anchor" href="#accumulateresults"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.1.4</span> <code>accumulateResults</code><a class="anchor" aria-label="anchor" href="#accumulateresults"><i class="fas fa-link"></i></a>
 </h4>
 <p>This final event is where outputs are saved. In the case of our example in Saskatchewan, we output and save <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#cbmpools">cbmPools</a> and Net Primary Production (<a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#net-primary-productivity-npp">NPP</a>) for each simulation year. If paths are kept at default when running the global script, these outputs should be found here: <code>~/GitHub/spadesCBM/outputs</code>.</p>
 </div>

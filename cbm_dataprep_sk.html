@@ -220,16 +220,16 @@
 <h3>
 <span class="header-section-number">2.4.3</span> Disturbances<a class="anchor" aria-label="anchor" href="#disturbances"><i class="fas fa-link"></i></a>
 </h3>
-<p>The user identifies what disturbances occur on the landscape during the simulations. Our example points to a file that has the disturbance name and description, <code>userDist</code>. The table also provides a raster values that differentiates between disturbance types (in our example, we provide one raster per year, which has all disturbances in that year, each having a unique raster value, as opposed to one individual raster per year per disturbance type), and identifies if the disturbance is a whole stand disturbance or not. These disturbances need to be match to a disturbance matrix, which identifies the proportion of carbon transferred from one pool (<a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">source_pool</a>) to another pool (<a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">sink_pool</a>) when a disturbance occurs in that pixel. If there is more than one match (e.g., more than one type of fire), the user will be prompted to select from a list of disturbance matrices available for the study area, for each <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">spatial unit</a> and <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">ecozone</a> combinations. The default matrices are provided in the Canada-wide defaults and are region (<a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">spatial unit</a> and <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">ecozone</a>) specific. These are read-in by <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a> and available to the <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> module via the <a href="https://predictiveecology.org/training/_book/simList.html">simList()</a>. We provide an example of selection in our example. The user-prompts look like this:
+<p>The user identifies what disturbances occur on the landscape during the simulations. Our example points to a file that has the disturbance name and description, <code>userDist</code>. The table also provides a raster values that differentiates between disturbance types (in our example, we provide one raster per year, which has all disturbances in that year, each having a unique raster value, as opposed to one individual raster per year per disturbance type), and identifies if the disturbance is a whole stand disturbance or not. These disturbances need to be match to a disturbance matrix, which identifies the proportion of carbon transferred from one pool (<a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#source_pool-and-sink_pool">source_pool</a>) to another pool (<a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#source_pool-and-sink_pool">sink_pool</a>) when a disturbance occurs in that pixel. If there is more than one match (e.g., more than one type of fire), the user will be prompted to select from a list of disturbance matrices available for the study area, for each <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#ecozone-vs-spatial-unit">spatial unit</a> and <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#ecozone-vs-spatial-unit">ecozone</a> combinations. The default matrices are provided in the Canada-wide defaults and are region (<a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#ecozone-vs-spatial-unit">spatial unit</a> and <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#ecozone-vs-spatial-unit">ecozone</a>) specific. These are read-in by <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a> and available to the <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> module via the <a href="https://predictiveecology.org/training/_book/simList.html">simList()</a>. We provide an example of selection in our example. The user-prompts look like this:
 <img src="https://github.com/PredictiveEcology/spadesCBM/blob/main/manual/images/disturbanceSelection.png?raw=true" fig-align="center"></p>
 <p>There are 468 unique disturbance matrices identified in the defaults. Since root parameters and snag carbon transfer rates have hardwood and softwood specific rates, each disturbance has a hardwood and a softwood instance, which means we have 234 unique disturbances across Canada as defaults in this modelling system, one for hardwood and one for softwood. A user could add or modify the proportions transferred between pools to represent a disturbance (<strong>NOTE THAT THIS WOULD HAVE TO HAPPEN IN THE CSVs, and even then would that work? Does libcbm point to those files? what if we change them? QUESTION FOR SCOTT, VINI and SUSAN</strong>).
 <strong>Add a section on how one would modify the disturbance matrices</strong></p>
 <p><em>Figure 1: Proportional carbon transfers between pools during a fire in Saskatchewan</em></p>
 <div class="inline-figure"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/SKfireAlluvial.png" fig-align="center" width="600"></div>
 <p>There are a series of helper functions in <a href="https://github.com/PredictiveEcology/CBMutils.git">CBMutils</a> to help users explore and navigate disturbance matrices:
-- <a href="https://github.com/PredictiveEcology/CBMutils/tree/main/vignettes">spuDist</a> for extracting the disturbances in a specific spatial unit,
-- <a href="https://github.com/PredictiveEcology/CBMutils/tree/main/vignettes">simDist()</a> which lists the distrubances used in a simulation, and
-- <a href="https://github.com/PredictiveEcology/CBMutils/tree/main/vignettes">seeDist()</a> which pulls out the proportions from source to sink pools.</p>
+- <a href="https://github.com/PredictiveEcology/CBMutils/blob/25f9b873ed7c2303864fa1b2d9243b8a7e20663e/R/CBM-DB_disturbances.R#L275">spuDist</a> for extracting the disturbances in a specific spatial unit,
+- <a href="https://github.com/PredictiveEcology/CBMutils/blob/25f9b873ed7c2303864fa1b2d9243b8a7e20663e/R/CBM-DB_disturbances.R#L458">simDist()</a> which lists the distrubances used in a simulation, and
+- <a href="https://github.com/PredictiveEcology/CBMutils/blob/25f9b873ed7c2303864fa1b2d9243b8a7e20663e/R/CBM-DB_disturbances.R#L388">seeDist()</a> which pulls out the proportions from source to sink pools.</p>
 <p>Because growth curves can be identified by strata, multiple columns can be used to identify growth curves using the <code>curveID</code> object. In our example, only <strong>gcids</strong> is used.</p>
 </div>
 </div>
@@ -265,31 +265,37 @@
 <td>TAble of cohort attributes</td>
 </tr>
 <tr class="even">
+<td>spatialDT</td>
+<td>Data table</td>
+<td>Summary table of raster input data with 1 row for each <code>masterRaster pixel</code> that is not <code>NA</code>
+</td>
+</tr>
+<tr class="odd">
 <td>curveID</td>
 <td>Character</td>
 <td>Column names in <code>cohortDT</code> that uniquely define each cohort growth curve ID</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>gcMeta</td>
 <td>Data table</td>
 <td>Growth curve metadata</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>userGcM3</td>
 <td>Data table</td>
 <td>User provided growth curve data</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>disturbanceMeta</td>
 <td>Data table</td>
 <td>Table defining disturbance event types</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>disturbanceEvents</td>
 <td>Data table</td>
 <td>Table with disturbance events for each simulation year</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>speciesPixelGroup</td>
 <td>Data table</td>
 <td>Table connecting pixel groups to species IDs</td>

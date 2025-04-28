@@ -47,7 +47,6 @@ module-functioning-3
 events-1
 init-1
 spinup-1
-postspinup
 annual
 accumulateresults
 pixel-groups-1
