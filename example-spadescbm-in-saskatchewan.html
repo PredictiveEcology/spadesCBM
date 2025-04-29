@@ -198,7 +198,7 @@ barplot &lt;- CBMutils::barPlot(
 <div class="inline-figure"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/bPlot.png" fig-align="center" width="700"></div>
 <pre><code># Map of pixel-level average NPP
 NppPlot &lt;- CBMutils::NPPplot(
-  spatialDT = simMngedSK$spatialDT,
+  cohortGroupKeep = simMngedSK$cohortGroupKeep,
   NPP = simMngedSK$NPP,
   masterRaster = simMngedSK$masterRaster
 )</code></pre>
@@ -208,7 +208,7 @@ spstialPlot &lt;- sCBMutils::patialPlot(
   cbmPools = simMngedSK$cbmPools,
   years = 2000, # set simulation year 
   masterRaster = simMngedSK$masterRaster,
-  spatialDT = simMngedSK$spatialDT
+  cohortGroupKeep = simMngedSK$cohortGroupKeep
 )</code></pre>
 <div class="inline-figure"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/spatialPlot.png" fig-align="center" width="700"></div>
 
