@@ -106,7 +106,7 @@ During the <a href="https://spades-core.predictiveecology.org/reference/simInit.
 </h3>
 <p>The <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module, which is the simulation module of <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>, requires Python &gt;=3.9 and &lt;=3.12.7.</p>
 <p>If a suitable version of Python does not already exist on your computer,
-<a href="https://spades-project.predictiveecology.org/reference/setupProject.html">SpaDES.project::setupProject</a> will use the <a href="https://rstudio.github.io/reticulate/"><code>reticulate</code></a> package to install it using the <a href="https://github.com/pyenv/pyenv">pyenv</a> or <a href="https://github.com/pyenv-win/pyenv-win">pyenv-win</a>.</p>
+The <a href="https://rstudio.github.io/reticulate/"><code>reticulate</code></a> package will be used to install it using the <a href="https://github.com/pyenv/pyenv">pyenv</a> or <a href="https://github.com/pyenv-win/pyenv-win">pyenv-win</a>.</p>
 <p>If you are using a Windows computer with Git installed, the <a href="https://github.com/pyenv-win/pyenv-win">pyenv-win</a> tool will be acquired and managed directly by <a href="https://rstudio.github.io/reticulate/"><code>reticulate</code></a>. If you are using a Windows computer without Git installed, you will be prompted to allow the <a href="https://github.com/pyenv-win/pyenv-win">pyenv-win</a> tool to be downloaded directly from Github to your local user application data directory (<code>tools::R_user_dir("CBMutils")</code>).</p>
 <p>If the Python installation process fails or you would prefer to manually install Python, it can be downloaded directly from <a href="https://python.org/downloads">python.org/downloads</a>. The calls to Python are for functions from a package called <a href="https://cat-cfs.github.io/libcbm_py/">libcbm</a>. Python functions are only used in the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module. Details on <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module and the Python functions are provided in <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> chapter in this manual.</p>
 </div>
@@ -204,7 +204,7 @@ NppPlot &lt;- CBMutils::NPPplot(
 )</code></pre>
 <div class="inline-figure"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/NPPplot.png" fig-align="center" width="700"></div>
 <pre><code># Map of total carbon per pixel for a simulation year
-spstialPlot &lt;- sCBMutils::patialPlot(
+spatialPlot &lt;- CBMutils::patialPlot(
   cbmPools = simMngedSK$cbmPools,
   years = 2000, # set simulation year 
   masterRaster = simMngedSK$masterRaster,
