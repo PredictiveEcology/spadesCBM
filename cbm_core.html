@@ -217,15 +217,19 @@
 <span class="header-section-number">4.4.1.5</span> <code>plot</code><a class="anchor" aria-label="anchor" href="#plot"><i class="fas fa-link"></i></a>
 </h4>
 <p>This final event is where all plotting occurs. Plots will be saved as <code>.png</code> files in the project’s outputs folder. Similar to in <code>accumulateResults</code>, if paths are kept at default when running our example global script, these outputs will be found here:
-<code>~/GitHub/spadesCBM/outputs</code>. You can also view examples of these plots (here)[<a href="https://predictiveecology.github.io/spadesCBM/example-spadescbm-in-saskatchewan.html#viewing-results" class="uri">https://predictiveecology.github.io/spadesCBM/example-spadescbm-in-saskatchewan.html#viewing-results</a>].
-### Stands and Cohort Groups</p>
+<code>~/GitHub/spadesCBM/outputs</code>. You can also view examples of these plots <a href="https://predictiveecology.github.io/spadesCBM/example-spadescbm-in-saskatchewan.html#viewing-results">here</a>.</p>
+</div>
+</div>
+<div id="stands-and-cohort-groups" class="section level3" number="4.4.2">
+<h3>
+<span class="header-section-number">4.4.2</span> Stands and Cohort Groups<a class="anchor" aria-label="anchor" href="#stands-and-cohort-groups"><i class="fas fa-link"></i></a>
+</h3>
 <p><a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#cohort-groups">Cohort groups</a> are unique combinations of age, growth curve (which equates to species as there is one growth curve per leading species in CBM), <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#ecozone-vs-spatial-unit">spatial unit</a> and <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#ecozone-vs-spatial-unit">ecozone</a>. In spadesCBM, forested pixels are simulated and represent a stand. Each stand (or pixel) can have one or many cohorts. All cohorts across stands that share an identical age, growth curve, spatial unit, and ecozone will share one unique <code>cohortGroupID</code> number.</p>
 <p>The object <code>allPixDT</code> is a large table with a row corresponding to every pixel in the <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#masterraster"><code>masterRaster</code></a>. The <code>cohortDT</code> object is a long-form table where each simulated pixel (or stand) has its own row (no NAs), and <code>cohortGroups</code> lists only the cohort groups and their attributes. In our example there are 1 347 529 pixels simulated (i.e., 1 347 529 rows in <code>cohortDT</code>) which are grouped in 739 <code>cohortGroups</code> for processing (i.e. 739 rows in <code>cohortGroups</code>).</p>
 </div>
-</div>
-<div id="carbon-transfers" class="section level3" number="4.4.2">
+<div id="carbon-transfers" class="section level3" number="4.4.3">
 <h3>
-<span class="header-section-number">4.4.2</span> Carbon Transfers<a class="anchor" aria-label="anchor" href="#carbon-transfers"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.4.3</span> Carbon Transfers<a class="anchor" aria-label="anchor" href="#carbon-transfers"><i class="fas fa-link"></i></a>
 </h3>
 <p>Default parameters for simulations are available mainly from <a href="libcbm/resources/cbm_exn">default <code>.csv</code> files</a> with a few pieces of information such as <code>mean_annual_temperature</code> used in decay rates calculations, <code>return_interval</code>, <code>min_rotations</code> and <code>max_rotations</code> used in the <code>spinup</code> or initialization process available in an <a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/resources/cbm_defaults_db">SQLight database</a>. There are 18 internal carbon pools in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> (see Table 1 in Overview), and two pools that take carbon out of the system, one for the atmosphere and one for harvested wood exiting the system. Disturbances are the first carbon transfer to be applied to each record. Half the annual increment is then added (transfer from the atmosphere to the three above ground biomass pools - <code>Merch</code>, <code>Foliage</code>, and <code>Other</code>). Disturbance inputs are processed externally to <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>. In our example disturbances are processed in <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, leaving <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> free of spatial data manipulations. Disturbance matrices specify the proportion of carbon in each pool to be transferred to other pools or to be taken out of the system (via forest products (pool named <code>Products</code>) or back to the atmosphere). Figure 1 gives an example of transfers during a fire in Saskatchewan.</p>
 <p><em>Figure 1: Proportional carbon transfers between pools during a fire in Saskatchewan</em></p>
@@ -349,7 +353,8 @@
 <li>
 <a class="nav-link" href="#module-functioning-3"><span class="header-section-number">4.4</span> Module functioning</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#events-1"><span class="header-section-number">4.4.1</span> Events</a></li>
-<li><a class="nav-link" href="#carbon-transfers"><span class="header-section-number">4.4.2</span> Carbon Transfers</a></li>
+<li><a class="nav-link" href="#stands-and-cohort-groups"><span class="header-section-number">4.4.2</span> Stands and Cohort Groups</a></li>
+<li><a class="nav-link" href="#carbon-transfers"><span class="header-section-number">4.4.3</span> Carbon Transfers</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#outputs-3"><span class="header-section-number">4.5</span> Outputs</a></li>
