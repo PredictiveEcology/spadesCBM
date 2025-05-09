@@ -49,7 +49,7 @@ init-1
 spinup-1
 annual
 accumulateresults
-stands-and-cohort-groups
+plot
 carbon-transfers
 outputs-3
 links-to-other-modules-3
