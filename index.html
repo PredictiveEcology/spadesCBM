@@ -206,13 +206,17 @@ A smaller study area extent simulation of <a href="https://github.com/Predictive
 <td>NO2</td>
 <td>NO2 emitted to atmosphere</td>
 </tr>
+<tr class="odd">
+<td>Products</td>
+<td>Harvested forest products</td>
+</tr>
 </tbody>
 </table></div>
 </div>
 <div id="order-of-operations" class="section level3 unnumbered">
 <h3>Order of operations<a class="anchor" aria-label="anchor" href="#order-of-operations"><i class="fas fa-link"></i></a>
 </h3>
-<p>In simulations, disturbances occur before any other carbon transfer. After the disturbances, half of the growth (determined by increments in the user-provided growth curve) is applied followed by the transfers representing DOM turnover, live biomass turnover, an overmature decline compensation if applicable, the 2nd half of the growth, DOM decay, slow decay and slow soil mixing. As previously stated, carbon additions to the system come from the atmosphere (amount determined by growth via user-provided growth curves), and carbon exists the system to the atmosphere or to the forest products sector.</p>
+<p>In simulations, disturbances occur before any other carbon transfer. After the disturbances, half of the growth (determined by increments in the user-provided growth curve) is applied followed by the transfers representing DOM turnover, live biomass turnover, an overmature decline compensation if applicable, the 2nd half of the growth, DOM decay, slow decay and slow soil mixing. As previously stated, carbon additions to the system come from the atmosphere (amount determined by growth via user-provided growth curves), and carbon exits the system to the atmosphere or to the forest products sector.</p>
 <div class="inline-figure"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/cbm_ppt_edited.png" fig-align="center" width="700"></div>
 <p><em>Figure 2: Carbon pools and transfers diagram in spadesCBM</em></p>
 <p>Transfers are proportions of a source pool to sink pools and proportions add up to 1, so no carbon is lost.</p>
