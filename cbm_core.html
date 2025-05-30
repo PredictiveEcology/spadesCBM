@@ -204,7 +204,7 @@
 <h4>
 <span class="header-section-number">4.4.1.3</span> <code>annual</code><a class="anchor" aria-label="anchor" href="#annual"><i class="fas fa-link"></i></a>
 </h4>
-<p>This is the only event in spadesCBM that is run more than once. This event is where all the carbon transfers are applied for each simulation year. Disturbances are matched to the correct records, and the transfers listed <a href="https://predictiveecology.github.io/spadesCBM/index.html#order-of-operations">here</a> are applied. Details on transfer rates are found in the <a href="https://predictiveecology.github.io/spadesCBM/cbm_core.html#carbon-transfers">following section, below</a>.</p>
+<p>This event is where all the carbon transfers are applied for each simulation year. Disturbances are matched to the correct records, and the transfers listed <a href="https://predictiveecology.github.io/spadesCBM/index.html#order-of-operations">here</a> are applied. Details on transfer rates are found in the <a href="https://predictiveecology.github.io/spadesCBM/cbm_core.html#carbon-transfers">following section, below</a>. While undisturbed cohorts will continue to grow by one time step according to their associated growth curve, disturbed cohorts will only begin growing again after a delay period. This delay is dictated by the <code>default_delay_regen</code> parameter of the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module, and can be changed by the user. Only growth-related carbon transfers are affected by this delay. By default it is set to 0 years.</p>
 </div>
 <div id="accumulateresults" class="section level4" number="4.4.1.4">
 <h4>
