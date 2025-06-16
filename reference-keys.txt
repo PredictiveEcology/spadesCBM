@@ -27,7 +27,7 @@ readdisturbanceevents
 disturbances
 outputs-1
 links-to-other-modules-1
-cbm_vol2biomass
+cbm_vol2biomass_sk
 overview-3
 background-2
 inputs-2
