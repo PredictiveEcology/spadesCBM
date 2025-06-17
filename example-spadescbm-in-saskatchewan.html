@@ -143,7 +143,7 @@ out &lt;- SpaDES.project::setupProject(
   ),
   modules =  c("PredictiveEcology/CBM_defaults@main",
                "PredictiveEcology/CBM_dataPrep_SK@main",
-               "PredictiveEcology/CBM_vol2biomass@main",
+               "PredictiveEcology/CBM_vol2biomass_SK@main",
                "PredictiveEcology/CBM_core@main"),
   times = times,
   require = c("reproducible"),
@@ -155,7 +155,7 @@ out &lt;- SpaDES.project::setupProject(
     CBM_dataPrep_SK = list(
       .useCache = TRUE
     ),
-    CBM_vol2biomass = list(
+    CBM_vol2biomass_SK = list(
       .useCache = TRUE
     )
   ),
@@ -183,7 +183,7 @@ simMngedSK &lt;- SpaDES.core::simInitAndSpades2(out)</code></pre>
 <div id="viewing-results" class="section level2 unnumbered">
 <h2>Viewing results<a class="anchor" aria-label="anchor" href="#viewing-results"><i class="fas fa-link"></i></a>
 </h2>
-<p>Once the simulation has run, we can view our results. Some of these are saved as files in the outputs folder created in the project’s directory. If kept as the default in the global script above, these can be found here: <code>~/GitHub/spadesCBM/outputs</code>. You should be able to see <code>.rds</code> files for cbmPools and NPP for each simulated year, as well as various growth curve and increment related figures from <a href="https://github.com/PredictiveEcology/CBM_vol2biomass">CBM_vol2biomass</a> shown below.</p>
+<p>Once the simulation has run, we can view our results. Some of these are saved as files in the outputs folder created in the project’s directory. If kept as the default in the global script above, these can be found here: <code>~/GitHub/spadesCBM/outputs</code>. You should be able to see <code>.rds</code> files for cbmPools and NPP for each simulated year, as well as various growth curve and increment related figures from <a href="https://github.com/PredictiveEcology/CBM_vol2biomass_SK">CBM_vol2biomass_SK</a> shown below.</p>
 <p><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/cumPools_smoothed_postChapmanRichards.png" fig-align="center" width="700"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/Increments.png" fig-align="center" width="700"></p>
 <p>The <code>simMngedSK</code> object in R is the resulting <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#simlist">simlist</a> of our simulation. <code>CBMutils</code> offers a few plotting functions to help visualize basic results using our simlist.</p>
 <pre><code># Yearly forest products and emissions for each simulation year
