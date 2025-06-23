@@ -8,7 +8,7 @@ masterraster
 cbmadmin
 net-primary-productivity-npp
 cbmpools
-dead-oraganic-matter
+dead-organic-matter
 cbm_defaults
 overview-1
 background
