@@ -22,8 +22,7 @@ overview-2
 background-1
 inputs-1
 module-functioning-1
-init
-readdisturbanceevents
+pixel-groups
 disturbances
 outputs-1
 links-to-other-modules-1
@@ -45,12 +44,8 @@ background-3
 inputs-3
 module-functioning-3
 events-1
-init-1
-spinup-1
-annual
-accumulateresults
-plot
-stands-and-cohort-groups
 carbon-transfers
+parameters
+results
 outputs-3
 links-to-other-modules-3
