@@ -10,7 +10,12 @@ out <- SpaDES.project::setupProject(
   Restart = TRUE,
   useGit = "PredictiveEcology", # a developer sets and keeps this = TRUE
   overwrite = TRUE, # a user who wants to get latest modules sets this to TRUE
-  paths = list(projectPath = projectPath),
+  paths = list(projectPath = projectPath,
+               outputPath  = file.path(projectPath, "outputs", "SK-30m"),
+               modulePath  = file.path(projectPath, "modules"),
+               packagePath = file.path(projectPath, "packages"),
+               inputPath   = file.path(projectPath, "inputs"),
+               cachePath   = file.path(projectPath, "cache")),
 
   options = options(
     repos = c(repos = repos),
@@ -44,13 +49,13 @@ out <- SpaDES.project::setupProject(
   #### begin manually passed inputs #########################################
   ## define the  study area.
   masterRaster = {
-    mr <- reproducible::prepInputs(url = "https://drive.google.com/file/d/1zUyFH8k6Ef4c_GiWMInKbwAl6m6gvLJW",
+    mr <- reproducible::prepInputs(url = "https://drive.google.com/file/d/1FmtbEKbkzufIifETONxOkoplGX50lrT_",
                                    destinationPath = "inputs")
     mr[mr[] == 0] <- NA
     mr
   },
 
-  disturbanceRastersURL = "https://drive.google.com/file/d/12YnuQYytjcBej0_kdodLchPg7z9LygCt",
+  disturbanceSource = "NTEMS",
 
   outputs = as.data.frame(expand.grid(
     objectName = c("cbmPools", "NPP"),
