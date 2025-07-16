@@ -50,9 +50,7 @@ out <- SpaDES.project::setupProject(
   ## define the  study area.
   masterRaster = {
     mr <- reproducible::prepInputs(url = "https://drive.google.com/file/d/1zUyFH8k6Ef4c_GiWMInKbwAl6m6gvLJW",
-                                   destinationPath = "inputs",
-                                   to = masterRaster,
-                                   method = "near")
+                                   destinationPath = "inputs")
     mr[mr[] == 0] <- NA
     mr
   },
