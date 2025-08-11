@@ -4,13 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 4 CBM_core | spadesCBM Manual</title>
+<title>Chapter 5 CBM_core | spadesCBM Manual</title>
 <meta name="author" content="Céline Boisvenue">
 <meta name="generator" content="bookdown 0.43 with bs4_book()">
-<meta property="og:title" content="Chapter 4 CBM_core | spadesCBM Manual">
+<meta property="og:title" content="Chapter 5 CBM_core | spadesCBM Manual">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 4 CBM_core | spadesCBM Manual">
+<meta name="twitter:title" content="Chapter 5 CBM_core | spadesCBM Manual">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -42,9 +42,9 @@
     }
   </style>
 <link rel="stylesheet" href="css/style.css">
-<meta name="description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, please contact us here.  4.1 Overview CBM_core is the central module of...">
-<meta property="og:description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, please contact us here.  4.1 Overview CBM_core is the central module of...">
-<meta name="twitter:description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, please contact us here.  4.1 Overview CBM_core is the central module of...">
+<meta name="description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, please contact us here.  5.1 Overview CBM_core is the central module of...">
+<meta property="og:description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, please contact us here.  5.1 Overview CBM_core is the central module of...">
+<meta name="twitter:description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, please contact us here.  5.1 Overview CBM_core is the central module of...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -70,9 +70,10 @@
 <li><a class="" href="index.html">Overview</a></li>
 <li><a class="" href="lexicon.html">Lexicon</a></li>
 <li><a class="" href="cbm_defaults.html"><span class="header-section-number">1</span> CBM_defaults</a></li>
-<li><a class="" href="cbm_dataprep_sk.html"><span class="header-section-number">2</span> CBM_dataPrep_SK</a></li>
-<li><a class="" href="cbm_vol2biomass_sk.html"><span class="header-section-number">3</span> CBM_vol2biomass_SK</a></li>
-<li><a class="active" href="cbm_core.html"><span class="header-section-number">4</span> CBM_core</a></li>
+<li><a class="" href="cbm_dataprep.html"><span class="header-section-number">2</span> CBM_dataPrep</a></li>
+<li><a class="" href="cbm_dataprep_sk.html"><span class="header-section-number">3</span> CBM_dataPrep_SK</a></li>
+<li><a class="" href="cbm_vol2biomass_sk.html"><span class="header-section-number">4</span> CBM_vol2biomass_SK</a></li>
+<li><a class="active" href="cbm_core.html"><span class="header-section-number">5</span> CBM_core</a></li>
 <li><a class="" href="example-spadescbm-in-saskatchewan.html">Example: spadesCBM in Saskatchewan</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
@@ -82,28 +83,28 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cbm_core" class="section level1" number="4">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cbm_core" class="section level1" number="5">
 <h1>
-<span class="header-section-number">4</span> CBM_core<a class="anchor" aria-label="anchor" href="#cbm_core"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5</span> CBM_core<a class="anchor" aria-label="anchor" href="#cbm_core"><i class="fas fa-link"></i></a>
 </h1>
 <div class="rmdimportant">
 <p>This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, please contact us <a href="%22https://github.com/PredictiveEcology/CBM_core/issues%22">here</a>.</p>
 </div>
-<div id="overview-4" class="section level2" number="4.1">
+<div id="overview-5" class="section level2" number="5.1">
 <h2>
-<span class="header-section-number">4.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview-5"><i class="fas fa-link"></i></a>
 </h2>
 <p><a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> is the central module of <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>. This is where all the carbon transfers are calculated at every time step, where disturbances are applied, and stocks are tracked. It cannot run on its own and it needs parameters from either <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a>, <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, and <a href="https://github.com/PredictiveEcology/CBM_vol2biomass_SK.git">CBM_vol2biomass_SK</a> (as per the provided example for managed forests of Saskatchewan) or the equivalent information from the user. In <em>SpaDES-speak</em>, this module has five events (<code>Init</code>, <code>spinup</code>, <code>annual</code>, <code>accumulateResults</code>, and <code>plot</code>). Only in two of these events do carbon transactions occur: <code>spinup</code> and <code>annual</code>. The other events are tools to enable these transactions. All events are scheduled only once except for the <code>annual</code> event, who schedules itself until the end of the simulation horizon. Only in this module are the Python functions from the <a href="https://github.com/cat-cfs/libcbm_py/tree/main">libcbm</a> package called. The functions used in this module are the <a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/model/cbm_exn">libcbm cbm-exn</a> functions exclusively, as these were designed to accept external biomass increments. These Python functions are used in the <code>spinup</code> and in the <code>annual</code> events only.</p>
 </div>
-<div id="background-3" class="section level2" number="4.2">
+<div id="background-4" class="section level2" number="5.2">
 <h2>
-<span class="header-section-number">4.2</span> Background<a class="anchor" aria-label="anchor" href="#background-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.2</span> Background<a class="anchor" aria-label="anchor" href="#background-4"><i class="fas fa-link"></i></a>
 </h2>
 <p>In <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>, the approach described in our <a href="https://predictiveecology.github.io/spadesCBM/index.html#order-of-operations">Overview</a> section is applied. Parameters are easily accessible via normal R-functions, and the SpaDES toolkit enables a modular, repeatable continuous workflow. This brings the transparency and flexibility needed for scientists to modify, evaluate and test new inputs, new data, and new algorithms while permitting non-researcher users to also use the system.</p>
 </div>
-<div id="inputs-3" class="section level2" number="4.3">
+<div id="inputs-4" class="section level2" number="5.3">
 <h2>
-<span class="header-section-number">4.3</span> Inputs<a class="anchor" aria-label="anchor" href="#inputs-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.3</span> Inputs<a class="anchor" aria-label="anchor" href="#inputs-4"><i class="fas fa-link"></i></a>
 </h2>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
@@ -177,59 +178,59 @@
 </tbody>
 </table></div>
 </div>
-<div id="module-functioning-3" class="section level2" number="4.4">
+<div id="module-functioning-4" class="section level2" number="5.4">
 <h2>
-<span class="header-section-number">4.4</span> Module functioning<a class="anchor" aria-label="anchor" href="#module-functioning-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4</span> Module functioning<a class="anchor" aria-label="anchor" href="#module-functioning-4"><i class="fas fa-link"></i></a>
 </h2>
-<div id="events-1" class="section level3" number="4.4.1">
+<div id="events-1" class="section level3" number="5.4.1">
 <h3>
-<span class="header-section-number">4.4.1</span> Events<a class="anchor" aria-label="anchor" href="#events-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4.1</span> Events<a class="anchor" aria-label="anchor" href="#events-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>There are 5 events in CBM_core. Each are run once, except for the <code>annual</code> event, which is repeated for each simulation year.</p>
-<div id="init-1" class="section level4" number="4.4.1.1">
+<div id="init-2" class="section level4" number="5.4.1.1">
 <h4>
-<span class="header-section-number">4.4.1.1</span> <code>Init</code><a class="anchor" aria-label="anchor" href="#init-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4.1.1</span> <code>Init</code><a class="anchor" aria-label="anchor" href="#init-2"><i class="fas fa-link"></i></a>
 </h4>
 <p>In this short event, the Python virtual environment is set up. If a suitable version of python is not available, it will be installed using the <code>reticulate</code> package.</p>
 </div>
-<div id="spinup-1" class="section level4" number="4.4.1.2">
+<div id="spinup-1" class="section level4" number="5.4.1.2">
 <h4>
-<span class="header-section-number">4.4.1.2</span> <code>spinup</code><a class="anchor" aria-label="anchor" href="#spinup-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4.1.2</span> <code>spinup</code><a class="anchor" aria-label="anchor" href="#spinup-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>The main goal of this event is to initialize the landscape by performing the <a href="https://predictiveecology.github.io/spadesCBM/#the-spinup-function">spinup function</a>.</p>
 <p>Cohort and stand data is prepared and passed to the <a href="https://github.com/PredictiveEcology/CBM_core/blob/cf9c966e7bbbb29f8089411c73d030e21846ffe3/R/spinup.R#L5"><code>cbmExnSpinup</code></a> function alongside growth curve data (from CBM_vol2biomass_SK) and spinup default data (from CBM_defaults). The <a href="https://github.com/PredictiveEcology/CBM_core/blob/cf9c966e7bbbb29f8089411c73d030e21846ffe3/R/spinup.R#L5"><code>cbmExnSpinup</code></a> function sets up inputs, calls the <a href="https://cat-cfs.github.io/libcbm_py/cbm_exn_custom_ops.html#Appendix-1:-CBM-EXN-Default-parameters"><code>cbm_exn_get_default_parameters</code></a> python function that defines the model structure, and runs the carbon transfers necessary for the growth and burn cycle using <a href="https://cat-cfs.github.io/libcbm_py/cbm_exn_custom_ops.html#Appendix-1:-CBM-EXN-Default-parameters"><code>cbm_exn_spinup</code></a>.</p>
 <p>The spinup output data and cohort groups are then prepared for use in the <code>annual</code> event.</p>
 </div>
-<div id="annual" class="section level4" number="4.4.1.3">
+<div id="annual" class="section level4" number="5.4.1.3">
 <h4>
-<span class="header-section-number">4.4.1.3</span> <code>annual</code><a class="anchor" aria-label="anchor" href="#annual"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4.1.3</span> <code>annual</code><a class="anchor" aria-label="anchor" href="#annual"><i class="fas fa-link"></i></a>
 </h4>
 <p>This event is where all the carbon transfers are applied for each simulation year. Disturbances are matched to the correct records, and the transfers listed <a href="https://predictiveecology.github.io/spadesCBM/index.html#order-of-operations">here</a> are applied. Details on transfer rates are found in the <a href="https://predictiveecology.github.io/spadesCBM/cbm_core.html#carbon-transfers">following section, below</a>. While undisturbed cohorts will continue to grow by one time step according to their associated growth curve, disturbed cohorts will only begin growing again after a delay period. This delay is dictated by the <code>default_delay_regen</code> parameter of the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module, and can be changed by the user. Only growth-related carbon transfers are affected by this delay. By default it is set to 0 years.</p>
 </div>
-<div id="accumulateresults" class="section level4" number="4.4.1.4">
+<div id="accumulateresults" class="section level4" number="5.4.1.4">
 <h4>
-<span class="header-section-number">4.4.1.4</span> <code>accumulateResults</code><a class="anchor" aria-label="anchor" href="#accumulateresults"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4.1.4</span> <code>accumulateResults</code><a class="anchor" aria-label="anchor" href="#accumulateresults"><i class="fas fa-link"></i></a>
 </h4>
 <p>This event is where outputs are saved. In the case of our example in Saskatchewan, we output and save <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#cbmpools">cbmPools</a> and Net Primary Production (<a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#net-primary-productivity-npp">NPP</a>) for each simulation year. If paths are kept at default when running the global script, these outputs will be found here: <code>~/GitHub/spadesCBM/outputs</code>.</p>
 </div>
-<div id="plot" class="section level4" number="4.4.1.5">
+<div id="plot" class="section level4" number="5.4.1.5">
 <h4>
-<span class="header-section-number">4.4.1.5</span> <code>plot</code><a class="anchor" aria-label="anchor" href="#plot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4.1.5</span> <code>plot</code><a class="anchor" aria-label="anchor" href="#plot"><i class="fas fa-link"></i></a>
 </h4>
 <p>This final event is where all plotting occurs. Plots will be saved as <code>.png</code> files in the project’s outputs folder. Similar to in <code>accumulateResults</code>, if paths are kept at default when running our example global script, these outputs will be found here:
 <code>~/GitHub/spadesCBM/outputs</code>. You can also view examples of these plots <a href="https://predictiveecology.github.io/spadesCBM/example-spadescbm-in-saskatchewan.html#viewing-results">here</a>.</p>
 </div>
 </div>
-<div id="stands-and-cohort-groups" class="section level3" number="4.4.2">
+<div id="stands-and-cohort-groups" class="section level3" number="5.4.2">
 <h3>
-<span class="header-section-number">4.4.2</span> Stands and Cohort Groups<a class="anchor" aria-label="anchor" href="#stands-and-cohort-groups"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4.2</span> Stands and Cohort Groups<a class="anchor" aria-label="anchor" href="#stands-and-cohort-groups"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#cohort-groups">Cohort groups</a> are unique combinations of age, growth curve (which equates to species as there is one growth curve per leading species in CBM), <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#ecozone-vs-spatial-unit">spatial unit</a> and <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#ecozone-vs-spatial-unit">ecozone</a>. In spadesCBM, forested pixels are simulated and represent a stand. Each stand (or pixel) can have one or many cohorts. All cohorts across stands that share an identical age, growth curve, spatial unit, and ecozone will share one unique <code>cohortGroupID</code> number.</p>
 <p>The object <code>allPixDT</code> is a large table with a row corresponding to every pixel in the <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#masterraster"><code>masterRaster</code></a>. The <code>cohortDT</code> object is a long-form table where each simulated pixel (or stand) has its own row (no NAs), and <code>cohortGroups</code> lists only the cohort groups and their attributes. In our example there are 1 347 529 pixels simulated (i.e., 1 347 529 rows in <code>cohortDT</code>) which are grouped in 739 <code>cohortGroups</code> for processing (i.e. 739 rows in <code>cohortGroups</code>).</p>
 </div>
-<div id="carbon-transfers" class="section level3" number="4.4.3">
+<div id="carbon-transfers" class="section level3" number="5.4.3">
 <h3>
-<span class="header-section-number">4.4.3</span> Carbon Transfers<a class="anchor" aria-label="anchor" href="#carbon-transfers"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4.3</span> Carbon Transfers<a class="anchor" aria-label="anchor" href="#carbon-transfers"><i class="fas fa-link"></i></a>
 </h3>
 <p>Default parameters for simulations are available mainly from <a href="libcbm/resources/cbm_exn">default <code>.csv</code> files</a> with a few pieces of information such as <code>mean_annual_temperature</code> used in decay rates calculations, <code>return_interval</code>, <code>min_rotations</code> and <code>max_rotations</code> used in the <code>spinup</code> or initialization process available in an <a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/resources/cbm_defaults_db">SQLight database</a>. There are 18 internal carbon pools in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> (see Table 1 in Overview), and two pools that take carbon out of the system, one for the atmosphere and one for harvested wood exiting the system. Disturbances are the first carbon transfer to be applied to each record. Half the annual increment is then added (transfer from the atmosphere to the three above ground biomass pools - <code>Merch</code>, <code>Foliage</code>, and <code>Other</code>). Disturbance inputs are processed externally to <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>. In our example disturbances are processed in <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, leaving <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> free of spatial data manipulations. Disturbance matrices specify the proportion of carbon in each pool to be transferred to other pools or to be taken out of the system (via forest products (pool named <code>Products</code>) or back to the atmosphere). Figure 1 gives an example of transfers during a fire in Saskatchewan.</p>
 <p><em>Figure 1: Proportional carbon transfers between pools during a fire in Saskatchewan</em></p>
@@ -272,9 +273,9 @@
 <p>On-going work to improve <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#cbm-cfs3-vs-spadescbm">CBM</a> is targeting all <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#dead-organic-matter">DOM</a> related parameters. <span class="citation">Hararuk (<a href="references.html#ref-hararuk2017">2017</a>)</span> used data assimilation methods which brought improvements to the turnover rates to the <code>FineRoots</code> pool, but no change to the <code>CoarseRoots</code> pool. The allocation of carbon between above ground biomass (<code>Merch</code>, <code>Foliage</code>, and <code>Other</code>) to the roots (<code>FineRoots</code>, <code>CoarseRoots</code>) implemented in <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#cbm-cfs3-vs-spadescbm">CBM</a> dates from the model development (<span class="citation">Kurz <em>et al.</em> (<a href="references.html#ref-kurz2009">2009</a>)</span>, <span class="citation">Li (<a href="references.html#ref-li2003">2003</a>)</span>). Other methods for estimating below ground biomass from above ground have been implement to estimate carbon elsewhere (example <span class="citation">Harris (<a href="references.html#ref-harris2021">2021</a>)</span>), and a user would be justified in wanting to explore the effects of changing these parameters (<span class="citation">Błońska (<a href="references.html#ref-b%C5%82o%C5%84ska2022">2022</a>)</span>). In this R-based environment implementation and improvement of <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#cbm-cfs3-vs-spadescbm">CBM</a>, a user is free to change any of the parameters provided to the <code>cbm_exn_spinup()</code> and <code>cbm_exn_step()</code> Python functions.</p>
 </div>
 </div>
-<div id="outputs-3" class="section level2" number="4.5">
+<div id="outputs-4" class="section level2" number="5.5">
 <h2>
-<span class="header-section-number">4.5</span> Outputs<a class="anchor" aria-label="anchor" href="#outputs-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.5</span> Outputs<a class="anchor" aria-label="anchor" href="#outputs-4"><i class="fas fa-link"></i></a>
 </h2>
 <p><a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> provides outputs as prescribed in the global script, the script that controls simulations. We make use of the function <a href="https://spades-project.predictiveecology.org/articles/i-getting-started.html#understanding-spades-projects-main-function-setupproject">SpaDES.project::setupProject</a>. While it is possible to develop a <a href="">SpaDES</a> project using different methods more familiar to the user, the <a href="https://spades-project.predictiveecology.org/">SpaDES.project</a> package streamlines this process, facilitating a clean, reproducible and reusable project setup for any project. In our example, we specify in the <a href="https://github.com/PredictiveEcology/spadesCBM/blob/main/globalSK.R"><code>globalSK.R</code></a> script that we want <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#net-primary-productivity-npp"><code>NPP</code></a> and <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#cbmpools"><code>cbmPools</code></a> saved every year (lines 54-56). A user could specify outputs for any pools (see Table 1 in <a href="https://predictiveecology.github.io/spadesCBM/index.html#pools">Overview</a>). A user can also chose the outputs they would like to see from all objects in the <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#simlist">simList</a>. For example, a user my have interest in the quantity (in tonnes of carbon) of forest products and emissions existing the system. Our <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#simlist">simList</a> is named <code>simMngedSK</code> (line 61 of our global script <a href="https://github.com/PredictiveEcology/spadesCBM/blob/main/globalSK.R"><code>globalSK.R</code></a>), so the object of interest would be <code>simMngedSK$emissionsProducts</code>.</p>
 <p>Note that <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#cbm-cfs3-vs-spadescbm">CBM</a>, like CBM-CFS3, does not simulate photosynthesis or autotrophic respiration. Therefore, <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#net-primary-productivity-npp">NPP</a> is calculated as the sum of net growth (i.e., growth that results in positive increment) and growth that replaces material lost to biomass turnover during the year. In young, actively growing stands, a large proportion of <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#net-primary-productivity-npp">NPP</a> results in positive growth increment while in older, mature stands, a larger proportion of <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#net-primary-productivity-npp">NPP</a> is allocated to replacement of material lost to turnover.</p>
@@ -329,9 +330,9 @@
 </tbody>
 </table></div>
 </div>
-<div id="links-to-other-modules-3" class="section level2" number="4.6">
+<div id="links-to-other-modules-4" class="section level2" number="5.6">
 <h2>
-<span class="header-section-number">4.6</span> Links to other modules<a class="anchor" aria-label="anchor" href="#links-to-other-modules-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.6</span> Links to other modules<a class="anchor" aria-label="anchor" href="#links-to-other-modules-4"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li><a href="https://github.com/PredictiveEcology/CBM_defaults">CBM_defaults</a></li>
@@ -341,24 +342,24 @@
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="cbm_vol2biomass_sk.html"><span class="header-section-number">3</span> CBM_vol2biomass_SK</a></div>
+<div class="prev"><a href="cbm_vol2biomass_sk.html"><span class="header-section-number">4</span> CBM_vol2biomass_SK</a></div>
 <div class="next"><a href="example-spadescbm-in-saskatchewan.html">Example: spadesCBM in Saskatchewan</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#cbm_core"><span class="header-section-number">4</span> CBM_core</a></li>
-<li><a class="nav-link" href="#overview-4"><span class="header-section-number">4.1</span> Overview</a></li>
-<li><a class="nav-link" href="#background-3"><span class="header-section-number">4.2</span> Background</a></li>
-<li><a class="nav-link" href="#inputs-3"><span class="header-section-number">4.3</span> Inputs</a></li>
+<li><a class="nav-link" href="#cbm_core"><span class="header-section-number">5</span> CBM_core</a></li>
+<li><a class="nav-link" href="#overview-5"><span class="header-section-number">5.1</span> Overview</a></li>
+<li><a class="nav-link" href="#background-4"><span class="header-section-number">5.2</span> Background</a></li>
+<li><a class="nav-link" href="#inputs-4"><span class="header-section-number">5.3</span> Inputs</a></li>
 <li>
-<a class="nav-link" href="#module-functioning-3"><span class="header-section-number">4.4</span> Module functioning</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#events-1"><span class="header-section-number">4.4.1</span> Events</a></li>
-<li><a class="nav-link" href="#stands-and-cohort-groups"><span class="header-section-number">4.4.2</span> Stands and Cohort Groups</a></li>
-<li><a class="nav-link" href="#carbon-transfers"><span class="header-section-number">4.4.3</span> Carbon Transfers</a></li>
+<a class="nav-link" href="#module-functioning-4"><span class="header-section-number">5.4</span> Module functioning</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#events-1"><span class="header-section-number">5.4.1</span> Events</a></li>
+<li><a class="nav-link" href="#stands-and-cohort-groups"><span class="header-section-number">5.4.2</span> Stands and Cohort Groups</a></li>
+<li><a class="nav-link" href="#carbon-transfers"><span class="header-section-number">5.4.3</span> Carbon Transfers</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#outputs-3"><span class="header-section-number">4.5</span> Outputs</a></li>
-<li><a class="nav-link" href="#links-to-other-modules-3"><span class="header-section-number">4.6</span> Links to other modules</a></li>
+<li><a class="nav-link" href="#outputs-4"><span class="header-section-number">5.5</span> Outputs</a></li>
+<li><a class="nav-link" href="#links-to-other-modules-4"><span class="header-section-number">5.6</span> Links to other modules</a></li>
 </ul>
 
       <div class="book-extra">

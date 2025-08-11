@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 2 CBM_dataPrep | spadesCBM Manual</title>
+<meta name="author" content="Céline Boisvenue">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
+<meta property="og:title" content="Chapter 2 CBM_dataPrep | spadesCBM Manual">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 2 CBM_dataPrep | spadesCBM Manual">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<style type="text/css">
+    /* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+    div.csl-bib-body { }
+    div.csl-entry {
+      clear: both;
+          margin-bottom: 0em;
+        }
+    .hanging div.csl-entry {
+      margin-left:2em;
+      text-indent:-2em;
+    }
+    div.csl-left-margin {
+      min-width:2em;
+      float:left;
+    }
+    div.csl-right-inline {
+      margin-left:2em;
+      padding-left:1em;
+    }
+    div.csl-indent {
+      margin-left: 2em;
+    }
+  </style>
+<link rel="stylesheet" href="css/style.css">
+<meta name="description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, please contact us here.  2.1 Overview CBM_dataPrep processes spatially...">
+<meta property="og:description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, please contact us here.  2.1 Overview CBM_dataPrep processes spatially...">
+<meta name="twitter:description" content="This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, please contact us here.  2.1 Overview CBM_dataPrep processes spatially...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="v. 0.1">spadesCBM Manual</a>:
+        <small class="text-muted">v. 0.1</small>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Overview</a></li>
+<li><a class="" href="lexicon.html">Lexicon</a></li>
+<li><a class="" href="cbm_defaults.html"><span class="header-section-number">1</span> CBM_defaults</a></li>
+<li><a class="active" href="cbm_dataprep.html"><span class="header-section-number">2</span> CBM_dataPrep</a></li>
+<li><a class="" href="cbm_dataprep_sk.html"><span class="header-section-number">3</span> CBM_dataPrep_SK</a></li>
+<li><a class="" href="cbm_vol2biomass_sk.html"><span class="header-section-number">4</span> CBM_vol2biomass_SK</a></li>
+<li><a class="" href="cbm_core.html"><span class="header-section-number">5</span> CBM_core</a></li>
+<li><a class="" href="example-spadescbm-in-saskatchewan.html">Example: spadesCBM in Saskatchewan</a></li>
+<li><a class="" href="references.html">References</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/PredictiveEcology/spadesCBM">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="cbm_dataprep" class="section level1" number="2">
+<h1>
+<span class="header-section-number">2</span> CBM_dataPrep<a class="anchor" aria-label="anchor" href="#cbm_dataprep"><i class="fas fa-link"></i></a>
+</h1>
+<div class="rmdimportant">
+<p>This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, please contact us <a href="https://github.com/PredictiveEcology/CBM_dataPrep/issues">here</a>.</p>
+</div>
+<div id="overview-2" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview-2"><i class="fas fa-link"></i></a>
+</h2>
+<p><a href="https://github.com/PredictiveEcology/CBM_dataPrep.git">CBM_dataPrep</a> processes spatially explicit inputs for use in <a href="https://github.com/PredictiveEcology/CBM_vol2biomass_SK.git">CBM_vol2biomass_SK</a> and <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>. In <em>SpaDES-speak</em>, it has two events, the <code>init</code> event (scheduled once) and the <code>readDisturbanceEvents</code> which processes disturbances (usually provided as rasters) into a table format used in <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>. <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> was designed for spatially explicit modelling and provides a wide variety of tools to support it. <a href="https://github.com/PredictiveEcology/CBM_dataPrep.git">CBM_dataPrep</a> makes use of these tools. We use an example that simulates a scenario where remotely-sensed disturbances are simulated in the managed forests of Saskatchewan from 1985 to 2011, as described in <span class="citation">Boisvenue <em>et al.</em> (<a href="references.html#ref-boisvenue2016">2016</a>)</span> (scenario = time horizon + disturbances).</p>
+</div>
+<div id="background-1" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Background<a class="anchor" aria-label="anchor" href="#background-1"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="inputs-1" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Inputs<a class="anchor" aria-label="anchor" href="#inputs-1"><i class="fas fa-link"></i></a>
+</h2>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="23%">
+<col width="23%">
+<col width="29%">
+<col width="23%">
+</colgroup>
+<thead><tr class="header">
+<th>Name</th>
+<th>Class</th>
+<th>Description</th>
+<th>Source</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>masterRaster</td>
+<td>SpatRaster</td>
+<td>Raster of study area</td>
+<td>User provided, for SK: <a href="https://drive.google.com/file/d/1zUyFH8k6Ef4c_GiWMInKbwAl6m6gvLJW">Google Drive</a>
+</td>
+</tr>
+<tr class="even">
+<td>ecoLocator</td>
+<td>SpatRaster</td>
+<td>Canada’s ecozone as polygon features with ecozone IDs</td>
+<td><a href="http://sis.agr.gc.ca/cansis/nsdb/ecostrat/zone/ecozone_shp.zip">Canadian Soil information Service</a></td>
+</tr>
+<tr class="odd">
+<td>adminLocator</td>
+<td>SpatRaster</td>
+<td>Spatial data source of Canada’s administrative boundary names</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>ageLocator</td>
+<td>SpatRaster</td>
+<td>Spatial data source of cohort ages or a single value to use for all cohorts</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>ageDataYear</td>
+<td>Numeric</td>
+<td>Year that the ages in <code>ageLocator</code> represent</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>ageSpinupMin</td>
+<td>Numeric</td>
+<td>Minimum age for cohorts during spinup</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>gcIndexLocator</td>
+<td>SpatRaster</td>
+<td>Raster giving the growth curve value for each pixel</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>cohortLocators</td>
+<td>List</td>
+<td>List of values or spatial data sources for additional columns in <code>cohortDT</code>
+</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>curveID</td>
+<td>Character</td>
+<td>Column(s) uniquely defining each growth curve in <code>cohortDT</code>, <code>userGcMeta</code>, and <code>userGcM3</code>
+</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>userGcMeta</td>
+<td>Data table</td>
+<td>User provided growth curve data</td>
+<td>Growth curve metadata for CBM_vol2biomass</td>
+</tr>
+<tr class="odd">
+<td>gcMeta</td>
+<td>Data table</td>
+<td>Growth curve metadata</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>disturbanceRasters</td>
+<td>List</td>
+<td>Disturbance rasters for the study area for the duration of simulation</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>disturbanceMeta</td>
+<td>Data table</td>
+<td>Table defining the disturbance event types</td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="module-functioning-1" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> Module functioning<a class="anchor" aria-label="anchor" href="#module-functioning-1"><i class="fas fa-link"></i></a>
+</h2>
+<p><a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> has 2 events; the <code>init</code> event, which is run only once, and the <code>readDisturbanceEvents</code> event, which is repeated for each simulation year.</p>
+<div id="init" class="section level3" number="2.4.1">
+<h3>
+<span class="header-section-number">2.4.1</span> <code>init</code><a class="anchor" aria-label="anchor" href="#init"><i class="fas fa-link"></i></a>
+</h3>
+<p>This first event performs the majority of the data processing steps in this module. The study area’s various spatial data is also processed into a table format for use in the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> and <a href="https://github.com/PredictiveEcology/CBM_vol2biomass_SK.git">CBM_vol2biomass_SK</a> modules. This event is run only once.</p>
+</div>
+<div id="readdisturbanceevents" class="section level3" number="2.4.2">
+<h3>
+<span class="header-section-number">2.4.2</span> <code>readDisturbanceEvents</code><a class="anchor" aria-label="anchor" href="#readdisturbanceevents"><i class="fas fa-link"></i></a>
+</h3>
+<p>This short event serves to process disturbance events for each simulation year. Separating this processing from the <code>init</code> event enables dynamic linkages to disturbance models. However, in our example, disturbances are provided in the form of remotely-sensed disturbance rasters.</p>
+</div>
+<div id="disturbances" class="section level3" number="2.4.3">
+<h3>
+<span class="header-section-number">2.4.3</span> Disturbances<a class="anchor" aria-label="anchor" href="#disturbances"><i class="fas fa-link"></i></a>
+</h3>
+<p>There are 468 unique disturbance matrices identified in the defaults. Since root parameters and snag carbon transfer rates have hardwood and softwood specific rates, each disturbance has a hardwood and a softwood instance, which means we have 234 unique disturbances across Canada as defaults in this modelling system, one for hardwood and one for softwood. A user could add or modify the proportions transferred between pools to represent a disturbance (<strong>NOTE THAT THIS WOULD HAVE TO HAPPEN IN THE CSVs, and even then would that work? Does libcbm point to those files? what if we change them? QUESTION FOR SCOTT, VINI and SUSAN</strong>).
+<strong>Add a section on how one would modify the disturbance matrices</strong></p>
+<p><em>Figure 1: Proportional carbon transfers between pools during a fire in Saskatchewan</em></p>
+<div class="inline-figure"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/WildfireAlluvial.png" fig-align="center" width="600"></div>
+<p>There are a series of helper functions in <a href="https://github.com/PredictiveEcology/CBMutils.git">CBMutils</a> to help users explore and navigate disturbance matrices:
+- <a href="https://github.com/PredictiveEcology/CBMutils/blob/25f9b873ed7c2303864fa1b2d9243b8a7e20663e/R/CBM-DB_disturbances.R#L275">spuDist</a> for extracting the disturbances in a specific spatial unit,
+- <a href="https://github.com/PredictiveEcology/CBMutils/blob/25f9b873ed7c2303864fa1b2d9243b8a7e20663e/R/CBM-DB_disturbances.R#L458">simDist()</a> which lists the disturbances used in a simulation, and
+- <a href="https://github.com/PredictiveEcology/CBMutils/blob/25f9b873ed7c2303864fa1b2d9243b8a7e20663e/R/CBM-DB_disturbances.R#L388">seeDist()</a> which pulls out the proportions from source to sink pools.</p>
+<p>Because growth curves can be identified by strata, multiple columns can be used to identify growth curves using the <code>curveID</code> object. In our example, only <strong>gcids</strong> is used.</p>
+</div>
+</div>
+<div id="outputs-1" class="section level2" number="2.5">
+<h2>
+<span class="header-section-number">2.5</span> Outputs<a class="anchor" aria-label="anchor" href="#outputs-1"><i class="fas fa-link"></i></a>
+</h2>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="23%">
+<col width="26%">
+<col width="50%">
+</colgroup>
+<thead><tr class="header">
+<th>Name</th>
+<th>Class</th>
+<th>Description</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>standDT</td>
+<td>Data table</td>
+<td>Table of stand attributes. Stands can have 1 or more cohorts</td>
+</tr>
+<tr class="even">
+<td>cohortDT</td>
+<td>Data table</td>
+<td>Table of cohort attributes</td>
+</tr>
+<tr class="odd">
+<td>userGcSPU</td>
+<td>Data table</td>
+<td>Table of growth curves and spatial unit combinations for each cohort</td>
+</tr>
+<tr class="even">
+<td>userGcMeta</td>
+<td>Data table</td>
+<td>Growth curve metadata with additional species attributes</td>
+</tr>
+<tr class="odd">
+<td>gcMeta</td>
+<td>Data table</td>
+<td>Growth curve metadata</td>
+</tr>
+<tr class="even">
+<td>disturbanceEvents</td>
+<td>Data table</td>
+<td>Table with disturbance events for each simulation year</td>
+</tr>
+<tr class="odd">
+<td>disturbanceMeta</td>
+<td>Data table</td>
+<td>Table defining disturbance event types</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="links-to-other-modules-1" class="section level2" number="2.6">
+<h2>
+<span class="header-section-number">2.6</span> Links to other modules<a class="anchor" aria-label="anchor" href="#links-to-other-modules-1"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li><a href="https://github.com/PredictiveEcology/CBM_defaults">CBM_defaults</a></li>
+<li><a href="https://github.com/PredictiveEcology/CBM_vol2biomass">CBM_vol2biomass</a></li>
+<li><a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK">CBM_dataPrep_SK</a></li>
+<li><a href="https://github.com/PredictiveEcology/CBM_core">CBM_core</a></li>
+</ul>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="cbm_defaults.html"><span class="header-section-number">1</span> CBM_defaults</a></div>
+<div class="next"><a href="cbm_dataprep_sk.html"><span class="header-section-number">3</span> CBM_dataPrep_SK</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#cbm_dataprep"><span class="header-section-number">2</span> CBM_dataPrep</a></li>
+<li><a class="nav-link" href="#overview-2"><span class="header-section-number">2.1</span> Overview</a></li>
+<li><a class="nav-link" href="#background-1"><span class="header-section-number">2.2</span> Background</a></li>
+<li><a class="nav-link" href="#inputs-1"><span class="header-section-number">2.3</span> Inputs</a></li>
+<li>
+<a class="nav-link" href="#module-functioning-1"><span class="header-section-number">2.4</span> Module functioning</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#init"><span class="header-section-number">2.4.1</span> init</a></li>
+<li><a class="nav-link" href="#readdisturbanceevents"><span class="header-section-number">2.4.2</span> readDisturbanceEvents</a></li>
+<li><a class="nav-link" href="#disturbances"><span class="header-section-number">2.4.3</span> Disturbances</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#outputs-1"><span class="header-section-number">2.5</span> Outputs</a></li>
+<li><a class="nav-link" href="#links-to-other-modules-1"><span class="header-section-number">2.6</span> Links to other modules</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/PredictiveEcology/spadesCBM/blob/main/../modules/CBM_dataPrep/CBM_dataPrep.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/PredictiveEcology/spadesCBM/edit/main/../modules/CBM_dataPrep/CBM_dataPrep.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>spadesCBM Manual</strong>: v. 0.1" was written by Céline Boisvenue. It was last built on 26 June 2024.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

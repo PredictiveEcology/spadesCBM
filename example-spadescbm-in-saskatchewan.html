@@ -42,9 +42,9 @@
     }
   </style>
 <link rel="stylesheet" href="css/style.css">
-<meta name="description" content="Here we provide an example script to run all managed forests in Saskatchewan between 1985 and 2011. This example is fairly lightweight and most computers should be able to run the simulation. In...">
-<meta property="og:description" content="Here we provide an example script to run all managed forests in Saskatchewan between 1985 and 2011. This example is fairly lightweight and most computers should be able to run the simulation. In...">
-<meta name="twitter:description" content="Here we provide an example script to run all managed forests in Saskatchewan between 1985 and 2011. This example is fairly lightweight and most computers should be able to run the simulation. In...">
+<meta name="description" content="Here we provide an example script to run a small area of managed forests in Saskatchewan between 1985 and 2020. This example is fairly lightweight and most computers should be able to run the...">
+<meta property="og:description" content="Here we provide an example script to run a small area of managed forests in Saskatchewan between 1985 and 2020. This example is fairly lightweight and most computers should be able to run the...">
+<meta name="twitter:description" content="Here we provide an example script to run a small area of managed forests in Saskatchewan between 1985 and 2020. This example is fairly lightweight and most computers should be able to run the...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -70,9 +70,10 @@
 <li><a class="" href="index.html">Overview</a></li>
 <li><a class="" href="lexicon.html">Lexicon</a></li>
 <li><a class="" href="cbm_defaults.html"><span class="header-section-number">1</span> CBM_defaults</a></li>
-<li><a class="" href="cbm_dataprep_sk.html"><span class="header-section-number">2</span> CBM_dataPrep_SK</a></li>
-<li><a class="" href="cbm_vol2biomass_sk.html"><span class="header-section-number">3</span> CBM_vol2biomass_SK</a></li>
-<li><a class="" href="cbm_core.html"><span class="header-section-number">4</span> CBM_core</a></li>
+<li><a class="" href="cbm_dataprep.html"><span class="header-section-number">2</span> CBM_dataPrep</a></li>
+<li><a class="" href="cbm_dataprep_sk.html"><span class="header-section-number">3</span> CBM_dataPrep_SK</a></li>
+<li><a class="" href="cbm_vol2biomass_sk.html"><span class="header-section-number">4</span> CBM_vol2biomass_SK</a></li>
+<li><a class="" href="cbm_core.html"><span class="header-section-number">5</span> CBM_core</a></li>
 <li><a class="active" href="example-spadescbm-in-saskatchewan.html">Example: spadesCBM in Saskatchewan</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
@@ -85,7 +86,7 @@
   </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="example-spadescbm-in-saskatchewan" class="section level1 unnumbered">
 <h1>Example: spadesCBM in Saskatchewan<a class="anchor" aria-label="anchor" href="#example-spadescbm-in-saskatchewan"><i class="fas fa-link"></i></a>
 </h1>
-<p>Here we provide an example script to run all managed forests in Saskatchewan between 1985 and 2011. This example is fairly lightweight and most computers should be able to run the simulation.</p>
+<p>Here we provide an example script to run a small area of managed forests in Saskatchewan between 1985 and 2020. This example is fairly lightweight and most computers should be able to run the simulation. If you have access to the computing power, the entirety of managed forests in Saskatchewan can also be run using this <a href="https://github.com/PredictiveEcology/spadesCBM/blob/main/globalSK.R">script</a>. Note while the example provided here can run on most computers, running the entire province requires &gt;75 Gbs of RAM to run.</p>
 <p>In this example, we setup the workflow using the
 <a href="https://spades-project.predictiveecology.org/"><code>SpaDES.project</code></a> package and
 current versions of the <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> modules.</p>
@@ -114,16 +115,16 @@ The <a href="https://rstudio.github.io/reticulate/"><code>reticulate</code></a> 
 <div id="running-the-simulation" class="section level2 unnumbered">
 <h2>Running the simulation<a class="anchor" aria-label="anchor" href="#running-the-simulation"><i class="fas fa-link"></i></a>
 </h2>
-<p>Here is an R script to run the simulation of forest carbon dynamics in the managed forests of SK from 1985 to 2011, with disturbances as presented in <span class="citation">Boisvenue <em>et al.</em> (<a href="references.html#ref-boisvenue2016">2016</a>)</span>. Depending on your computing capacity, this may take a while, particularly the first time you run it. Subsequent simulations are much faster because of the use of the <a href="https://cran.r-project.org/web/packages/SpaDES.core/vignettes/iii-cache.html">reproducible::Cache</a> function.</p>
+<p>Here is an R script to run the simulation of forest carbon dynamics in a small area in the managed forests of SK from 1985 to 2020, with disturbances as presented in <span class="citation">Boisvenue <em>et al.</em> (<a href="references.html#ref-boisvenue2016">2016</a>)</span>. Depending on your computing capacity, this may take a while, particularly the first time you run it. Subsequent simulations are much faster because of the use of the <a href="https://cran.r-project.org/web/packages/SpaDES.core/vignettes/iii-cache.html">reproducible::Cache</a> function.</p>
 <p>The simulation period can be changed to be shorter, but disturbances raster are only provided for years within the 1985-2011 range in this example.</p>
 <pre><code># set project paths and install packages
 projectPath &lt;- "~/GitHub/spadesCBM"
 repos &lt;- unique(c("predictiveecology.r-universe.dev", getOption("repos")))
 install.packages("SpaDES.project",
                  repos = repos)
-
+                 
 # Set simulation period.In this example we start in 1985, and end in 2011
-times &lt;- list(start = 1985, end = 2011)
+times &lt;- list(start = 1985, end = 2020)
 
 # This is our setupProject call. This creates the model's folder structure, downloads modules, installs and loads needed packages, and sets options.
 out &lt;- SpaDES.project::setupProject(
@@ -141,12 +142,13 @@ out &lt;- SpaDES.project::setupProject(
     # Require.offlineMode = TRUE,
     spades.moduleCodeChecks = FALSE
   ),
-  modules =  c("PredictiveEcology/CBM_defaults@main",
-               "PredictiveEcology/CBM_dataPrep_SK@main",
-               "PredictiveEcology/CBM_vol2biomass_SK@main",
-               "PredictiveEcology/CBM_core@main"),
+  modules =  c("PredictiveEcology/CBM_defaults@development",
+               "PredictiveEcology/CBM_dataPrep_SK@development",
+               "PredictiveEcology/CBM_dataPrep@development",
+               "PredictiveEcology/CBM_vol2biomass_SK@development",
+               "PredictiveEcology/CBM_core@development"),
   times = times,
-  require = c("reproducible"),
+  require = c("terra", "reproducible"),
 
   params = list(
     CBM_defaults = list(
@@ -155,7 +157,7 @@ out &lt;- SpaDES.project::setupProject(
     CBM_dataPrep_SK = list(
       .useCache = TRUE
     ),
-    CBM_vol2biomass_SK = list(
+    CBM_vol2biomass = list(
       .useCache = TRUE
     )
   ),
@@ -163,8 +165,14 @@ out &lt;- SpaDES.project::setupProject(
   #### begin manually passed inputs #########################################
   ## define the  study area.
   masterRaster = {
+    extent = terra::ext(c(xmin = -687696, xmax = -681036, ymin = 711955, ymax = 716183))
+    masterRaster &lt;- terra::rast(extent, res = 30)
+    terra::crs(masterRaster) &lt;- "PROJCRS[\"Lambert_Conformal_Conic_2SP\",\n    BASEGEOGCRS[\"GCS_GRS_1980_IUGG_1980\",\n        DATUM[\"D_unknown\",\n            ELLIPSOID[\"GRS80\",6378137,298.257222101,\n                LENGTHUNIT[\"metre\",1,\n                    ID[\"EPSG\",9001]]]],\n        PRIMEM[\"Greenwich\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433,\n                ID[\"EPSG\",9122]]]],\n    CONVERSION[\"Lambert Conic Conformal (2SP)\",\n        METHOD[\"Lambert Conic Conformal (2SP)\",\n            ID[\"EPSG\",9802]],\n        PARAMETER[\"Latitude of false origin\",49,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8821]],\n        PARAMETER[\"Longitude of false origin\",-95,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8822]],\n        PARAMETER[\"Latitude of 1st standard parallel\",49,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8823]],\n        PARAMETER[\"Latitude of 2nd standard parallel\",77,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8824]],\n        PARAMETER[\"Easting at false origin\",0,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8826]],\n        PARAMETER[\"Northing at false origin\",0,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8827]]],\n    CS[Cartesian,2],\n        AXIS[\"easting\",east,\n            ORDER[1],\n            LENGTHUNIT[\"metre\",1,\n                ID[\"EPSG\",9001]]],\n        AXIS[\"northing\",north,\n            ORDER[2],\n            LENGTHUNIT[\"metre\",1,\n                ID[\"EPSG\",9001]]]]"
+    masterRaster[] &lt;- rep(1, terra::ncell(masterRaster))
     mr &lt;- reproducible::prepInputs(url = "https://drive.google.com/file/d/1zUyFH8k6Ef4c_GiWMInKbwAl6m6gvLJW",
-                                   destinationPath = "inputs")
+                                   destinationPath = "inputs",
+                                   to = masterRaster,
+                                   method = "near")
     mr[mr[] == 0] &lt;- NA
     mr
   },
@@ -178,7 +186,7 @@ out &lt;- SpaDES.project::setupProject(
 )
 
 # Run simulation
-simMngedSK &lt;- SpaDES.core::simInitAndSpades2(out)</code></pre>
+simMngedSKtestArea &lt;- SpaDES.core::simInitAndSpades2(out)</code></pre>
 </div>
 <div id="viewing-results" class="section level2 unnumbered">
 <h2>Viewing results<a class="anchor" aria-label="anchor" href="#viewing-results"><i class="fas fa-link"></i></a>
@@ -215,7 +223,7 @@ spatialPlot &lt;- CBMutils::patialPlot(
 </div>
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="cbm_core.html"><span class="header-section-number">4</span> CBM_core</a></div>
+<div class="prev"><a href="cbm_core.html"><span class="header-section-number">5</span> CBM_core</a></div>
 <div class="next"><a href="references.html">References</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
