@@ -27,15 +27,7 @@
 
 ## RUN INDIVIDUAL TESTS ----
 
-  ## Run SK-small 1998-2000
-  testthat::test_file("tests/testthat/test-SK-small_t1-1998-2000.R")
+  testthat::test_file(filter = "SK_1-small_1998-2000")
 
-  ## Run SK-small 1985-2011
-  testthat::test_file("tests/testthat/test-SK-small_t2-1985-2011.R")
-
-  ## Run SK 1998-2000
-  testthat::test_file("tests/testthat/test-SK_t1-1998-2000.R")
-
-  ## Run SK 1985-2011
-  testthat::test_file("tests/testthat/test-SK_t2-1985-2011.R")
+  testthat::test_file(filter = "SK_2-SPU-27-28_NTEMS_1998-2000")
 
