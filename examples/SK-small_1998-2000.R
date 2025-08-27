@@ -30,11 +30,11 @@
     # Set modules and simulation time span
     times   = times,
     modules = c(
-      CBM_defaults    = "PredictiveEcology/CBM_defaults@main",
-      CBM_dataPrep_SK = "PredictiveEcology/CBM_dataPrep_SK@main",
-      CBM_dataPrep    = "PredictiveEcology/CBM_dataPrep@main",
+      CBM_defaults       = "PredictiveEcology/CBM_defaults@main",
+      CBM_dataPrep_SK    = "PredictiveEcology/CBM_dataPrep_SK@main",
+      CBM_dataPrep       = "PredictiveEcology/CBM_dataPrep@main",
       CBM_vol2biomass_SK = "PredictiveEcology/CBM_vol2biomass_SK@main",
-      CBM_core        = "PredictiveEcology/CBM_core@main"
+      CBM_core           = "PredictiveEcology/CBM_core@main"
     ),
 
     # Set options
@@ -73,6 +73,9 @@
         method = "near"
       ) |> terra::classify(cbind(0, NA))
     },
+
+    # NTEMS disturbances sample
+    disturbanceRastersURL = "https://drive.google.com/file/d/12YnuQYytjcBej0_kdodLchPg7z9LygCt",
 
     # Set input: Output table
     outputs = as.data.frame(expand.grid(
