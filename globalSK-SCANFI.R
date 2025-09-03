@@ -11,10 +11,10 @@ out <- SpaDES.project::setupProject(
   useGit = "PredictiveEcology", # a developer sets and keeps this = TRUE
   overwrite = TRUE, # a user who wants to get latest modules sets this to TRUE
   paths = list(projectPath = projectPath,
-               outputPath  = file.path(projectPath, "outputs", "SK-30m"),
+               outputPath  = file.path(projectPath, "outputs", "SK-30m-SCANFI"),
                modulePath  = file.path(projectPath, "modules"),
                packagePath = file.path(projectPath, "packages"),
-               inputPath   = file.path(projectPath, "inputs"),
+               inputPath   = file.path(projectPath, "inputs-SCANFI"),
                cachePath   = file.path(projectPath, "cache")),
 
   options = options(
@@ -50,20 +50,20 @@ out <- SpaDES.project::setupProject(
   ## define the  study area.
   masterRaster = {
     mr <- reproducible::prepInputs(url = "https://drive.google.com/file/d/1EIct8OMMdUP3_F0njXyeqIe004TTTtWU/view?usp=drive_link",
-                                   destinationPath = "inputs")
+                                   destinationPath = inputPath)
     mr[mr[] == 0] <- NA
     mr
   },
 
   ageLocator = terra::round(reproducible::prepInputs(url = "https://drive.google.com/file/d/1OvloZLpXvx-Wc2Qr4LAgXkweS-u97BE7/view?usp=drive_link",
-                                                     destinationPath = "inputs",
+                                                     destinationPath = inputPath,
                                                      fun = terra::rast)),
   ageDataYear = 2020,
   userGcMeta = as.data.table(reproducible::prepInputs(url = "https://drive.google.com/file/d/12RHUTxQX9yRwgkWKDzWrA3q27FVYU_3h/view?usp=drive_link",
-                                                      destinationPath = "inputs",
+                                                      destinationPath = inputPath,
                                                       fun = fread)),
   userGcM3 = as.data.table(reproducible::prepInputs(url = "https://drive.google.com/file/d/1rlygsfT9Te6XHNAKNQxfQJDwMybXLijG/view?usp=drive_link",
-                                                    destinationPath = "inputs",
+                                                    destinationPath = inputPath,
                                                     fun = fread)),
 
   ## If not using curveID, comment this in.
@@ -72,10 +72,10 @@ out <- SpaDES.project::setupProject(
   ## Comment this out if not using curveID
   curveID = c("speciesId", "prodclass"),
   leadSpeciesRaster = reproducible::prepInputs(url = "https://drive.google.com/file/d/1EIct8OMMdUP3_F0njXyeqIe004TTTtWU/view?usp=drive_link",
-                                               destinationPath = "inputs",
+                                               destinationPath = inputPath,
                                                fun = terra::rast),
   siteProductivityRaster = reproducible::prepInputs(url = "https://drive.google.com/file/d/1mPkDfGBNxkYPorUxSog36ayRpeISo8iT/view?usp=drive_link",
-                                                    destinationPath = "inputs",
+                                                    destinationPath = inputPath,
                                                     fun = terra::rast),
   cohortLocators = list(
     speciesId  = leadSpeciesRaster,
