@@ -49,23 +49,37 @@ out <- SpaDES.project::setupProject(
   #### begin manually passed inputs #########################################
   ## define the  study area.
   masterRaster = {
-    mr <- reproducible::prepInputs(url = "https://drive.google.com/file/d/1EIct8OMMdUP3_F0njXyeqIe004TTTtWU/view?usp=drive_",
+    mr <- reproducible::prepInputs(url = "https://drive.google.com/file/d/1EIct8OMMdUP3_F0njXyeqIe004TTTtWU/view?usp=drive_link",
                                    destinationPath = "inputs")
     mr[mr[] == 0] <- NA
     mr
   },
 
-  ageLocator = terra::round(terra::rast("~/GitHub/Data/scanfi/scanfiAgeSK_newCRS.tif")),
+  ageLocator = terra::round(reproducible::prepInputs(url = "https://drive.google.com/file/d/1OvloZLpXvx-Wc2Qr4LAgXkweS-u97BE7/view?usp=drive_link",
+                                                     destinationPath = "inputs",
+                                                     fun = terra::rast)),
   ageDataYear = 2020,
-  gcIndexLocator = terra::rast("~/GitHub/Data/scanfi/gcIndex.tif"),
-  userGcMeta = as.data.table(read.csv("~/GitHub/Data/scanfi/gcMetaEg.csv")),
-  userGcM3 = as.data.table(read.csv("~/GitHub/Data/scanfi/userGcM3.csv")),
-  # curveID = c("speciesId", "prodclass"),
-  # leadSpeciesRaster = terra::rast("~/GitHub/Data/scanfi/leadingSpeciesSK.tif"),
-  # siteProductivityRaster = terra::rast("~/GitHub/SK_30m/site_productivity.tif"),
-  # cohortLocators = list(
-  #   speciesId  = leadSpeciesRaster,
-  #   prodclass = siteProductivityRaster),
+  userGcMeta = as.data.table(reproducible::prepInputs(url = "https://drive.google.com/file/d/12RHUTxQX9yRwgkWKDzWrA3q27FVYU_3h/view?usp=drive_link",
+                                                      destinationPath = "inputs",
+                                                      fun = fread)),
+  userGcM3 = as.data.table(reproducible::prepInputs(url = "https://drive.google.com/file/d/1rlygsfT9Te6XHNAKNQxfQJDwMybXLijG/view?usp=drive_link",
+                                                    destinationPath = "inputs",
+                                                    fun = fread)),
+
+  ## If not using curveID, comment this in.
+  # gcIndexLocator = terra::rast("~/GitHub/Data/scanfi/gcIndex.tif"),
+
+  ## Comment this out if not using curveID
+  curveID = c("speciesId", "prodclass"),
+  leadSpeciesRaster = reproducible::prepInputs(url = "https://drive.google.com/file/d/1EIct8OMMdUP3_F0njXyeqIe004TTTtWU/view?usp=drive_link",
+                                               destinationPath = "inputs",
+                                               fun = terra::rast),
+  siteProductivityRaster = reproducible::prepInputs(url = "https://drive.google.com/file/d/1mPkDfGBNxkYPorUxSog36ayRpeISo8iT/view?usp=drive_link",
+                                                    destinationPath = "inputs",
+                                                    fun = terra::rast),
+  cohortLocators = list(
+    speciesId  = leadSpeciesRaster,
+    prodclass = siteProductivityRaster),
 
 
   disturbanceSource = "NTEMS",
