@@ -41,12 +41,7 @@ test_that("SK-small 1998-2000", {
       ),
 
       # NTEMS disturbances sample
-      disturbanceRastersURL = "https://drive.google.com/file/d/12YnuQYytjcBej0_kdodLchPg7z9LygCt",
-
-      outputs = as.data.frame(expand.grid(
-        objectName = c("cbmPools", "NPP"),
-        saveTime   = sort(c(times$start, times$start + c(1:(times$end - times$start))))
-      ))
+      disturbanceRastersURL = "https://drive.google.com/file/d/12YnuQYytjcBej0_kdodLchPg7z9LygCt"
     )
   )
 

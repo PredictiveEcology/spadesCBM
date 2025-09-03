@@ -41,12 +41,7 @@ test_that("SK-med with NTEMS disturbances 1998-2000", {
       ),
 
       # NTEMS disturbances
-      disturbanceSource = "NTEMS",
-
-      outputs = as.data.frame(expand.grid(
-        objectName = c("cbmPools", "NPP"),
-        saveTime   = sort(c(times$start, times$start + c(1:(times$end - times$start))))
-      ))
+      disturbanceSource = "NTEMS"
     )
   )
 

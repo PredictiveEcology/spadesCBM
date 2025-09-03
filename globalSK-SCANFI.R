@@ -82,12 +82,7 @@ out <- SpaDES.project::setupProject(
     prodclass = siteProductivityRaster),
 
 
-  disturbanceSource = "NTEMS",
-
-  outputs = as.data.frame(expand.grid(
-    objectName = c("cbmPools", "NPP"),
-    saveTime = sort(c(times$start, times$start + c(1:(times$end - times$start))))
-  ))
+  disturbanceSource = "NTEMS"
 )
 
 # Run
