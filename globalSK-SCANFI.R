@@ -14,7 +14,7 @@ out <- SpaDES.project::setupProject(
                outputPath  = file.path(projectPath, "outputs", "SK-30m-SCANFI"),
                modulePath  = file.path(projectPath, "modules"),
                packagePath = file.path(projectPath, "packages"),
-               inputPath   = file.path(projectPath, "inputs-SCANFI"),
+               inputPath   = file.path(projectPath, "inputs", "SK-30m-SCANFI"),
                cachePath   = file.path(projectPath, "cache")),
 
   options = options(
