@@ -56,14 +56,14 @@ out <- SpaDES.project::setupProject(
   },
 
   ageLocator = terra::round(reproducible::prepInputs(url = "https://drive.google.com/file/d/1OvloZLpXvx-Wc2Qr4LAgXkweS-u97BE7/view?usp=drive_link",
-                                                     destinationPath = "inputs",
+                                                     destinationPath = paths$inputPath,
                                                      fun = terra::rast)),
   ageDataYear = 2020,
-  userGcMeta = as.data.table(reproducible::prepInputs(url = "https://drive.google.com/file/d/12RHUTxQX9yRwgkWKDzWrA3q27FVYU_3h/view?usp=drive_link",
-                                                      destinationPath = "inputs",
+  userGcMeta = as.data.table(reproducible::prepInputs(url = "https://drive.google.com/file/d/1rlygsfT9Te6XHNAKNQxfQJDwMybXLijG/view?usp=drive_link",
+                                                      destinationPath = paths$inputPath,
                                                       fun = fread)),
-  userGcM3 = as.data.table(reproducible::prepInputs(url = "https://drive.google.com/file/d/1rlygsfT9Te6XHNAKNQxfQJDwMybXLijG/view?usp=drive_link",
-                                                    destinationPath = "inputs",
+  userGcM3 = as.data.table(reproducible::prepInputs(url = "https://drive.google.com/file/d/12RHUTxQX9yRwgkWKDzWrA3q27FVYU_3h/view?usp=drive_link",
+                                                    destinationPath = paths$inputPath,
                                                     fun = fread)),
 
   ## If not using curveID, comment this in.
@@ -72,10 +72,10 @@ out <- SpaDES.project::setupProject(
   ## Comment this out if not using curveID
   curveID = c("speciesId", "prodclass"),
   leadSpeciesRaster = reproducible::prepInputs(url = "https://drive.google.com/file/d/1EIct8OMMdUP3_F0njXyeqIe004TTTtWU/view?usp=drive_link",
-                                               destinationPath = "inputs",
+                                               destinationPath = paths$inputPath,
                                                fun = terra::rast),
   siteProductivityRaster = reproducible::prepInputs(url = "https://drive.google.com/file/d/1mPkDfGBNxkYPorUxSog36ayRpeISo8iT/view?usp=drive_link",
-                                                    destinationPath = "inputs",
+                                                    destinationPath = paths$inputPath,
                                                     fun = terra::rast),
   cohortLocators = list(
     speciesId  = leadSpeciesRaster,
