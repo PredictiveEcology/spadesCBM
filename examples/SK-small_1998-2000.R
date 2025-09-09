@@ -43,36 +43,18 @@
     ),
 
     # Set packages required for set up
-    require = c("reproducible", "terra"),
+    require = "terra",
 
     # Set input: Study area
-    masterRaster = {
-
-      # Set study area extent and resolution
-      mrAOI <- list(
-        ext = c(xmin = -687696, xmax = -681036, ymin = 711955, ymax = 716183),
-        res = 30
-      )
-
-      # Align SK master raster with study area
-      mrSource <- terra::rast(
-        reproducible::preProcess(
-          destinationPath = "~/spadesCBM/inputs",
-          url             = "https://drive.google.com/file/d/1zUyFH8k6Ef4c_GiWMInKbwAl6m6gvLJW",
-          targetFile      = "ldSp_TestArea.tif"
-        )$targetFilePath)
-
-      reproducible::postProcess(
-        mrSource,
-        to = terra::rast(
-          extent     = mrAOI$ext,
-          resolution = mrAOI$res,
-          crs        = terra::crs(mrSource),
-          vals       = 1
-        ),
-        method = "near"
-      ) |> terra::classify(cbind(0, NA))
-    },
+    masterRaster = terra::rast(
+      crs  = "EPSG:3979",
+      res  = 30,
+      vals = 1L,
+      xmin = -690643.4762,
+      xmax = -632143.4762,
+      ymin =  700447.9315,
+      ymax =  757447.9315
+    ),
 
     # NTEMS disturbances sample
     disturbanceRastersURL = "https://drive.google.com/file/d/12YnuQYytjcBej0_kdodLchPg7z9LygCt",

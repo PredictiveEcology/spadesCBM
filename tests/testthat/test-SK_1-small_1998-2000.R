@@ -35,9 +35,12 @@ test_that("SK-small 1998-2000", {
       # Small test area in SPU 27
       masterRaster = terra::rast(
         crs  = "EPSG:3979",
-        ext  = c(xmin = -687696, xmax = -681036, ymin = 711955, ymax = 716183),
         res  = 30,
-        vals = 1L
+        vals = 1L,
+        xmin = -690643.4762,
+        xmax = -632143.4762,
+        ymin =  700447.9315,
+        ymax =  757447.9315
       ),
 
       # NTEMS disturbances sample
