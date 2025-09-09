@@ -32,7 +32,6 @@ out <- SpaDES.project::setupProject(
                "PredictiveEcology/CBM_vol2biomass_SK@development",
                "PredictiveEcology/CBM_core@development"),
   times = times,
-  require = c("reproducible"),
 
   params = list(
     CBM_defaults = list(
@@ -47,14 +46,20 @@ out <- SpaDES.project::setupProject(
   ),
 
   #### begin manually passed inputs #########################################
-  ## define the  study area.
-  masterRaster = {
-    mr <- reproducible::prepInputs(url = "https://drive.google.com/file/d/1FmtbEKbkzufIifETONxOkoplGX50lrT_",
-                                   destinationPath = "inputs")
-    mr[mr[] == 0] <- NA
-    mr
-  },
+  require = "terra",
 
+  # Set study area
+  masterRaster = terra::rast(
+    crs  = "EPSG:3979",
+    res  = 30,
+    vals = 1L,
+    xmin = -1077673.4762,
+    xmax =  -426673.4762,
+    ymin =   108487.9315,
+    ymax =   971077.9315
+  ),
+
+  # Set disturbances data source
   disturbanceSource = "NTEMS"
 )
 
