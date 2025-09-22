@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 2 CBM_dataPrep | spadesCBM Manual</title>
 <meta name="author" content="Céline Boisvenue">
-<meta name="generator" content="bookdown 0.43 with bs4_book()">
+<meta name="generator" content="bookdown 0.44 with bs4_book()">
 <meta property="og:title" content="Chapter 2 CBM_dataPrep | spadesCBM Manual">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
@@ -208,23 +208,17 @@
 <span class="header-section-number">2.4</span> Module functioning<a class="anchor" aria-label="anchor" href="#module-functioning-1"><i class="fas fa-link"></i></a>
 </h2>
 <p><a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> has 2 events; the <code>init</code> event, which is run only once, and the <code>readDisturbanceEvents</code> event, which is repeated for each simulation year.</p>
-<div id="init" class="section level3" number="2.4.1">
+<div id="readdisturbanceevents" class="section level3" number="2.4.1">
 <h3>
-<span class="header-section-number">2.4.1</span> <code>init</code><a class="anchor" aria-label="anchor" href="#init"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4.1</span> <code>readDisturbanceEvents</code><a class="anchor" aria-label="anchor" href="#readdisturbanceevents"><i class="fas fa-link"></i></a>
 </h3>
-<p>This first event performs the majority of the data processing steps in this module. The study area’s various spatial data is also processed into a table format for use in the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> and <a href="https://github.com/PredictiveEcology/CBM_vol2biomass_SK.git">CBM_vol2biomass_SK</a> modules. This event is run only once.</p>
+<p>This first short event serves to process disturbance events for each simulation year. Separating this processing from the <code>init</code> event enables dynamic linkages to disturbance models. However, in our example, disturbances are provided in the form of remotely-sensed disturbance rasters.</p>
 </div>
-<div id="readdisturbanceevents" class="section level3" number="2.4.2">
+<div id="disturbances" class="section level3" number="2.4.2">
 <h3>
-<span class="header-section-number">2.4.2</span> <code>readDisturbanceEvents</code><a class="anchor" aria-label="anchor" href="#readdisturbanceevents"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4.2</span> Disturbances<a class="anchor" aria-label="anchor" href="#disturbances"><i class="fas fa-link"></i></a>
 </h3>
-<p>This short event serves to process disturbance events for each simulation year. Separating this processing from the <code>init</code> event enables dynamic linkages to disturbance models. However, in our example, disturbances are provided in the form of remotely-sensed disturbance rasters.</p>
-</div>
-<div id="disturbances" class="section level3" number="2.4.3">
-<h3>
-<span class="header-section-number">2.4.3</span> Disturbances<a class="anchor" aria-label="anchor" href="#disturbances"><i class="fas fa-link"></i></a>
-</h3>
-<p>There are 468 unique disturbance matrices identified in the defaults. Since root parameters and snag carbon transfer rates have hardwood and softwood specific rates, each disturbance has a hardwood and a softwood instance, which means we have 234 unique disturbances across Canada as defaults in this modelling system, one for hardwood and one for softwood. A user could add or modify the proportions transferred between pools to represent a disturbance (<strong>NOTE THAT THIS WOULD HAVE TO HAPPEN IN THE CSVs, and even then would that work? Does libcbm point to those files? what if we change them? QUESTION FOR SCOTT, VINI and SUSAN</strong>).
+<p>There are 468 unique disturbance matrices identified in the defaults. Since root parameters and snag carbon transfer rates have hardwood and softwood specific rates, each disturbance has a hardwood and a softwood instance, which means we have 234 unique disturbances across Canada as defaults in this modelling system, one for hardwood and one for softwood. A user could add or modify the proportions transferred between pools to represent a disturbance.
 <strong>Add a section on how one would modify the disturbance matrices</strong></p>
 <p><em>Figure 1: Proportional carbon transfers between pools during a fire in Saskatchewan</em></p>
 <div class="inline-figure"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/WildfireAlluvial.png" fig-align="center" width="600"></div>
@@ -233,6 +227,12 @@
 - <a href="https://github.com/PredictiveEcology/CBMutils/blob/25f9b873ed7c2303864fa1b2d9243b8a7e20663e/R/CBM-DB_disturbances.R#L458">simDist()</a> which lists the disturbances used in a simulation, and
 - <a href="https://github.com/PredictiveEcology/CBMutils/blob/25f9b873ed7c2303864fa1b2d9243b8a7e20663e/R/CBM-DB_disturbances.R#L388">seeDist()</a> which pulls out the proportions from source to sink pools.</p>
 <p>Because growth curves can be identified by strata, multiple columns can be used to identify growth curves using the <code>curveID</code> object. In our example, only <strong>gcids</strong> is used.</p>
+</div>
+<div id="init" class="section level3" number="2.4.3">
+<h3>
+<span class="header-section-number">2.4.3</span> <code>init</code><a class="anchor" aria-label="anchor" href="#init"><i class="fas fa-link"></i></a>
+</h3>
+<p>This event performs the majority of the data processing steps in this module. The study area’s various spatial data, read-in in the study area specific <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> module, is also processed into a table format for use in the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> and <a href="https://github.com/PredictiveEcology/CBM_vol2biomass_SK.git">CBM_vol2biomass_SK</a> modules. This event is run only once.</p>
 </div>
 </div>
 <div id="outputs-1" class="section level2" number="2.5">
@@ -313,9 +313,9 @@
 <li><a class="nav-link" href="#inputs-1"><span class="header-section-number">2.3</span> Inputs</a></li>
 <li>
 <a class="nav-link" href="#module-functioning-1"><span class="header-section-number">2.4</span> Module functioning</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#init"><span class="header-section-number">2.4.1</span> init</a></li>
-<li><a class="nav-link" href="#readdisturbanceevents"><span class="header-section-number">2.4.2</span> readDisturbanceEvents</a></li>
-<li><a class="nav-link" href="#disturbances"><span class="header-section-number">2.4.3</span> Disturbances</a></li>
+<li><a class="nav-link" href="#readdisturbanceevents"><span class="header-section-number">2.4.1</span> readDisturbanceEvents</a></li>
+<li><a class="nav-link" href="#disturbances"><span class="header-section-number">2.4.2</span> Disturbances</a></li>
+<li><a class="nav-link" href="#init"><span class="header-section-number">2.4.3</span> init</a></li>
 </ul>
 </li>
 <li><a class="nav-link" href="#outputs-1"><span class="header-section-number">2.5</span> Outputs</a></li>

@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 5 CBM_core | spadesCBM Manual</title>
 <meta name="author" content="Céline Boisvenue">
-<meta name="generator" content="bookdown 0.43 with bs4_book()">
+<meta name="generator" content="bookdown 0.44 with bs4_book()">
 <meta property="og:title" content="Chapter 5 CBM_core | spadesCBM Manual">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
@@ -94,7 +94,7 @@
 <h2>
 <span class="header-section-number">5.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview-5"><i class="fas fa-link"></i></a>
 </h2>
-<p><a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> is the central module of <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>. This is where all the carbon transfers are calculated at every time step, where disturbances are applied, and stocks are tracked. It cannot run on its own and it needs parameters from either <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a>, <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, and <a href="https://github.com/PredictiveEcology/CBM_vol2biomass_SK.git">CBM_vol2biomass_SK</a> (as per the provided example for managed forests of Saskatchewan) or the equivalent information from the user. In <em>SpaDES-speak</em>, this module has five events (<code>Init</code>, <code>spinup</code>, <code>annual</code>, <code>accumulateResults</code>, and <code>plot</code>). Only in two of these events do carbon transactions occur: <code>spinup</code> and <code>annual</code>. The other events are tools to enable these transactions. All events are scheduled only once except for the <code>annual</code> event, who schedules itself until the end of the simulation horizon. Only in this module are the Python functions from the <a href="https://github.com/cat-cfs/libcbm_py/tree/main">libcbm</a> package called. The functions used in this module are the <a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/model/cbm_exn">libcbm cbm-exn</a> functions exclusively, as these were designed to accept external biomass increments. These Python functions are used in the <code>spinup</code> and in the <code>annual</code> events only.</p>
+<p><a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> is the central module of <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>. This is where all the carbon transfers are calculated at every time step, where disturbances are applied, and stocks are tracked. It cannot run on its own and it needs parameters from <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a>, <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, <a href="https://github.com/PredictiveEcology/CBM_dataPrep.git">CBM_dataPrep</a>, and <a href="https://github.com/PredictiveEcology/CBM_vol2biomass_SK.git">CBM_vol2biomass_SK</a> (as per the provided example for managed forests of Saskatchewan) or the equivalent information from the user. In <em>SpaDES-speak</em>, this module has six events (<code>Init</code>, <code>spinup</code>, <code>annual_preprocessing</code>, <code>annual_carbonDynamics</code>, <code>accumulateResults</code>, and <code>plot</code>). Only in two of these events do carbon transactions occur: <code>spinup</code> and <code>annual_carbonDynamics</code>. The other events are tools to enable these transactions. All events are scheduled only once except for the two <code>annual</code> events, who schedules themselves until the end of the simulation horizon. Only in this module are the Python functions from the <a href="https://github.com/cat-cfs/libcbm_py/tree/main">libcbm</a> package called. The functions used in this module are the <a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/model/cbm_exn">libcbm cbm-exn</a> functions exclusively, as these were designed to accept external biomass increments. These Python functions are used in the <code>spinup</code> and in the <code>annual_carbonDynamics</code> events only.</p>
 </div>
 <div id="background-4" class="section level2" number="5.2">
 <h2>
@@ -186,10 +186,10 @@
 <h3>
 <span class="header-section-number">5.4.1</span> Events<a class="anchor" aria-label="anchor" href="#events-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>There are 5 events in CBM_core. Each are run once, except for the <code>annual</code> event, which is repeated for each simulation year.</p>
-<div id="init-2" class="section level4" number="5.4.1.1">
+<p>There are 6 events in CBM_core. Each are run once, except for the <code>annual</code> event, which is repeated for each simulation year.</p>
+<div id="init-1" class="section level4" number="5.4.1.1">
 <h4>
-<span class="header-section-number">5.4.1.1</span> <code>Init</code><a class="anchor" aria-label="anchor" href="#init-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4.1.1</span> <code>Init</code><a class="anchor" aria-label="anchor" href="#init-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>In this short event, the Python virtual environment is set up. If a suitable version of python is not available, it will be installed using the <code>reticulate</code> package.</p>
 </div>
@@ -201,21 +201,26 @@
 <p>Cohort and stand data is prepared and passed to the <a href="https://github.com/PredictiveEcology/CBM_core/blob/cf9c966e7bbbb29f8089411c73d030e21846ffe3/R/spinup.R#L5"><code>cbmExnSpinup</code></a> function alongside growth curve data (from CBM_vol2biomass_SK) and spinup default data (from CBM_defaults). The <a href="https://github.com/PredictiveEcology/CBM_core/blob/cf9c966e7bbbb29f8089411c73d030e21846ffe3/R/spinup.R#L5"><code>cbmExnSpinup</code></a> function sets up inputs, calls the <a href="https://cat-cfs.github.io/libcbm_py/cbm_exn_custom_ops.html#Appendix-1:-CBM-EXN-Default-parameters"><code>cbm_exn_get_default_parameters</code></a> python function that defines the model structure, and runs the carbon transfers necessary for the growth and burn cycle using <a href="https://cat-cfs.github.io/libcbm_py/cbm_exn_custom_ops.html#Appendix-1:-CBM-EXN-Default-parameters"><code>cbm_exn_spinup</code></a>.</p>
 <p>The spinup output data and cohort groups are then prepared for use in the <code>annual</code> event.</p>
 </div>
-<div id="annual" class="section level4" number="5.4.1.3">
+<div id="annual_preprocessing" class="section level4" number="5.4.1.3">
 <h4>
-<span class="header-section-number">5.4.1.3</span> <code>annual</code><a class="anchor" aria-label="anchor" href="#annual"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4.1.3</span> <code>annual_preprocessing</code><a class="anchor" aria-label="anchor" href="#annual_preprocessing"><i class="fas fa-link"></i></a>
+</h4>
+</div>
+<div id="annual_carbondynamics" class="section level4" number="5.4.1.4">
+<h4>
+<span class="header-section-number">5.4.1.4</span> <code>annual_carbonDynamics</code><a class="anchor" aria-label="anchor" href="#annual_carbondynamics"><i class="fas fa-link"></i></a>
 </h4>
 <p>This event is where all the carbon transfers are applied for each simulation year. Disturbances are matched to the correct records, and the transfers listed <a href="https://predictiveecology.github.io/spadesCBM/index.html#order-of-operations">here</a> are applied. Details on transfer rates are found in the <a href="https://predictiveecology.github.io/spadesCBM/cbm_core.html#carbon-transfers">following section, below</a>. While undisturbed cohorts will continue to grow by one time step according to their associated growth curve, disturbed cohorts will only begin growing again after a delay period. This delay is dictated by the <code>default_delay_regen</code> parameter of the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module, and can be changed by the user. Only growth-related carbon transfers are affected by this delay. By default it is set to 0 years.</p>
 </div>
-<div id="accumulateresults" class="section level4" number="5.4.1.4">
+<div id="accumulateresults" class="section level4" number="5.4.1.5">
 <h4>
-<span class="header-section-number">5.4.1.4</span> <code>accumulateResults</code><a class="anchor" aria-label="anchor" href="#accumulateresults"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4.1.5</span> <code>accumulateResults</code><a class="anchor" aria-label="anchor" href="#accumulateresults"><i class="fas fa-link"></i></a>
 </h4>
 <p>This event is where outputs are saved. In the case of our example in Saskatchewan, we output and save <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#cbmpools">cbmPools</a> and Net Primary Production (<a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#net-primary-productivity-npp">NPP</a>) for each simulation year. If paths are kept at default when running the global script, these outputs will be found here: <code>~/GitHub/spadesCBM/outputs</code>.</p>
 </div>
-<div id="plot" class="section level4" number="5.4.1.5">
+<div id="plot" class="section level4" number="5.4.1.6">
 <h4>
-<span class="header-section-number">5.4.1.5</span> <code>plot</code><a class="anchor" aria-label="anchor" href="#plot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4.1.6</span> <code>plot</code><a class="anchor" aria-label="anchor" href="#plot"><i class="fas fa-link"></i></a>
 </h4>
 <p>This final event is where all plotting occurs. Plots will be saved as <code>.png</code> files in the project’s outputs folder. Similar to in <code>accumulateResults</code>, if paths are kept at default when running our example global script, these outputs will be found here:
 <code>~/GitHub/spadesCBM/outputs</code>. You can also view examples of these plots <a href="https://predictiveecology.github.io/spadesCBM/example-spadescbm-in-saskatchewan.html#viewing-results">here</a>.</p>
@@ -277,7 +282,7 @@
 <h2>
 <span class="header-section-number">5.5</span> Outputs<a class="anchor" aria-label="anchor" href="#outputs-4"><i class="fas fa-link"></i></a>
 </h2>
-<p><a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> provides outputs as prescribed in the global script, the script that controls simulations. We make use of the function <a href="https://spades-project.predictiveecology.org/articles/i-getting-started.html#understanding-spades-projects-main-function-setupproject">SpaDES.project::setupProject</a>. While it is possible to develop a <a href="">SpaDES</a> project using different methods more familiar to the user, the <a href="https://spades-project.predictiveecology.org/">SpaDES.project</a> package streamlines this process, facilitating a clean, reproducible and reusable project setup for any project. In our example, we specify in the <a href="https://github.com/PredictiveEcology/spadesCBM/blob/main/globalSK.R"><code>globalSK.R</code></a> script that we want <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#net-primary-productivity-npp"><code>NPP</code></a> and <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#cbmpools"><code>cbmPools</code></a> saved every year (lines 54-56). A user could specify outputs for any pools (see Table 1 in <a href="https://predictiveecology.github.io/spadesCBM/index.html#pools">Overview</a>). A user can also chose the outputs they would like to see from all objects in the <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#simlist">simList</a>. For example, a user my have interest in the quantity (in tonnes of carbon) of forest products and emissions existing the system. Our <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#simlist">simList</a> is named <code>simMngedSK</code> (line 61 of our global script <a href="https://github.com/PredictiveEcology/spadesCBM/blob/main/globalSK.R"><code>globalSK.R</code></a>), so the object of interest would be <code>simMngedSK$emissionsProducts</code>.</p>
+<p><a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> provides outputs as prescribed in the global script, the script that controls simulations. We make use of the function <a href="https://spades-project.predictiveecology.org/articles/i-getting-started.html#understanding-spades-projects-main-function-setupproject">SpaDES.project::setupProject</a>. While it is possible to develop a <a href="">SpaDES</a> project using different methods more familiar to the user, the <a href="https://spades-project.predictiveecology.org/">SpaDES.project</a> package streamlines this process, facilitating a clean, reproducible and reusable project setup for any project. In our example, we specify in the <a href="https://github.com/PredictiveEcology/spadesCBM/blob/main/globalSK.R"><code>globalSK.R</code></a> script that we want <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#net-primary-productivity-npp"><code>NPP</code></a> and <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#cbmpools"><code>cbmPools</code></a> saved every year (lines 54-56). A user could specify outputs for any pools (see Table 1 in <a href="https://predictiveecology.github.io/spadesCBM/index.html#pools">Overview</a>). A user can also chose the outputs they would like to see from all objects in the <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#simlist">simList</a>. For example, a user my have interest in the quantity (in tonnes of carbon) of forest products and emissions existing the system. Our <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#simlist">simList</a> is named <code>simMngedSKtestArea</code> (line 61 of our global script <a href="https://github.com/PredictiveEcology/spadesCBM/blob/main/globalSK.R"><code>globalSK.R</code></a>), so the object of interest would be <code>simMngedSKtestArea$emissionsProducts</code>.</p>
 <p>Note that <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#cbm-cfs3-vs-spadescbm">CBM</a>, like CBM-CFS3, does not simulate photosynthesis or autotrophic respiration. Therefore, <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#net-primary-productivity-npp">NPP</a> is calculated as the sum of net growth (i.e., growth that results in positive increment) and growth that replaces material lost to biomass turnover during the year. In young, actively growing stands, a large proportion of <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#net-primary-productivity-npp">NPP</a> results in positive growth increment while in older, mature stands, a larger proportion of <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#net-primary-productivity-npp">NPP</a> is allocated to replacement of material lost to turnover.</p>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
@@ -292,37 +297,21 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>spinupInput</td>
-<td>Data table</td>
-<td>input parameters for the spinup functions</td>
-</tr>
-<tr class="even">
-<td>spinupResults</td>
-<td>Data frame</td>
-<td>Pools post spinup in order of pixelGroup</td>
-</tr>
-<tr class="odd">
 <td>cbm_vars</td>
 <td>List</td>
 <td>List of 4 data tables: parameters, pools, flux, and state</td>
 </tr>
 <tr class="even">
-<td>cohortGroupKeep</td>
-<td>Data table</td>
-<td>Key connecting ‘cohortID’ with current and previous <code>cohortGroupID</code>
-</td>
-</tr>
-<tr class="odd">
 <td>cbmPools</td>
 <td>Data table</td>
 <td>Cohort groups and pools after each simulation year (or as prescribed if the simulations are very long)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>NPP</td>
 <td>Data table</td>
 <td>Net primary production per cohort group</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>emissionsProducts</td>
 <td>matrix</td>
 <td>Total emissions and products for study area per simulation year</td>
@@ -336,6 +325,7 @@
 </h2>
 <ul>
 <li><a href="https://github.com/PredictiveEcology/CBM_defaults">CBM_defaults</a></li>
+<li><a href="https://github.com/PredictiveEcology/CBM_dataPrep">CBM_datPrep</a></li>
 <li><a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a></li>
 <li><a href="https://github.com/PredictiveEcology/CBM_vol2biomass_SK">CBM_vol2biomass_SK</a></li>
 </ul>

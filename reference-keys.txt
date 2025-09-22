@@ -22,9 +22,9 @@ overview-2
 background-1
 inputs-1
 module-functioning-1
-init
 readdisturbanceevents
 disturbances
+init
 outputs-1
 links-to-other-modules-1
 cbm_dataprep_sk
@@ -32,9 +32,6 @@ overview-3
 background-2
 inputs-2
 module-functioning-2
-init-1
-readdisturbanceevents-1
-disturbances-1
 outputs-2
 links-to-other-modules-2
 cbm_vol2biomass_sk
@@ -55,9 +52,10 @@ background-4
 inputs-4
 module-functioning-4
 events-1
-init-2
+init-1
 spinup-1
-annual
+annual_preprocessing
+annual_carbondynamics
 accumulateresults
 plot
 stands-and-cohort-groups
