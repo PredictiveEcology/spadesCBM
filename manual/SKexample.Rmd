@@ -126,38 +126,25 @@ The `simMngedSK` object in R is the resulting [simlist](https://predictiveecolog
 
 ```
 # Yearly forest products and emissions for each simulation year
-carbonPlot <- CBMutils::carbonOutPlot(
-  emissionsProducts = simMngedSK$emissionsProducts
-)
+emissionsProductsPlot <- CBMutils::CBMutils::simPlotEmissionsProducts(simMngedSK)
 ```
 ![](https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/carbonOutPlot.png){fig-align="center" width="700"}
 
 ```
 # Proportions of carbon in above and below ground compartments
-barplot <- CBMutils::barPlot(
-  cbmPools = simMngedSK$cbmPools
-)
+barplot <- CBMutils::simPlotPoolProportions(simMngedSK)
 ```
 ![](https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/bPlot.png){fig-align="center" width="700"}
 
 ```
 # Map of pixel-level average NPP
-NppPlot <- CBMutils::NPPplot(
-  cohortGroupKeep = simMngedSK$cohortGroupKeep,
-  NPP = simMngedSK$NPP,
-  masterRaster = simMngedSK$masterRaster
-)
+NppPlot <- CBMutils::simMapNPP(simMngedSK, year = 1998) #set year to simulation year to plot
 ```
-![](https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/NPPplot.png){fig-align="center" width="700"}
+![](https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/NPPEnd.png){fig-align="center" width="700"}
 
 ```
 # Map of total carbon per pixel for a simulation year
-spatialPlot <- CBMutils::patialPlot(
-  cbmPools = simMngedSK$cbmPools,
-  years = 2000, # set simulation year 
-  masterRaster = simMngedSK$masterRaster,
-  cohortGroupKeep = simMngedSK$cohortGroupKeep
-)
+totalCarbonPlot <- CBMutils::simMapTotalCarbon(simMngedSKsmall, year = 1998) #set year to simulation year to plot
 ```
-![](https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/spatialPlot.png){fig-align="center" width="700"}
+![](https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/TotalCarbonEnd.png){fig-align="center" width="700"}
 
