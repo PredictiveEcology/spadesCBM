@@ -98,9 +98,9 @@
 <p>Like many statistical models, this translation is not always successful. The user is advised to review the resulting biomass increments as these are the only representation of vegetation dynamics in <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">CBM</a> and <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a></p>
 <p>This module can be run independently of the <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">deck</a>. It relies on multiple <a href="https://github.com/PredictiveEcology/CBMutils/tree/development"><code>CBMutils</code></a> functions. We describe how these functions relate to the <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span> equations, and also describe our smoothing algorithm below.</p>
 </div>
-<div id="background-3" class="section level2" number="4.2">
+<div id="background-2" class="section level2" number="4.2">
 <h2>
-<span class="header-section-number">4.2</span> Background<a class="anchor" aria-label="anchor" href="#background-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">4.2</span> Background<a class="anchor" aria-label="anchor" href="#background-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>The module uses the subset of <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span> empirical models that calculate volume-to-biomass conversion models for forested (treed) land. These were developed from plot data supplied from forest inventory agencies throughout Canada. Figure 1 (Figure 3 in <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span>) outline the model development procedure (upper) and the calculation workflow (lower). We matched our calculation and functions to the <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span> calculation workflow.</p>
 <p><img src="https://github.com/PredictiveEcology/spadesCBM/blob/main/manual/images/BoudewynFigure3.png?raw=true" fig-align="center" width="750"><strong>Figure 1: Figure 3 from <span class="citation">Boudewyn <em>et al.</em> (<a href="references.html#ref-boudewyn2007">2007</a>)</span> </strong></p>
@@ -475,7 +475,7 @@ and the objects <code>spatialDT</code> provides location information. The table 
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#cbm_vol2biomass_sk"><span class="header-section-number">4</span> CBM_vol2biomass_SK</a></li>
 <li><a class="nav-link" href="#overview-4"><span class="header-section-number">4.1</span> Overview</a></li>
-<li><a class="nav-link" href="#background-3"><span class="header-section-number">4.2</span> Background</a></li>
+<li><a class="nav-link" href="#background-2"><span class="header-section-number">4.2</span> Background</a></li>
 <li><a class="nav-link" href="#inputs-3"><span class="header-section-number">4.3</span> Inputs</a></li>
 <li>
 <a class="nav-link" href="#module-functioning-3"><span class="header-section-number">4.4</span> Module functioning</a><ul class="nav navbar-nav">

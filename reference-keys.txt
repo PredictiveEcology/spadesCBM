@@ -29,14 +29,13 @@ outputs-1
 links-to-other-modules-1
 cbm_dataprep_sk
 overview-3
-background-2
 inputs-2
 module-functioning-2
 outputs-2
 links-to-other-modules-2
 cbm_vol2biomass_sk
 overview-4
-background-3
+background-2
 inputs-3
 module-functioning-3
 input-check
@@ -48,7 +47,7 @@ usage-2
 links-to-other-modules-3
 cbm_core
 overview-5
-background-4
+background-3
 inputs-4
 module-functioning-4
 events-1

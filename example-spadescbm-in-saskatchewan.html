@@ -195,30 +195,17 @@ simMngedSKtestArea &lt;- SpaDES.core::simInitAndSpades2(out)</code></pre>
 <p><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/cumPools_smoothed_postChapmanRichards.png" fig-align="center" width="700"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/Increments.png" fig-align="center" width="700"></p>
 <p>The <code>simMngedSK</code> object in R is the resulting <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#simlist">simlist</a> of our simulation. <code>CBMutils</code> offers a few plotting functions to help visualize basic results using our simlist.</p>
 <pre><code># Yearly forest products and emissions for each simulation year
-carbonPlot &lt;- CBMutils::carbonOutPlot(
-  emissionsProducts = simMngedSK$emissionsProducts
-)</code></pre>
+emissionsProductsPlot &lt;- CBMutils::CBMutils::simPlotEmissionsProducts(simMngedSK)</code></pre>
 <div class="inline-figure"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/carbonOutPlot.png" fig-align="center" width="700"></div>
 <pre><code># Proportions of carbon in above and below ground compartments
-barplot &lt;- CBMutils::barPlot(
-  cbmPools = simMngedSK$cbmPools
-)</code></pre>
+barplot &lt;- CBMutils::simPlotPoolProportions(simMngedSK)</code></pre>
 <div class="inline-figure"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/bPlot.png" fig-align="center" width="700"></div>
 <pre><code># Map of pixel-level average NPP
-NppPlot &lt;- CBMutils::NPPplot(
-  cohortGroupKeep = simMngedSK$cohortGroupKeep,
-  NPP = simMngedSK$NPP,
-  masterRaster = simMngedSK$masterRaster
-)</code></pre>
-<div class="inline-figure"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/NPPplot.png" fig-align="center" width="700"></div>
+NppPlot &lt;- CBMutils::simMapNPP(simMngedSK, year = 1998) #set year to simulation year to plot</code></pre>
+<div class="inline-figure"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/NPPEnd.png" fig-align="center" width="700"></div>
 <pre><code># Map of total carbon per pixel for a simulation year
-spatialPlot &lt;- CBMutils::patialPlot(
-  cbmPools = simMngedSK$cbmPools,
-  years = 2000, # set simulation year 
-  masterRaster = simMngedSK$masterRaster,
-  cohortGroupKeep = simMngedSK$cohortGroupKeep
-)</code></pre>
-<div class="inline-figure"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/spatialPlot.png" fig-align="center" width="700"></div>
+totalCarbonPlot &lt;- CBMutils::simMapTotalCarbon(simMngedSKsmall, year = 1998) #set year to simulation year to plot</code></pre>
+<div class="inline-figure"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/TotalCarbonEnd.png" fig-align="center" width="700"></div>
 
 </div>
 </div>
