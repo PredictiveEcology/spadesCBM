@@ -124,14 +124,19 @@ install.packages("SpaDES.project",
                  repos = repos)
                  
 # Set simulation period.In this example we start in 1985, and end in 2011
-times &lt;- list(start = 1985, end = 2020)
+times &lt;- list(start = 1985, end = 2011)
 
 # This is our setupProject call. This creates the model's folder structure, downloads modules, installs and loads needed packages, and sets options.
 out &lt;- SpaDES.project::setupProject(
   Restart = TRUE,
   useGit = "PredictiveEcology", # a developer sets and keeps this = TRUE
   overwrite = TRUE, # a user who wants to get latest modules sets this to TRUE
-  paths = list(projectPath = projectPath),
+  paths = list(projectPath = projectPath,
+               outputPath  = file.path(projectPath, "outputs", "SK-testArea"),
+               modulePath  = file.path(projectPath, "modules"),
+               packagePath = file.path(projectPath, "packages"),
+               inputPath   = file.path(projectPath, "inputs"),
+               cachePath   = file.path(projectPath, "cache")),
 
   options = options(
     repos = c(repos = repos),
@@ -148,7 +153,6 @@ out &lt;- SpaDES.project::setupProject(
                "PredictiveEcology/CBM_vol2biomass_SK@development",
                "PredictiveEcology/CBM_core@development"),
   times = times,
-  require = c("terra", "reproducible"),
 
   params = list(
     CBM_defaults = list(
@@ -162,27 +166,22 @@ out &lt;- SpaDES.project::setupProject(
     )
   ),
 
-  #### begin manually passed inputs #########################################
-  ## define the  study area.
-  masterRaster = {
-    extent = terra::ext(c(xmin = -687696, xmax = -681036, ymin = 711955, ymax = 716183))
-    masterRaster &lt;- terra::rast(extent, res = 30)
-    terra::crs(masterRaster) &lt;- "PROJCRS[\"Lambert_Conformal_Conic_2SP\",\n    BASEGEOGCRS[\"GCS_GRS_1980_IUGG_1980\",\n        DATUM[\"D_unknown\",\n            ELLIPSOID[\"GRS80\",6378137,298.257222101,\n                LENGTHUNIT[\"metre\",1,\n                    ID[\"EPSG\",9001]]]],\n        PRIMEM[\"Greenwich\",0,\n            ANGLEUNIT[\"degree\",0.0174532925199433,\n                ID[\"EPSG\",9122]]]],\n    CONVERSION[\"Lambert Conic Conformal (2SP)\",\n        METHOD[\"Lambert Conic Conformal (2SP)\",\n            ID[\"EPSG\",9802]],\n        PARAMETER[\"Latitude of false origin\",49,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8821]],\n        PARAMETER[\"Longitude of false origin\",-95,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8822]],\n        PARAMETER[\"Latitude of 1st standard parallel\",49,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8823]],\n        PARAMETER[\"Latitude of 2nd standard parallel\",77,\n            ANGLEUNIT[\"degree\",0.0174532925199433],\n            ID[\"EPSG\",8824]],\n        PARAMETER[\"Easting at false origin\",0,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8826]],\n        PARAMETER[\"Northing at false origin\",0,\n            LENGTHUNIT[\"metre\",1],\n            ID[\"EPSG\",8827]]],\n    CS[Cartesian,2],\n        AXIS[\"easting\",east,\n            ORDER[1],\n            LENGTHUNIT[\"metre\",1,\n                ID[\"EPSG\",9001]]],\n        AXIS[\"northing\",north,\n            ORDER[2],\n            LENGTHUNIT[\"metre\",1,\n                ID[\"EPSG\",9001]]]]"
-    masterRaster[] &lt;- rep(1, terra::ncell(masterRaster))
-    mr &lt;- reproducible::prepInputs(url = "https://drive.google.com/file/d/1zUyFH8k6Ef4c_GiWMInKbwAl6m6gvLJW",
-                                   destinationPath = "inputs",
-                                   to = masterRaster,
-                                   method = "near")
-    mr[mr[] == 0] &lt;- NA
-    mr
-  },
+    #### begin manually passed inputs #########################################
+  require = "terra",
 
-  disturbanceRastersURL = "https://drive.google.com/file/d/12YnuQYytjcBej0_kdodLchPg7z9LygCt",
+  # Set study area
+  masterRaster = terra::rast(
+    crs  = "EPSG:3979",
+    res  = 30,
+    vals = 1L,
+    xmin = -690643.4762,
+    xmax = -632143.4762,
+    ymin =  700447.9315,
+    ymax =  757447.9315
+  ),
 
-  outputs = as.data.frame(expand.grid(
-    objectName = c("cbmPools", "NPP"),
-    saveTime = sort(c(times$start, times$start + c(1:(times$end - times$start))))
-  ))
+  # Set disturbances data source: NTEMS disturbances sample
+  disturbanceRastersURL = "https://drive.google.com/file/d/12YnuQYytjcBej0_kdodLchPg7z9LygCt"
 )
 
 # Run simulation
@@ -195,16 +194,16 @@ simMngedSKtestArea &lt;- SpaDES.core::simInitAndSpades2(out)</code></pre>
 <p><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/cumPools_smoothed_postChapmanRichards.png" fig-align="center" width="700"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/Increments.png" fig-align="center" width="700"></p>
 <p>The <code>simMngedSK</code> object in R is the resulting <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#simlist">simlist</a> of our simulation. <code>CBMutils</code> offers a few plotting functions to help visualize basic results using our simlist.</p>
 <pre><code># Yearly forest products and emissions for each simulation year
-emissionsProductsPlot &lt;- CBMutils::CBMutils::simPlotEmissionsProducts(simMngedSK)</code></pre>
+emissionsProductsPlot &lt;- CBMutils::CBMutils::simPlotEmissionsProducts(simMngedSKtestArea)</code></pre>
 <div class="inline-figure"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/carbonOutPlot.png" fig-align="center" width="700"></div>
 <pre><code># Proportions of carbon in above and below ground compartments
-barplot &lt;- CBMutils::simPlotPoolProportions(simMngedSK)</code></pre>
+barplot &lt;- CBMutils::simPlotPoolProportions(simMngedSKtestArea)</code></pre>
 <div class="inline-figure"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/bPlot.png" fig-align="center" width="700"></div>
 <pre><code># Map of pixel-level average NPP
-NppPlot &lt;- CBMutils::simMapNPP(simMngedSK, year = 1998) #set year to simulation year to plot</code></pre>
+NppPlot &lt;- CBMutils::simMapNPP(simMngedSKtestArea, year = 1998) #set year to simulation year to plot</code></pre>
 <div class="inline-figure"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/NPPEnd.png" fig-align="center" width="700"></div>
 <pre><code># Map of total carbon per pixel for a simulation year
-totalCarbonPlot &lt;- CBMutils::simMapTotalCarbon(simMngedSKsmall, year = 1998) #set year to simulation year to plot</code></pre>
+totalCarbonPlot &lt;- CBMutils::simMapTotalCarbon(simMngedSKtestArea, year = 1998) #set year to simulation year to plot</code></pre>
 <div class="inline-figure"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/TotalCarbonEnd.png" fig-align="center" width="700"></div>
 
 </div>
