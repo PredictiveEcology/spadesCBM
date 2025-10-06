@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 5 CBM_core | spadesCBM Manual</title>
 <meta name="author" content="Céline Boisvenue">
-<meta name="generator" content="bookdown 0.44 with bs4_book()">
+<meta name="generator" content="bookdown 0.45 with bs4_book()">
 <meta property="og:title" content="Chapter 5 CBM_core | spadesCBM Manual">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
@@ -186,10 +186,10 @@
 <h3>
 <span class="header-section-number">5.4.1</span> Events<a class="anchor" aria-label="anchor" href="#events-1"><i class="fas fa-link"></i></a>
 </h3>
-<p>There are 6 events in CBM_core. Each are run once, except for the <code>annual</code> event, which is repeated for each simulation year.</p>
-<div id="init-1" class="section level4" number="5.4.1.1">
+<p>There are 6 main events in CBM_core. Each are run once, except for the <code>annual_X</code> events, which are repeated for each simulation year.</p>
+<div id="init" class="section level4" number="5.4.1.1">
 <h4>
-<span class="header-section-number">5.4.1.1</span> <code>Init</code><a class="anchor" aria-label="anchor" href="#init-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4.1.1</span> <code>Init</code><a class="anchor" aria-label="anchor" href="#init"><i class="fas fa-link"></i></a>
 </h4>
 <p>In this short event, the Python virtual environment is set up. If a suitable version of python is not available, it will be installed using the <code>reticulate</code> package.</p>
 </div>
@@ -205,6 +205,7 @@
 <h4>
 <span class="header-section-number">5.4.1.3</span> <code>annual_preprocessing</code><a class="anchor" aria-label="anchor" href="#annual_preprocessing"><i class="fas fa-link"></i></a>
 </h4>
+<p>This event serves to run 2 smaller events: <code>annual_prepDisturbances</code> and <code>annualprepCohortGroups</code>. The first reads in and saves the disturbances for the current simulation year for processing in the <code>annual_carbonDynamics</code> event. The latter prepares cohort data for the upcoming carbon dynamics processing. It saves old and sets new group IDs for disturbed pixels, clears information about previous disturbances, prepares data for new cohort groups, removes inactive groups, and sets the appropriate growth increments for the current simulation year.</p>
 </div>
 <div id="annual_carbondynamics" class="section level4" number="5.4.1.4">
 <h4>

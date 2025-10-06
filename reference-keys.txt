@@ -22,9 +22,11 @@ overview-2
 background-1
 inputs-1
 module-functioning-1
+readcohorts
+matchspecies
+matchdisturbance
 readdisturbanceevents
 disturbances
-init
 outputs-1
 links-to-other-modules-1
 cbm_dataprep_sk
@@ -51,7 +53,7 @@ background-3
 inputs-4
 module-functioning-4
 events-1
-init-1
+init
 spinup-1
 annual_preprocessing
 annual_carbondynamics
