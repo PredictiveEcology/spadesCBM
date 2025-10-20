@@ -10,7 +10,12 @@ out <- SpaDES.project::setupProject(
   Restart = TRUE,
   useGit = "PredictiveEcology", # a developer sets and keeps this = TRUE
   overwrite = TRUE, # a user who wants to get latest modules sets this to TRUE
-  paths = list(projectPath = projectPath),
+  paths = list(projectPath = projectPath,
+               outputPath  = file.path(projectPath, "outputs", "SK-30m"),
+               modulePath  = file.path(projectPath, "modules"),
+               packagePath = file.path(projectPath, "packages"),
+               inputPath   = file.path(projectPath, "inputs"),
+               cachePath   = file.path(projectPath, "cache")),
 
   options = options(
     repos = c(repos = repos),
@@ -27,7 +32,6 @@ out <- SpaDES.project::setupProject(
                "PredictiveEcology/CBM_vol2biomass_SK@development",
                "PredictiveEcology/CBM_core@development"),
   times = times,
-  require = c("reproducible"),
 
   params = list(
     CBM_defaults = list(
@@ -42,20 +46,21 @@ out <- SpaDES.project::setupProject(
   ),
 
   #### begin manually passed inputs #########################################
-  ## define the  study area.
-  masterRaster = {
-    mr <- reproducible::prepInputs(url = "https://drive.google.com/file/d/1zUyFH8k6Ef4c_GiWMInKbwAl6m6gvLJW",
-                                   destinationPath = "inputs")
-    mr[mr[] == 0] <- NA
-    mr
-  },
+  require = "terra",
 
-  disturbanceRastersURL = "https://drive.google.com/file/d/12YnuQYytjcBej0_kdodLchPg7z9LygCt",
+  # Set study area
+  masterRaster = terra::rast(
+    crs  = "EPSG:3979",
+    res  = 30,
+    vals = 1L,
+    xmin = -1077673.4762,
+    xmax =  -426673.4762,
+    ymin =   108487.9315,
+    ymax =   971077.9315
+  ),
 
-  outputs = as.data.frame(expand.grid(
-    objectName = c("cbmPools", "NPP"),
-    saveTime = sort(c(times$start, times$start + c(1:(times$end - times$start))))
-  ))
+  # Set disturbances data source
+  disturbanceSource = "NTEMS"
 )
 
 # Run

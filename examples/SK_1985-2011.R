@@ -30,17 +30,20 @@
     # Set modules and simulation time span
     times   = times,
     modules = c(
-      CBM_defaults    = "PredictiveEcology/CBM_defaults@main",
-      CBM_dataPrep_SK = "PredictiveEcology/CBM_dataPrep_SK@main",
-      CBM_dataPrep    = "PredictiveEcology/CBM_dataPrep@main",
+      CBM_defaults       = "PredictiveEcology/CBM_defaults@main",
+      CBM_dataPrep_SK    = "PredictiveEcology/CBM_dataPrep_SK@main",
+      CBM_dataPrep       = "PredictiveEcology/CBM_dataPrep@main",
       CBM_vol2biomass_SK = "PredictiveEcology/CBM_vol2biomass_SK@main",
-      CBM_core        = "PredictiveEcology/CBM_core@main"
+      CBM_core           = "PredictiveEcology/CBM_core@main"
     ),
 
     # Set options
     options = list(
       spades.moduleCodeChecks = FALSE
     ),
+
+    # NTEMS disturbances
+    disturbanceSource = "NTEMS",
 
     # Set input: Output table
     outputs = as.data.frame(expand.grid(
