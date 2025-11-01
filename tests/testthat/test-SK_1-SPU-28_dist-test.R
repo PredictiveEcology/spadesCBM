@@ -1,13 +1,13 @@
 
 if (!testthat::is_testing()) source(testthat::test_path("setup.R"))
 
-test_that("SK-med with NTEMS disturbances 1998-2000", {
+test_that("Integration: CBM: SK test area (SPU 28)", {
 
   ## Run simInit and spades ----
 
   # Set up project
-  projectName <- "2_SK-med_NTEMS_1998-2000"
-  times       <- list(start = 1998, end = 2000)
+  projectName <- "SK_1-SPU-28"
+  times       <- list(start = 1985, end = 1985)
 
   simInitInput <- SpaDEStestMuffleOutput(
 
@@ -32,19 +32,19 @@ test_that("SK-med with NTEMS disturbances 1998-2000", {
 
       require = "terra",
 
-      # Test area covering SPU 27 & 28
+      # Small test area in SPU 27
       masterRaster = terra::rast(
         crs  = "EPSG:3979",
-        res  = 50,
+        res  = 30,
         vals = 1L,
-        xmin = -710000,
-        xmax = -640000,
-        ymin =  690000,
-        ymax =  760000
+        xmin = -690643.4762,
+        xmax = -632143.4762,
+        ymin =  700447.9315,
+        ymax =  757447.9315
       ),
 
-      # NTEMS disturbances
-      disturbanceSource = "NTEMS"
+      # NTEMS disturbances sample
+      disturbanceRastersURL = "https://drive.google.com/file/d/12YnuQYytjcBej0_kdodLchPg7z9LygCt"
     )
   )
 
