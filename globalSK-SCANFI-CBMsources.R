@@ -11,7 +11,7 @@ projSetup <- SpaDES.project::setupProject(
   useGit = "PredictiveEcology", # a developer sets and keeps this = TRUE
   overwrite = TRUE, # a user who wants to get latest modules sets this to TRUE
   paths = list(projectPath = projectPath,
-               outputPath  = file.path(projectPath, "outputs", "SK-30m"),
+               outputPath  = file.path(projectPath, "outputs", "SK-30m-SCANFI"),
                modulePath  = file.path(projectPath, "modules"),
                packagePath = file.path(projectPath, "packages"),
                inputPath   = file.path(projectPath, "inputs"),
