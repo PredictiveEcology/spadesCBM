@@ -10,7 +10,6 @@ name: examples-SK
 
 jobs:
   examples-SK:
-    if: "!contains(github.event.commits[0].message, '[skip-ci]')"
     runs-on: ${{ matrix.config.os }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
