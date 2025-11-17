@@ -5,7 +5,7 @@
 ```{r setup-example, include = FALSE}
 ```
 # Example: spadesCBM in Saskatchewan {-}
-Here we provide an example script to run all managed forests in Saskatchewan between 1985 and 2011. This example is fairly lightweight and most computers should be able to run the simulation. 
+Here we provide an example script to run a small area of managed forests in Saskatchewan between 1985 and 2020. This example is fairly lightweight and most computers should be able to run the simulation. If you have access to the computing power, the entirety of managed forests in Saskatchewan can also be run using this [script](https://github.com/PredictiveEcology/spadesCBM/blob/main/globalSK.R). Note while the example provided here can run on most computers, running the entire province requires >75 Gbs of RAM to run. 
 
 In this example, we setup the workflow using the
 [`SpaDES.project`](https://spades-project.predictiveecology.org/) package and
@@ -39,7 +39,7 @@ If the Python installation process fails or you would prefer to manually install
   
 ## Running the simulation {-}
   
-Here is an R script to run the simulation of forest carbon dynamics in the managed forests of SK from 1985 to 2011, with disturbances as presented in @boisvenue2016. Depending on your computing capacity, this may take a while, particularly the first time you run it. Subsequent simulations are much faster because of the use of the [reproducible::Cache](https://cran.r-project.org/web/packages/SpaDES.core/vignettes/iii-cache.html) function.
+Here is an R script to run the simulation of forest carbon dynamics in a small area in the managed forests of SK from 1985 to 2020, with disturbances as presented in @boisvenue2016. Depending on your computing capacity, this may take a while, particularly the first time you run it. Subsequent simulations are much faster because of the use of the [reproducible::Cache](https://cran.r-project.org/web/packages/SpaDES.core/vignettes/iii-cache.html) function.
 
 The simulation period can be changed to be shorter, but disturbances raster are only provided for years within the 1985-2011 range in this example.
 
@@ -49,7 +49,7 @@ projectPath <- "~/GitHub/spadesCBM"
 repos <- unique(c("predictiveecology.r-universe.dev", getOption("repos")))
 install.packages("SpaDES.project",
                  repos = repos)
-
+                 
 # Set simulation period.In this example we start in 1985, and end in 2011
 times <- list(start = 1985, end = 2011)
 
@@ -58,7 +58,12 @@ out <- SpaDES.project::setupProject(
   Restart = TRUE,
   useGit = "PredictiveEcology", # a developer sets and keeps this = TRUE
   overwrite = TRUE, # a user who wants to get latest modules sets this to TRUE
-  paths = list(projectPath = projectPath),
+  paths = list(projectPath = projectPath,
+               outputPath  = file.path(projectPath, "outputs", "SK-testArea"),
+               modulePath  = file.path(projectPath, "modules"),
+               packagePath = file.path(projectPath, "packages"),
+               inputPath   = file.path(projectPath, "inputs"),
+               cachePath   = file.path(projectPath, "cache")),
 
   options = options(
     repos = c(repos = repos),
@@ -71,10 +76,10 @@ out <- SpaDES.project::setupProject(
   ),
   modules =  c("PredictiveEcology/CBM_defaults@main",
                "PredictiveEcology/CBM_dataPrep_SK@main",
+               "PredictiveEcology/CBM_dataPrep@main",
                "PredictiveEcology/CBM_vol2biomass_SK@main",
                "PredictiveEcology/CBM_core@main"),
   times = times,
-  require = c("reproducible"),
 
   params = list(
     CBM_defaults = list(
@@ -83,30 +88,31 @@ out <- SpaDES.project::setupProject(
     CBM_dataPrep_SK = list(
       .useCache = TRUE
     ),
-    CBM_vol2biomass_SK = list(
+    CBM_vol2biomass = list(
       .useCache = TRUE
     )
   ),
 
-  #### begin manually passed inputs #########################################
-  ## define the  study area.
-  masterRaster = {
-    mr <- reproducible::prepInputs(url = "https://drive.google.com/file/d/1zUyFH8k6Ef4c_GiWMInKbwAl6m6gvLJW",
-                                   destinationPath = "inputs")
-    mr[mr[] == 0] <- NA
-    mr
-  },
+    #### begin manually passed inputs #########################################
+  require = "terra",
 
-  disturbanceRastersURL = "https://drive.google.com/file/d/12YnuQYytjcBej0_kdodLchPg7z9LygCt",
+  # Set study area
+  masterRaster = terra::rast(
+    crs  = "EPSG:3979",
+    res  = 30,
+    vals = 1L,
+    xmin = -690643.4762,
+    xmax = -632143.4762,
+    ymin =  700447.9315,
+    ymax =  757447.9315
+  ),
 
-  outputs = as.data.frame(expand.grid(
-    objectName = c("cbmPools", "NPP"),
-    saveTime = sort(c(times$start, times$start + c(1:(times$end - times$start))))
-  ))
+  # Set disturbances data source: NTEMS disturbances sample
+  disturbanceRastersURL = "https://drive.google.com/file/d/12YnuQYytjcBej0_kdodLchPg7z9LygCt"
 )
 
 # Run simulation
-simMngedSK <- SpaDES.core::simInitAndSpades2(out)
+simMngedSKtestArea <- SpaDES.core::simInitAndSpades2(out)
 ```
 
 ## Viewing results {-}
@@ -119,38 +125,25 @@ The `simMngedSK` object in R is the resulting [simlist](https://predictiveecolog
 
 ```
 # Yearly forest products and emissions for each simulation year
-carbonPlot <- CBMutils::carbonOutPlot(
-  emissionsProducts = simMngedSK$emissionsProducts
-)
+emissionsProductsPlot <- CBMutils::CBMutils::simPlotEmissionsProducts(simMngedSKtestArea)
 ```
 ![](https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/carbonOutPlot.png){fig-align="center" width="700"}
 
 ```
 # Proportions of carbon in above and below ground compartments
-barplot <- CBMutils::barPlot(
-  cbmPools = simMngedSK$cbmPools
-)
+barplot <- CBMutils::simPlotPoolProportions(simMngedSKtestArea)
 ```
 ![](https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/bPlot.png){fig-align="center" width="700"}
 
 ```
 # Map of pixel-level average NPP
-NppPlot <- CBMutils::NPPplot(
-  cohortGroupKeep = simMngedSK$cohortGroupKeep,
-  NPP = simMngedSK$NPP,
-  masterRaster = simMngedSK$masterRaster
-)
+NppPlot <- CBMutils::simMapNPP(simMngedSKtestArea, year = 1998) #set year to simulation year to plot
 ```
-![](https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/NPPplot.png){fig-align="center" width="700"}
+![](https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/NPPEnd.png){fig-align="center" width="700"}
 
 ```
 # Map of total carbon per pixel for a simulation year
-spatialPlot <- CBMutils::patialPlot(
-  cbmPools = simMngedSK$cbmPools,
-  years = 2000, # set simulation year 
-  masterRaster = simMngedSK$masterRaster,
-  cohortGroupKeep = simMngedSK$cohortGroupKeep
-)
+totalCarbonPlot <- CBMutils::simMapTotalCarbon(simMngedSKtestArea, year = 1998) #set year to simulation year to plot
 ```
-![](https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/spatialPlot.png){fig-align="center" width="700"}
+![](https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/TotalCarbonEnd.png){fig-align="center" width="700"}
 

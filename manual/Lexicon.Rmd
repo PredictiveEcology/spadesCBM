@@ -71,8 +71,8 @@ This data table provides ecozone and spatial unit information for provincial bou
 ### Net Primary Productivity (NPP)
 NPP is defined as the amount of CO~2~ removed from the atmosphere and absorbed by the forest to maintain itself. 
 
-### cbmPools
-This table is an output of spadesCBM. It provides carbon in MgC for all cohort groups and pools after each simulation year (or as prescribed if the simulations are very long). 
+### spadesCBMdb
+in spadesCBM, output tables for each simulation year are saved into a object called `spadesCBMdb` this object is a path to a directory containing the output tables for each simulation year as `.qs` files. By default, 3 tables are saved per simulation year: `key`, `pools`, and `flux`.
 
 ### Dead Organic Matter
 spadesCBM models carbon in the live component of the forest (i.e. trees) and its dead organic matter (DOM). DOM carbon pools in spadesCBM include all snag pools (which include dead stems, bark, branches, stumps) and all organic soil carbon pools. 
