@@ -20,7 +20,6 @@ projSetup <- SpaDES.project::setupProject(
   options = options(
     repos = c(repos = repos),
     Require.cloneFrom = Sys.getenv("R_LIBS_USER"),
-    reproducible.destinationPath = "inputs",
     ## These are for speed
     reproducible.useMemoise = TRUE,
     # Require.offlineMode = TRUE,
@@ -34,7 +33,10 @@ projSetup <- SpaDES.project::setupProject(
   times = times,
 
   params = list(
-    CBM_dataPrep = list(saveRasters = TRUE) # Save aligned inputs as output rasters
+    CBM_dataPrep = list(
+      parallel.cores = 1,   # Use parallel processing
+      saveRasters    = TRUE # Save aligned inputs as output rasters
+    )
   ),
 
   # Set cohort data sources
