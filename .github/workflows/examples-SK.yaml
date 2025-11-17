@@ -10,7 +10,6 @@ name: examples-SK
 
 jobs:
   examples-SK:
-    if: "!contains(github.event.commits[0].message, '[skip-ci]')"
     runs-on: ${{ matrix.config.os }}
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
@@ -60,11 +59,20 @@ jobs:
           any::googledrive
           any::rstudioapi
 
-      - uses: PredictiveEcology/actions/install-Require@v0.2
-        with:
-          GitTag: 'development'
+      ## TEMPORARY: use reproducible@AI and SpaDES.core@box with LandR@development
 
-      - uses: PredictiveEcology/actions/install-SpaDES@v0.2
+      # - uses: PredictiveEcology/actions/install-Require@v0.2
+      #   with:
+      #     GitTag: 'development'
+      #
+      # - uses: PredictiveEcology/actions/install-SpaDES@v0.2
+
+      - name: Install reproducible@AI and SpaDES.core@box
+        run: |
+          install.packages("remotes")
+          remotes::install_github("PredictiveEcology/reproducible@AI")
+          remotes::install_github("PredictiveEcology/SpaDES.core@box")
+        shell: Rscript {0}
 
       - name: Run examples for SK
         run: |
