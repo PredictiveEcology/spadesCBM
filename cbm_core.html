@@ -213,11 +213,11 @@
 </h4>
 <p>This event is where all the carbon transfers are applied for each simulation year. Disturbances are matched to the correct records, and the transfers listed <a href="https://predictiveecology.github.io/spadesCBM/index.html#order-of-operations">here</a> are applied. Details on transfer rates are found in the <a href="https://predictiveecology.github.io/spadesCBM/cbm_core.html#carbon-transfers">following section, below</a>. While undisturbed cohorts will continue to grow by one time step according to their associated growth curve, disturbed cohorts will only begin growing again after a delay period. This delay is dictated by the <code>default_delay_regen</code> parameter of the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> module, and can be changed by the user. Only growth-related carbon transfers are affected by this delay. By default it is set to 0 years.</p>
 </div>
-<div id="accumulateresults" class="section level4" number="5.4.1.5">
+<div id="save" class="section level4" number="5.4.1.5">
 <h4>
-<span class="header-section-number">5.4.1.5</span> <code>accumulateResults</code><a class="anchor" aria-label="anchor" href="#accumulateresults"><i class="fas fa-link"></i></a>
+<span class="header-section-number">5.4.1.5</span> <code>save</code><a class="anchor" aria-label="anchor" href="#save"><i class="fas fa-link"></i></a>
 </h4>
-<p>This event is where outputs are saved. In the case of our example in Saskatchewan, we output and save <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#cbmpools">cbmPools</a> and Net Primary Production (<a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#net-primary-productivity-npp">NPP</a>) for each simulation year. If paths are kept at default when running the global script, these outputs will be found here: <code>~/GitHub/spadesCBM/outputs</code>.</p>
+<p>This event is where outputs are saved. In the case of our example in Saskatchewan, we save outputs to <code>.qs</code> files to our <a href="https://predictiveecology.github.io/spadesCBM/index.html#spadesCBMdb"><code>spadesCBMdb</code></a> object for each simulation year. By default, 3 tables are saved, a <code>key</code> table, a <code>pools</code> table, and a <code>flux</code> table. Other tables with simulation parameters can be saved by changing the <code>.saveAll</code> parameter to <code>TRUE</code> in the module. If output paths are kept at default, hese output files will be found here: <code>~/GitHub/spadesCBM/outputs</code>.</p>
 </div>
 <div id="plot" class="section level4" number="5.4.1.6">
 <h4>
@@ -283,7 +283,8 @@
 <h2>
 <span class="header-section-number">5.5</span> Outputs<a class="anchor" aria-label="anchor" href="#outputs-4"><i class="fas fa-link"></i></a>
 </h2>
-<p><a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> provides outputs as prescribed in the global script, the script that controls simulations. We make use of the function <a href="https://spades-project.predictiveecology.org/articles/i-getting-started.html#understanding-spades-projects-main-function-setupproject">SpaDES.project::setupProject</a>. While it is possible to develop a <a href="">SpaDES</a> project using different methods more familiar to the user, the <a href="https://spades-project.predictiveecology.org/">SpaDES.project</a> package streamlines this process, facilitating a clean, reproducible and reusable project setup for any project. In our example, we specify in the <a href="https://github.com/PredictiveEcology/spadesCBM/blob/main/globalSK.R"><code>globalSK.R</code></a> script that we want <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#net-primary-productivity-npp"><code>NPP</code></a> and <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#cbmpools"><code>cbmPools</code></a> saved every year (lines 54-56). A user could specify outputs for any pools (see Table 1 in <a href="https://predictiveecology.github.io/spadesCBM/index.html#pools">Overview</a>). A user can also chose the outputs they would like to see from all objects in the <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#simlist">simList</a>. For example, a user my have interest in the quantity (in tonnes of carbon) of forest products and emissions existing the system. Our <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#simlist">simList</a> is named <code>simMngedSKtestArea</code> (line 61 of our global script <a href="https://github.com/PredictiveEcology/spadesCBM/blob/main/globalSK.R"><code>globalSK.R</code></a>), so the object of interest would be <code>simMngedSKtestArea$emissionsProducts</code>.</p>
+<p><a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> provides outputs as prescribed in the global script, the script that controls simulations. We make use of the function <a href="https://spades-project.predictiveecology.org/articles/i-getting-started.html#understanding-spades-projects-main-function-setupproject">SpaDES.project::setupProject</a>. While it is possible to develop a <a href="">SpaDES</a> project using different methods more familiar to the user, the <a href="https://spades-project.predictiveecology.org/">SpaDES.project</a> package streamlines this process, facilitating a clean, reproducible and reusable project setup for any project.</p>
+<p>In our example, we specify in the <a href="https://github.com/PredictiveEcology/spadesCBM/blob/main/globalSK.R"><code>globalSK.R</code></a> script we used default saving options, which saves output tables to <a href="https://predictiveecology.github.io/spadesCBM/index.html#spadesCBMdb"><code>spadesCBMdb</code></a> every simulation year. However, a user can change the frequency at which these are saved at, or decide to save all output tables instead of the default using the <code>.saveInterval</code> and <code>.saveAll</code> parameters respectively. A user can also choose to save their <code>spinup</code> results (off by default) by switching the <code>.saveSpinup</code> parameter to <code>TRUE</code>. A user can also choose the outputs they would like to see from all objects in the <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#simlist">simList</a>. For example, a user my have interest in the quantity (in tonnes of carbon) of forest products and emissions existing the system. Our <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#simlist">simList</a> is named <code>simMngedSKtestArea</code> (line 61 of our global script <a href="https://github.com/PredictiveEcology/spadesCBM/blob/main/globalSK.R"><code>globalSK.R</code></a>), so the object of interest would be <code>simMngedSKtestArea$emissionsProducts</code>.</p>
 <p>Note that <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#cbm-cfs3-vs-spadescbm">CBM</a>, like CBM-CFS3, does not simulate photosynthesis or autotrophic respiration. Therefore, <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#net-primary-productivity-npp">NPP</a> is calculated as the sum of net growth (i.e., growth that results in positive increment) and growth that replaces material lost to biomass turnover during the year. In young, actively growing stands, a large proportion of <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#net-primary-productivity-npp">NPP</a> results in positive growth increment while in older, mature stands, a larger proportion of <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#net-primary-productivity-npp">NPP</a> is allocated to replacement of material lost to turnover.</p>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
@@ -303,16 +304,11 @@
 <td>List of 4 data tables: parameters, pools, flux, and state</td>
 </tr>
 <tr class="even">
-<td>cbmPools</td>
-<td>Data table</td>
-<td>Cohort groups and pools after each simulation year (or as prescribed if the simulations are very long)</td>
+<td>spadesCBMdb</td>
+<td>character</td>
+<td>Path to SpaDES CBM database directory containing simulation data</td>
 </tr>
 <tr class="odd">
-<td>NPP</td>
-<td>Data table</td>
-<td>Net primary production per cohort group</td>
-</tr>
-<tr class="even">
 <td>emissionsProducts</td>
 <td>matrix</td>
 <td>Total emissions and products for study area per simulation year</td>
