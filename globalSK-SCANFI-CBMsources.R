@@ -21,7 +21,7 @@ projSetup <- SpaDES.project::setupProject(
     repos = c(repos = repos),
     Require.cloneFrom = Sys.getenv("R_LIBS_USER"),
     ## These are for speed
-    reproducible.useMemoise = TRUE,
+    reproducible.useMemoise = FALSE,
     # Require.offlineMode = TRUE,
     spades.moduleCodeChecks = FALSE
   ),
