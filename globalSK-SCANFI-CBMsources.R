@@ -33,9 +33,14 @@ projSetup <- SpaDES.project::setupProject(
   times = times,
 
   params = list(
+    CBM_dataPrep_SK = list(
+      parallel.cores     = NULL,
+      parallel.tileSize  = 2500
+    ),
     CBM_dataPrep = list(
-      parallel.cores = NULL, # Use parallel processing
-      saveRasters    = TRUE  # Save aligned inputs as output rasters
+      parallel.cores     = NULL,
+      parallel.chunkSize = 25000,
+      saveRasters        = TRUE # Save aligned inputs as output rasters
     )
   ),
 
