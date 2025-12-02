@@ -59,20 +59,11 @@ jobs:
           any::googledrive
           any::rstudioapi
 
-      ## TEMPORARY: use reproducible@AI and SpaDES.core@box with LandR@development
+      - uses: PredictiveEcology/actions/install-Require@v0.2
+        with:
+          GitTag: 'development'
 
-      # - uses: PredictiveEcology/actions/install-Require@v0.2
-      #   with:
-      #     GitTag: 'development'
-      #
-      # - uses: PredictiveEcology/actions/install-SpaDES@v0.2
-
-      - name: Install reproducible@AI and SpaDES.core@box
-        run: |
-          install.packages("remotes")
-          remotes::install_github("PredictiveEcology/reproducible@AI")
-          remotes::install_github("PredictiveEcology/SpaDES.core@box")
-        shell: Rscript {0}
+      - uses: PredictiveEcology/actions/install-SpaDES@v0.2
 
       - name: Run examples for SK
         run: |
