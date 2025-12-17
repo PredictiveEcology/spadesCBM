@@ -17,7 +17,7 @@ test_that("Integration: CBM: SK test area (SPU 27 & 28)", {
         paste0("PredictiveEcology/CBM_defaults@",       Sys.getenv("BRANCH_NAME", "development")),
         paste0("PredictiveEcology/CBM_dataPrep_SK@",    Sys.getenv("BRANCH_NAME", "development")),
         paste0("PredictiveEcology/CBM_dataPrep@",       Sys.getenv("BRANCH_NAME", "development")),
-        paste0("PredictiveEcology/CBM_vol2biomass_SK@", Sys.getenv("BRANCH_NAME", "development")),
+        paste0("PredictiveEcology/CBM_vol2biomass@",    Sys.getenv("BRANCH_NAME", "development")),
         paste0("PredictiveEcology/CBM_core@",           Sys.getenv("BRANCH_NAME", "development"))
       ),
       times   = times,
