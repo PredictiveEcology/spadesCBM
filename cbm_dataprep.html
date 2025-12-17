@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Chapter 2 CBM_dataPrep | spadesCBM Manual</title>
 <meta name="author" content="Céline Boisvenue">
-<meta name="generator" content="bookdown 0.45 with bs4_book()">
+<meta name="generator" content="bookdown 0.46 with bs4_book()">
 <meta property="og:title" content="Chapter 2 CBM_dataPrep | spadesCBM Manual">
 <meta property="og:type" content="book">
 <meta name="twitter:card" content="summary">
@@ -72,7 +72,7 @@
 <li><a class="" href="cbm_defaults.html"><span class="header-section-number">1</span> CBM_defaults</a></li>
 <li><a class="active" href="cbm_dataprep.html"><span class="header-section-number">2</span> CBM_dataPrep</a></li>
 <li><a class="" href="cbm_dataprep_sk.html"><span class="header-section-number">3</span> CBM_dataPrep_SK</a></li>
-<li><a class="" href="cbm_vol2biomass_sk.html"><span class="header-section-number">4</span> CBM_vol2biomass_SK</a></li>
+<li><a class="" href="cbm_vol2biomass.html"><span class="header-section-number">4</span> CBM_vol2biomass</a></li>
 <li><a class="" href="cbm_core.html"><span class="header-section-number">5</span> CBM_core</a></li>
 <li><a class="" href="example-spadescbm-in-saskatchewan.html">Example: spadesCBM in Saskatchewan</a></li>
 <li><a class="" href="references.html">References</a></li>
@@ -94,7 +94,7 @@
 <h2>
 <span class="header-section-number">2.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview-2"><i class="fas fa-link"></i></a>
 </h2>
-<p><a href="https://github.com/PredictiveEcology/CBM_dataPrep.git">CBM_dataPrep</a> processes spatially explicit inputs for use in <a href="https://github.com/PredictiveEcology/CBM_vol2biomass_SK.git">CBM_vol2biomass_SK</a> and <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>. In <em>SpaDES-speak</em>, it has two events, the <code>init</code> event (scheduled once) and the <code>readDisturbanceEvents</code> which processes disturbances (usually provided as rasters) into a table format used in <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>. <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> was designed for spatially explicit modelling and provides a wide variety of tools to support it. <a href="https://github.com/PredictiveEcology/CBM_dataPrep.git">CBM_dataPrep</a> makes use of these tools. We use an example that simulates a scenario where remotely-sensed disturbances are simulated in the managed forests of Saskatchewan from 1985 to 2011, as described in <span class="citation">Boisvenue <em>et al.</em> (<a href="references.html#ref-boisvenue2016">2016</a>)</span> (scenario = time horizon + disturbances).</p>
+<p><a href="https://github.com/PredictiveEcology/CBM_dataPrep.git">CBM_dataPrep</a> processes spatially explicit inputs for use in <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> and <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>. In <em>SpaDES-speak</em>, it has two events, the <code>init</code> event (scheduled once) and the <code>readDisturbanceEvents</code> which processes disturbances (usually provided as rasters) into a table format used in <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>. <a href="https://SpaDES.PredictiveEcology.org">SpaDES</a> was designed for spatially explicit modelling and provides a wide variety of tools to support it. <a href="https://github.com/PredictiveEcology/CBM_dataPrep.git">CBM_dataPrep</a> makes use of these tools. We use an example that simulates a scenario where remotely-sensed disturbances are simulated in the managed forests of Saskatchewan from 1985 to 2011, as described in <span class="citation">Boisvenue <em>et al.</em> (<a href="references.html#ref-boisvenue2016">2016</a>)</span> (scenario = time horizon + disturbances).</p>
 </div>
 <div id="background-1" class="section level2" number="2.2">
 <h2>

@@ -35,7 +35,7 @@ inputs-2
 module-functioning-2
 outputs-2
 links-to-other-modules-2
-cbm_vol2biomass_sk
+cbm_vol2biomass
 overview-4
 background-2
 inputs-3
@@ -45,7 +45,6 @@ choosing-parameters
 from-m3-to-carbon
 smoothing-algorithm
 outputs-3
-usage-2
 links-to-other-modules-3
 cbm_core
 overview-5
