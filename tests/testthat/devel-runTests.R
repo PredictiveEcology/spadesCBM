@@ -25,9 +25,11 @@
   testthat::test_dir("tests/testthat", reporter = testthat::SummaryReporter)
 
 
-## RUN INDIVIDUAL TESTS ----
+## RUN TEST SUBSETS ----
 
-  testthat::test_file(filter = "SK_1-small_1998-2000")
+  testthat::test_file(filter = "SK")
 
-  testthat::test_file(filter = "SK_2-SPU-27-28_NTEMS_1998-2000")
+  testthat::test_file(filter = "NTEMS")
+
+
 

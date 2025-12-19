@@ -1,13 +1,13 @@
 
 if (!testthat::is_testing()) source(testthat::test_path("setup.R"))
 
-test_that("SK-med with NTEMS disturbances 1998-2000", {
+test_that("Integration: CBM: SK test area (SPU 27 & 28)", {
 
   ## Run simInit and spades ----
 
   # Set up project
-  projectName <- "2_SK-med_NTEMS_1998-2000"
-  times       <- list(start = 1998, end = 2000)
+  projectName <- "SK_2-SPU-27-28"
+  times       <- list(start = 1985, end = 1985)
 
   simInitInput <- SpaDEStestMuffleOutput(
 
@@ -17,7 +17,7 @@ test_that("SK-med with NTEMS disturbances 1998-2000", {
         paste0("PredictiveEcology/CBM_defaults@",       Sys.getenv("BRANCH_NAME", "development")),
         paste0("PredictiveEcology/CBM_dataPrep_SK@",    Sys.getenv("BRANCH_NAME", "development")),
         paste0("PredictiveEcology/CBM_dataPrep@",       Sys.getenv("BRANCH_NAME", "development")),
-        paste0("PredictiveEcology/CBM_vol2biomass_SK@", Sys.getenv("BRANCH_NAME", "development")),
+        paste0("PredictiveEcology/CBM_vol2biomass@",    Sys.getenv("BRANCH_NAME", "development")),
         paste0("PredictiveEcology/CBM_core@",           Sys.getenv("BRANCH_NAME", "development"))
       ),
       times   = times,

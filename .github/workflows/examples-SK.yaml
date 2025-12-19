@@ -19,9 +19,7 @@ jobs:
       matrix:
         config:
           - {os: windows-latest, r: 'release'}
-          - {os: windows-latest, r: 'devel'}
           - {os: ubuntu-latest,  r: 'release'}
-          - {os: ubuntu-latest,  r: 'devel'}
           #- {os: macOS-latest,   r: 'release'}
 
     env:
@@ -64,6 +62,16 @@ jobs:
           GitTag: 'development'
 
       - uses: PredictiveEcology/actions/install-SpaDES@v0.2
+
+      # Temporary: install SpaDES development branches
+      - name: Install SpaDES development branches
+        run: |
+          Require::setLinuxBinaryRepo()
+          Require::Require("PredictiveEcology/quickPlot@development",      require = FALSE)
+          Require::Require("PredictiveEcology/reproducible@development",   require = FALSE)
+          Require::Require("PredictiveEcology/SpaDES.core@development",    require = FALSE)
+          Require::Require("PredictiveEcology/SpaDES.project@development", require = FALSE)
+        shell: Rscript {0}
 
       - name: Run examples for SK
         run: |

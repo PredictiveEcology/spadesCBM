@@ -1,17 +1,17 @@
 projectPath <- "~/GitHub/spadesCBM"
 repos <- unique(c("predictiveecology.r-universe.dev", getOption("repos")))
-install.packages("SpaDES.project",
-                 repos = repos)
+install.packages("SpaDES.project", repos = repos)
 
-# start in 1998, and end in 2000
-times <- list(start = 1998, end = 2000)
+# Set times
+times <- list(start = 1985, end = 2020)
 
-out <- SpaDES.project::setupProject(
+# Set up project
+projSetup <- SpaDES.project::setupProject(
   Restart = TRUE,
   useGit = "PredictiveEcology", # a developer sets and keeps this = TRUE
   overwrite = TRUE, # a user who wants to get latest modules sets this to TRUE
   paths = list(projectPath = projectPath,
-               outputPath  = file.path(projectPath, "outputs", "SK-testArea"),
+               outputPath  = file.path(projectPath, "outputs", "SK-30m-SCANFI"),
                modulePath  = file.path(projectPath, "modules"),
                packagePath = file.path(projectPath, "packages"),
                inputPath   = file.path(projectPath, "inputs"),
@@ -20,9 +20,8 @@ out <- SpaDES.project::setupProject(
   options = options(
     repos = c(repos = repos),
     Require.cloneFrom = Sys.getenv("R_LIBS_USER"),
-    reproducible.destinationPath = "inputs",
     ## These are for speed
-    reproducible.useMemoise = TRUE,
+    reproducible.useMemoise = FALSE,
     # Require.offlineMode = TRUE,
     spades.moduleCodeChecks = FALSE
   ),
@@ -34,34 +33,28 @@ out <- SpaDES.project::setupProject(
   times = times,
 
   params = list(
-    CBM_defaults = list(
-      .useCache = TRUE
-    ),
     CBM_dataPrep_SK = list(
-      .useCache = TRUE
+      parallel.cores     = NULL,
+      parallel.tileSize  = 2500
     ),
-    CBM_vol2biomass = list(
-      .useCache = TRUE
+    CBM_dataPrep = list(
+      parallel.cores     = NULL,
+      parallel.chunkSize = 25000,
+      saveRasters        = TRUE # Save aligned inputs as output rasters
     )
   ),
 
-  #### begin manually passed inputs #########################################
-  require = "terra",
+  # Set cohort data sources
+  ageLocator = "SCANFI-2020-age",
+  spsLocator = "SCANFI-2020-LandR",
 
-  # Set study area
-  masterRaster = terra::rast(
-    crs  = "EPSG:3979",
-    res  = 30,
-    vals = 1L,
-    xmin = -690643.4762,
-    xmax = -632143.4762,
-    ymin =  700447.9315,
-    ymax =  757447.9315
-  ),
-
-  # Set disturbances data source: NTEMS disturbances sample
-  disturbanceRastersURL = "https://drive.google.com/file/d/12YnuQYytjcBej0_kdodLchPg7z9LygCt"
+  # Set disturbances data source
+  disturbanceSource = "NTEMS"
 )
 
 # Run
-simMngedSKsmall <- SpaDES.core::simInitAndSpades2(out)
+simCBM <- SpaDES.core::simInit2(projSetup)
+simCBM <- SpaDES.core::spades(simCBM)
+
+
+
