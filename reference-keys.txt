@@ -22,10 +22,11 @@ overview-2
 background-1
 inputs-1
 module-functioning-1
-readcohorts
+prepcohorts
+prepvol2biomass
 matchspecies
 matchdisturbance
-readdisturbanceevents
+readdisturbances
 disturbances
 outputs-1
 links-to-other-modules-1
