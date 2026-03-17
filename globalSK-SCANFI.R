@@ -3,7 +3,7 @@ repos <- unique(c("predictiveecology.r-universe.dev", getOption("repos")))
 install.packages("SpaDES.project",
                  repos = repos)
 
-# start in 1998, and end in 2000
+# Set times
 times <- list(start = 1985, end = 2020)
 
 out <- SpaDES.project::setupProject(
