@@ -31,7 +31,6 @@ out <- SpaDES.project::setupProject(
                "PredictiveEcology/CBM_vol2biomass@development",
                "PredictiveEcology/CBM_core@development"),
   times = times,
-  require = c("reproducible"),
 
   params = list(
     CBM_defaults = list(
@@ -46,6 +45,8 @@ out <- SpaDES.project::setupProject(
   ),
 
   #### begin manually passed inputs #########################################
+  require = c("reproducible", "data.table", "terra"),
+
   ## define the  study area.
   masterRaster = {
     mr <- reproducible::prepInputs(url = "https://drive.google.com/file/d/1EIct8OMMdUP3_F0njXyeqIe004TTTtWU/view?usp=drive_link",
@@ -60,10 +61,10 @@ out <- SpaDES.project::setupProject(
   ageDataYear = 2020,
   userGcMeta = as.data.table(reproducible::prepInputs(url = "https://drive.google.com/file/d/1rlygsfT9Te6XHNAKNQxfQJDwMybXLijG/view?usp=drive_link",
                                                       destinationPath = paths$inputPath,
-                                                      fun = fread)),
+                                                      fun = data.table::fread)),
   userGcM3 = as.data.table(reproducible::prepInputs(url = "https://drive.google.com/file/d/12RHUTxQX9yRwgkWKDzWrA3q27FVYU_3h/view?usp=drive_link",
                                                     destinationPath = paths$inputPath,
-                                                    fun = fread)),
+                                                    fun = data.table::fread)),
 
   ## If not using curveID, comment this in.
   # gcIndexLocator = terra::rast("~/GitHub/Data/scanfi/gcIndex.tif"),
