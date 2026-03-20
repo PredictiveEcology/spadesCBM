@@ -20,7 +20,6 @@ out <- SpaDES.project::setupProject(
   options = options(
     repos = c(repos = repos),
     Require.cloneFrom = Sys.getenv("R_LIBS_USER"),
-    reproducible.destinationPath = "inputs",
     ## These are for speed
     reproducible.useMemoise = TRUE,
     # Require.offlineMode = TRUE,
@@ -50,7 +49,7 @@ out <- SpaDES.project::setupProject(
   ## define the  study area.
   masterRaster = {
     mr <- reproducible::prepInputs(url = "https://drive.google.com/file/d/1EIct8OMMdUP3_F0njXyeqIe004TTTtWU/view?usp=drive_link",
-                                   destinationPath = "inputs")
+                                   destinationPath = paths$inputPath)
     mr[mr[] == 0] <- NA
     mr
   },

@@ -20,7 +20,6 @@ out <- SpaDES.project::setupProject(
   options = options(
     repos = c(repos = repos),
     Require.cloneFrom = Sys.getenv("R_LIBS_USER"),
-    reproducible.destinationPath = "inputs",
     ## These are for speed
     reproducible.useMemoise = TRUE,
     # Require.offlineMode = TRUE,
