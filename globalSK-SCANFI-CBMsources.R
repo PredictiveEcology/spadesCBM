@@ -1,7 +1,9 @@
-projectPath <- "~/GitHub/spadesCBM"
 
 # Install SpaDES.project
 install.packages("SpaDES.project", repos = unique(c("predictiveecology.r-universe.dev", getOption("repos"))))
+
+# Set project path
+projectPath <- "~/GitHub/spadesCBM"
 
 # Set times
 times <- list(start = 1985, end = 2020)
