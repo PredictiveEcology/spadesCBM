@@ -1,6 +1,9 @@
+
+# Install SpaDES.project
+install.packages("SpaDES.project", repos = unique(c("predictiveecology.r-universe.dev", getOption("repos"))))
+
+# Set project path
 projectPath <- "~/GitHub/spadesCBM"
-repos <- unique(c("predictiveecology.r-universe.dev", getOption("repos")))
-install.packages("SpaDES.project", repos = repos)
 
 # Set times
 times <- list(start = 1985, end = 2020)
@@ -18,7 +21,7 @@ projSetup <- SpaDES.project::setupProject(
                cachePath   = file.path(projectPath, "cache")),
 
   options = options(
-    repos = c(repos = repos),
+    repos = unique(c("predictiveecology.r-universe.dev", getOption("repos"))),
     Require.cloneFrom = Sys.getenv("R_LIBS_USER"),
     ## These are for speed
     reproducible.useMemoise = FALSE,
