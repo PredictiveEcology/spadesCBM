@@ -65,9 +65,6 @@ jobs:
       - uses: PredictiveEcology/actions/install-Rmd-pkgs@v0.2
       - name: Install module package and other dependencies
         run: |
-          pkgs <- unlist(SpaDES.core::packages(modules = list.files("./modules"),
-          paths = "./modules"))
-          pkgs <- Require::pkgDep2(pkgs)
           Require::Require(c("rprojroot", "bibtex", "bookdown", "data.table", "downlit", "RefManageR","formatR", "knitr", "PredictiveEcology/SpaDES.docs"))
           Require::Require(pkgs)
 
