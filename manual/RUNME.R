@@ -14,8 +14,9 @@ docsDir <- file.path(manDir, "_bookdown.yml") |>
 
 # load packages -------------------------------------
 ## TEMPORARY to avoid bug where SpaDES.core doesn't exist
-install.packages("SpaDES.core")
+install.packages(c("fs", "SpaDES.core"))
 library(SpaDES.core)
+library(fs)
 
 library(bibtex)
 library(bookdown)
