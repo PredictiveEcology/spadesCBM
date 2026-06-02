@@ -13,6 +13,9 @@ docsDir <- file.path(manDir, "_bookdown.yml") |>
 # figDir <- Require::checkPath(file.path(docsDir, "figures"), create = TRUE)
 
 # load packages -------------------------------------
+## TEMPORARY to avoid bug where SpaDES.core doesn't exist
+install.packages("SpaDES.core")
+library(SpaDES.core)
 
 library(bibtex)
 library(bookdown)
