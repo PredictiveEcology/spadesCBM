@@ -1,8 +1,7 @@
-
 ## this manual must be knitted by running this script
-## TEMPORARY to avoid bug where SpaDES.core doesn't exist
-install.packages("fs")
-library(fs)
+install.packages("pak")
+pak::pak("r-lib/fs")
+
 
 prjDir <- rprojroot::find_root(rprojroot::is_rstudio_project | rprojroot::is_git_root | rprojroot::from_wd, path = getwd())
 manDir <- file.path(prjDir, "manual")
@@ -21,10 +20,12 @@ install.packages("SpaDES.core")
 library(SpaDES.core)
 
 library(bibtex)
+install.packages("bookdown")
 library(bookdown)
 library(data.table)
 library(knitr)
 library(RefManageR)
+pak::pak("PredictiveEcology/SpaDES.docs")
 library(SpaDES.docs)
 library(formatR)
 library(downlit)
