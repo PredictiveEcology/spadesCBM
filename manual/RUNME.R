@@ -1,8 +1,3 @@
-## this manual must be knitted by running this script
-install.packages("pak")
-pak::pak("r-lib/fs")
-
-
 prjDir <- rprojroot::find_root(rprojroot::is_rstudio_project | rprojroot::is_git_root | rprojroot::from_wd, path = getwd())
 manDir <- file.path(prjDir, "manual")
 
@@ -15,17 +10,11 @@ docsDir <- file.path(manDir, "_bookdown.yml") |>
 # figDir <- Require::checkPath(file.path(docsDir, "figures"), create = TRUE)
 
 # load packages -------------------------------------
-## TEMP
-install.packages("SpaDES.core")
-library(SpaDES.core)
-
 library(bibtex)
-install.packages("bookdown")
 library(bookdown)
 library(data.table)
 library(knitr)
 library(RefManageR)
-pak::pak("PredictiveEcology/SpaDES.docs")
 library(SpaDES.docs)
 library(formatR)
 library(downlit)
