@@ -94,7 +94,9 @@
 <h2>
 <span class="header-section-number">5.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview-5"><i class="fas fa-link"></i></a>
 </h2>
-<p><a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> is the central module of <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>. This is where all the carbon transfers are calculated at every time step, where disturbances are applied, and stocks are tracked. It cannot run on its own and it needs parameters from <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a>, <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, <a href="https://github.com/PredictiveEcology/CBM_dataPrep.git">CBM_dataPrep</a>, and <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> (as per the provided example for managed forests of Saskatchewan) or the equivalent information from the user. In <em>SpaDES-speak</em>, this module has six events (<code>Init</code>, <code>spinup</code>, <code>annual_preprocessing</code>, <code>annual_carbonDynamics</code>, <code>save</code>, and <code>plot</code>). Only in two of these events do carbon transactions occur: <code>spinup</code> and <code>annual_carbonDynamics</code>. The other events are tools to enable these transactions. All events are scheduled only once except for the two <code>annual</code> events, who schedules themselves until the end of the simulation horizon. Only in this module are the Python functions from the <a href="https://github.com/cat-cfs/libcbm_py/tree/main">libcbm</a> package called. The functions used in this module are the <a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/model/cbm_exn">libcbm cbm-exn</a> functions exclusively, as these were designed to accept external biomass increments. These Python functions are used in the <code>spinup</code> and in the <code>annual_carbonDynamics</code> events only.</p>
+<p><a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> is the central module of <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> implementing the <a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/model/cbm_exn">CBM-EXN</a> model. This is where all the carbon transfers are calculated at every time step, where disturbances are applied, and stocks are tracked.</p>
+<p><a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/model/cbm_exn">CBM-EXN</a> is a CBM-CFS3 equivalent model driven by external net C increments rather than merchantable volume growth curves. The <a href="https://github.com/PredictiveEcology/libcbmr">libcbmr R package</a> provides an R interface to the Python implemented CBM-EXN model in <a href="https://github.com/cat-cfs/libcbm_py/tree/main">libcbm</a>.</p>
+<p>CBM_core cannot run on its own and it needs parameters from <a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a>, <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, <a href="https://github.com/PredictiveEcology/CBM_dataPrep.git">CBM_dataPrep</a>, and <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> (as per the provided example for managed forests of Saskatchewan) or the equivalent information from the user. In <em>SpaDES-speak</em>, this module has six events (<code>Init</code>, <code>spinup</code>, <code>annual_preprocessing</code>, <code>annual_carbonDynamics</code>, <code>save</code>, and <code>plot</code>). Only in two of these events do carbon transactions occur: <code>spinup</code> and <code>annual_carbonDynamics</code>. The other events are tools to enable these transactions. All events are scheduled only once except for the two annual events which schedule themselves until the end of the simulation horizon.</p>
 </div>
 <div id="background-3" class="section level2" number="5.2">
 <h2>
@@ -121,47 +123,35 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>growth_increments</td>
-<td>Data table</td>
-<td>growth increment matrix</td>
-<td>CBM_vol2biomass</td>
-</tr>
-<tr class="even">
 <td>standDT</td>
 <td>Data table</td>
 <td>Table of stand attributes. Stands can have 1 or more cohorts</td>
 <td>CBM_dataPrep</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>cohortDT</td>
 <td>Data table</td>
 <td>Table of cohort attributes</td>
 <td>CBM_dataPrep</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>masterRaster</td>
 <td>SpatRaster</td>
 <td>Raster of study area</td>
 <td>User provided, for SK: <a href="https://drive.google.com/file/d/1zUyFH8k6Ef4c_GiWMInKbwAl6m6gvLJW">Google Drive</a>
 </td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td>gcMeta</td>
 <td>Data table</td>
 <td>Growth curve metadata</td>
 <td>CBM_dataPrep</td>
 </tr>
-<tr class="even">
-<td>pooldef</td>
-<td>Character</td>
-<td>Vector of pools</td>
-<td>CBM_defaults</td>
-</tr>
 <tr class="odd">
-<td>spinupSQL</td>
+<td>growth_increments</td>
 <td>Data table</td>
-<td>Parameters for CBM_core spinup event</td>
-<td>CBM_defaults</td>
+<td>growth increment matrix</td>
+<td>CBM_vol2biomass</td>
 </tr>
 <tr class="even">
 <td>disturbanceEvents</td>
@@ -174,6 +164,18 @@
 <td>Data table</td>
 <td>Table defining disturbance event types</td>
 <td>CBM_dataPrep_SK</td>
+</tr>
+<tr class="even">
+<td>pooldef</td>
+<td>Character</td>
+<td>Vector of pools</td>
+<td>CBM_defaults</td>
+</tr>
+<tr class="odd">
+<td>spinupSQL</td>
+<td>Data table</td>
+<td>Parameters for CBM_core spinup event</td>
+<td>CBM_defaults</td>
 </tr>
 </tbody>
 </table></div>
@@ -198,8 +200,8 @@
 <span class="header-section-number">5.4.1.2</span> <code>spinup</code><a class="anchor" aria-label="anchor" href="#spinup-1"><i class="fas fa-link"></i></a>
 </h4>
 <p>The main goal of this event is to initialize the landscape by performing the <a href="https://predictiveecology.github.io/spadesCBM/#the-spinup-function">spinup function</a>.</p>
-<p>Cohort and stand data is prepared and passed to the <a href="https://github.com/PredictiveEcology/CBM_core/blob/cf9c966e7bbbb29f8089411c73d030e21846ffe3/R/spinup.R#L5"><code>cbmExnSpinup</code></a> function alongside growth curve data (from CBM_vol2biomass) and spinup default data (from CBM_defaults). The <a href="https://github.com/PredictiveEcology/CBM_core/blob/cf9c966e7bbbb29f8089411c73d030e21846ffe3/R/spinup.R#L5"><code>cbmExnSpinup</code></a> function sets up inputs, calls the <a href="https://cat-cfs.github.io/libcbm_py/cbm_exn_custom_ops.html#Appendix-1:-CBM-EXN-Default-parameters"><code>cbm_exn_get_default_parameters</code></a> python function that defines the model structure, and runs the carbon transfers necessary for the growth and burn cycle using <a href="https://cat-cfs.github.io/libcbm_py/cbm_exn_custom_ops.html#Appendix-1:-CBM-EXN-Default-parameters"><code>cbm_exn_spinup</code></a>.</p>
-<p>The spinup output data and cohort groups are then prepared for use in the <code>annual</code> event.</p>
+<p>Cohort and stand data is prepared and passed to the <a href="https://github.com/PredictiveEcology/CBM_core/blob/main/R/spinup.R"><code>cbmExnSpinup</code></a> function alongside growth curve data (from CBM_vol2biomass) and spinup default data (from CBM_defaults). The <a href="https://github.com/PredictiveEcology/CBM_core/blob/main/R/spinup.R"><code>cbmExnSpinup</code></a> function sets up inputs, calls the <code>cbm_exn_get_default_parameters</code> python function that defines the model structure, and runs the carbon transfers necessary for the growth and burn cycle using <code>cbm_exn_spinup</code>.</p>
+<p>The spinup output data and cohort groups are then prepared for use in the annual event.</p>
 </div>
 <div id="annual_preprocessing" class="section level4" number="5.4.1.3">
 <h4>
@@ -217,7 +219,7 @@
 <h4>
 <span class="header-section-number">5.4.1.5</span> <code>save</code><a class="anchor" aria-label="anchor" href="#save"><i class="fas fa-link"></i></a>
 </h4>
-<p>This event is where outputs are saved. In the case of our example in Saskatchewan, we save outputs to <code>.qs</code> files to our <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#spadesCBMdb"><code>spadesCBMdb</code></a> object for each simulation year. By default, 3 tables are saved, a <code>key</code> table, a <code>pools</code> table, and a <code>flux</code> table. Other tables with simulation parameters can be saved by changing the <code>.saveAll</code> parameter to <code>TRUE</code> in the module. If output paths are kept at default, hese output files will be found here: <code>~/GitHub/spadesCBM/outputs</code>.</p>
+<p>This event is where outputs are saved. In the case of our example in Saskatchewan, we save outputs to <code>.qs</code> files to our <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#spadesCBMdb"><code>spadesCBMdb</code></a> object for each simulation year. By default, 3 tables are saved, a <code>key</code> table, a <code>pools</code> table, and a <code>flux</code> table. Other tables with simulation parameters can be saved by changing the <code>.saveAll</code> parameter to <code>TRUE</code> in the module. If output paths are kept at default, these output files will be found here: <code>~/GitHub/spadesCBM/outputs</code>.</p>
 </div>
 <div id="plot" class="section level4" number="5.4.1.6">
 <h4>
@@ -232,7 +234,7 @@
 <span class="header-section-number">5.4.2</span> Stands and Cohort Groups<a class="anchor" aria-label="anchor" href="#stands-and-cohort-groups"><i class="fas fa-link"></i></a>
 </h3>
 <p><a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#cohort-groups">Cohort groups</a> are unique combinations of age, growth curve (which equates to species as there is one growth curve per leading species in CBM), <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#ecozone-vs-spatial-unit">spatial unit</a> and <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#ecozone-vs-spatial-unit">ecozone</a>. In spadesCBM, forested pixels are simulated and represent a stand. Each stand (or pixel) can have one or many cohorts. All cohorts across stands that share an identical age, growth curve, spatial unit, and ecozone will share one unique <code>cohortGroupID</code> number.</p>
-<p>The object <code>allPixDT</code> is a large table with a row corresponding to every pixel in the <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#masterraster"><code>masterRaster</code></a>. The <code>cohortDT</code> object is a long-form table where each simulated pixel (or stand) has its own row (no NAs), and <code>cohortGroups</code> lists only the cohort groups and their attributes. In our example there are 1 347 529 pixels simulated (i.e., 1 347 529 rows in <code>cohortDT</code>) which are grouped in 739 <code>cohortGroups</code> for processing (i.e. 739 rows in <code>cohortGroups</code>).</p>
+<p>The object <code>standDT</code> is a large table with a row corresponding to every pixel in the <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#masterraster"><code>masterRaster</code></a>. The <code>cohortDT</code> object is a long-form table where each simulated pixel (or stand) has its own row (no NAs), and <code>cohortGroups</code> lists only the cohort groups and their attributes. In our example there are 1 347 529 pixels simulated (i.e., 1 347 529 rows in <code>cohortDT</code>) which are grouped in 739 <code>cohortGroups</code> for processing (i.e. 739 rows in <code>cohortGroups</code>).</p>
 </div>
 <div id="carbon-transfers" class="section level3" number="5.4.3">
 <h3>
@@ -241,7 +243,7 @@
 <p>Default parameters for simulations are available mainly from <a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/resources/cbm_exn">default <code>.csv</code> files</a> with a few pieces of information such as <code>mean_annual_temperature</code> used in decay rates calculations, <code>return_interval</code>, <code>min_rotations</code> and <code>max_rotations</code> used in the <code>spinup</code> or initialization process available in an <a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/resources/cbm_defaults_db">SQLite database</a>. There are 18 internal carbon pools in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> (see Table 1 in Overview), and two pools that take carbon out of the system, one for the atmosphere and one for harvested wood exiting the system. Disturbances are the first carbon transfer to be applied to each record. Half the annual increment is then added (transfer from the atmosphere to the three above ground biomass pools - <code>Merch</code>, <code>Foliage</code>, and <code>Other</code>). Disturbance inputs are processed externally to <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a>. In our example disturbances are processed in <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a>, leaving <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> free of spatial data manipulations. Disturbance matrices specify the proportion of carbon in each pool to be transferred to other pools or to be taken out of the system (via forest products (pool named <code>Products</code>) or back to the atmosphere). Figure 1 gives an example of transfers during a fire in Saskatchewan.</p>
 <p><em>Figure 1: Proportional carbon transfers between pools during a fire in Saskatchewan</em></p>
 <div class="inline-figure"><img src="https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/WildfireAlluvial.png" fig-align="center" width="600"></div>
-<p>The amount of carbon transferred from the atmosphere to the above ground biomass pools is determined from the growth curves, which were translated from <span class="math inline">\(m^3/ha\)</span> to carbon increments in <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> and provided to <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> in carbon increments (in tonnes of carbon/ha). In our example the object <code>simMngedSK$growth_increments</code> has the increments used for the simulation. Dead Organic Matter (<a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#dead-organic-matter">DOM</a>) turnover happens next and transfers carbon from the pools representing snags (<code>StemSnags</code> and <code>BranchSnags</code>), to the <code>MediumSoil</code>, and <code>AboveGroundFastSoil</code> pools. Biomass turnover follows with transfers from the <code>Merch</code>, <code>Foliage</code>, <code>Other</code>, <code>FineRoots</code> and <code>CoarseRoots</code>, to the pools representing the snags (<code>StemSnags</code> and <code>BranchSnags</code>), <code>AboveGroundVeryFastSoil</code>, <code>BelowGroundFastSoil</code>, <code>AboveGroundVeryFastSoil</code> and <code>BelowGroundVeryFastSoil pools</code>. Carbon is never lost in the system, but increments are at times negative. To accommodate negative increment values, a carbon transfer labelled <code>overmature_decline</code>, moves carbon between the <code>Merch</code>, <code>Other</code>, <code>Foliage</code>, <code>CoarseRoots</code> and <code>FineRoots</code> to pools representing stem an branch snags, and the <code>AboveGroundFastSoil</code>, <code>AboveGroundVeryFastSoil</code>, <code>BelowGroundFastSoil</code>, and <code>BelowGroundVeryFastSoil</code> pools. The transfers are portioned in the same way as the annual turnover and the amount is equal to the loss of each individual biomass pool according to the negative increment. Following the <code>overmature_decline</code> transfers, the second half of the growth is added to the three above ground biomass pools - <code>Merch</code>, <code>Foliage</code>, and <code>Other</code>. Next, the transfers due to decay are performed. Applied decay rates (<span class="math inline">\(a_k\)</span>) are calculated for each DOM pool(<span class="math inline">\(_k\)</span>) as per <strong>Equation 1</strong> (see <span class="citation">Kurz <em>et al.</em> (<a href="references.html#ref-kurz2009">2009</a>)</span>).</p>
+<p>The amount of carbon transferred from the atmosphere to the above ground biomass pools is determined from the growth curves, which were translated from <span class="math inline">\(m^3/ha\)</span> to carbon increments in <a href="https://github.com/PredictiveEcology/CBM_vol2biomass.git">CBM_vol2biomass</a> and provided to <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> in carbon increments (in tonnes of carbon/ha). In our example the object <code>simMngedSK$growth_increments</code> has the increments used for the simulation. Dead Organic Matter (<a href="https://predictiveecology.github.io/spadesCBM/lexicon.html#dead-organic-matter">DOM</a>) turnover happens next and transfers carbon from the pools representing snags (<code>StemSnags</code> and <code>BranchSnags</code>), to the <code>MediumSoil</code>, and <code>AboveGroundFastSoil</code> pools. Biomass turnover follows with transfers from the <code>Merch</code>, <code>Foliage</code>, <code>Other</code>, <code>FineRoots</code> and <code>CoarseRoots</code>, to the pools representing the snags (<code>StemSnags</code> and <code>BranchSnags</code>), <code>AboveGroundVeryFastSoil</code>, <code>BelowGroundFastSoil</code>, <code>AboveGroundVeryFastSoil</code> and <code>BelowGroundVeryFastSoil</code> pools. Carbon is never lost in the system, but increments are at times negative. To accommodate negative increment values, a carbon transfer labelled <code>overmature_decline</code>, moves carbon between the <code>Merch</code>, <code>Other</code>, <code>Foliage</code>, <code>CoarseRoots</code> and <code>FineRoots</code> to pools representing stem and branch snags, and the <code>AboveGroundFastSoil</code>, <code>AboveGroundVeryFastSoil</code>, <code>BelowGroundFastSoil</code>, and <code>BelowGroundVeryFastSoil</code> pools. The transfers are portioned in the same way as the annual turnover and the amount is equal to the loss of each individual biomass pool according to the negative increment. Following the <code>overmature_decline</code> transfers, the second half of the growth is added to the three above ground biomass pools - <code>Merch</code>, <code>Foliage</code>, and <code>Other</code>. Next, the transfers due to decay are performed. Applied decay rates (<span class="math inline">\(a_k\)</span>) are calculated for each DOM pool(<span class="math inline">\(_k\)</span>) as per <strong>Equation 1</strong> (see <span class="citation">Kurz <em>et al.</em> (<a href="references.html#ref-kurz2009">2009</a>)</span>).</p>
 <p><strong>Equation 1.</strong>
 <span class="math inline">\(a_k = D_k * TempMod * StandMod\)</span></p>
 <p>Where:</p>
@@ -322,7 +324,7 @@
 </h2>
 <ul>
 <li><a href="https://github.com/PredictiveEcology/CBM_defaults">CBM_defaults</a></li>
-<li><a href="https://github.com/PredictiveEcology/CBM_dataPrep">CBM_datPrep</a></li>
+<li><a href="https://github.com/PredictiveEcology/CBM_dataPrep">CBM_dataPrep</a></li>
 <li><a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a></li>
 <li><a href="https://github.com/PredictiveEcology/CBM_vol2biomass">CBM_vol2biomass</a></li>
 </ul>

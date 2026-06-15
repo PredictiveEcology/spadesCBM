@@ -94,7 +94,7 @@
 <h2>
 <span class="header-section-number">1.1</span> Overview<a class="anchor" aria-label="anchor" href="#overview-1"><i class="fas fa-link"></i></a>
 </h2>
-<p><a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a> reads in default parameters for the managed forest of Canada. In <em>SpaDES-speak</em>, it has one event (<code>init</code>). On its own, this module provides R-based access to all defaults <strong>CBM</strong> parameters for the managed forests of Canada (run <a href="index.html#usage">Usage</a> section below to run this module independently). As part of <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>, it provides simulations with default parameter values for the managed forests of Canada, akin to the Archive Index in the CBM-CFS3 documentation. Most parameters are read in from an SQLite database (link below), with some defaults, modified from CBM-CFS3 to accommodate a more flexible representation of vegetation dynamics enable by the <code>libcbm</code> Python functions used, available <a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/resources/cbm_exn">here</a>. Defaults for the managed forests of Canada include disturbance data such as different disturbance types and their IDs, spinup parameters, pool names, fire return intervals for each <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">ecozone</a> and more. The outputs of this module are used by <a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a> and <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulations.</p>
+<p><a href="https://github.com/PredictiveEcology/CBM_defaults.git">CBM_defaults</a> reads in default parameters for the managed forest of Canada. In <em>SpaDES-speak</em>, it has one event (<code>init</code>). On its own, this module provides R-based access to all defaults <strong>CBM</strong> parameters for the managed forests of Canada (run <a href="index.html#usage">Usage</a> section below to run this module independently). As part of <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a>, it provides simulations with default parameter values for the managed forests of Canada, akin to the Archive Index in the CBM-CFS3 documentation. Most parameters are read in from an SQLite database, with some defaults modified from CBM-CFS3 to accommodate a more flexible representation of vegetation dynamics enabled by the <code>libcbm</code> Python functions used. Defaults for the managed forests of Canada include disturbance data such as different disturbance types and their IDs, spinup parameters, pool names, fire return intervals for each <a href="https://predictiveecology.github.io/spadesCBM/lexicon.html">ecozone</a> and more. The outputs of this module are used by <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> in <a href="https://github.com/PredictiveEcology/spadesCBM.git">spadesCBM</a> simulations.</p>
 </div>
 <div id="background" class="section level2" number="1.2">
 <h2>
@@ -106,6 +106,7 @@
 <h2>
 <span class="header-section-number">1.3</span> Inputs<a class="anchor" aria-label="anchor" href="#inputs"><i class="fas fa-link"></i></a>
 </h2>
+<p><a href="https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/resources/cbm_exn" class="uri">https://github.com/cat-cfs/libcbm_py/tree/main/libcbm/resources/cbm_exn</a></p>
 <div class="inline-table"><table style="width:100%;" class="table table-sm">
 <colgroup>
 <col width="24%">
@@ -143,18 +144,6 @@
 <td>Data table</td>
 <td>Default species information</td>
 <td><a href="https://github.com/cat-cfs/libcbm_py/blob/main/libcbm/resources/cbm_exn/species.csv">GitHub</a></td>
-</tr>
-<tr class="odd">
-<td>ecoLocator</td>
-<td>Shapefile</td>
-<td>Canada’s ecozone as polygon features</td>
-<td><a href="http://sis.agr.gc.ca/cansis/nsdb/ecostrat/zone/ecozone_shp.zip">Canadian Soil information Service</a></td>
-</tr>
-<tr class="even">
-<td>spuLocator</td>
-<td>Shapefile</td>
-<td>Canada’s spatial units as polygon features</td>
-<td><a href="https://drive.google.com/file/d/1D3O0Uj-s_QEgMW7_X-NhVsEZdJ29FBed">Google Drive</a></td>
 </tr>
 </tbody>
 </table></div>
@@ -258,7 +247,7 @@
 <span class="header-section-number">1.7</span> Links to other modules<a class="anchor" aria-label="anchor" href="#links-to-other-modules"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
-<li><a href="https://github.com/PredictiveEcology/CBM_dataPrep">CBM_datPrep</a></li>
+<li><a href="https://github.com/PredictiveEcology/CBM_dataPrep">CBM_dataPrep</a></li>
 <li><a href="https://github.com/PredictiveEcology/CBM_dataPrep_SK.git">CBM_dataPrep_SK</a></li>
 <li><a href="https://github.com/PredictiveEcology/CBM_vol2biomass">CBM_vol2biomass</a></li>
 <li><a href="https://github.com/PredictiveEcology/CBM_core">CBM_core</a></li>
