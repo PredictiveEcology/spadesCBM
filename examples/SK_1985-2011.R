@@ -30,11 +30,11 @@
     # Set modules and simulation time span
     times   = times,
     modules = c(
-      CBM_defaults       = "PredictiveEcology/CBM_defaults@main",
-      CBM_dataPrep_SK    = "PredictiveEcology/CBM_dataPrep_SK@main",
-      CBM_dataPrep       = "PredictiveEcology/CBM_dataPrep@main",
-      CBM_vol2biomass_SK = "PredictiveEcology/CBM_vol2biomass_SK@main",
-      CBM_core           = "PredictiveEcology/CBM_core@main"
+      CBM_defaults    = "PredictiveEcology/CBM_defaults@main",
+      CBM_dataPrep_SK = "PredictiveEcology/CBM_dataPrep_SK@main",
+      CBM_dataPrep    = "PredictiveEcology/CBM_dataPrep@main",
+      CBM_vol2biomass = "PredictiveEcology/CBM_vol2biomass@main",
+      CBM_core        = "PredictiveEcology/CBM_core@main"
     ),
 
     # Set options
@@ -43,17 +43,12 @@
     ),
 
     # NTEMS disturbances
-    disturbanceSource = "NTEMS",
-
-    # Set input: Output table
-    outputs = as.data.frame(expand.grid(
-      objectName = c("cbmPools", "NPP"),
-      saveTime = sort(c(times$start, times$start + c(1:(times$end - times$start))))
-    ))
+    disturbanceSource = "NTEMS"
   )
 
   # Run simulation
-  simCBM <- SpaDES.core::simInitAndSpades2(simSetup)
+  simCBM <- SpaDES.core::simInit2(simSetup)
+  simCBM <- SpaDES.core::spades(simCBM)
 
 
 ## Review results ----
@@ -72,28 +67,15 @@
   SpaDES.core::objectDiagram(simCBM)
 
   # Plot yearly forest products and yearly emissions for the length of the simulation
-  CBMutils::carbonOutPlot(
-    emissionsProducts = simCBM$emissionsProducts
-  )
+  CBMutils::simPlotEmissionsProducts(simCBM)
 
   # Plot carbon proportions above and below ground each simulation year
-  CBMutils::barPlot(
-    cbmPools = simCBM$cbmPools
-  )
+  CBMutils::simPlotPoolProportions(simCBM)
 
   # Plots the per-pixel average net primary production
-  CBMutils::NPPplot(
-    masterRaster    = simCBM$masterRaster,
-    cohortGroupKeep = simCBM$cohortGroupKeep,
-    NPP             = simCBM$NPP
-  )
+  CBMutils::simMapNPP(simCBM)
 
   # Plot the Total Carbon per pixel for the final simulation year
-  CBMutils::spatialPlot(
-    masterRaster    = simCBM$masterRaster,
-    cohortGroupKeep = simCBM$cohortGroupKeep,
-    cbmPools        = simCBM$cbmPools,
-    years           = SpaDES.core::end(simCBM)
-  )
+  CBMutils::simMapTotalCarbon(simCBM)
 
 
