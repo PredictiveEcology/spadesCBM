@@ -1,11 +1,14 @@
-projectPath <- "~/GitHub/spadesCBM"
-repos <- unique(c("predictiveecology.r-universe.dev", getOption("repos")))
-install.packages("SpaDES.project",
-                 repos = repos)
 
-# start in 1998, and end in 2000
+# Install SpaDES.project
+install.packages("SpaDES.project", repos = unique(c("predictiveecology.r-universe.dev", getOption("repos"))))
+
+# Set project path
+projectPath <- "~/GitHub/spadesCBM"
+
+# Set times
 times <- list(start = 1985, end = 2020)
 
+# Set up project
 out <- SpaDES.project::setupProject(
   Restart = TRUE,
   useGit = "PredictiveEcology", # a developer sets and keeps this = TRUE
@@ -18,9 +21,8 @@ out <- SpaDES.project::setupProject(
                cachePath   = file.path(projectPath, "cache")),
 
   options = options(
-    repos = c(repos = repos),
+    repos = unique(c("predictiveecology.r-universe.dev", getOption("repos"))),
     Require.cloneFrom = Sys.getenv("R_LIBS_USER"),
-    reproducible.destinationPath = "inputs",
     ## These are for speed
     reproducible.useMemoise = TRUE,
     # Require.offlineMode = TRUE,
@@ -32,7 +34,6 @@ out <- SpaDES.project::setupProject(
                "PredictiveEcology/CBM_vol2biomass@development",
                "PredictiveEcology/CBM_core@development"),
   times = times,
-  require = c("reproducible"),
 
   params = list(
     CBM_defaults = list(
@@ -47,34 +48,36 @@ out <- SpaDES.project::setupProject(
   ),
 
   #### begin manually passed inputs #########################################
+  require = c("reproducible", "data.table", "terra"),
+
   ## define the  study area.
   masterRaster = {
-    mr <- reproducible::prepInputs(url = "https://drive.google.com/file/d/1EIct8OMMdUP3_F0njXyeqIe004TTTtWU/view?usp=drive_link",
-                                   destinationPath = "inputs")
+    mr <- reproducible::prepInputs(url = "https://drive.google.com/file/d/1EIct8OMMdUP3_F0njXyeqIe004TTTtWU",
+                                   destinationPath = paths$inputPath)
     mr[mr[] == 0] <- NA
     mr
   },
 
-  ageLocator = terra::round(reproducible::prepInputs(url = "https://drive.google.com/file/d/1OvloZLpXvx-Wc2Qr4LAgXkweS-u97BE7/view?usp=drive_link",
+  ageLocator = terra::round(reproducible::prepInputs(url = "https://drive.google.com/file/d/1OvloZLpXvx-Wc2Qr4LAgXkweS-u97BE7",
                                                      destinationPath = paths$inputPath,
                                                      fun = terra::rast)),
   ageDataYear = 2020,
-  userGcMeta = as.data.table(reproducible::prepInputs(url = "https://drive.google.com/file/d/1rlygsfT9Te6XHNAKNQxfQJDwMybXLijG/view?usp=drive_link",
+  userGcMeta = as.data.table(reproducible::prepInputs(url = "https://drive.google.com/file/d/1rlygsfT9Te6XHNAKNQxfQJDwMybXLijG",
                                                       destinationPath = paths$inputPath,
-                                                      fun = fread)),
-  userGcM3 = as.data.table(reproducible::prepInputs(url = "https://drive.google.com/file/d/12RHUTxQX9yRwgkWKDzWrA3q27FVYU_3h/view?usp=drive_link",
+                                                      fun = data.table::fread)),
+  userGcM3 = as.data.table(reproducible::prepInputs(url = "https://drive.google.com/file/d/12RHUTxQX9yRwgkWKDzWrA3q27FVYU_3h",
                                                     destinationPath = paths$inputPath,
-                                                    fun = fread)),
+                                                    fun = data.table::fread)),
 
   ## If not using curveID, comment this in.
   # gcIndexLocator = terra::rast("~/GitHub/Data/scanfi/gcIndex.tif"),
 
   ## Comment this out if not using curveID
   curveID = c("speciesId", "prodclass"),
-  leadSpeciesRaster = reproducible::prepInputs(url = "https://drive.google.com/file/d/1EIct8OMMdUP3_F0njXyeqIe004TTTtWU/view?usp=drive_link",
+  leadSpeciesRaster = reproducible::prepInputs(url = "https://drive.google.com/file/d/1EIct8OMMdUP3_F0njXyeqIe004TTTtWU",
                                                destinationPath = paths$inputPath,
                                                fun = terra::rast),
-  siteProductivityRaster = reproducible::prepInputs(url = "https://drive.google.com/file/d/1mPkDfGBNxkYPorUxSog36ayRpeISo8iT/view?usp=drive_link",
+  siteProductivityRaster = reproducible::prepInputs(url = "https://drive.google.com/file/d/1mPkDfGBNxkYPorUxSog36ayRpeISo8iT",
                                                     destinationPath = paths$inputPath,
                                                     fun = terra::rast),
   cohortLocators = list(

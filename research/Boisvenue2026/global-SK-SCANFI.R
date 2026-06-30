@@ -10,9 +10,16 @@ times <- list(start = 1985, end = 2020)
 
 # Set up project
 projSetup <- SpaDES.project::setupProject(
-  Restart = TRUE,
-  useGit = "PredictiveEcology", # a developer sets and keeps this = TRUE
-  overwrite = TRUE, # a user who wants to get latest modules sets this to TRUE
+  Restart   = FALSE,
+  useGit    = FALSE,
+  overwrite = TRUE,
+  options = options(
+    repos = unique(c("predictiveecology.r-universe.dev", getOption("repos"))),
+    Require.cloneFrom = Sys.getenv("R_LIBS_USER"),
+    reproducible.useMemoise = FALSE,
+    spades.moduleCodeChecks = FALSE
+  ),
+
   paths = list(projectPath = projectPath,
                outputPath  = file.path(projectPath, "outputs", "SK-30m-SCANFI"),
                modulePath  = file.path(projectPath, "modules"),
@@ -20,20 +27,13 @@ projSetup <- SpaDES.project::setupProject(
                inputPath   = file.path(projectPath, "inputs"),
                cachePath   = file.path(projectPath, "cache")),
 
-  options = options(
-    repos = unique(c("predictiveecology.r-universe.dev", getOption("repos"))),
-    Require.cloneFrom = Sys.getenv("R_LIBS_USER"),
-    ## These are for speed
-    reproducible.useMemoise = FALSE,
-    # Require.offlineMode = TRUE,
-    spades.moduleCodeChecks = FALSE
-  ),
-  modules =  c("PredictiveEcology/CBM_defaults@development",
-               "PredictiveEcology/CBM_dataPrep_SK@development",
-               "PredictiveEcology/CBM_dataPrep@development",
-               "PredictiveEcology/CBM_vol2biomass@development",
-               "PredictiveEcology/CBM_core@development"),
+  modules =  c("PredictiveEcology/CBM_defaults@v1.0.0",
+               "PredictiveEcology/CBM_dataPrep_SK@v1.0.0",
+               "PredictiveEcology/CBM_dataPrep@v1.0.0",
+               "PredictiveEcology/CBM_vol2biomass@v1.0.0",
+               "PredictiveEcology/CBM_core@v1.0.0"),
   times = times,
+
 
   params = list(
     CBM_dataPrep_SK = list(
@@ -44,8 +44,23 @@ projSetup <- SpaDES.project::setupProject(
       parallel.cores     = NULL,
       parallel.chunkSize = 2000000,
       saveRasters        = TRUE # Save aligned inputs as output rasters
+    ),
+    CBM_core = list(
+      .saveAll = TRUE
     )
   ),
+
+  #### begin manually passed inputs #########################################
+  require = c("reproducible", "terra"),
+
+  # Set study area
+  masterRaster = {
+    mr <- reproducible::prepInputs(url = "https://drive.google.com/file/d/1RGj8wxHj4lyq1v9x_xkVoMS1a5_w2nmn",
+                                   destinationPath = paths$inputPath,
+                                   fun = terra::rast)
+    mr[mr[] == 0] <- NA
+    mr
+  },
 
   # Set cohort data sources
   ageLocator = "SCANFI-2020-age",
@@ -58,6 +73,5 @@ projSetup <- SpaDES.project::setupProject(
 # Run
 simCBM <- SpaDES.core::simInit2(projSetup)
 simCBM <- SpaDES.core::spades(simCBM)
-
 
 
