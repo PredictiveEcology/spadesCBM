@@ -77,7 +77,7 @@ out <- SpaDES.project::setupProject(
   modules =  c("PredictiveEcology/CBM_defaults@main",
                "PredictiveEcology/CBM_dataPrep_SK@main",
                "PredictiveEcology/CBM_dataPrep@main",
-               "PredictiveEcology/CBM_vol2biomass_SK@main",
+               "PredictiveEcology/CBM_vol2biomass@main",
                "PredictiveEcology/CBM_core@main"),
   times = times,
 
@@ -116,7 +116,7 @@ simMngedSKtestArea <- SpaDES.core::simInitAndSpades2(out)
 ```
 
 ## Viewing results {-}
-Once the simulation has run, we can view our results. Some of these are saved as files in the outputs folder created in the project's directory. If kept as the default in the global script above, these can be found here: `~/GitHub/spadesCBM/outputs`. You should be able to see `.rds` files for cbmPools and NPP for each simulated year, as well as various growth curve and increment related figures from [CBM_vol2biomass_SK](https://github.com/PredictiveEcology/CBM_vol2biomass_SK) shown below. 
+Once the simulation has run, we can view our results. Some of these are saved as files in the outputs folder created in the project's directory. If kept as the default in the global script above, these can be found here: `~/GitHub/spadesCBM/outputs`. You should be able to see `.rds` files for cbmPools and NPP for each simulated year, as well as various growth curve and increment related figures from [CBM_vol2biomass](https://github.com/PredictiveEcology/CBM_vol2biomass) shown below. 
 
 ![](https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/cumPools_smoothed_postChapmanRichards.png){fig-align="center" width="700"}
 ![](https://raw.githubusercontent.com/PredictiveEcology/spadesCBM/main/manual/images/Increments.png){fig-align="center" width="700"}

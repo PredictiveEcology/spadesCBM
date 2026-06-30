@@ -1,6 +1,3 @@
-
-## this manual must be knitted by running this script
-
 prjDir <- rprojroot::find_root(rprojroot::is_rstudio_project | rprojroot::is_git_root | rprojroot::from_wd, path = getwd())
 manDir <- file.path(prjDir, "manual")
 
@@ -13,7 +10,6 @@ docsDir <- file.path(manDir, "_bookdown.yml") |>
 # figDir <- Require::checkPath(file.path(docsDir, "figures"), create = TRUE)
 
 # load packages -------------------------------------
-
 library(bibtex)
 library(bookdown)
 library(data.table)
