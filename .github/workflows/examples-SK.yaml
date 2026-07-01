@@ -60,7 +60,7 @@ jobs:
           options("Require.cloneFrom" = Sys.getenv("R_LIBS_USER"))
 
           # Run examples
-          exampleScripts <- list.files(file.path(getwd(), "examples"), pattern = "^SK[_-]+", full.names = TRUE)
+          exampleScripts <- list.files(file.path(getwd(), "examples"), pattern = "small", full.names = TRUE)
           for (exampleScript in exampleScripts){
             cat("\nRun example:", exampleScript, "\n\n")
             source(exampleScript)
