@@ -39,44 +39,13 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      - uses: PredictiveEcology/actions/install-spatial-deps@v0.2
-
-      - name: Install extra Linux dependencies
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt -y install libfontconfig1-dev
-        shell: bash
-
-      - uses: r-lib/actions/setup-r@v2
+      - uses: suz-estella/actions/setup-SpaDES-tests@main
         with:
-          r-version: ${{ matrix.config.r }}
-          use-public-rspm: true
-          Ncpus: 2
-
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-         packages: |
-          any::testthat
-          any::googledrive
-
-      - uses: PredictiveEcology/actions/install-Require@v0.2
-        with:
-          GitTag: 'development'
-
-      #- uses: PredictiveEcology/actions/install-SpaDES@v0.2
-
-      # Temporary: install SpaDES development branches
-      - name: Install SpaDES development branches
-        run: |
-          Require::setLinuxBinaryRepo()
-          Require::Require("PredictiveEcology/quickPlot@development",      require = FALSE)
-          Require::Require("PredictiveEcology/reproducible@development",   require = FALSE)
-          Require::Require("PredictiveEcology/SpaDES.core@development",    require = FALSE)
-          Require::Require("PredictiveEcology/SpaDES.project@development", require = FALSE)
-        shell: Rscript {0}
+           r-version: ${{ matrix.config.r }}
 
       - name: Run tests
         run: |
+          Require::Require("googledrive")
           googledrive::drive_auth(path = Sys.getenv("GOOGLE_AUTH"))
           testthat::test_dir("tests/testthat", stop_on_failure = TRUE)
         shell: Rscript {0}
