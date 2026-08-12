@@ -15,7 +15,7 @@ link-citations: true
 # Overview  {-}
 
 :::{.rmdimportant}
-This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, contact us [here]("https://github.com/PredictiveEcology/spadesCBM/issues").
+This documentation is work in progress. Potential discrepancies and omissions may exist for the time being. If you find any, contact us [here](https://github.com/PredictiveEcology/spadesCBM/issues).
 :::
 
 [spadesCBM](https://github.com/PredictiveEcology/spadesCBM.git) is a modular, transparent, and spatially explicit implementation of the logic, pools structure, equations, and default assumptions of the Carbon Budget Model of the Canadian Forest Sector ([CBM](https://natural-resources.canada.ca/climate-change/climate-change-impacts-forests/carbon-accounting/carbon-budget-model/13107)). It applies the science presented in @kurz2009 in a similar way to the simulations in @boisvenue2016 and @boisvenue2022 but calls Python functions for annual processes (see [libcbm_py/examples/cbm_exn](https://github.com/cat-cfs/libcbm_py/tree/main/examples/cbm_exn)). These functions and [spadesCBM](https://github.com/PredictiveEcology/spadesCBM.git) are, like much of modelling-based science, continuously under development.
