@@ -225,7 +225,7 @@
 <h2>
 <span class="header-section-number">2.4</span> Module functioning<a class="anchor" aria-label="anchor" href="#module-functioning-1"><i class="fas fa-link"></i></a>
 </h2>
-<p><a href="https://github.com/PredictiveEcology/CBM_dataPrep.git">CBM_dataPrep</a> has 5 events; <code>prepCohorts</code>, <code>prepVol2Biomass</code>, <code>MatchSpecies</code>, and <code>MatchDisturbances</code>, which are run only once, and the <code>readDisturbances</code> event, which is repeated for each simulation year.</p>
+<p><a href="https://github.com/PredictiveEcology/CBM_dataPrep.git">CBM_dataPrep</a> has 5 events; <code>prepCohorts</code>, <code>prepVol2Biomass</code>, <code>matchSpecies</code>, and <code>matchDisturbances</code>, which are run only once, and the <code>readDisturbances</code> event, which is repeated for each simulation year.</p>
 <div id="prepcohorts" class="section level3" number="2.4.1">
 <h3>
 <span class="header-section-number">2.4.1</span> <code>prepCohorts</code><a class="anchor" aria-label="anchor" href="#prepcohorts"><i class="fas fa-link"></i></a>
@@ -240,13 +240,13 @@
 </div>
 <div id="matchspecies" class="section level3" number="2.4.3">
 <h3>
-<span class="header-section-number">2.4.3</span> <code>MatchSpecies</code><a class="anchor" aria-label="anchor" href="#matchspecies"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4.3</span> <code>matchSpecies</code><a class="anchor" aria-label="anchor" href="#matchspecies"><i class="fas fa-link"></i></a>
 </h3>
 <p>Here the module matches species in user provided data tables to get additional attributes, such as CBM-specific species IDs needed in later modules.</p>
 </div>
 <div id="matchdisturbance" class="section level3" number="2.4.4">
 <h3>
-<span class="header-section-number">2.4.4</span> <code>MatchDisturbance</code><a class="anchor" aria-label="anchor" href="#matchdisturbance"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4.4</span> <code>matchDisturbance</code><a class="anchor" aria-label="anchor" href="#matchdisturbance"><i class="fas fa-link"></i></a>
 </h3>
 <p>This event matches disturbances event types to its appropriate CBM-specific disturbance type ID.</p>
 </div>
@@ -350,8 +350,8 @@
 <a class="nav-link" href="#module-functioning-1"><span class="header-section-number">2.4</span> Module functioning</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#prepcohorts"><span class="header-section-number">2.4.1</span> prepCohorts</a></li>
 <li><a class="nav-link" href="#prepvol2biomass"><span class="header-section-number">2.4.2</span> prepVol2Biomass</a></li>
-<li><a class="nav-link" href="#matchspecies"><span class="header-section-number">2.4.3</span> MatchSpecies</a></li>
-<li><a class="nav-link" href="#matchdisturbance"><span class="header-section-number">2.4.4</span> MatchDisturbance</a></li>
+<li><a class="nav-link" href="#matchspecies"><span class="header-section-number">2.4.3</span> matchSpecies</a></li>
+<li><a class="nav-link" href="#matchdisturbance"><span class="header-section-number">2.4.4</span> matchDisturbance</a></li>
 <li><a class="nav-link" href="#readdisturbances"><span class="header-section-number">2.4.5</span> readDisturbances</a></li>
 <li><a class="nav-link" href="#disturbances"><span class="header-section-number">2.4.6</span> Disturbances</a></li>
 </ul>

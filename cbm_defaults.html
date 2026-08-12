@@ -158,8 +158,6 @@
 <li>The <code>disturbanceMatrix</code> and <code>cTransfers</code> objects help identify which carbon transfers matches the provided disturbances as it matches the transfer matrix IDs and the proportions transferred to disturbance names.</li>
 <li>Parameters necessary for the <code>spinup</code> event in the <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> modules are assembled in the <code>spinupSQL</code> object.</li>
 <li>
-<code>pooldef</code> gives the names of each <a href="https://predictiveecology.github.io/spadesCBM/index.html#pools">carbon pool</a> that exists in CBM.</li>
-<li>
 <a href="https://github.com/cat-cfs/libcbm_py/blob/main/libcbm/resources/cbm_exn/species.csv"><code>species.csv</code></a> is read in as the <code>CBMspecies</code> object.</li>
 <li>
 <code>cbmAdmin</code> identifies all ecozones and spatial unit IDs combinations possible for each province and territory.</li>
@@ -182,6 +180,16 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td>libcbm_resources</td>
+<td>Character</td>
+<td>Path to CBM defaults SQLite database in the project outputs directory</td>
+</tr>
+<tr class="even">
+<td>cbm_exn_dir</td>
+<td>Character</td>
+<td>Path to CBM-EXN parameters directory in the project outputs directory</td>
+</tr>
+<tr class="odd">
 <td>disturbanceMatrix</td>
 <td>Data table</td>
 <td>Default disturbance data</td>
@@ -195,16 +203,6 @@
 <td>spinupSQL</td>
 <td>Data table</td>
 <td>Parameters for <a href="https://github.com/PredictiveEcology/CBM_core.git">CBM_core</a> spinup event</td>
-</tr>
-<tr class="even">
-<td>pooldef</td>
-<td>Character</td>
-<td>Vector of pools</td>
-</tr>
-<tr class="odd">
-<td>CBMspecies</td>
-<td>Data table</td>
-<td>Default species data</td>
 </tr>
 <tr class="even">
 <td>cbmAdmin</td>
