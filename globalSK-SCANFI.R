@@ -1,6 +1,8 @@
 
 # Install SpaDES.project
-install.packages("SpaDES.project", repos = unique(c("predictiveecology.r-universe.dev", getOption("repos"))))
+if (tryCatch(packageVersion("SpaDES.project") < "0.1.1", error = function(x) TRUE)){
+  install.packages("SpaDES.project", repos = "predictiveecology.r-universe.dev")
+}
 
 # Set project path
 projectPath <- "~/GitHub/spadesCBM"
@@ -9,7 +11,7 @@ projectPath <- "~/GitHub/spadesCBM"
 times <- list(start = 1985, end = 2020)
 
 # Set up project
-projSetup <- SpaDES.project::setupProject(
+out <- SpaDES.project::setupProject(
   Restart = TRUE,
   useGit = "PredictiveEcology", # a developer sets and keeps this = TRUE
   overwrite = TRUE, # a user who wants to get latest modules sets this to TRUE
@@ -32,10 +34,14 @@ projSetup <- SpaDES.project::setupProject(
                "PredictiveEcology/CBM_dataPrep_SK@development",
                "PredictiveEcology/CBM_dataPrep@development",
                "PredictiveEcology/CBM_vol2biomass@development",
-               "PredictiveEcology/CBM_core@development"),
+               "PredictiveEcology/CBM_core@CBM4"),
   times = times,
 
   params = list(
+    CBM_core = list(
+      .chunk_size  = 100,
+      .max_workers = NA
+    ),
     CBM_dataPrep_SK = list(
       parallel.cores     = NULL,
       parallel.tileSize  = 2500
@@ -46,6 +52,22 @@ projSetup <- SpaDES.project::setupProject(
       saveRasters        = TRUE # Save aligned inputs as output rasters
     )
   ),
+
+  #### begin manually passed inputs #########################################
+  require = c("PredictiveEcology/CBM4r@development (>=1.0.1)",
+              "PredictiveEcology/CBMutils@development (>=2.5.6)"),
+
+  # Set up Python virtual environment
+  python = {
+    CBM4r::cbm4_virtualenv_create(
+      "r-CBM4",
+      python  = CBMutils::ReticulateFindPython(
+        version        = ">=3.12,<3.13",
+        versionInstall = "3.12:latest",
+        pyenvOnly      = TRUE))
+    reticulate::use_virtualenv("r-CBM4")
+    reticulate::import("pyarrow")
+  },
 
   # Set cohort data sources
   ageLocator = "SCANFI-2020-age",

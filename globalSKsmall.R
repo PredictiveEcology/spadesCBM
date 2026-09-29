@@ -1,6 +1,8 @@
 
 # Install SpaDES.project
-install.packages("SpaDES.project", repos = unique(c("predictiveecology.r-universe.dev", getOption("repos"))))
+if (tryCatch(packageVersion("SpaDES.project") < "0.1.1", error = function(x) TRUE)){
+  install.packages("SpaDES.project", repos = "predictiveecology.r-universe.dev")
+}
 
 # Set project path
 projectPath <- "~/GitHub/spadesCBM"
@@ -24,7 +26,7 @@ out <- SpaDES.project::setupProject(
     repos = unique(c("predictiveecology.r-universe.dev", getOption("repos"))),
     Require.cloneFrom = Sys.getenv("R_LIBS_USER"),
     ## These are for speed
-    reproducible.useMemoise = TRUE,
+    reproducible.useMemoise = FALSE,
     # Require.offlineMode = TRUE,
     spades.moduleCodeChecks = FALSE
   ),
@@ -32,23 +34,31 @@ out <- SpaDES.project::setupProject(
                "PredictiveEcology/CBM_dataPrep_SK@development",
                "PredictiveEcology/CBM_dataPrep@development",
                "PredictiveEcology/CBM_vol2biomass@development",
-               "PredictiveEcology/CBM_core@development"),
+               "PredictiveEcology/CBM_core@CBM4"),
   times = times,
 
+  #### begin manually passed inputs #########################################
   params = list(
-    CBM_defaults = list(
-      .useCache = TRUE
-    ),
-    CBM_dataPrep_SK = list(
-      .useCache = TRUE
-    ),
-    CBM_vol2biomass = list(
-      .useCache = TRUE
+    CBM_core = list(
+      .chunk_size  = NA,
+      .max_workers = NA
     )
   ),
+  require = c("PredictiveEcology/CBM4r@development (>=1.0.1)",
+              "PredictiveEcology/CBMutils@development (>=2.5.6)",
+              "terra"),
 
-  #### begin manually passed inputs #########################################
-  require = "terra",
+  # Set up Python virtual environment
+  python = {
+    CBM4r::cbm4_virtualenv_create(
+      "r-CBM4",
+      python  = CBMutils::ReticulateFindPython(
+        version        = ">=3.12,<3.13",
+        versionInstall = "3.12:latest",
+        pyenvOnly      = TRUE))
+    reticulate::use_virtualenv("r-CBM4")
+    reticulate::import("pyarrow")
+  },
 
   # Set study area
   masterRaster = terra::rast(
@@ -66,4 +76,8 @@ out <- SpaDES.project::setupProject(
 )
 
 # Run
-simMngedSKsmall <- SpaDES.core::simInitAndSpades2(out)
+simMngedSKsmall <- SpaDES.core::simInit2(out)
+simMngedSKsmall <- SpaDES.core::spades(simMngedSKsmall)
+
+
+
