@@ -37,6 +37,7 @@ out <- SpaDES.project::setupProject(
                "PredictiveEcology/CBM_core@CBM4"),
   times = times,
 
+  #### begin manually passed inputs #########################################
   params = list(
     CBM_core = list(
       .chunk_size  = 100,
@@ -44,8 +45,7 @@ out <- SpaDES.project::setupProject(
     )
   ),
 
-  #### begin manually passed inputs #########################################
-  require = c("PredictiveEcology/CBM4r@development (>=1.0.1)",
+  require = c("PredictiveEcology/CBM4r@development (>=1.1.0)",
               "PredictiveEcology/CBMutils@development (>=2.5.6)",
               "terra"),
 

@@ -44,7 +44,8 @@ out <- SpaDES.project::setupProject(
       .max_workers = NA
     )
   ),
-  require = c("PredictiveEcology/CBM4r@development (>=1.0.1)",
+
+  require = c("PredictiveEcology/CBM4r@development (>=1.1.0)",
               "PredictiveEcology/CBMutils@development (>=2.5.6)",
               "terra"),
 
